@@ -1,0 +1,274 @@
+<style>
+    /* Projects Section */
+    #projects {
+       padding: 50px 0;
+       background-color: #ffffff;
+       background-size: auto;
+    }
+    #projects h2 {
+       text-align: center;
+       font-size: 2.5rem;
+       color: #333;
+       margin-bottom: 40px;
+    }
+    #projects h2::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background-color: rgb(0, 134, 179);
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    } 
+
+    .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+ }
+    /* Card Styling */
+    .project-card {
+       width: 300px;
+       height: 400px;
+       margin: 20px auto;
+       perspective: 1000px; /* To enable 3D rotation */
+    }
+    .card-content {
+       width: 100%;
+       height: 100%;
+       position: relative;
+       transform-style: preserve-3d;
+       transition: transform 0.6s;
+    }
+    .project-card:hover .card-content {
+        transform: rotateY(180deg);
+    }
+    /* Card Front (Image + Title + Brief Description) */
+    .card-front, .card-back {
+       position: absolute;
+       width: auto;
+       height: 103%;
+       backface-visibility: hidden;
+       border-radius: 10px;
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.281);
+       overflow: hidden;
+       transition: transform 0.6s ease-in-out;
+    }
+    .card-front {
+       background-color: rgb(255, 255, 255);
+       /*background-image: ;
+       background-size: cover;
+       background-position: center;*/
+       border: 1.5px solid rgba(0, 0, 0, 0.644);
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       padding: 20px;
+       text-align: center;
+    }
+    .card-front h3 {
+       font-family: Oswald;
+       font-size: 1.5rem;
+       color: #000000;
+       margin: 15px 0;
+    }
+    .card-front p {
+       font-size: 1.2rem;
+       color: #555;
+    }
+    .card-number {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        font-family: Oswald;
+        font-size: 30px;
+        font-weight: bold;
+        z-index: 2;
+        color: #000000;
+    }
+    /* Card Back (Detailed Description) */
+   .card-back {
+       background-color: #fdfdfd;
+       color: rgb(0, 0, 0);
+       text-align: center;
+       padding: 20px;
+       transform: rotateY(180deg);
+    }
+    .card-back h4 {
+       font-size: 1.5rem;
+       margin-bottom: 15px;
+    }
+    .card-back p {
+        font-family: Oswald;
+      text-align: left;
+       font-size: 1.2rem;
+       line-height: 1.4;
+    }
+
+    /* Responsive-card*/
+    @media (min-width: 768px) {
+       .project-card {
+           width: 350px;
+           height: 450px;
+       }
+    }
+
+    </style>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>RICKCLMNT - Projects</title>
+    </head>
+    <body>
+       <!-- Other sections like About Me -->
+       <!-- Projects Section -->
+       <section id="projects">
+        <h2>Projects</h2><br><br>
+      <div class="container">
+           <div class="project-card">
+               <div class="card-content">
+                   <!-- Card Front (Image + Title + Brief Description) -->
+                   <div class="card-front">
+                       <span class="card-number">01</span>
+                       <h3>AI-Driven Retail</h3>
+                       <p>AI-driven insights for business optimization.</p>
+                   </div>
+                   <!-- Card Back (Detailed Description) -->
+                   <div class="card-back">
+                    <h4>Project Overview</h4><br>
+                    <p>Intelligent Retail System: An AI-driven system designed for real-time customer
+                        insights and operational efficiency.<br><br>
+                        Key Features:<br>
+                        Smart-Store: Advanced inventory tracking, predictive customer analytics, and e
+                        commerce integration.<br>
+                        Mobile App: Seamless in-store navigation and electronic payment solutions.</p>
+                   </div>
+               </div>               
+            </div>
+            <div class="project-card">
+                <div class="card-content">
+                    <!-- Card Front (Image + Title + Brief Description) -->
+                    <div class="card-front">
+                        <span class="card-number">02</span>
+                        <h3>R.E.S.C.U.E.</h3>
+                        <p>Real-time Emergency Situation Coordination and Urgent Execution.</p>
+                    </div>
+                    <!-- Card Back (Detailed Description) -->
+                    <div class="card-back">
+                     <h4>Project Overview</h4><br>
+                    <p>R.E.S.C.U.E. is a program designed to control a swarm of drones, and other smart devices 
+                        it has access to, to <strong>search</strong> for survivors after a disaster <strong>and</strong>
+                        generate or adjust <strong>rescue</strong> plans based on real-time information.</p>
+                    </div>
+                </div>               
+            </div>
+            <div class="project-card">
+                <div class="card-content">
+                    <!-- Card Front (Image + Title + Brief Description) -->
+                    <div class="card-front">
+                        <span class="card-number">03</span>
+                        <h3>G.R.I.D.</h3>
+                        <p>Ground Reconnaissance and Intrusion Detection</p>
+                    </div>
+                    <!-- Card Back (Detailed Description) -->
+                    <div class="card-back">
+                     <h4>Project Overview</h4><br>
+                    <p>Next-Gen Security Solution— A robust security system that detects and monitors
+                        potential threats. With cutting-edge surveillance and analysis, it ensures constant
+                        protection of assets and properties.
+                        <br><br>
+                        Effortless security for peace of mind.</p>
+                    </div>
+                </div>               
+            </div>
+            <div class="project-card">
+                <div class="card-content">
+                    <!-- Card Front (Image + Title + Brief Description) -->
+                    <div class="card-front">
+                        <span class="card-number">04</span>
+                        <h3>Expert Systems Suite</h3>
+                        <p>A Team of AI Specialists for Focused Solutions</p>
+                    </div>
+                    <!-- Card Back (Detailed Description) -->
+                    <div class="card-back">
+                     <h4>Project Overview</h4><br>
+                     <p>This suite of highly specialized expert systems delivers pinpoint accuracy in critical
+                        domains. Whether diagnosing medical conditions, offering financial advice, or
+                        teaching, these systems excel in their respective fields by drawing on vast knowledge
+                        bases and intelligent algorithms.
+                        <br><br>
+                        Precision technology for high-stakes environments.</p>
+                    </div>
+                </div>               
+            </div>
+            <div class="project-card">
+                <div class="card-content">
+                    <!-- Card Front (Image + Title + Brief Description) -->
+                    <div class="card-front">
+                        <span class="card-number">05</span>
+                        <h3>P.A.L.</h3>
+                        <p>Personalized Artificially-intelligent Lifeform</p>
+                    </div>
+                    <!-- Card Back (Detailed Description) -->
+                    <div class="card-back">
+                     <h4>Project Overview</h4><br>
+                     <p>Designed as a customizable digital companion, 
+                        P.A.L. adapts to individual users, offering a unique blend of personality,
+                         emotional depth, and intelligence. Drawing personality traits and nuanced 
+                         mannerisms from beloved movie characters, P.A.L. serves as both a friend and a personal assistant 
+                         , ensuring that interactions feel genuine and engaging.
+                        <br><br>
+                    Your personalized companion.</p>
+                    </div>
+                </div>               
+            </div>
+            <div class="project-card">
+                <div class="card-content">
+                    <!-- Card Front (Image + Title + Brief Description) -->
+                    <div class="card-front">
+                        <span class="card-number">06</span>
+                        <h3>The Rheingold algorithm</h3>
+                        <p>AI-Powered Forex Trading System</p>
+                    </div>
+                    <!-- Card Back (Detailed Description) -->
+                    <div class="card-back">
+                     <h4>Project Overview</h4><br>
+                     <p>Designed for competitive forex trading, Rheingold analyzes market volatility through
+                        a trend table of key indicators. It identifies chart patterns and integrates built-in risk
+                        management strategies to ensure optimized trading decisions, all while automating
+                        stop loss and profit-taking mechanisms.  
+                        <br><br>
+                       Data-driven trading.</p>
+                    </div>
+                </div>               
+            </div>
+            <div class="project-card">
+                <div class="card-content">
+                    <!-- Card Front (Image + Title + Brief Description) -->
+                    <div class="card-front">
+                        <span class="card-number">07</span>
+                        <h3>M.A.R.K. IV</h3>
+                        <p>Machine Assisted Resource Knowledge-base <br>(Version 4)<br><br>
+                            <strong>Intelligent, Self-Sustaining AI.</strong></p>
+                    </div>
+                    <!-- Card Back (Detailed Description) -->
+                    <div class="card-back">
+                     <h4>Project Overview</h4>
+                     <p>M.A.R.K. is a powerful AI assistant I
+                        designed to assist with my work. This system helps manage
+                        everything from daily tasks to complex projects, with unique self-repairing
+                        capabilities like the ability to write, update, and even replicate its own code when
+                        needed, along with access to redundant backups of itself.<br><br> M.A.R.K. IV enhances
+                        my productivity and efficiency, designed to grow alongside the demands I place on it.</p>
+                    </div>
+                </div>               
+            </div>
+        </div> 
+     </section>
+    </body>
+    </html>

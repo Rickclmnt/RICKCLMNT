@@ -1,0 +1,536 @@
+<style>
+/* Resetting Default Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Avenir', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+ /* heads up Section */
+ .heads-up {
+    font-size: 1.5rem; /* Adjust the font size as needed */
+    color: #000000; /* Text color */
+    text-align: center; /* Center the text */
+    opacity: 0; /* Start with hidden text */
+ }
+ /* Part One Style */
+ .part-one {
+    display: inline-block; /* Allows for proper fade-in */
+    opacity: 0; /* Start hidden */
+    transition: opacity 1s ease; /* Transition for fade-in */
+ }
+ /* Part Two Style */
+ .part-two {
+    display: inline-block; /* Allows for proper fade-in */
+    opacity: 0; /* Start hidden */
+    transition: opacity 1s ease; /* Transition for fade-in */
+ }
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #222;
+    padding: 5px 0;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: rgb(134, 135, 136);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #fff;
+    margin-bottom: 4px;
+    border-radius: 5px;
+}
+
+/* Heads-Up Section */
+header {
+    background-color: #eeeeee;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.heads-up {
+    color: #000000;
+    font-family: Oswald;
+    font-size: 1.5em;
+    font-weight: 100;
+}
+
+/* Section Styling */
+section {
+    background: #fff;
+    padding: 40px 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+section p {
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+/* Services List */
+.services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.service-item {
+    flex: 1 1 300px;
+    background: #ffffff;
+    padding: 20px 0;
+    border-radius: 8px;
+}
+
+.service-item h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Projects List */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.project-item h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Reviews Section */
+.reviews blockquote {
+    border-left: 5px solid #353535;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    font-style: italic;
+    background: #f9f9f9;
+}
+
+.reviews footer {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Consultation Section */
+.consultation p {
+    margin-bottom: 20px;
+}
+
+.consultation a {
+    color: #ff6347;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.consultation a:hover {
+    text-decoration: underline;
+}
+
+/* Mentorship Section */
+.mentorship ul {
+    list-style: disc inside;
+    margin-top: 10px;
+}
+
+.mentorship ul li {
+    margin-bottom: 10px;
+}
+
+/* Newsletter Section */
+#newsletter form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#newsletter input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#newsletter button {
+    padding: 10px;
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#newsletter button:hover {
+    background-color: rgb(115, 117, 117);
+}
+
+/* CTA Buttons */
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(0, 134, 179);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: rgb(115, 117, 117);
+}
+
+.button {
+    font-size: large;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 1px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.contact-btn {
+    background-color: #252525;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.blk-btn {
+    background-color: black;
+    color: #f9f9f9;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 1px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Button Style */
+.animated-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(0, 134, 179);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover Effect */
+.animated-button:hover {
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: #fff;
+    text-align: left;
+    padding: 20px 0;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background-color: #222;
+        flex-direction: column;
+        align-items: center;
+        transition: left 0.3s ease;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .services-list, .projects-list {
+        flex-direction: column;
+    }
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RICKCLMNT - Bespoke Software Solutions</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Avenir:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- External CSS -->
+    <!-- link rel="stylesheet" href="styles.css" -->
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="RICKCLMNT offers bespoke software solutions, AI engineering, and innovative technologies tailored for high-level clients.">
+    <meta name="keywords" content="Software Developer, AI Engineer, Bespoke Software, Innovative Solutions, Premium Technology">
+    <meta name="author" content="Rick Clement">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="logo">RICKCLMNT</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#consultation">Consultation</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <header id="home">
+        <div class="container">
+            <div class="heads-up">
+                <span class="part-one">This website is a work in progress</span>
+                <span class="part-two"> —innovation takes time</span>
+            </div>
+        </div>
+    </header>
+    <br>
+    <br>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+        const partOne = document.querySelector(".part-one");
+        const partTwo = document.querySelector(".part-two");
+        // Fade in Part One
+        setTimeout(() => {
+            partOne.style.opacity = 1; // Set opacity to 1
+        }, 1000);
+        // After Part One fades in, fade in Part Two
+        setTimeout(() => {
+            partTwo.style.opacity = 1; // Set opacity to 1 for Part Two
+        }, 4000); // Delay before Part Two fades in (1000ms = 1 second)
+        // Finally, set the main container to visible after the fade-in
+        document.querySelector(".heads-up").style.opacity = 1;
+     });
+        </script>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About</h2>
+            <p>RICKCLMNT provides tailored technology solutions that combine cutting-edge
+                innovation with a personalized approach. Whether you're a small business looking
+                to optimize operations or a large enterprise seeking a visionary solution to a
+                complex problem, I leverage my diverse expertise to deliver results that exceed
+                expectations. My work is not limited to one domain—whatever your needs, I tackle
+                the challenge head-on to create customized solutions that drive success.</p>
+            <p>Discover how I can bring your vision to life through exclusive, cutting-edge technology designed specifically for you. 
+                <br><br><a href="#consultation" class="blk-btn">Let's build the future together</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+         <div class="service-item">
+            <h2>My Services</h2>
+                <h1>Explore a wide range of cutting-edge services.</h1><br>
+            </div><br>
+            <a href="services.html" class="cta-button"><strong>View Services</strong></a>
+         </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <p>Here is a curated selection of some of my more interesting projects, each showcasing my commitment to innovation, precision, and excellence. Detailed project information is only available upon request.</p>
+           <br>
+            <a href="projects.html" class="cta-button">Projects</a>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+    <div class="container">
+        <h2>Reviews</h2>
+        <br>
+        <blockquote>
+            <p>"Patrick completely optimized my research and reporting process, saving hours on data organization—Highly recommend!" <br> - <strong>Karen Liu</strong>, Ethical Sourcing Consultant</p>
+        </blockquote>
+        <br>
+        <blockquote>
+            <p>"His work was instrumental to our project; it was both discreet and professional." <br> - <strong>Name Withheld</strong>, CEO | Private Project</p>
+        </blockquote>
+    </div>
+    </section>
+
+    <!-- Consultation Section -->
+    <section id="consultation">
+        <br><br><br><br>
+        <div class="container">
+            <h2>Consultation</h2>
+            <p>Engage in a conversation to explore collaboration opportunities. Availability is limited to select projects, whether it's building a website or designing a satellite—whatever aligns with my current pursuits.</p>
+            <p><strong>Engage for Consultation:</strong> <a href="mailto:rickclmnt@gmail.com" class="blk-btn">rickclmnt@gmail.com</a></p>
+        </div>
+    </section>
+
+    
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <h2>FAQ</h2>
+            <p><strong>Frequently Asked Questions:</strong><br><br>
+                <strong>How can I get a quote for my project?</strong><br>
+                "Book a consultation. I'll provide you with a personalized quote based on the scope
+                 of work, complexity, and timeline."<br><br>
+                 <strong>Can you handle complex projects with tight deadlines?</strong><br>
+                 "Yes i can. But, i prefere to be given enough time to do my best
+                 work, especially on complex project."<br><br>
+                 <strong>How do you ensure the quality and security of your software?</strong><br>
+                 "I follow industry best practices for software development and testing to ensure the
+                 quality and reliability of my work. I also prioritize security measures to protect
+                 sensitive data."<br><br>
+                 <strong>What is your payment process?</strong><br>
+                 "We can discuss specific payment terms during a consultation."<br><br>
+                 <strong>How can I contact you?</strong><br>
+                 "You can contact me via email at rickclmnt@gmail.com"</p>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter">
+        <div class="container">
+            <h2>Newsletter</h2>
+            <p>Subscribe to stay ahead of emerging technologies.</p>
+            <button>Comming soon</button>
+            
+        </div>
+    </section>
+
+    <section id="about-me">
+        <div class="container">
+            <a href="about-me.html" class="blk-btn">About The Author</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2024 RICKCLMNT. All rights reserved.</p><br>
+            <div class="footer-links">
+             <a href="#">Credits</a> |
+             <a href="#">Cookies</a> |
+             <a href="#">Privacy Policy</a> |
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactive Features -->
+    <script src="script.js"></script>
+</body>
+</html>
