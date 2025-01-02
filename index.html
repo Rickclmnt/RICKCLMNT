@@ -5,37 +5,17 @@
     box-sizing: border-box;
 }
 
+header {
+    background-color: #eeeeee;
+    padding: 40px 0;
+    text-align: center;
+}
+
 body {
     font-family: 'Avenir', sans-serif;
     line-height: 1.6;
     background-color: #f9f9f9;
     color: #333;
-}
-
- .heads-up {
-    font-size: 1.5rem;
-    color: #000000;
-    text-align: center;
-    opacity: 0;
- }
-    
- .part-one {
-    display: inline-block;
-    opacity: 0;
-    transition: opacity 1s ease;
- }
-    
- .part-two {
-    display: inline-block;
-    opacity: 0; 
-    transition: opacity 1s ease; 
- }
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px 0;
 }
 
 .navbar {
@@ -95,18 +75,96 @@ body {
     border-radius: 5px;
 }
 
-/* Heads-Up Section */
-header {
-    background-color: #eeeeee;
-    padding: 40px 0;
-    text-align: center;
+/* Slider Container */
+.modern-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.heads-up {
-    color: #000000;
-    font-family: Oswald;
+@media (max-width: 768px) {
+    .modern-slider {
+        height: 50vh;
+    }
+}
+/* Slides Wrapper */
+.slides {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+}
+
+/* Individual Slide */
+.slide {
+    flex: 1 0 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+/* Image styling */
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+/* Text Overlay */
+.overlay {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    color: #fff;
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease, transform 4s ease;
+}
+
+.slide.active .overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (max-width: 768px) {
+    .overlay {
+        font-size: 3vw;
+        bottom: 10%;
+    }
+}
+/* Navigation Arrows */
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.navigation button {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
     font-size: 1.5em;
-    font-weight: 100;
+    padding: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.navigation button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
 }
 
 /* Section Styling */
@@ -163,43 +221,9 @@ section p {
     color: #333;
 }
 
-/* Reviews Section */
-.reviews blockquote {
-    border-left: 5px solid #353535;
-    padding-left: 15px;
-    margin-bottom: 20px;
-    font-style: italic;
-    background: #f9f9f9;
-}
-
-.reviews footer {
-    margin-top: 5px;
-    font-weight: bold;
-}
-
 /* Consultation Section */
 .consultation p {
     margin-bottom: 20px;
-}
-
-.consultation a {
-    color: #ff6347;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-.consultation a:hover {
-    text-decoration: underline;
-}
-
-/* Mentorship Section */
-.mentorship ul {
-    list-style: disc inside;
-    margin-top: 10px;
-}
-
-.mentorship ul li {
-    margin-bottom: 10px;
 }
 
 /* Newsletter Section */
@@ -209,31 +233,10 @@ section p {
     gap: 10px;
 }
 
-#newsletter input[type="email"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#newsletter button {
-    padding: 10px;
-    background-color: #ff6347;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-#newsletter button:hover {
-    background-color: rgb(115, 117, 117);
-}
-
-/* CTA Buttons */
+/* Buttons */
 .cta-button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 5px 20px;
     background-color: rgb(0, 134, 179);
     color: #fff;
     text-decoration: none;
@@ -257,42 +260,13 @@ section p {
     cursor: pointer;
 }
 
-.contact-btn {
-    background-color: #252525;
-    color: #fff;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
-}
-
 .blk-btn {
     background-color: black;
     color: #f9f9f9;
     padding: 7px 10px;
     border: none;
-    border-radius: 1px;
     text-decoration: none;
     cursor: pointer;
-}
-
-/* Button Style */
-.animated-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgb(0, 134, 179);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover Effect */
-.animated-button:hover {
-    transform: scale(1.05);
 }
 
 /* Footer */
@@ -372,194 +346,24 @@ footer {
     <nav class="navbar">
         <div class="container">
             <a href="#home" class="logo">RICKCLMNT</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#consultation">Consultation</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </nav>
 
-    <!-- Home Section -->
-    <header id="home">
-        <div class="container">
-            <div class="heads-up">
-                <span class="part-one">This website is a work in progress</span>
-                <span class="part-two"> —innovation takes time</span>
-            </div>
-        </div>
-    </header>
-    <br>
-    <br>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-        const partOne = document.querySelector(".part-one");
-        const partTwo = document.querySelector(".part-two");
-        // Fade in Part One
-        setTimeout(() => {
-            partOne.style.opacity = 1; // Set opacity to 1
-        }, 1000);
-        // After Part One fades in, fade in Part Two
-        setTimeout(() => {
-            partTwo.style.opacity = 1; // Set opacity to 1 for Part Two
-        }, 4000); // Delay before Part Two fades in (1000ms = 1 second)
-        // Finally, set the main container to visible after the fade-in
-        document.querySelector(".heads-up").style.opacity = 1;
-     });
-        </script>
-
     <!-- About Section -->
     <section id="about">
-        <div class="container">
-            <h2>About</h2>
-            <p>RICKCLMNT provides tailored technology solutions that combine cutting-edge
-                innovation with a personalized approach. Whether you're a small business looking
-                to optimize operations or a large enterprise seeking a visionary solution to a
-                complex problem, I leverage my diverse expertise to deliver results that exceed
-                expectations. My work is not limited to one domain—whatever your needs, I tackle
-                the challenge head-on to create customized solutions that drive success.</p>
-            <p>Discover how I can bring your vision to life through exclusive, cutting-edge technology designed specifically for you. 
-                <br><br><a href="#consultation" class="blk-btn">Let's build the future</a>
-            </p>
+        <div class="container"><br>
+            <h2>Offline For Maintenance</h2><br>
+            <p>Improvement in progress: the <strong>new RICKCLMNT</strong> website is in the works. <br><br>Thank you for your continued support as we bring our vision to life.
+                <br><br><br>Best regards,<br><a href="#" class="blk-btn">The team</a>
+            </p><br><br><br>
         </div>
     </section>
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-         <div class="service-item">
-            <h2>My Services</h2>
-                <h1>Explore a wide range of cutting-edge services.</h1><br>
-            </div><br>
-            <a href="services.html" class="cta-button"><strong>View Services</strong></a>
-         </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <p>Here is a curated selection of some of my more interesting projects, each showcasing my commitment to innovation, precision, and excellence. Detailed project information is only available upon request.</p>
-           <br>
-            <a href="projects.html" class="cta-button">Projects</a>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews">
-    <div class="container">
-        <h2>Reviews</h2>
-        <br>
-        <blockquote>
-            <p>"Patrick completely optimized my research and reporting process, saving hours on data organization—Highly recommend!" <br> - <strong>Karen Liu</strong>, Ethical Sourcing Consultant</p>
-        </blockquote>
-        <br>
-        <blockquote>
-            <p>"His work was instrumental to our project; it was both discreet and professional." <br> - <strong>Name Withheld</strong>, CEO | Private Project</p>
-        </blockquote>
-    </div>
-    </section>
-
-    <!-- Consultation Section -->
-    <section id="consultation">
-        <br><br><br><br>
-        <div class="container">
-            <h2>Consultation</h2>
-            <p>Engage in a conversation to explore collaboration opportunities. Availability is limited to select projects, whether it's building a website or designing a satellite—whatever aligns with my current pursuits.</p>
-            <p><a class="appointlet-button" data-appointlet-modal href="https://appt.link/meet-with-rick-clement-hs9USG3o" style="background-color:#2980b9;">Book a consultation</a><script async defer src="https://js.appointlet.com/"></script><link href="https://js.appointlet.com/styles.css" rel="stylesheet"></p>
-        </div>
-    </section>
-
-    
-
-    <!-- FAQ Section -->
-    <section id="faq">
-        <div class="container">
-            <h2>FAQ</h2>
-            <p><strong>Frequently Asked Questions:</strong><br><br>
-                <strong>How can I get a quote for my project?</strong><br>
-                "Book a consultation. I'll provide you with a personalized quote based on the scope
-                 of work, complexity, and timeline."<br><br>
-                 <strong>Can you handle complex projects with tight deadlines?</strong><br>
-                 "Yes i can. But, i prefere to be given enough time to do my best
-                 work, especially on complex project."<br><br>
-                 <strong>How do you ensure the quality and security of your software?</strong><br>
-                 "I follow industry best practices for software development and testing to ensure the
-                 quality and reliability of my work. I also prioritize security measures to protect
-                 sensitive data."<br><br>
-                 <strong>What is your payment process?</strong><br>
-                 "We can discuss specific payment terms during a consultation."<br><br>
-                 <strong>How can I contact you?</strong><br>
-                 "You can book a consultation <a href="#consultation" class="blk-btn">here</a> or contact me via email at rickclmnt@gmail.com"</p>
-        </div>
-    </section>
-
-    <section id="newsletter">
-        <div class="container">
-            <h2>Newsletter</h2>
-            <p>Subscribe to stay ahead of emerging technologies.</p>
-            <div id="mc_embed_shell">
-      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-  <style type="text/css">
-        #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 320px;}
-        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
-<div id="mc_embed_signup">
-    <form action="https://github.us7.list-manage.com/subscribe/post?u=238ff3b9584cc4c974f50f82a&amp;id=afea8bbeed&amp;f_id=00b0c2e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-        <div id="mc_embed_signup_scroll">
-            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" value="" required=""></div><div class="mc-field-group"><label for="mce-FNAME">First Name </label><input type="text" name="FNAME" class=" text" id="mce-FNAME" value=""></div>
-        <div id="mce-responses" class="clear foot">
-            <div class="response" id="mce-error-response" style="display: none;"></div>
-            <div class="response" id="mce-success-response" style="display: none;"></div>
-        </div>
-    <div aria-hidden="true" style="position: absolute; left: -5000px;">
-        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
-        <input type="text" name="b_238ff3b9584cc4c974f50f82a_afea8bbeed" tabindex="-1" value="">
-    </div>
-        <div class="optionalParent">
-            <div class="clear foot">
-                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
-                <p style="margin: 0px auto;"><a href="http://eepurl.com/i5EchI" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
-            </div>
-        </div>
-    </div>
-</form>
-</div>
-<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[6]='COMPANY';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
-        </div>
-    </section>
-
-    <section id="about-me">
-        <div class="container">
-           <br> <a href="about-me.html" class="blk-btn">About The Author</a>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="container">
             <p>© 2024 RICKCLMNT. All rights reserved.</p><br>
-            <div class="footer-links">
-             <a href="#">Credits</a> |
-             <a href="privacy&cookies.html">Cookies</a> |
-             <a href="privacy&cookies.html">Privacy Policy</a> |
-            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Interactive Features -->
-    <script src="script.js"></script>
 </body>
 </html>
