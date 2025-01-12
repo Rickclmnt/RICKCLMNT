@@ -1,0 +1,121 @@
+/* Basic Styles */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  transition: background-image 1s ease-in-out; /* Smooth transition */
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Background Text */
+.background-text {
+  position: absolute;
+  top: 10%; /* Adjust to your preference */
+  width: 100%;
+  text-align: center;
+  font-size: 3rem; /* Adjust font size as needed */
+  font-weight: bold;
+  color: rgb(0, 0, 0); /* Semi-transparent effect */
+  z-index: 0; /* Keeps it behind interactive elements */
+  pointer-events: none; /* Prevents interaction */
+  margin-bottom: 2rem;
+}
+
+/* Calendar Container */
+.calendar-container {
+  position: relative;
+  top: 5%;
+  width: 210px;
+  height: 250px;
+}
+
+/* Pegs Container */
+.calendar-pegs {
+  display: flex;
+  justify-content: center;
+  gap: 80px; /* Space between pegs */
+  position: absolute;
+  top: 17px; /* Position above the calendar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Individual Peg */
+.peg {
+  width: 20px; /* Width of the peg */
+  height: 40px; /* Height of the peg */
+  background-color: #555; /* Color of the peg */
+  border-radius: 2px; /* Slight rounding for a realistic look */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+.calendar {
+  position: relative;
+  width: 93%;
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 5px;
+  background: rgb(240, 240, 240);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+
+/* Topmost Falling Page */
+.falling-page {
+  position: absolute;
+  bottom: 10px;
+  width: 180px;
+  height: 200px;
+  background: white;
+  color: black;
+  font-size: 4rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
+  transform-origin: center top;
+  animation: none;
+}
+
+/* Next Stacked Page */
+.stacked-page {
+  position: absolute;
+  bottom: 10px;
+  width: 180px;
+  height: 200px;
+  background: white;
+  color: black;
+  font-size: 4rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.23);
+}
+
+/* Falling Animation */
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(50px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(300px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(15deg); /* Falling off the screen */
+    opacity: 1;
+  }
+}
