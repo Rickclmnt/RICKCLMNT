@@ -10,28 +10,6 @@ body {
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    background-color: #222;
-    padding: 5px 0;
-    z-index: 1000;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    color: #fff;
-    text-decoration: none;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    font-weight: 700;
-}
-
 /* Background Text */
 .background-text {
   position: absolute;
