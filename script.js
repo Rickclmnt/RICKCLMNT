@@ -18,7 +18,7 @@ function updateBackground() {
     body.style.backgroundImage = "url('afternoon.jpg')";
   } else if (currentHour >= 17 && currentHour < 20) {
     // Evening (5 PM - 7:59 PM)
-    body.style.backgroundImage = "url('/evening.jpg')";
+    body.style.backgroundImage = "url('evening.jpg')";
   } else {
     // Night (8 PM - 4:59 AM)
     body.style.backgroundImage = "url('night.jpg')";
