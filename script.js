@@ -12,16 +12,16 @@ function updateBackground() {
 
   if (currentHour >= 5 && currentHour < 12) {
     // Morning (5 AM - 11:59 AM)
-    body.style.backgroundImage = "url('assets/morning.jpg')";
+    body.style.backgroundImage = "url('morning.jpg')";
   } else if (currentHour >= 12 && currentHour < 17) {
     // Afternoon (12 PM - 4:59 PM)
-    body.style.backgroundImage = "url('assets/afternoon.jpg')";
+    body.style.backgroundImage = "url('afternoon.jpg')";
   } else if (currentHour >= 17 && currentHour < 20) {
     // Evening (5 PM - 7:59 PM)
-    body.style.backgroundImage = "url('assets/evening.jpg')";
+    body.style.backgroundImage = "url('evening.jpg')";
   } else {
     // Night (8 PM - 4:59 AM)
-    body.style.backgroundImage = "url('assets/night.jpg')";
+    body.style.backgroundImage = "url('night.jpg')";
   }
 
   // Ensure the background image covers the entire body
