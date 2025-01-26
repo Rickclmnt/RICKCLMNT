@@ -1,0 +1,652 @@
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #eeeeee;
+    padding: 0px 0;
+    text-align: center;
+}
+
+body {
+    font-family: 'Avenir', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #222;
+    padding: 5px 0;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: rgb(134, 135, 136);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #fff;
+    margin-bottom: 4px;
+    border-radius: 5px;
+}
+
+/* Slider Container */
+.modern-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .modern-slider {
+        height: 50vh;
+    }
+}
+/* Slides Wrapper */
+.slides {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+}
+
+/* Individual Slide */
+.slide {
+    flex: 1 0 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.slide h1 {
+    font-family: 'Avenir', sans-serif;
+}
+/* Image styling */
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+/* Text Overlay */
+.overlay {
+    position: absolute;
+    bottom: 5%;
+    left: 1%;
+    color: #fff;
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease, transform 4s ease;
+}
+
+.slide.active .overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (max-width: 768px) {
+    .overlay {
+        font-size: 3vw;
+        bottom: 10%;
+    }
+}
+/* Navigation Arrows */
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.navigation button {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    font-size: 1.5em;
+    padding: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.navigation button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+/* Section Styling */
+section {
+    background: #fff;
+    padding: 40px 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+section p {
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+/* Services List */
+.services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.service-item {
+    flex: 1 1 300px;
+    background: #ffffff;
+    padding: 20px 0;
+    border-radius: 8px;
+}
+
+.service-item h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Projects List */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.project-item h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Consultation Section */
+.consultation p {
+    margin-bottom: 20px;
+}
+
+/* Newsletter Section */
+#newsletter form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Buttons */
+.cta-button {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: rgb(0, 134, 179);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: rgb(115, 117, 117);
+}
+
+.button {
+    font-size: large;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 1px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.blk-btn {
+    background-color: black;
+    color: #f9f9f9;
+    padding: 7px 10px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* section background */
+#about-us {
+    background-image: url('assets/image1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 30vh;
+    border-radius: 1px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#projects {    
+    background-image: url('assets/image11.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 60vh;
+    width: 100%;
+    display: flex;
+}
+
+/* Footer */
+footer {
+    background-color: #000000;
+    color: #fff;
+    text-align: left;
+    padding: 20px 0;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background-color: #222;
+        flex-direction: column;
+        align-items: center;
+        transition: left 0.3s ease;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .services-list, .projects-list {
+        flex-direction: column;
+    }
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RICKCLMNT - Technology Solutions Contractor </title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Avenir:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="RICKCLMNT offers bespoke software solutions, AI engineering, and innovative technologies tailored for high-level clients.">
+    <meta name="keywords" content="Software Developer, AI Engineer, Bespoke Software, Innovative Solutions, Premium Technology, Future Technology, Futurist ">
+    <meta name="author" content="Rick Clement">
+    <!-- Google tag(gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-N4NGTP8WXB');
+</script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="logo">RICKCLMNT</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <!-- <li><a href="#reviews">Reviews</a></li> -->
+                <li><a href="#consultation">Consultation</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="R&D.html">R&D</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section (slides) -->
+    <header id="home">
+            <div class="modern-slider">
+             <div class="slides">
+                <div class="slide">
+                <img src="assets\image4.jpg" alt="image1">
+                 <div class="overlay">
+                  <h1>Empowering innovation</h1>
+                  <p>From ground to orbit</p>
+                 </div>
+                </div>
+                <div class="slide">
+                <img src="assets\image2.jpg" alt="image2">
+                 <div class="overlay">
+                  <h1>Driving intelligent automation</h1>
+                  <p>For enhanced efficiency</p>
+                 </div>
+                </div>
+                <div class="slide">
+                <img src="assets\image3.jpg" alt="image3">
+                 <div class="overlay">
+                  <h1>From research to the real world</h1>
+                  <p>Transforming ideas to results</p>
+                 </div>
+                </div>
+                </div>
+                <!-- Navigation -->
+                <div class="navigation">
+                 <button class="prev">❮</button>
+                 <button class="next">❯</button>
+                </div>
+            </div>
+    </header>
+        <!-- Note to self: optimize this later -->
+        <script>
+            // Dots are redundant
+            let currentIndex = 0;
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dots span');
+            const slidesWrapper = document.querySelector('.slides');
+            const totalSlides = slides.length;
+
+            // Function to update the slides and dots
+            function updateSlides() {
+             // Move the slides container
+             slidesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            // Update active slide and dot
+            slides.forEach((slide, index) => {
+             slide.classList.remove('active');
+             if (index === currentIndex) {
+              slide.classList.add('active');
+             }
+            });
+
+            dots.forEach((dot, index) => {
+             dot.classList.remove('active');
+             if (index === currentIndex) {
+              dot.classList.add('active');
+             }
+            });
+           }
+           // Event listeners for navigation buttons
+          document.querySelector('.navigation .prev').addEventListener('click', () => {
+           currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // Wrap around
+           updateSlides();
+          });
+
+          document.querySelector('.navigation .next').addEventListener('click', () => {
+           currentIndex = (currentIndex + 1) % totalSlides; // Wrap around
+           updateSlides();
+          });
+
+          // Event listeners for dots
+         dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+           currentIndex = index; // Go to the clicked dot
+           updateSlides();
+          });
+         });
+
+         // Initialize the first slide as active
+         updateSlides();
+
+            // Toggle Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+        </script>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container"><br><br>
+            <h2>What We Do</h2>
+            <p>At RICKCLMNT, we provide tailored technology solutions and strategic guidance to help businesses and individuals
+                tackle challenges and achieve their goals. Whether it's developing advanced systems, optimizing existing processes,
+                 or solving unique challenges, we deliver 
+                innovative, practical solutions tailored to your needs.
+                Our work is not limited to one domain—whatever your requirements, we tackle
+                the challenge head-on.</p>
+            <p>Discover how we bring your vision to life through cutting-edge technology designed specifically for you. 
+                <br><br><a href="#consultation" class="blk-btn">Let's Innovate</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <strong><h1>Our Mission</h1>
+                <br>"At RICKCLMNT, your success is our mission, we are here to help you navigate the ever evolving world of technology with 
+                confidence and clarity. We turn challenges into opportunities and ideas into reality."
+            </strong>
+        <br><br><br>
+         <div class="service-item">
+            <h2>Our Expertise</h2>
+                <p>We provide a wide range of technology-based solutions tailored to meet the unique needs of our clients. 
+                    Our diverse skill set and ability to think outside the box allow us to tackle complex problems and deliver 
+                    tailored solutions that work.</p><br>
+            </div>
+            <a href="services.html" class="cta-button"><strong>Services Breakdown</strong></a>
+         </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container"><br><br>
+            <h2>Featured Solutions</h2>
+            <p>Here is a curated selection of some of our more interesting projects, each showcasing our commitment to innovation,
+                 precision, and excellence. <br>* Detailed project information is available upon inquiry.</p>
+            <a href="projects.html" class="cta-button">Our Projects</a>
+        </div>
+    </section>
+    <br>
+    <!-- don't ask-->
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    <!-- Consultation Section -->
+    <section id="consultation">
+        <div class="container"><br><br>
+            <h2>Collaborate With Us</h2>
+            <p>Availability is limited to select projects. Act now to reserve your spot on our wait-list.</p>
+            <p><a class="appointlet-button" data-appointlet-modal href="https://appt.link/meet-with-rick-clement-hs9USG3o" style="background-color:#2980b9;">Book a consultation</a><script async defer src="https://js.appointlet.com/"></script><link href="https://js.appointlet.com/styles.css" rel="stylesheet"></p>
+            <br><p>Engage in a conversation to explore collaboration opportunities. For inquiries contact us at</p>
+                <a href="rickclmnt@gmail.com" class="blk-btn">rickclmnt@gmail.com</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container"><br><br>
+            <h2>FAQ</h2>
+            <p><strong>Frequently Asked Questions:</strong><br><br>
+                <strong>General</strong><br><br>
+                <strong>Q: What does your company do?</strong><br>
+                <strong>A:</strong> RICKCLMNT specializes in tailored technology solutions. We provide consulting,
+                development, and innovative problem-solving services for individuals and
+                businesses across various industries.<br><br><br>
+                <strong>Q: What kind of projects do you take on?</strong><br>
+                <strong>A:</strong> We take on projects that align with our interests and expertise. These range from
+                developing custom software applications to consulting on advanced technological
+                innovations.<br><br><br>
+                <strong>Q: Do you work alone or with a team?</strong><br>
+                <strong>A:</strong> RICKCLMNT is led by me, Patrick Clement, and supported by a team of skilled
+                professionals. Together, we ensure every project meets the highest standards.</p>
+                <br>
+                <a href="FAQ.html" class="blk-btn">More</a>
+        </div>
+    </section>
+
+    <section id="redev">
+        <div class="container"><br><br>
+            <h2>Research & Development</h2>
+            <p>Stay tuned for updates as we continue to
+                innovate and explore new frontiers. Publicly available information about our ongoing and completed R&D
+                initiatives will be showcased on the R&D page.</p>
+                <a href="R&D.html" class="blk-btn">Here</a>
+        </div>
+    </section>
+
+    <section id="newsletter">
+        <div class="container">
+            <h2>Newsletter</h2>
+            <p>Subscribe to stay ahead of emerging technologies.</p>
+            <div id="mc_embed_shell">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width: 320px;}
+</style>
+<div id="mc_embed_signup">
+    <form action="https://github.us7.list-manage.com/subscribe/post?u=238ff3b9584cc4c974f50f82a&amp;id=afea8bbeed&amp;f_id=00b0c2e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll">
+            <div class="indicates-required"><span class="asterisk">(*)</span> required fields</div><br>
+            <div class="mc-field-group"><label for="mce-FNAME">First Name <span class="asterisk">*</span></label><input type="text" name="FNAME" class=" text" id="mce-FNAME" value=""></div><div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" value="" required=""></div>
+        <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div>
+    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
+        <input type="text" name="b_238ff3b9584cc4c974f50f82a_afea8bbeed" tabindex="-1" value="">
+    </div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                <p style="margin: 0px auto;"><a href="http://eepurl.com/i5EchI" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js">
+    
+</script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[6]='COMPANY';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
+        </div>
+    </section>
+
+    <section id="about-us">
+        <div class="container">
+          <br> <a href="about-us.html" class="blk-btn">About Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+             <a href="credits.html">Credits</a> |
+             <a href="privacy&cookies.html">Cookies</a> |
+             <a href="privacy&cookies.html">Privacy Policy</a> |
+            <br><br><br>
+            <p>RICKCLMNT<br>Amplifying Potential, Together</p><br>
+            <p>© 2025 RICKCLMNT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

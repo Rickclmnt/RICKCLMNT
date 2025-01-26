@@ -1,0 +1,217 @@
+<style>
+body {
+    margin: 0;
+    font-family: 'Avenir', sans-serif;
+    background-color: #FFFFFF;
+    color: #333;
+}
+
+.projects-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.projects-section h3 {
+    font-family: 'Avenir', sans-serif;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #222;
+    position: relative;
+ }
+ .projects-section h3::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background-color: rgb(0, 134, 179);
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+ }
+
+.project {
+    border: none;
+    overflow: hidden;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.04);
+    border-radius: 0px;
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-content {
+    padding: 10px 15px;
+}
+
+.project-title {
+    font-size: 1.4rem;
+    margin: 10px 0 5px;
+    font-weight: normal;
+    color: #000;
+}
+
+.read-more {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    color: #007BFF;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.details {
+    display: none; /* Hidden by default */
+    margin-top: 10px;
+}
+
+</style>
+
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">       
+       <title>RICKCLMNT - Our Projects</title>
+       <!-- Google Fonts -->
+       <link href="https://fonts.googleapis.com/css2?family=Avenir:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">       
+       <!-- Google tag(gtag.js) -->
+       <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+   <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+
+       gtag('config', 'G-N4NGTP8WXB');
+   </script>
+    </head>
+<body>
+    <section class="projects-section">
+      <h3>Projects</h3>
+      <br><br>  
+        <div class="project">
+            <img src="assets\image7.jpg" alt="Drone" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">[1] R.E.S.C.U.E.</h2>
+                <p>Revolutionizing Search and Rescue Operations</p>
+                <a href="#" class="read-more" onclick="toggleDetails(event, 'details1', this)">[READ MORE]</a>
+                <div id="details1" class="details">
+    <p><strong>
+        The Real-time. Emergency. Situation. Coordination. and Urgent. Execution. system is designed to assist
+         aid authorities in conducting faster, smarter, and more effective search and rescue operations. By
+         integrating real-time geolocation, AI-powered analytics, and seamless
+         communication tools, this technology enables rapid response during critical
+         situations, saving lives when every second counts.
+       </strong></p> 
+ </div>
+            </div>
+        </div>
+        <br>
+        <div class="project">
+            <img src="assets\MARK IV.gif" alt="M.A.R.K. IV" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">[2] M.A.R.K. IV</h2>
+                <p>Machine Assisted Resource Knowledge-base (Version 4)</p>
+                <a href="#" class="read-more" onclick="toggleDetails(event, 'details3', this)">[READ MORE]</a>
+                <div id="details3" class="details">
+                    <p><strong>The M.A.R.K series is a line of powerful AI personal assistants
+                        designed to elevate your work and make life a little easier. This system helps manage
+                        everything from daily tasks to complex projects, with unique self-repairing
+                        capabilities like the ability to write, update, and even replicate its own code when
+                        needed, along with access to redundant backups of itself. 
+                        <br><br>M.A.R.K IV ensures
+                        seamless performance with minimal downtime. It’s a dynamic tool that enhances
+                        productivity and efficiency, designed to grow alongside your demands.</strong></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="project">
+            <img src="assets\image8.jpg" alt="Bootable flashdrive" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">[3] Forget-me OS</h2>
+                <p>Privacy and Security, Tailored for You</p>
+                <a href="#" class="read-more" onclick="toggleDetails(event, 'details2', this)">[READ MORE]</a>
+                <div id="details2" class="details">
+                    <p><strong>
+                        Forget-me is our variant of the popular Tails OS. It is a secure, portable operating system built for
+                        professionals and businesses that demand the highest standards of privacy. With
+                        advanced encryption protocols, user-friendly interfaces, and bespoke features, this
+                        OS ensures your data remains yours, no matter where or how you work.<br><br>
+                        Key Features:
+                    <ul>
+                        <li>Live OS without persistent storage</li>
+                        <li>Customizable security features for specialized needs.</li>
+                        <li>Portable and easy to deploy on any system.</li>
+                    </ul>
+                </strong></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="project">
+            <img src="assets\image13.jpg" alt="Dead Hand Protocol" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">[4] Failsafe</h2>
+                <p>Securing Your Legacy with Strategic Precision</p>
+                <a href="#" class="read-more" onclick="toggleDetails(event, 'details4', this)">[READ MORE]</a>
+                <div id="details4" class="details">
+                    <p><strong>
+                        The Failsafe Execution Protocol is a robust personal contingency system designed
+                        to safeguard critical data, assets, and operations in unforeseen
+                        scenarios. This system ensures that essential information and
+                        processes remain secure and accessible in critical moments.<br><br>
+                        Key Features:
+                    <ul>
+                        <li>Asset Protection: Safeguards sensitive data and critical operations from compromise.</li>
+                        <li>Customizable Protocols: Tailored to meet your unique requirements.</li>
+                        <li>Real-time Execution: Guarantees timely activation of protective measures during emergencies.</li>
+                    </ul>
+                       </strong></p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+    </section>
+
+    <script>
+        // Function to toggle the details
+        function toggleDetails(event, detailsId, button) {
+            event.preventDefault(); 
+
+            // Close any open details
+            const allDetails = document.querySelectorAll(".details");
+            allDetails.forEach((detail) => {
+                detail.style.display = "none";
+            });
+
+            // Make all "Read More" buttons visible again
+            const allButtons = document.querySelectorAll(".read-more");
+            allButtons.forEach((btn) => {
+                btn.style.display = "inline-block";
+            });
+
+            // Open the clicked details section
+            const details = document.getElementById(detailsId);
+            details.style.display = "block";
+
+            // Hides the clicked "Read More" button
+            button.style.display = "none";
+        }
+    </script>
+</body>
+</html>
