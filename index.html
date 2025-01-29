@@ -9,10 +9,11 @@ header {
     background-color: #eeeeee;
     padding: 0px 0;
     text-align: center;
+    height: 30vh;
 }
 
 body {
-    font-family: 'Avenir';
+    font-family: 'Avenir', sans-serif;
     line-height: 1.6;
     background-color: #f9f9f9;
     color: #333;
@@ -22,8 +23,9 @@ body {
     position: sticky;
     top: 0;
     background-color: #222;
-    padding: 5px 0;
+    padding: 1px 0;
     z-index: 1000;
+    height: 80px;
 }
 
 .navbar .container {
@@ -36,7 +38,7 @@ body {
     color: #fff;
     text-decoration: none;
     font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
+    font-size: 1.4em;
     font-weight: 700;
 }
 
@@ -92,6 +94,7 @@ body {
 .slides {
     display: flex;
     transition: transform 0.8s ease-in-out;
+    height: cover;
 }
 
 /* Individual Slide */
@@ -142,7 +145,7 @@ body {
 /* Navigation Arrows */
 .navigation {
     position: absolute;
-    top: 50%;
+    top: 40%;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -153,7 +156,7 @@ body {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     border: none;
-    font-size: 1.5em;
+    font-size: 1.0em;
     padding: 5px;
     cursor: pointer;
     transition: background 0.3s;
@@ -170,7 +173,12 @@ body {
     padding: 20px 0;
 }
 
-/* Section Styling */
+/* Section Styling 
+
+section1 {
+    top: 90%;
+}*/
+
 section {
     background: #fff;
     padding: 40px 20px;
@@ -286,17 +294,6 @@ section p {
     align-items: center;
 }
 
-#projects {    
-    background-image: url('./image11.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: absolute;
-    height: 60vh;
-    width: 100%;
-    display: flex;
-}
-
 /* Footer */
 footer {
     background-color: #000000;
@@ -377,11 +374,11 @@ footer {
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
                 <!-- <li><a href="#reviews">Reviews</a></li> -->
                 <li><a href="#consultation">Consultation</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="R&D.html">R&D</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
             <div class="hamburger">
@@ -397,21 +394,21 @@ footer {
             <div class="modern-slider">
              <div class="slides">
                 <div class="slide">
-                <img src="image4.jpg" alt="image1">
+                <img src="./image4.jpg" alt="image1">
                  <div class="overlay">
                   <h1>Empowering innovation</h1>
                   <p>From ground to orbit</p>
                  </div>
                 </div>
                 <div class="slide">
-                <img src="image2.jpg" alt="image2">
+                <img src="./image2.jpg" alt="image2">
                  <div class="overlay">
                   <h1>Driving intelligent automation</h1>
                   <p>For enhanced efficiency</p>
                  </div>
                 </div>
                 <div class="slide">
-                <img src="image3.jpg" alt="image3">
+                <img src="./image3.jpg" alt="image3">
                  <div class="overlay">
                   <h1>From research to the real world</h1>
                   <p>Transforming ideas to results</p>
@@ -425,6 +422,7 @@ footer {
                 </div>
             </div>
     </header>
+
         <!-- Note to self: optimize this later -->
         <script>
             // Dots are redundant
@@ -486,9 +484,10 @@ footer {
         });
         </script>
 
+
     <!-- About Section -->
     <section id="about">
-        <div class="container"><br><br>
+        <div class="container"><br><br><br><br><br><br>
             <h2>What We Do</h2>
             <p>At RICKCLMNT, we provide tailored technology solutions and strategic guidance to help businesses and individuals
                 tackle challenges and achieve their goals. Whether it's developing advanced systems, optimizing existing processes,
@@ -502,65 +501,37 @@ footer {
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services">
         <div class="container">
             <strong><h1>Our Mission</h1>
                 <br>"At RICKCLMNT, your success is our mission, we are here to help you navigate the ever evolving world of technology with 
                 confidence and clarity. We turn challenges into opportunities and ideas into reality."
             </strong>
-        <br><br><br>
-         <div class="service-item">
+        <br><br>
+            <!-- Services Section -->
+    <section id="services">
+         <div class="service-item"><br>
             <h2>Our Expertise</h2>
                 <p>We provide a wide range of technology-based solutions tailored to meet the unique needs of our clients. 
                     Our diverse skill set and ability to think outside the box allow us to tackle complex problems and deliver 
-                    tailored solutions that work.</p><br>
-            </div>
+                    tailored solutions that work.</p>
             <a href="services.html" class="cta-button"><strong>Services Breakdown</strong></a>
          </div>
         </div>
     </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container"><br><br>
-            <h2>Featured Solutions</h2>
-            <p>Here is a curated selection of some of our more interesting projects, each showcasing our commitment to innovation,
-                 precision, and excellence. <br>* Detailed project information is available upon inquiry.</p>
-            <a href="projects.html" class="cta-button">Our Projects</a>
-        </div>
-    </section>
-    <br>
-    <!-- don't ask-->
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
     <!-- Consultation Section -->
     <section id="consultation">
-        <div class="container"><br><br>
+        <div class="container"><br>
             <h2>Collaborate With Us</h2>
             <p>Availability is limited to select projects. Act now to reserve your spot on our wait-list.</p>
             <p><a class="appointlet-button" data-appointlet-modal href="https://appt.link/meet-with-rick-clement-hs9USG3o" style="background-color:#2980b9;">Book a consultation</a><script async defer src="https://js.appointlet.com/"></script><link href="https://js.appointlet.com/styles.css" rel="stylesheet"></p>
             <br><p>Engage in a conversation to explore collaboration opportunities. For inquiries contact us at</p>
-                <a href="rickclmnt@gmail.com" class="blk-btn">rickclmnt@gmail.com</a>
+                <a href="https://rickclmnt@gmail.com" class="blk-btn">rickclmnt@gmail.com</a>
         </div>
     </section>
 
     <!-- FAQ Section -->
     <section id="faq">
-        <div class="container"><br><br>
+        <div class="container"><br>
             <h2>FAQ</h2>
             <p><strong>Frequently Asked Questions:</strong><br><br>
                 <strong>General</strong><br><br>
@@ -573,13 +544,13 @@ footer {
                 developing custom software applications to consulting on advanced technological
                 innovations.<br><br><br>
                 <strong>Q: Do you work alone or with a team?</strong><br>
-                <strong>A:</strong> RICKCLMNT is led by me, Patrick Clement, and supported by a team of skilled
+                <strong>A:</strong> RICKCLMNT is led by Patrick Clement, and supported by a team of skilled
                 professionals. Together, we ensure every project meets the highest standards.</p>
                 <br>
                 <a href="FAQ.html" class="blk-btn">More</a>
         </div>
     </section>
-
+    <!-- R&D section -->
     <section id="redev">
         <div class="container"><br><br>
             <h2>Research & Development</h2>
@@ -589,7 +560,17 @@ footer {
                 <a href="R&D.html" class="blk-btn">Here</a>
         </div>
     </section>
-
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container"><br><br>
+            <h2>Featured Solutions</h2>
+            <p>Here is a curated selection of some of our more interesting projects, each showcasing our commitment to innovation,
+                 precision, and excellence. <br>* Detailed project information is available upon inquiry.</p>
+            <a href="projects.html" class="cta-button">Our Projects</a>
+        </div>
+        <br>
+    </section>
+    <!-- newsletter -->
     <section id="newsletter">
         <div class="container">
             <h2>Newsletter</h2>
@@ -636,11 +617,10 @@ footer {
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-links">
+          <div class="footer-links">
              <a href="credits.html">Credits</a> |
-             <a href="privacy&cookies.html">Cookies</a> |
-             <a href="privacy&cookies.html">Privacy Policy</a> |
-            <br><br><br>
+             <a href="privacy&cookies.html">Cookies&Privacy</a> 
+            <br><br><br><br>
             <p>RICKCLMNT<br>Amplifying Potential, Together</p><br>
             <p>© 2025 RICKCLMNT. All rights reserved.</p>
             </div>
