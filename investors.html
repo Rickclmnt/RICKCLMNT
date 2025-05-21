@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invest | RICKCLMNT Technologies</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: white;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    #preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #loading-bar-container {
+      width: 40%;
+      background-color: #e0e0e0;
+      border-radius: 0px;
+      height: 3.4px;
+      overflow: hidden;
+    }
+
+    #loading-bar {
+      width: 0%;
+      height: 100%;
+      background-color: black;
+      transition: width 0.2s ease;
+    }
+
+    /* Main content (hidden at first) */
+    #main-content {
+      display: none;
+      /*padding: 20px;
+      text-align: center;*/
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: #F9F9F7;
+      border-bottom: 1px solid #ddd;
+      z-index: 999;
+    }
+    .nav-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    h1, h2, h3 {
+      color: #1a1a1a;
+    }
+
+    a {
+      display: inline-block;
+      color: #111;
+      background-color: #f9f9f7;
+      border: 1px solid #333;
+      padding: 10px 20px;
+      transition: background 0.3s ease;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    a:hover {
+      background-color: #111;
+      color: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    thead {
+      background-color: #e9ecef;
+    }
+
+    ul {
+      list-style: disc;
+      margin-left: 5px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+     .section img {
+      border: 2px solid grey;
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .firelike {
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 1.4;
+      color: #444;
+    }
+
+    .contact {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #e9ecef;
+      border-radius: 8px;
+    }
+
+    .footer {
+      width: flex;
+     margin-top: 6rem;
+     padding: 1.5rem 1rem;
+     font-size: 0.875rem; /* text-sm */
+     color: #737373; /* neutral-500 */
+     text-align: center;
+   }
+
+   .footer-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 0.5rem;
+     max-width: 100%;
+   }
+
+   .footer-logo {
+     height: 3rem;
+     opacity: 0.9;
+   }
+  </style>
+    <!-- Google tag(gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-N4NGTP8WXB');
+</script>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="loading-bar-container">
+      <div id="loading-bar"></div>
+    </div>
+  </div>
+
+  <header>
+    <div class="nav-container">
+      <!-- Left: Logo / brand -->
+      <div class="nav-left">RICKCLMNT 	Technologies</div>
+   </div>
+  </header>
+
+  <!-- Main Website Content -->
+  <div id="main-content">
+
+  <br><br>
+  <div class="section">
+    <h2>Company Overview</h2>
+    <p>RICKCLMNT Technologies is a future-driven technology solutions firm on a mission to build intelligent, bespoke solutions that drive digital transformation across education, business, and society.</p>
+  </div><br><br><br>
+<a href="firelike-pitch.html">Investment opportunity</a>
+<br><br><br>
+<br><br><br>
+<footer class="footer">
+  <div class="footer-container">
+    <p class="footer-text">© 2025 RICKCLMNT TECHNOLOGIES.<br> All rights reserved.</p>
+  </div>
+</footer>
+  </div>
+
+  <script>
+    // Progressive Loading Bar
+    const loadingBar = document.getElementById('loading-bar');
+    const preloader = document.getElementById('preloader');
+    const mainContent = document.getElementById('main-content');
+
+    let progress = 0;
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 10; // Increase randomly to simulate loading
+
+      if (progress > 100) {
+        progress = 100;
+      }
+
+      loadingBar.style.width = progress + '%';
+
+      if (progress === 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          preloader.addEventListener('transitionend', () => {
+            preloader.remove();
+            mainContent.style.display = 'block';
+          });
+        }, 400); // Small delay to feel natural
+      }
+    }, 400); // Update every 200ms
+  </script>
+</body>
+</html>

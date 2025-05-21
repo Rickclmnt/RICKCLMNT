@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pilot program | RICKCLMNT Technologies</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      margin: 0;
+      background-color: rgba(255,254,235);
+      color: #111;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    #preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #loading-bar-container {
+      width: 40%;
+      background-color: #e0e0e0;
+      border-radius: 0px;
+      height: 3.4px;
+      overflow: hidden;
+    }
+
+    #loading-bar {
+      width: 0%;
+      height: 100%;
+      background-color: rgba(255,163,86);
+      transition: width 0.2s ease;
+    }
+
+    /* Main content (hidden at first) */
+    #main-content {
+      display: none;
+      /*padding: 20px;
+      text-align: center;*/
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: #F9F9F7;
+      border-bottom: 1px solid #ddd;
+      z-index: 999;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: rgba(255,163,86);
+    }
+    p.lead {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 3rem;
+      max-width: 700px;
+    }
+    a {
+      display: inline-block;
+      color: #111;
+      background-color: #f9f9f7;
+      border: 1px solid #333;
+      padding: 10px 20px;
+      transition: background 0.3s ease;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    a:hover {
+      background-color: #111;
+      color: #fff;
+    }
+
+    ul {
+      font-size: 1.2rem;
+      color: #333;
+      /* margin-bottom: 3rem; */
+      max-width: 700px;
+    }
+
+
+.footer {
+  width: flex;
+  margin-top: 6rem;
+  padding: 1.5rem 1rem;
+  font-size: 0.875rem; /* text-sm */
+  color: #737373; /* neutral-500 */
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.footer-logo {
+  height: 3rem;
+  opacity: 0.9;
+}
+
+    .job-listing {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+    }
+    .job-listing h2 {
+      padding: 25px;
+    }
+    .job-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 25px;
+      transition: all 0.2s ease;
+    }
+    .job-card:hover {
+      border-color: orange;
+      box-shadow: 0 0 5px rgba(255,163,86);
+    }
+    .job-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .job-meta {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    .job-card p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+    .job-card a {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #111;
+      border: 1px solid #111;
+      padding: 8px 16px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+    .job-card a:hover {
+      background-color: #111;
+      color: #fff;
+    }
+
+    .contact-section {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      margin-top: 40px;
+      padding: 40px 20px;
+    }
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 15px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .contact-form button {
+      background-color: light-orange;
+      color: #111;
+      border: none;
+      padding: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .contact-form button:hover {
+      background-color: rgba(255,163,86);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .job-listing {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+    <!-- Google tag(gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-N4NGTP8WXB');
+</script>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="loading-bar-container">
+      <div id="loading-bar"></div>
+    </div>
+  </div>
+
+  <!-- Main Website Content -->
+  <div id="main-content">
+
+  <div class="container">
+    <h1>Firelike<br>Pilot Program</h1><br><br>
+<br><br>
+    <p class="lead">Give your students an education designed for the future. Less admin work, better student engagement, smarter insights.</p>
+
+<br><br><br><br>
+    <h2>Pilot Program will commence<br>Summer 2025</h2>
+  </div>
+<br><br><br><br>
+<footer class="footer">
+  <div class="footer-container">
+    <p class="footer-text">© 2025 RICKCLMNT TECHNOLOGIES. <br>All rights reserved.</p>
+  </div>
+</footer>
+
+ <script>
+    // Progressive Loading Bar
+    const loadingBar = document.getElementById('loading-bar');
+    const preloader = document.getElementById('preloader');
+    const mainContent = document.getElementById('main-content');
+
+    let progress = 0;
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 3; // Increase randomly to simulate loading
+
+      if (progress > 100) {
+        progress = 100;
+      }
+
+      loadingBar.style.width = progress + '%';
+
+      if (progress === 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          preloader.addEventListener('transitionend', () => {
+            preloader.remove();
+            mainContent.style.display = 'block';
+          });
+        }, 700); // Small delay to feel natural
+      }
+    }, 200); // Update every 200ms
+  </script>
+</body>
+</html>

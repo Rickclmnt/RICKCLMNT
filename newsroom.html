@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsroom | RICKCLMNT Technologies</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f7f8;
+      color: #111;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: #F9F9F7;
+      border-bottom: 1px solid #ddd;
+      z-index: 999;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -1px;
+    }
+    .hero {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+
+    a {
+      display: inline-block;
+      color: #111;
+      background-color: #f9f9f7;
+      padding: 5px 8px;
+      transition: background 0.3s ease;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+   a:hover {
+      background-color: #111;
+      color: #fff;
+    }
+
+    .categories {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem auto;
+      flex-wrap: wrap;
+    }
+    .categories button {
+      border: none;
+      background: #e0e0e0;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .categories button.active {
+      background: #111;
+      color: #fff;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 1rem;
+    }
+    .card-body h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    .card-body p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+    .card-body .meta {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 0.5rem;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 8px;
+      overflow: auto;
+      max-height: 90vh;
+      padding: 2rem;
+      position: relative;
+    }
+    .modal-content img {
+      max-width: 100%;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+.footer {
+  width: flex;
+  margin-top: 6rem;
+  padding: 1.5rem 1rem;
+  font-size: 0.875rem; /* text-sm */
+  color: #737373; /* neutral-500 */
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.footer-logo {
+  height: 3rem;
+  opacity: 0.9;
+}
+
+  </style>
+</head>
+    <!-- Google tag(gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-N4NGTP8WXB');
+</script>
+<body>
+  <header>
+    <div class="nav-container">
+      <!-- Left: Logo / brand -->
+      <div class="nav-left">RICKCLMNT 	Technologies</div>
+  </div>
+</header>
+
+  <div class="hero">
+    <h1>Newsroom</h1>
+    <p>Field reports, tech updates, and stories from the edge of innovation.</p>
+  </div>
+
+  <div class="categories">
+    <button class="active" data-category="all">All</button>
+    <button data-category="new">New</button>
+    <button data-category="tech">Tech</button>
+    <button data-category="updates">Updates</button>
+    <button data-category="field">Field Reports</button>
+  </div>
+
+  <div class="news-grid">
+    <div class="card" data-category="new">
+      <img src="Pilot program.jpg" alt="News">
+      <div class="card-body">
+        <h3>Firelike pilot program</h3>
+        <p>The Firelike Pilot program will begin in august 2025.</p>
+        <div class="meta">New • May 2025</div>
+      </div>
+    </div>
+    <div class="card" data-category="tech">
+      <img src="Firelike.jpg" alt="News">
+      <div class="card-body">
+        <h3>Coming Soon: Firelike — Education for the Next Generation</h3><br>
+        <a href="firelike.html">Learn more</a>
+        <div class="meta">Tech • April 2025</div>
+      </div>
+    </div>
+    <div class="card" data-category="all">
+      <img src="banner.jpg" alt="News">
+      <div class="card-body">
+        <h3>RICKCLMNT Technologies</h3>
+        <p><strong>02/05/2025</strong></p>
+        <div class="meta">Launch • February 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <img id="modalImage" src="" alt="">
+      <h2 id="modalTitle"></h2>
+      <p id="modalContent"></p>
+    </div>
+  </div>
+<br><br><br><br><br>
+<footer class="footer">
+  <div class="footer-container">
+    <p class="footer-text">© 2025 RICKCLMNT TECHNOLOGIES. <br>All rights reserved.</p>
+  </div>
+</footer>
+  <script>
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        modal.classList.add('active');
+        modalImage.src = card.querySelector('img').src;
+        modalTitle.textContent = card.querySelector('h3').textContent;
+        modalContent.textContent = card.querySelector('p').textContent;
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    const filterButtons = document.querySelectorAll('.categories button');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const category = btn.dataset.category;
+
+        cards.forEach(card => {
+          card.style.display = category === 'all' || card.dataset.category === category ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

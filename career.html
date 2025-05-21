@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Careers | RICKCLMNT Technologies</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      margin: 0;
+      background-color: #f9f9f7;
+      color: #111;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    #preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #loading-bar-container {
+      width: 40%;
+      background-color: #e0e0e0;
+      border-radius: 0px;
+      height: 3.4px;
+      overflow: hidden;
+    }
+
+    #loading-bar {
+      width: 0%;
+      height: 100%;
+      background-color: black;
+      transition: width 0.2s ease;
+    }
+
+    /* Main content (hidden at first) */
+    #main-content {
+      display: none;
+      /*padding: 20px;
+      text-align: center;*/
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: #F9F9F7;
+      border-bottom: 1px solid #ddd;
+      z-index: 999;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -1px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 3rem;
+      max-width: 700px;
+    }
+    a {
+      display: inline-block;
+      color: #111;
+      background-color: #f9f9f7;
+      border: 1px solid #333;
+      padding: 10px 20px;
+      transition: background 0.3s ease;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    a:hover {
+      background-color: #111;
+      color: #fff;
+    }
+
+ .card {
+  display: block;
+  background-color: #f9f9f7;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 15px  rgba(33,134,216);
+}
+
+.footer {
+  width: flex;
+  margin-top: 6rem;
+  padding: 1.5rem 1rem;
+  font-size: 0.875rem; /* text-sm */
+  color: #737373; /* neutral-500 */
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.footer-logo {
+  height: 3rem;
+  opacity: 0.9;
+}
+
+    .job-listing {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+    }
+    .job-listing h2 {
+      padding: 25px;
+    }
+    .job-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 25px;
+      transition: all 0.2s ease;
+    }
+    .job-card:hover {
+      border-color: #111;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    .job-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .job-meta {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    .job-card p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+    .job-card a {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #111;
+      border: 1px solid #111;
+      padding: 8px 16px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+    .job-card a:hover {
+      background-color: #111;
+      color: #fff;
+    }
+
+    .contact-section {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      margin-top: 40px;
+      padding: 40px 20px;
+    }
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 15px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .contact-form button {
+      background-color: #111;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .contact-form button:hover {
+      background-color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .job-listing {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+    <!-- Google tag(gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-N4NGTP8WXB');
+</script>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="loading-bar-container">
+      <div id="loading-bar"></div>
+    </div>
+  </div>
+
+  <header>
+    <div class="nav-container">
+      <!-- Left: Logo / brand -->
+      <div class="nav-left">RICKCLMNT 	Technologies</div>
+    </div>
+  </header>
+
+  <!-- Main Website Content -->
+  <div id="main-content">
+
+  <div class="container">
+    <h1>Careers at <br>RICKCLMNT</h1><br><br>
+<br><br>
+    <h2>We Still Hire Humans</h2>
+    <p class="lead">Our mission isn’t to replace people with technology—it’s to empower them. We believe in a future where intelligent systems extend human capacity, not erase it.
+That’s why we’re not chasing automation for automation’s sake. We’re designing tools that amplify intuition, sharpen creativity, and adapt to real human needs. Because the spark that drives innovation—curiosity, insight, imagination—still belongs to people.
+So, yeah. <strong>We still hire humans, and we always will.</strong></p><br><br><br><br>
+<a href="#contact">View Open Positions</a>
+<br><br><br><br><br><br><br>
+    <h2>Work at RICKCLMNT</h2><p class="lead">At RICKCLMNT, we embrace the unconventional, the bold, and the imaginative. We hire people who think outside the box, who see the potential to bring ideas from science fiction into the tangible reality of tomorrow. Our team thrives on collaboration, with a bit of chaos—and method—in between.
+Even though we operate in separate divisions, we’re united by a shared vision: to break down the boundaries of what’s possible. We believe in the value of autonomy, but we also recognize the power of deadlines. There's freedom here, but it’s not without <strong>responsibility</strong>.
+We don’t do micromanagement. If you’re here, we trust you. No one will undermine your expertise. We value the quiet innovators and the bold disruptors, and we show real appreciation for every breakthrough, every successful challenge, and every job well done.
+At RICKCLMNT, we don’t just make things work. We make them better.</p>
+  <div class="container">
+ <h2>Benefits & Perks</h2><p class="lead">We keep it simple: we give you what you need and get out of your way.</p>
+
+    <div class="card"><strong>Flexible Hours & Remote Freedom</strong><br>Work when you’re at your best, wherever that is. We care about outcomes, not online status.</div><br>
+
+    <div class="card"><strong>Growth That Makes Sense</strong><br>Promotions here aren’t just titles—they’re milestones. We assess whether you’d thrive in a new role or double down on your strengths where you are. You grow, and so does your compensation.</div><br>
+
+    <div class="card"><strong>Performance-Based Incentives</strong><br>You’re rewarded relative to the value you bring.</div><br>
+
+    <div class="card"><strong>Tools & Autonomy</strong><br>We provide you with the resources you need.</div><br>
+
+    <div class="card"><strong>Mentorship</strong><br>
+Learning isn’t optional. You’ll have access to courses, mentorship, and other oppurtunities to improve yourself.</div><br>
+
+    <div class="card"><strong>Appreciation For Impactfull Contribution</strong><br>Genuine recognition, career elevation, and being treated like you matter—because you do.</div><br><br><br><br>
+
+<h2>Join the Team</h2>
+<p class="lead">We're always on the lookout for curious minds, builders, and big thinkers. Below, you'll find our current open roles. If something sparks your interest, apply—even if you don’t meet every single requirement. We hire potential, not perfection.</p>
+  </div>
+
+  <div class="container">
+    <div class="job-listing">
+      <!-- div class="job-card" -->
+  <section id="contact" class="contact-section">
+        <h3>No Open Positions Right Now</h3>
+    <p style="text-align: left; margin-bottom: 1rem;">
+      There aren't any Jobs availiable right now. Check back later, or leave an email so we can reach you when something opens up.
+    </p>
+<br>
+    <div class="contact-form">
+<form action="https://formsubmit.co/rickclmnt@gmail.com" method="POST">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <button type="submit" onclick="handleSubmit(event)">Get Notifications</button>
+</form>
+    </div>
+  </section>
+      </div>
+    </div>
+  </div>
+<footer class="footer">
+  <div class="footer-container">
+    <p class="footer-text">© 2025 RICKCLMNT TECHNOLOGIES. <br>All rights reserved.</p>
+  </div>
+</footer>
+  </div>
+
+ <script>
+    // Progressive Loading Bar
+    const loadingBar = document.getElementById('loading-bar');
+    const preloader = document.getElementById('preloader');
+    const mainContent = document.getElementById('main-content');
+
+    let progress = 0;
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 2; // Increase randomly to simulate loading
+
+      if (progress > 100) {
+        progress = 100;
+      }
+
+      loadingBar.style.width = progress + '%';
+
+      if (progress === 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          preloader.addEventListener('transitionend', () => {
+            preloader.remove();
+            mainContent.style.display = 'block';
+          });
+        }, 400); // Small delay to feel natural
+      }
+    }, 200); // Update every 200ms
+  </script>
+</body>
+</html>
