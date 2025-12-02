@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+  <style>.section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; color: #222; font-family: monospace; }
+  p { line-height: 1.6; margin-bottom: 1.5rem; color: #222; }
+  .button { padding: 10px 20px; background: #2A9DF4DB; color: #000; border: none; cursor: pointer; }
+  section { max-width: 1000px; margin: 0 auto; padding: 100px 20px; }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-right ul {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+    .nav-right li a {
+      position: relative;
+    }
+    .nav-right li a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #222;
+      transition: width 0.3s ease;
+    }
+    .nav-right li a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<div class="nav-container">
+  <div class="nav-left"></div>
+  <div class="nav-right"><a href="index.html" style="padding:8px 10px;background:#2a9df4;color:#000;border:none;cursor:pointer;text-decoration: none;">Back</a>
+  </div>
+</div>
+  <!-- CONTACT PAGE -->
+<div class="page" id="contact">
+  <section>
+    <div class="section-title">Contact Form</div>
+    <p>Whether you’re seeking a solution, a strategic partnership, or an innovative approach to a challenge, start here.</p>
+    
+    <form action="https://formsubmit.co/rickclmntcorp@protonmail.com" method="POST" style="margin-top:2rem;">
+      <input type="text" name="name" placeholder="Your Name" required style="display:block;width:100%;padding:10px;margin-bottom:10px;background:#f2f2f2;border:1px solid #333;color:#222;">
+      <input type="email" name="email" placeholder="Your Email" required style="display:block;width:100%;padding:10px;margin-bottom:10px;background:#f2f2f2;border:1px solid #333;color:#222;">
+      <textarea name="message" placeholder="Message..." required style="display:block;width:100%;padding:10px;margin-bottom:10px;background:#f2f2f2;border:1px solid #333;color:#222;"></textarea>
+      <button type="submit" style="padding:10px 20px;background:#2a9df4;color:#000;border:none;cursor:pointer;">Send Message</button>
+    </form>
+  </section>
+</div>
+</body>
+
+</html>

@@ -1,343 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RICKCLMNT Technologies</title>
-  <style>
-  @font-face {
-  font-family: "Rajdhani-Regular";
-  src: url("Rajdhani-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-      background-color: #f2f2f2;
-      color: #0a0a0a;
-      scroll-behavior: smooth;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }header {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  color: black;
-  background-color: #f2f2f2;
-  border-bottom: 2px solid #f2f2f2;
-  z-index: 999;
-}
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 11px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.nav-left {
-  font-family: "Rajdhani-Regular";
-  font-weight: 900;
-  font-size: 1.3rem;
-  letter-spacing: 0px;
-}
-.nav-right ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-}
-.nav-right li a {
-  position: relative;
-}
-.nav-right li a::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #222;
-  transition: width 0.3s ease;
-}
-.nav-right li a:hover::after {
-  width: 100%;
-}
-
-.hamburger {
-  display: none;
-  cursor: pointer;
-}
-
-/* Hero */
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 60vh;
-  padding: 80px 20px;border-top: 1px solid #f2f2f2;
-  /*border-bottom: 1px solid #222;*/
-}
-.hero-content h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-}
-.hero-content h1::after {
-  content: "_";
-  animation: blink 1s steps(2, start) infinite;
-  color: black;
-  margin-left: 5px;
-}
-@keyframes blink {
-  to { visibility: hidden; }
-}
-.hero-content p {
-  font-size: 1rem;
-  color: #222;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-section {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 100px 20px;
-  border-top: 1px solid #3C3C3C;
-}
-.section-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  color: #222;
-  font-family: monospace;
-}
-.section-subtitle {
-  font-size: 1rem;
-  color: #222;
-  margin-bottom: 3rem;
-  line-height: 1.6;
-}
-p {
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  color: #222;
-}
-
-.service-block {
-  border-top: 1px solid #333;
-  padding: 3rem 0;
-}
-.service-block h2 {
-  font-family: monospace;
-  font-size: 0.95rem;
-  color: #222;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-.service-block p {
-  font-size: 0.95rem;
-  color: #818181;
-}
-
-    footer {
-      font-family: "Rajdhani-Regular";
-      margin-top: 60px;
-      padding: 40px 20px;
-      border-top: 1px solid #ddd;
-      background-color: #f9f9f7;
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .footer-top {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-    .footer-column {
-      flex: 1;
-      min-width: 200px;
-    }
-    .footer-column h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .footer-column ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .footer-column ul li a:hover {
-      text-decoration: underline;
-    }
-    .footer-bottom {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #555;
-    }
-
-@media (max-width: 768px) {
-  .nav-right ul {
-    display: none;
-  }
-  .hamburger {
-    display: block;
-  }
-}
-
-  </style>
-    <!-- Google tag(gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
-<script>
+  <link rel="stylesheet" href="style.css" />  <!-- Google tag (gtag.js) -->  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-N4NGTP8WXB');
-</script>
-</head>
+  </script></head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="nav-container">
-      <div class="nav-left">RICKCLMNT Technologies</div>
-      <div class="nav-right" id="mobileNav">
-        <ul>
-          <li><a href="#mission">Mission</a></li>
-          <li><a href="about-us.html">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#latest-news">Newsroom</a></li>
-        </ul>
-      </div>
-      <div class="hamburger" onclick="toggleMenu()">[+]</div>
-    </div>
-  </header>  <!-- HERO -->  <section class="hero">
+<header>
+  <div class="nav-container">
+    <div class="nav-left">RICKCLMNT</div><div class="nav-right">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+  </div>
+</header>
+<!-- HERO -->
+  <section id="hero-section">
     <div class="hero-content">
-      <h1>Technology, Tailored to Transform</h1>
-      <p>We are dedicated to developing state-of-the-art solutions that push the boundaries of what’s possible—we are here to engineer tomorrow.</p><br><br><br><br><br><br><br><br>
+      <h1>Engineering Tomorrow, Today</h1><br>
+      <p>We create technology solutions that push boundaries, accelerate growth, and deliver tangible impact—tailored to your unique challenges and ambitions.</p>
     </div>
-  </section> <!-- OUR MISSION -->  <section id="mission">
-    <div class="section-title">Our Mission</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about-preview">
+    <div class="section-title"></div>
+    <p>At RICKCLMNT, we tackle the most complex technological challenges with precision and innovation—delivering solutions that produce measurable results and lasting impact.</p><br><br>
+    <a href="/about.html" class="button">Learn more →</a>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="section-title">Our Mission</div><br>
     <div class="section-subtitle">
-      <strong>Your success</strong> is our mission. We revolutionize industries and empower organizations with the tools they need to thrive in an ever-evolving digital landscape.<br><br>
-    </div>
-    <p>At <strong>RICKCLMNT</strong>, our goal is to use <strong>technology</strong> to solve the hardest problems, harnessing it to design solutions that deliver tangible results for our clients.</p>
-      <a href="about-us.html"><strong>About Us</strong> →</a>
-  </section>  <!-- APPROACH -->  <section>
-    <div class="section-title">Our Approach</div>
-    <p>We provide a robust approach that includes strategic consulting, advanced R&D, software development, hardware integration, and more. We use technology to bring ideas to life—from concept to deployment.</p>
-    <p><a href="#contact">Join us in shaping tomorrow →</a></p>
-  </section>  <!-- SERVICES -->  <section id="services">
-    <div class="section-title">What We Offer</div>
-    <div class="section-subtitle">Our work spans across deep tech, strategy, and product, tailored to those bold enough to innovate.</div><div class="service-block">
-  <h2>01 — Bespoke Technology Solutions</h2>
-  <p>We design and build end-to-end technical solutions—enterprise software, hardware, automation, infrastructure—entirely around your context. Even if it doesn't exist yet, we'll build it.</p>
+      <strong>Your success</strong> is our mission.<br>We empower organizations with advanced technology solutions, strategic insight, and innovative tools to thrive in a rapidly evolving digital landscape.<br><br>From concept to deployment, we combine strategic consulting, advanced R&D, software, and hardware integration to deliver solutions that work—and scale.
+    </div><br>
+    <p><a href="contact.html"><strong>Join us in shaping tomorrow →</strong></a></p>
+  </section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-title">Services We Offer</div>
+  <div class="section-subtitle">Deep tech, strategy, and innovation—solutions tailored to ambitious organizations.</div>
+  
+  <div class="service-block">
+    <h2>01 — Business Optimisation</h2>
+    <p>
+      Streamline operations, cut costs, and improve efficiency. Save time, eliminate bottlenecks, and empower your team to perform at peak levels.
+      <br><br><strong>Impact :</strong> Reduce costs by up to 20%, speed up processes, accelerate project delivery.
+    </p>
+  </div>
+  
+  <div class="service-block">
+    <h2>02 — Tech Consultation & Deployment</h2>
+    <p>
+      Secure, scalable technology solutions from strategy to execution. Includes system integration, deployment, infrastructure optimization, and embedded cybersecurity.
+      <br><br><strong>Impact :</strong> Seamless deployments, optimized IT, and enhanced security.
+    </p>
+  </div>
+  
+  <div class="service-block">
+    <h2>03 — Cognitive & AI Systems</h2>
+    <p>
+      Adaptive AI and multi-agent frameworks that provide predictive insights and automated reasoning for smarter decision-making.
+      <br><br><strong>Impact :</strong> Real-time insights, predictive analytics, optimized complex processes.
+    </p>
+  </div>
+  
+  <div class="service-block">
+  <h2>04 — Strategic Intelligence & Risk Insights</h2>
+  <p>Strategic Intelligence & Risk Insights
+We provide high-clarity intelligence, due diligence, and risk analysis to support critical decision-making and protect your operations.
+    <br><br>
+    <strong>Impact examples :</strong> Identifying red flags before partnerships or investments, uncovering vendor and operational risks, delivering targeted intelligence briefs for executives, mapping potential threats early to prevent disruption, strengthening high-stakes decisions with verified insight
+  </p>
 </div>
 
-<div class="service-block">
-  <h2>02 — Research & Development</h2>
-  <p>Advisory services, Innovation Think Tank: Organisations come to us for our insights on AI, automation, cybersecurity, and other advanced tech. We investigate emerging technologies and radical use-cases.</p>
-</div>
+  <div class="service-block">
+    <h2>05 — Special Projects & Experimental Builds</h2>
+    <p>
+      High-impact innovation projects that prototype advanced solutions and deliver tangible results, setting you apart as an industry leader.
+      <br><br><strong>Impact :</strong> Cutting-edge prototypes, new revenue streams, unique implementations.
+    </p>
+  </div>
+  
+  <div class="service-block">
+    <h2>06 — Strategic Enhancements</h2>
+    <p>
+      Advanced analytics, tailored software, and integrated hardware that unlock opportunities and give your organization a competitive edge.
+      <br><br><strong>Impact :</strong> Seamless integration, actionable insights, scalable solutions.
+    </p>
+  </div>
+  <br><br>
+  <a id="contact" href="contact.html" style="padding:8px 10px;background:#2a9df4;color:#000;border:none;cursor:pointer;text-decoration: none;font-size: 18px;">Contact us →</a>
+</section>
 
-<div class="service-block">
-  <h2>03 — Consulting</h2>
-  <p>We work with founders, CTOs, and leaders to untangle complex challenges. From infrastructure decisions to long-term technology roadmaps, we blend deep technical understanding with strategic thinking.</p>
-</div>
+  <!-- NEWS -->
+  <section id="latest-news">
+    <div class="section-title" >News</div>
+    <p>Keep up with our breakthroughs, industry insights, and announcements.</p>
 
-<div class="service-block">
-  <h2>04 — SaaS</h2>
-  <p>We build SaaS products from zero to launch—or help refine and scale existing ones. From market validation and MVPs to backend logic and monetization models, we ensure what you’re building actually delivers value.</p>
-</div>
-
-<div class="service-block">
-  <h2>05 — Special Projects & Experimental Builds</h2>
-  <p>Some ideas don’t fit in a pitch deck. That’s where we thrive. We work on bold high-concept, low-template projects—often confidential. From prototype to production-ready, we bring breakthrough ideas into form.</p>
-</div>
-
-  </section>  <!-- CONTACT -->  <section id="contact">
-    <div class="section-title">Contact Us</div>
-    <p>Whether you're looking for a solution, partnership, or something you can’t quite name yet — start here.</p>
-    <form action="https://formsubmit.co/rickclmntcorp@protonmail.com" method="POST" style="margin-top:2rem;">
-      <input type="text" name="name" placeholder="Your Name" required style="display:block;width:100%;padding:10px;margin-bottom:10px;background:#f2f2f2;border:1px solid #333;color:#222;">
-      <input type="email" name="email" placeholder="Your Email" required style="display:block;width:100%;padding:10px;margin-bottom:10px;background:#f2f2f2;border:1px solid #333;color:#222;">
-      <textarea name="message" placeholder="Message..." required style="display:block;width:100%;padding:10px;margin-bottom:10px;background:#f2f2f2;border:1px solid #333;color:#222;"></textarea>
-      <button type="submit" style="padding:10px 20px;background:#2a9df4;color:#000;border:none;cursor:pointer;">Send Message</button>
-    </form>
-  </section>  <!-- LATEST NEWS -->  <section id="latest-news">
-    <div class="section-title">Latest News</div>
-    <p>Stay up to date with our newest developments, breakthroughs, and announcements.</p>
-<!--div class="service-block">
-  <h2>04/26/2025 — Firelike</h2>
-  <p>Project Commencement: Firelike — Education for the Next Generation <a href="newsroom.html">→</a></p>
-</div-->
-<div class="service-block">
-  <h2>02/05/2025 — Website Launch</h2>
-  <p>This website was launched <!--a href="newsroom.html">→</a--></p>
-</div>
-
-  </section>   
+        <div class="footer-column">
+          <p>Join our newsletter</p>
+          <form action="https://formsubmit.co/rickclmntcorp@protonmail.com" method="POST">
+            <input type="email" name="email" placeholder="Your email" required style="padding:8px 10px;background: white;color:#000;border:none;cursor:pointer;text-decoration: none;">
+            <button type="submit" style="padding:8px 10px;background:#2a9df4;color:#000;border:none;cursor:pointer;text-decoration: none;">Subscribe</button>
+          </form>
+        </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-container">
-      <div class="footer-top">
-        <!-- Column 1 -->
-        <div class="footer-column">
-          <h4>RICKCLMNT</h4>
-          <p>We are here to engineer tomorrow.
-          </p>
-        </div>
-        <!-- Column 2 -->
-        <div class="footer-column">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#mission">Our Mission</a></li>
-            <li><a href="about-us.html">About-Us</a></li>
-            <li><a href="#services">Services</a></li>
-            <!--li><a href="projects.html">Products</a></li-->
-            <!--li><a href="career.html">Careers</a></li-->
-            <li><a href="newsroom.html">Newsroom</a></li>
-          </ul>
-        </div>
-        <!-- Column 3 -->
-        <div class="footer-column">
-          <h4>Contact</h4><br>
-          <ul>
-            <li><a href="#contact"><strong>contact_form</strong></a></li>
-          </ul>
-        </div>
-      </div>
-  <br><br>
-      <div class="footer-bottom">
-        &copy; 2025 RICKCLMNT TECHNOLOGIES. All rights reserved.
-      </div>
-    </div>
-  </footer>  
-<script>
-    function toggleMenu() {
-      const nav = document.querySelector('.nav-right ul');
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-      nav.style.flexDirection = 'column';
-      nav.style.gap = '15px';
-    }
-  </script></body>
+    <strong>RICKCLMNT Technologies</strong><br>We're here to engineer tomorrow.<br><br>
+    <a href="#">• Home</a> <br>
+    <a href="about.html">• About</a> <br>
+    <a href="#services">• Services</a> <br>
+    <a href="contact.html">• Contact</a> <br>
+    <br><br>
+    <div class="footer-bottom"><strong>&copy; 2025 RICKCLMNT. All rights reserved.</strong></div>
+  </footer>
+</div>
+</div>  
+<script src="script.js"></script>
+<!--02/05/2025 — Website Launch-->
+  </body>
 </html>
