@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RICKCLMNT Technologies | Engineering Tomorrow, Today</title>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --blue: #2a9df4;
+            --grey: #666666;
+            --light-grey: #e5e5e5;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--black);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 6%;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 0.95;
+            margin-bottom: 3rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 .emphasis {
+            font-style: italic;
+            color: var(--blue);
+        }
+
+        .hero-text {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--grey);
+            max-width: 700px;
+            margin-bottom: 4rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .hero-cta:hover {
+            background: var(--blue);
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 8rem 6%;
+        }
+
+        .philosophy {
+            background: var(--light-grey);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 6rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .philosophy h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .philosophy-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .philosophy-item h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .philosophy-item h3::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+
+        .philosophy-item p {
+            color: var(--grey);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .mission {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+        }
+
+        .mission-left h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .mission-left .subtitle {
+            font-size: 1.2rem;
+            color: var(--grey);
+            font-weight: 300;
+        }
+
+        .mission-right {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .mission-card {
+            padding: 2rem;
+            border-left: 3px solid var(--blue);
+            background: var(--light-grey);
+        }
+
+        .mission-card h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card p {
+            color: var(--grey);
+            line-height: 1.8;
+        }
+
+        .services {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .services-header {
+            max-width: 1300px;
+            margin: 0 auto 5rem;
+        }
+
+        .services-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .services-header p {
+            font-size: 1.2rem;
+            color: var(--grey);
+        }
+
+        .services-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: var(--grey);
+        }
+
+        .service {
+            background: var(--black);
+            padding: 3rem;
+            transition: background 0.3s;
+        }
+
+        .service:hover {
+            background: #1a1a1a;
+        }
+
+        .service-num {
+            font-size: 0.85rem;
+            color: var(--blue);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .service h3 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .service p {
+            color: var(--grey);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-impact {
+            font-size: 0.95rem;
+            color: #999;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+        }
+
+        .service-impact strong {
+            color: var(--white);
+        }
+
+        .values {
+            background: var(--blue);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .values-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .values h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .values p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .newsletter {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            color: var(--grey);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--light-grey);
+            font-size: 1rem;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: var(--blue);
+            color: var(--white);
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .newsletter-form button:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 5rem 6% 3rem;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 6rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--grey);
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--grey);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--grey);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 968px) {
+            .philosophy-grid,
+            .mission,
+            .services-grid,
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">RICKCLMNT</div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Engineering tomorrow, <span class="emphasis">today</span></h1>
+            <p class="hero-text">We build technology that puts people first. Solutions that advance humanity responsibly. Innovation that's as thoughtful as it is powerful—because the future we're creating should work for everyone.</p>
+            <a href="philosophy.html" class="hero-cta">Discover our approach</a>
+        </div>
+    </section>
+
+    <section id="mission">
+        <div class="mission">
+            <div class="mission-left">
+                <h2>Your success is our mission</h2>
+                <p class="subtitle">We empower organizations with technology that's advanced, ethical, and built to make a real difference.</p>
+            </div>
+            <div class="mission-right">
+                <div class="mission-card fade-in">
+                    <h3>Precision & purpose</h3>
+                    <p>We tackle complex challenges with both technical excellence and moral clarity—delivering solutions that work brilliantly and feel right.</p>
+                </div>
+                <div class="mission-card fade-in">
+                    <h3>Vision to reality</h3>
+                    <p>From initial concept to full deployment, we combine strategic thinking, cutting-edge R&D, and integrated systems to build solutions that scale responsibly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="services-header">
+            <h2>What we do</h2>
+            <p>Deep tech and strategy, crafted for organizations that want to lead with purpose.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service fade-in">
+                <div class="service-num">01</div>
+                <h3>Business Optimisation</h3>
+                <p>Streamline operations, eliminate bottlenecks, and cut costs. We find efficiency without sacrificing humanity—systems that work for people, not against them.</p>
+                <div class="service-impact"><strong>Impact:</strong> Up to 20% cost reduction, faster processes, happier teams.</div>
+            </div>
+
+            <div class="service fade-in">
+                <div class="service-num">02</div>
+                <h3>Tech Consultation & Deployment</h3>
+                <p>Secure, scalable systems from strategy through execution. Infrastructure that's resilient, cybersecurity that's proactive, deployment that's seamless.</p>
+                <div class="service-impact"><strong>Impact:</strong> Rock-solid infrastructure, protected operations, peace of mind.</div>
+            </div>
+
+            <div class="service fade-in">
+                <div class="service-num">03</div>
+                <h3>Cognitive & AI Systems</h3>
+                <p>AI that augments human intelligence, not replaces it. Predictive insights, adaptive reasoning, and automation that keeps people in control.</p>
+                <div class="service-impact"><strong>Impact:</strong> Smarter decisions, real-time intelligence, enhanced capabilities.</div>
+            </div>
+
+            <div class="service fade-in">
+                <div class="service-num">04</div>
+                <h3>Strategic Intelligence & Risk</h3>
+                <p>High-clarity intelligence for high-stakes decisions. Due diligence, risk analysis, and insights that protect what matters most.</p>
+                <div class="service-impact"><strong>Impact:</strong> Early threat detection, confident decision-making, protected interests.</div>
+            </div>
+
+            <div class="service fade-in">
+                <div class="service-num">05</div>
+                <h3>Special Projects, R&D, and Experimental Builds</h3>
+                <p>Where innovation meets responsibility. We prototype the future—testing bold ideas with careful consideration of their impact.</p>
+                <div class="service-impact"><strong>Impact:</strong> Breakthrough solutions, competitive advantage, pioneering work.</div>
+            </div>
+
+            <div class="service fade-in">
+                <div class="service-num">06</div>
+                <h3>Strategic Enhancements</h3>
+                <p>Custom analytics, integrated systems, and hardware solutions that give you an edge while staying true to your values.</p>
+                <div class="service-impact"><strong>Impact:</strong> Actionable insights, seamless integration, measurable growth.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values">
+        <div class="values-content">
+            <h2>Technology that respects humanity</h2>
+            <p>We're not just building for tomorrow. We're building a tomorrow worth having—where technology amplifies human potential, protects human dignity, and creates opportunities for everyone.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="newsletter">
+            <h2>Keep up with our breakthroughs</h2>
+            <p>Industry insights, announcements, and updates on innovation delivered to your inbox.</p>
+          </form>
+            <form class="newsletter-form" action="https://formsubmit.co/rickclmntcorp@protonmail.com" method="POST">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>RICKCLMNT Technologies</h3>
+                <p>Engineering tomorrow, responsibly.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="philosophy.html">Philosophy</a>
+                <a href="#services">Services</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 RICKCLMNT. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Newsletter
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for joining us! (Demo)');
+        });
+    </script>
+</body>
+</html>

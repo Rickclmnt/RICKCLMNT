@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #000;
+      --white: #fff;
+      --blue: #0066ff;
+      --grey: #666;
+      --light-grey: #e5e5e5;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    section {
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 6vw, 6%);
+    }
+
+    .contact {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    /* LEFT */
+    .contact-left h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.8rem;
+    }
+
+    .contact-left p {
+      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+      color: var(--grey);
+      max-width: 420px;
+    }
+
+    .contact-details {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-details span {
+      color: var(--grey);
+    }
+
+    .contact-details a {
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .contact-details a:hover {
+      border-color: var(--blue);
+    }
+
+    /* FORM */
+    .contact-form {
+      background: var(--light-grey);
+      padding: clamp(2rem, 4vw, 3rem);
+    }
+
+    .contact-form h2 {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.6rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: var(--grey);
+    }
+
+    input,
+    textarea {
+      padding: 0.9rem 1rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: inherit;
+      background: var(--white);
+      width: 100%;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 1rem 2.5rem;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      width: fit-content;
+    }
+
+    button:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    /* TABLET */
+    @media (max-width: 900px) {
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width: 480px) {
+      .contact-left p {
+        max-width: none;
+      }
+
+      .contact-details {
+        font-size: 0.9rem;
+      }
+
+      input,
+      textarea {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="contact">
+      <div class="contact-left">
+        <h1>Let’s talk.</h1>
+        <p>
+          Whether you have an idea, a challenge, or a thoughtful question,
+          we’re always open to meaningful conversations.
+        </p>
+
+        <div class="contact-details">
+          <div>
+            <span>Email</span><br />
+            <a href="mailto:rickclmntcorp@protonmail.com">rickclmntcorp@protonmail.com</a>
+          </div>
+
+          <div>
+            <span>Location</span><br />
+            Nigeria · Remote-first
+          </div>
+        </div>
+      </div>
+
+      <form action="https://formsubmit.co/rickclmntcorp@protonmail.com" method="POST" class="contact-form">
+  <h2>Send a message</h2>
+  
+  <input type="hidden" name="_subject" value="New Contact Form Submission">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+  
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" required />
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required />
+  </div>
+  
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required></textarea>
+  </div>
+  
+  <button type="submit">Send message</button>
+</form>
+    </div>
+  </section>
+</body>
+</html>

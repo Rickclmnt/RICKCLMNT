@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Philosophy</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    :root {
+      --black: #000;
+      --white: #fff;
+      --blue: #0066ff;
+      --grey: #666;
+      --light-grey: #e5e5e5;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 8rem 6%;
+    }
+
+    .philosophy {
+      background: var(--light-grey);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 6rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .philosophy h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+    }
+
+    .philosophy-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .philosophy-item h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .philosophy-item h3::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+    }
+
+    .philosophy-item p {
+      color: var(--grey);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    /* Fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 968px) {
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="philosophy" id="philosophy">
+    <div class="philosophy-grid">
+      <div>
+        <h2>How we think about technology</h2>
+      </div>
+
+      <div class="philosophy-content">
+        <div class="philosophy-item fade-in">
+          <h3>People first, always</h3>
+          <p>
+            Technology should serve humanity, not the other way around.
+            Every solution we build prioritizes human wellbeing, dignity,
+            and positive impact on real lives.
+          </p>
+        </div>
+
+        <div class="philosophy-item fade-in">
+          <h3>Responsible innovation</h3>
+          <p>
+            We push boundaries, but never recklessly. Progress means building
+            with intention, considering consequences, and creating technology
+            that makes the world genuinely better.
+          </p>
+        </div>
+
+        <div class="philosophy-item fade-in">
+          <h3>Joy in the work</h3>
+          <p>
+            We believe in building what excites us. When you love what you create, it shows in every detail. Great technology comes from teams that care deeply and have fun doing meaningful work.
+          </p>
+        </div>
+
+        <div class="philosophy-item fade-in">
+          <h3>Ethics as foundation</h3>
+          <p>
+            Our values aren't an afterthought. They're embedded in every decision, every line of code, every conversation. We build for a future we actually want to live in.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
