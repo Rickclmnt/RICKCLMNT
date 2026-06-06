@@ -1,1 +1,0 @@
-RICKCLMNT Technologies
