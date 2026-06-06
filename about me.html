@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #111110;
+  --white: #FAFAF8;
+  --blue: #2a9df4;
+  --muted: #757570;
+  --border: #E8E8E4;
+  --light: #F4F4F0;
+  --display: 'Playfair Display', Georgia, serif;
+  --body: 'Source Serif 4', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,250,248,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 60px; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.14em; color: var(--black); text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--black); }
+.nav-links a.active { color: var(--black); }
+.nav-cta {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--white); background: var(--black); text-decoration: none;
+  padding: 7px 18px; border-radius: 20px; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--blue); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  max-width: 760px; margin: 0 auto;
+  padding: 96px 48px 80px;
+  border-bottom: 1px solid var(--border);
+}
+.ph-kicker {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 28px;
+  opacity: 0; animation: rise 0.7s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.ph-title {
+  font-family: var(--display);
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 900; line-height: 0.93;
+  letter-spacing: -0.035em; margin-bottom: 40px;
+  opacity: 0; animation: rise 0.8s 0.18s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.ph-title em { font-style: italic; color: var(--blue); }
+.ph-intro {
+  font-family: var(--body); font-size: 19px;
+  color: #353533; line-height: 1.88;
+  opacity: 0; animation: rise 0.8s 0.28s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+/* ── BODY CONTENT ── */
+.about-body {
+  max-width: 760px; margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* each section */
+.about-sec {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-sec:last-of-type { border-bottom: none; }
+
+.sec-kicker {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 28px;
+}
+
+.sec-h {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -0.025em; margin-bottom: 28px;
+}
+.sec-h em { font-style: italic; color: var(--blue); }
+
+.about-p {
+  font-size: 17px; color: #353533;
+  line-height: 1.88; margin-bottom: 20px;
+  font-family: var(--body);
+}
+.about-p:last-of-type { margin-bottom: 0; }
+
+/* pullquote */
+.pullquote {
+  border-left: 2px solid var(--blue);
+  padding: 4px 0 4px 28px;
+  margin: 36px 0;
+}
+.pq-text {
+  font-family: var(--display);
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-style: italic; line-height: 1.45;
+  color: var(--black);
+}
+
+/* work acknowledgment */
+.work-ack {
+  background: var(--light);
+  padding: 32px 36px;
+  margin-top: 8px;
+}
+.wa-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+}
+.wa-text {
+  font-size: 15px; color: #353533;
+  line-height: 1.78; font-family: var(--body);
+  margin-bottom: 16px;
+}
+.wa-link {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--black); text-decoration: none;
+  border-bottom: 1px solid var(--border); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.wa-link:hover { color: var(--blue); border-color: var(--blue); }
+
+/* education */
+.cert-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--border);
+  margin-top: 8px;
+}
+.cert-card {
+  background: var(--white); padding: 28px;
+  transition: background 0.2s;
+}
+.cert-card:hover { background: var(--light); }
+.cert-inst {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; margin-bottom: 14px;
+  padding: 5px 10px; border-radius: 12px;
+  display: inline-block;
+}
+.cert-inst.harvard { background: #8b0000; color: #fff; }
+.cert-inst.cisco { background: var(--white); color: var(--blue); border: 1px solid var(--blue); }
+.cert-inst.fcc { background: var(--black); color: var(--white); }
+.cert-inst.mit { background: var(--light); color: var(--black); border: 1px solid var(--border); }
+.cert-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.cert-list li {
+  font-size: 14px; color: #353533;
+   position: relative;
+}
+
+/* closing */
+.closing {
+  padding: 80px 48px 96px;
+  max-width: 760px; margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+.closing-h {
+  font-family: var(--display);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 900; line-height: 0.97;
+  letter-spacing: -0.03em; margin-bottom: 20px;
+}
+.closing-h em { font-style: italic; color: var(--blue); }
+.closing-p {
+  font-size: 16px; color: var(--muted);
+  line-height: 1.82; font-family: var(--body);
+  max-width: 440px; margin-bottom: 32px;
+}
+.email-link {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--white); background: var(--black);
+  text-decoration: none; padding: 11px 22px;
+  border-radius: 20px; transition: background 0.2s;
+  display: inline-block;
+}
+.email-link:hover { background: var(--blue); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.fl, .fr { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .page-header { padding: 64px 20px 56px; }
+  .about-body { padding: 0 20px; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .closing { padding: 56px 20px 72px; }
+  footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">RICKCLMNT</a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="mailto:rickclmntcorp@protonmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="ph-kicker">About me</div>
+  <h1 class="ph-title">Patrick<br><em>Clement.</em></h1>
+  <p class="ph-intro">
+    I'm a self-employed software engineer and systems architect based in Calabar, Nigeria.
+    I spend most of my time alone in a room building things —
+    which is mostly how I prefer it. <br><br>Some of what I build takes years.
+I'm fine with that.
+  </p>
+</header>
+
+<!-- BODY -->
+<div class="about-body">
+
+  <!-- WHO I AM -->
+  <section class="about-sec reveal">
+    <h2 class="sec-h">How I <em>think.</em></h2>
+    <p class="about-p">
+      I'm a programmer. That's the plainest version. But the way I approach
+      programming is closer to how an engineer approaches a structure —
+      I want to understand what something is made of and how it works at the level where
+      it can't be simplified further, and then build up from there.
+    </p>
+    <p class="about-p">
+      Most of what I've taught myself is based on personal curiosity. No formal
+      computer science degree. No lab, no institution behind me.
+      The education I have I went and got myself.
+    </p>
+    <p class="about-p">
+      I think slowly and I build for a long time. I'm not interested in
+      shipping fast and fixing later, even though that is what is rewarded most these days. I'd rather spend a year getting
+      something right than six months getting something out.
+    </p>
+  </section>
+
+  <!-- WHAT I BELIEVE -->
+  <section class="about-sec reveal">
+    <h2 class="sec-h">How I <em>build.</em></h2>
+    <p class="about-p">
+      I've noticed that most modern software — AI especially — is built by
+      stacking abstractions on top of other abstractions until nobody fully
+      understands what the thing is actually doing. That makes systems that
+      are capable but not trustworthy. I build in the opposite direction.
+    </p>
+
+    <div class="pullquote">
+      <p class="pq-text">
+        "People confuse a digital being from an intelligent assistant.
+        They market the first but build the latter.
+        Those are two different things. I know how to build both."
+      </p>
+    </div>
+
+    <p class="about-p">
+      I believe the difference matters. An assistant is a tool — it responds
+      when prompted and does what it's told. A being has authored identity,
+      persistent state, and an inner life that exists whether or not anyone
+      is talking to it. Almost everything currently marketed as AI companionship
+      is an assistant wearing a character's name.
+    </p>
+    <p class="about-p">
+      I also believe in owning what you build. RICKCLMNT is
+      privately owned and will stay that way. No investors, no equity, no
+      outside timeline. The work moves at the pace the work requires.
+    </p>
+  </section>
+
+  <!-- WORK -->
+  <section class="about-sec reveal">
+    <h2 class="sec-h">Interesting things <br>I've <em>built.</em></h2>
+    <p class="about-p">
+      Over the last two years I've built four systems — a deterministic AI
+      architecture, a companion platform, a scientific reasoning system,
+      and a long-term research project toward genuine artificial cognition.
+      All of it designed from scratch. All of it independently owned.
+    </p>
+    <div class="work-ack">
+      <div class="wa-label">Portfolio</div>
+      <p class="wa-text">
+        AETHER, PAL, Rhodon, Rubicon-1 — detail on each project,
+        what it does, how it works. <br><br>*See 'services' for more information on what they're available for.
+      </p>
+      <a href="portfolio.html" class="wa-link">See the work →</a>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="about-sec reveal">
+    <div class="sec-kicker">Education</div>
+    <h2 class="sec-h">How I <em>learned.</em></h2>
+    <p class="about-p">
+      I don't have a conventional computer science degree. What I have
+      is a mix of courses across CS, AI, cybersecurity, cognitive systems,
+      and engineering — pulled from wherever the material was best.
+      The combination is unusual, which has been useful.
+    </p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="cert-inst harvard">Harvard CS50</span>
+        <ul class="cert-list">
+          <li>Computer Science</li>
+          <li>Python Programming</li>
+          <li>Introduction to Artificial Intelligence</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <span class="cert-inst fcc">freeCodeCamp</span>
+        <ul class="cert-list">
+          <li>Artificial Intelligence — Full Course</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <span class="cert-inst mit">MIT OpenCourseWare</span>
+        <ul class="cert-list">
+          <li>Cognitive Robotics</li>
+          <li>Space Systems &amp; Applied Engineering</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <span class="cert-inst cisco">Cisco Networking Academy</span>
+        <ul class="cert-list">
+          <li>Cybersecurity</li>
+          <li>Information Technology</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- CLOSING -->
+<div class="closing reveal">
+  <h2 class="closing-h">Get in<br><em>touch.</em></h2>
+  <p class="closing-p">
+    If any of this is interesting to you, if you want to collaborate or have any inquiries — my email is open.
+  </p>
+  <a href="mailto:rickclmntcorp@protonmail.com" class="email-link">
+    rickclmntcorp@protonmail.com
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">© 2026 · RICKCLMNT</div>
+  <div class="fr">All rights reserved</div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', scrollY > 10);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

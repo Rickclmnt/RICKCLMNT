@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="AETHER — deterministic AI reasoning platform by RICKCLMNT. No hallucinations, fully auditable, runs on consumer hardware.">
+<title>AETHER | RICKCLMNT</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET & AESTHETIC (from AETHER core) ────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:  #F0EDE6;
+    --sand:   #E0DCD2;
+    --stone:  #C8C3B8;
+    --mid:    #7A7670;
+    --ink:    #1A1916;
+    --black:  #0D0D0B;
+    --mono:   'Space Mono', monospace;
+    --serif:  'DM Serif Display', serif;
+  }
+
+  html { scroll-behavior: smooth; background: var(--cream); }
+  body {
+    background: var(--cream);
+    color: var(--black);
+    font-family: var(--mono);
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* grain overlay (signature texture) */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    width: 200%; height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: .028;
+    pointer-events: none;
+    z-index: 9998;
+    animation: grain 8s steps(10) infinite;
+  }
+  @keyframes grain {
+    0%,100% { transform: translate(0,0); }
+    10% { transform: translate(-2%,-3%); }
+    20% { transform: translate(3%,1%); }
+    30% { transform: translate(-1%,4%); }
+    40% { transform: translate(2%,-2%); }
+    50% { transform: translate(-3%,3%); }
+    60% { transform: translate(1%,-1%); }
+    70% { transform: translate(-2%,2%); }
+    80% { transform: translate(3%,-3%); }
+    90% { transform: translate(-1%,1%); }
+  }
+
+  /* custom cursor (deterministic dot) */
+  .cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 10px; height: 10px;
+    background: var(--black);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: width .15s, height .15s, background .15s;
+  }
+  .cursor.expand {
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1.5px solid var(--black);
+  }
+
+  /* ── navigation (cream / ink) ───────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: var(--cream);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s, background .3s;
+  }
+  nav.scrolled {
+    border-color: rgba(0,0,0,.12);
+    background: rgba(240,237,230,.96);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+  .nav-logo span {
+    display: inline-block;
+    background: var(--black);
+    color: var(--cream);
+    padding: 4px 10px;
+  }
+  .nav-links-main {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links-main a {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--mid);
+    transition: color .15s;
+  }
+  .nav-links-main a:hover { color: var(--black); }
+  .nav-cta {
+    background: var(--black);
+    color: var(--cream);
+    border: none;
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    cursor: none;
+    transition: opacity .15s;
+  }
+  .nav-cta:hover { opacity: .8; }
+  .nav-hamburger { display: none; }
+
+  /* mobile menu overlay (fixed + smooth) */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--cream);
+    z-index: 200;
+    padding: 100px 32px 48px;
+    box-shadow: -8px 0 24px rgba(0,0,0,0.05);
+    transition: right 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    border-left: 1px solid rgba(0,0,0,0.1);
+  }
+  .mobile-nav.open {
+    right: 0;
+  }
+  .mobile-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .mobile-nav a {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    transition: opacity .2s;
+  }
+  .mobile-nav a:hover { opacity: 0.6; }
+  .mobile-nav .mobile-cta {
+    margin-top: 24px;
+    background: var(--black);
+    color: var(--cream);
+    border: none;
+    padding: 14px 20px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    cursor: none;
+  }
+  .mobile-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: none;
+    font-family: monospace;
+    color: var(--mid);
+  }
+
+  /* section shared utilities */
+  .section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 20px;
+  }
+  .section-heading {
+    font-family: var(--serif);
+    font-size: clamp(36px, 3.8vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+  }
+  .section-heading em { font-style: italic; color: var(--mid); }
+
+  /* marquee strip (ticker) */
+  .marquee-wrap {
+    background: var(--black);
+    color: var(--cream);
+    padding: 13px 0;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 28s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .marquee-track span {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    padding: 0 36px;
+    opacity: .7;
+  }
+  .marquee-track span b { opacity: 1; color: var(--cream); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* hero (aether style) */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    margin-top: 80px;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 140px 48px 64px;
+    border-right: 1px solid rgba(0,0,0,.1);
+  }
+  .hero-kicker {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 28px;
+  }
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(52px, 5.5vw, 84px);
+    line-height: .96;
+    letter-spacing: -.02em;
+    margin-bottom: 36px;
+  }
+  .hero-headline em { font-style: italic; color: var(--mid); }
+  .hero-sub {
+    font-size: 11px;
+    line-height: 1.9;
+    color: var(--ink);
+    max-width: 420px;
+    margin-bottom: 52px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--black);
+    color: var(--cream);
+    border: 1.5px solid var(--black);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    cursor: none;
+    transition: background .15s, color .15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--ink); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--black);
+    border: 1.5px solid var(--black);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    cursor: none;
+    transition: background .15s, color .15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-ghost:hover { background: var(--sand); }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 48px 64px;
+  }
+  .hero-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.1);
+    margin-bottom: 40px;
+  }
+  .hero-stat {
+    background: var(--cream);
+    padding: 28px 24px;
+    transition: background .2s;
+  }
+  .hero-stat:hover { background: var(--sand); }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 44px;
+    letter-spacing: -.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .hero-ticker-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+  .ticker-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--stone);
+  }
+  .ticker-dot.live { background: #2D6A4F; }
+
+  /* problem section (like 'about' with principles) */
+  .problem {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+  .problem-left {
+    padding: 96px 48px;
+    border-right: 1px solid rgba(0,0,0,.1);
+  }
+  .problem-right {
+    padding: 96px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .problem-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(0,0,0,.08);
+    border: 1px solid rgba(0,0,0,.1);
+  }
+  .problem-card {
+    background: var(--cream);
+    padding: 24px 28px;
+    display: flex;
+    gap: 18px;
+    transition: background .15s;
+  }
+  .problem-card:hover { background: var(--sand); }
+  .problem-num {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--stone);
+    letter-spacing: .08em;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .problem-card h4 {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .problem-card p {
+    font-size: 10px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  /* products (capabilities grid style) */
+  .products-section {
+    padding: 96px 48px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .products-sub {
+    font-size: 10.5px;
+    line-height: 1.8;
+    color: var(--ink);
+    max-width: 420px;
+  }
+  .prod-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,.08);
+    border: 1px solid rgba(0,0,0,.1);
+  }
+  .product-card {
+    background: var(--cream);
+    padding: 36px 32px;
+    transition: background .2s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .product-card:hover { background: var(--sand); }
+  .product-tag {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .product-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    letter-spacing: -.02em;
+    margin-bottom: 18px;
+  }
+  .product-desc {
+    font-size: 10px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .product-features {
+    list-style: none;
+    margin: 16px 0 28px;
+  }
+  .product-features li {
+    font-size: 9px;
+    line-height: 1.7;
+    padding: 6px 0;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+  .product-features li::before {
+    content: '—';
+    opacity: .4;
+    flex-shrink: 0;
+  }
+  .product-model {
+    background: rgba(0,0,0,.03);
+    border: 1px solid rgba(0,0,0,.08);
+    padding: 12px 14px;
+    margin: 16px 0 24px;
+  }
+  .product-model-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+  .product-model-value {
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--mono);
+  }
+  .product-cta {
+    margin-top: auto;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--mid);
+    transition: all .15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .product-cta:hover { color: var(--black); gap: 12px; }
+
+  /* how it works (aether’s step+quote style) */
+  .how-section {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+  .how-left {
+    padding: 96px 48px;
+    border-right: 1px solid rgba(0,0,0,.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .how-right {
+    padding: 96px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .step-item {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    transition: background .15s;
+  }
+  .step-item:hover { background: var(--sand); }
+  .step-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    letter-spacing: -.04em;
+    color: var(--stone);
+    padding: 32px 40px;
+    border-right: 1px solid rgba(0,0,0,.08);
+    width: 100px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .step-body {
+    padding: 32px 40px;
+  }
+  .step-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .step-desc {
+    font-size: 10.5px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .how-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-top: 48px;
+  }
+  .arch-diagram {
+    background: var(--cream);
+    border: 1px solid rgba(0,0,0,.1);
+    padding: 32px;
+    margin-top: 32px;
+  }
+  .arch-title {
+    font-size: 8px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 20px;
+  }
+  .arch-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .arch-block {
+    flex: 1;
+    padding: 12px 6px;
+    font-size: 9px;
+    text-align: center;
+    background: var(--cream);
+    border: 1px solid rgba(0,0,0,.08);
+    font-family: var(--mono);
+  }
+  .arch-block.highlight {
+    background: var(--sand);
+    border-color: var(--stone);
+    font-weight: 700;
+  }
+  .arch-connector {
+    text-align: center;
+    font-size: 14px;
+    color: var(--stone);
+    margin: 4px 0;
+  }
+  .arch-badge {
+    margin-top: 16px;
+    font-size: 7px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,.06);
+    padding-top: 12px;
+  }
+
+  /* pricing (black background as original aether pricing) */
+  .pricing-section {
+    background: var(--black);
+    color: var(--cream);
+    padding: 96px 48px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .pricing-section .section-label { color: rgba(255,255,255,.4); }
+  .pricing-section .section-heading { color: var(--cream); }
+  .pricing-section .section-heading em { color: rgba(255,255,255,.35); }
+  .pricing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .pricing-sub {
+    font-size: 10.5px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.5);
+    max-width: 340px;
+    text-align: right;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,.07);
+  }
+  .plan-card {
+    background: var(--black);
+    padding: 44px 36px;
+    transition: background .2s;
+  }
+  .plan-card:hover { background: #1a1916; }
+  .plan-card.featured {
+    background: var(--cream);
+    color: var(--black);
+  }
+  .plan-card.featured:hover { background: #f5f2eb; }
+  .plan-badge {
+    background: var(--cream);
+    color: var(--black);
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    display: inline-block;
+    margin-bottom: 28px;
+  }
+  .plan-card.featured .plan-badge {
+    background: var(--black);
+    color: var(--cream);
+  }
+  .plan-name {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    opacity: .5;
+    margin-bottom: 14px;
+  }
+  .plan-price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .plan-price {
+    font-family: var(--serif);
+    font-size: 56px;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+  .plan-currency { font-size: 22px; opacity: .6; }
+  .plan-period {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    opacity: .4;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .plan-features {
+    list-style: none;
+    margin-bottom: 36px;
+  }
+  .plan-features li {
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,.07);
+    display: flex;
+    gap: 10px;
+  }
+  .plan-card.featured .plan-features li { border-color: rgba(0,0,0,.08); }
+  .plan-features li::before {
+    content: '—';
+    opacity: .35;
+  }
+  .plan-btn {
+    width: 100%;
+    background: rgba(255,255,255,.08);
+    color: var(--cream);
+    border: 1px solid rgba(255,255,255,.15);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 14px;
+    cursor: none;
+  }
+  .plan-btn:hover { background: rgba(255,255,255,.14); }
+  .plan-card.featured .plan-btn {
+    background: var(--black);
+    color: var(--cream);
+    border-color: var(--black);
+  }
+
+  /* CTA banner — fixed layout */
+  .cta-banner {
+    padding: 120px 48px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 48px;
+  }
+  .cta-banner-heading {
+    font-family: var(--serif);
+    font-size: clamp(42px, 4.5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -.02em;
+  }
+  .cta-banner-heading em { font-style: italic; color: var(--mid); }
+  .cta-banner-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 360px;
+  }
+  .cta-banner-sub {
+    font-size: 10px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+  .cta-button-group {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  /* footer */
+  footer {
+    padding: 64px 48px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 48px;
+  }
+  .footer-brand .footer-logo {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    margin-bottom: 18px;
+  }
+  .footer-brand .footer-logo span {
+    background: var(--black);
+    color: var(--cream);
+    padding: 3px 8px;
+  }
+  .footer-brand p {
+    font-size: 9.5px;
+    line-height: 1.75;
+    color: var(--mid);
+    max-width: 260px;
+  }
+  .footer-col h4 {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col a {
+    font-size: 9.5px;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .footer-col a:hover { color: var(--black); }
+  .footer-bottom {
+    padding: 20px 48px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 8.5px;
+    color: var(--stone);
+  }
+
+  /* reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-d1 { transition-delay: .05s; }
+  .reveal-d2 { transition-delay: .15s; }
+  .reveal-d3 { transition-delay: .25s; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links-main { display: none; }
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 201;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--black);
+    }
+    .hero, .problem, .how-section { grid-template-columns: 1fr; }
+    .hero-left, .problem-left, .how-left { border-right: none; border-bottom: 1px solid rgba(0,0,0,.1); padding: 80px 24px 48px; }
+    .hero-right, .problem-right, .how-right { padding: 48px 24px; }
+    .prod-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .cta-banner { grid-template-columns: 1fr; padding: 60px 24px; gap: 32px; }
+    .cta-banner-right { max-width: 100%; }
+    footer { grid-template-columns: 1fr; gap: 32px; padding: 48px 24px; }
+    .products-section { padding: 60px 24px; }
+    .pricing-section { padding: 60px 24px; }
+    .hero-stat-grid { grid-template-columns: 1fr; }
+    .pricing-header { flex-direction: column; align-items: flex-start; }
+    .pricing-sub { text-align: left; }
+  }
+  @media (max-width: 580px) {
+    .step-num { width: 70px; padding: 24px 16px; }
+    .step-body { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="nav-logo"><span>Aəther</span> by rickclmnt</div>
+  <ul class="nav-links-main">
+    <li><a href="#how">Architecture</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <!--button class="nav-cta" id="mainNavCta">Get API Access</button-->
+  <button class="nav-hamburger" aria-label="Menu" id="hamburgerBtn"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-kicker">AETHER Platform</p>
+    <h1 class="hero-headline">A.E.T.H.E.R.</h1>
+    <p class="hero-sub"><strong>Autonomous Expression Through Hallucination-Eliminated Reasoning</strong>. The first deterministic AI reasoning platform built for production — runs on consumer hardware, fully auditable.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#how" class="btn-ghost">How It Works</a>
+    </div>
+  </div>
+  <div class="hero-right"><br>
+    <div class="hero-stat-grid">
+      <div class="hero-stat"><div class="stat-num">Predictable</div><div class="stat-label">same input, same output</div></div>
+      <div class="hero-stat"><div class="stat-num">Auditable</div><div class="stat-label">every decision is traceable</div></div>
+      <div class="hero-stat"><div class="stat-num">Deployable</div><div class="stat-label">no cloud dependency</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span><b>Deductive Reasoning</b></span><span>—</span><span>Rule Injection</span><span>—</span><span><b>Zero Hallucination</b></span><span>—</span><span>Deterministic Output</span><span>—</span><span><b>Domain Injection</b></span><span>—</span><span>Auditable Decision Chain</span><span>—</span><span>Meta-Reasoning</span><span>—</span>
+    <span><b>Deductive Reasoning</b></span><span>—</span><span>Rule Injection</span><span>—</span><span><b>Zero Hallucination</b></span><span>—</span><span>Deterministic Output</span><span>—</span><span><b>Domain Injection</b></span><span>—</span><span>Auditable Decision Chain</span><span>—</span>
+  </div>
+</div>
+
+<!-- PROBLEM SECTION -->
+<section class="problem" id="problem">
+  <div class="problem-left">
+    <p class="section-label reveal">The Problem with LLMs</p>
+    <h2 class="section-heading reveal reveal-d1">LLMs fail<br>where it matters.</h2>
+    <div class="section-body reveal reveal-d2" style="margin-top: 24px; font-size: 11px; line-height: 1.9;">Large language models are powerful — but fundamentally unreliable. Every output is probabilistic. Every answer could be fabricated. AETHER eliminates these failure modes entirely.</div>
+  </div>
+  <div class="problem-right">
+    <div class="problem-cards">
+      <div class="problem-card"><div class="problem-num">01</div><div><h4>Hallucination</h4><p>LLMs confidently fabricate facts. In legal, medical, finance: a liability.</p></div></div>
+      <div class="problem-card"><div class="problem-num">02</div><div><h4>Non-Determinism</h4><p>Same prompt → different outputs. Impossible to certify.</p></div></div>
+      <div class="problem-card"><div class="problem-num">03</div><div><h4>Cloud Dependency</h4><p>Sensitive data leaves your infrastructure.</p></div></div>
+      <div class="problem-card"><div class="problem-num">04</div><div><h4>No Audit Trail</h4><p>Regulators need traceability.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-left">
+    <div><p class="section-label reveal">Architecture</p><h2 class="section-heading reveal reveal-d1">How AETHER<br> actually works.</h2><br><p class="section-body reveal reveal-d2" style="margin-top: 24px; font-size: 11px; line-height: 1.9;">AETHER is a deterministic reasoning engine.
+
+It answers questions, solves problems, completes tasks for users by processing language and applying structured logic — without a large language model anywhere in its core loop. <br><br>Hallucination in a large language model is not a bug. It is a structural consequence of the architecture: the model generates the statistically most probable continuation of the input, and sometimes the most probable continuation is factually wrong. The model has no mechanism to distinguish between "I know this" and "this sounds right." <br>AETHER avoids that entirely with its deterministic architecture, designed to eliminate hallucination.</p></div>
+    <blockquote class="how-quote reveal reveal-d2">"Deterministic by design."<cite>— AETHER v4</cite></blockquote>
+  </div>
+  <div class="how-right">
+    <div class="step-item reveal"><div class="step-num">01</div><div class="step-body"><div class="step-title">Intent classification</div><div class="step-desc">Input parsed into typed intent categories. Every query maps to a deterministic routing path — no guessing.</div></div></div>
+    <div class="step-item reveal reveal-d1"><div class="step-num">02</div><div class="step-body"><div class="step-title">Structured reasoning</div><div class="step-desc">Routing engine applies deterministic logic, not token prediction. Outputs assembled from verified knowledge graph.</div></div></div>
+    <div class="step-item reveal reveal-d2"><div class="step-num">03</div><div class="step-body"><div class="step-title">Discourse assembly</div><div class="step-desc">Sentence‑tree engine builds responses — every word traces to a verifiable reasoning step.</div></div></div>
+    <div class="step-item reveal reveal-d3"><div class="step-num">04</div><div class="step-body"><div class="step-title">Audit log output</div><div class="step-desc">Full trace: intent, route taken, knowledge sources. Fully inspectable.</div></div></div>
+    <!--div class="arch-diagram reveal"><div class="arch-title">// AETHER REASONING PIPELINE</div><div class="arch-row"><div class="arch-block highlight">Input Layer</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block">Semantic Parser</div><div class="arch-block">Frame Classifier</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block highlight">Intent Router</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block">Knowledge Retrieval</div><div class="arch-block">Factual Extractor</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block">Sentence Tree</div><div class="arch-block">Discourse Engine</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block highlight">Verified Output + Audit Log</div></div><div class="arch-badge" style="margin-top:12px; font-size:8px; letter-spacing:.2em;">deterministic by design</div></div--><br><br>
+    <p class="section-body reveal reveal-d2" style="margin-top: 24px; font-size: 11px; line-height: 1.9;">Not an LLM wrapper — ground‑up deterministic reasoning: structured, traceable, verifiable at every step.</p><br>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="products-header"><div><p class="section-label reveal">Three Ways to Deploy AETHER</p><h2 class="section-heading reveal reveal-d1">Built for every<br>deployment model.</h2></div><p class="products-sub reveal reveal-d2">Developer-grade API access, white‑label B2B, or offline edge deployment. One platform — three commercial paths.</p></div>
+  <div class="prod-grid">
+    <div class="product-card reveal"><div class="product-tag">01 · Developer</div><div class="product-name">AETHER API</div><p class="product-desc">Deterministic reasoning as a service. REST API, full audit logs, no hallucinations.</p><ul class="product-features"><li>REST API with JSON responses</li><li>Per-request audit trail</li><li>Usage dashboard + rate controls</li><li>Free tier available</li></ul><div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Usage‑based · Free / Pro / Enterprise tiers</div></div><a href="#pricing" class="product-cta">View pricing →</a></div>
+    <div class="product-card reveal reveal-d1"><div class="product-tag">02 · Enterprise</div><div class="product-name">B2B License</div><p class="product-desc">Embed AETHER’s reasoning engine into your product. Domain‑tuned via AppManifest.</p><ul class="product-features"><li>AppManifest domain customization</li><li>Dedicated onboarding + SLA</li><li>White‑label ready</li><li>Annual license with pilot program</li></ul><div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Annual license + onboarding</div></div><a href="#cta" class="product-cta">Talk to sales →</a></div>
+    <div class="product-card reveal reveal-d2"><div class="product-tag">03 · Edge / On‑Premise</div><div class="product-name">AETHER Edge</div><p class="product-desc">Full deployment inside your infrastructure. Air‑gapped ready, runs on consumer hardware.</p><ul class="product-features"><li>Docker + binary packages</li><li>Air‑gapped network compatible</li><li>HIPAA / compliance friendly</li><li>Per‑device licensing</li></ul><div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Annual per‑device / per‑seat</div></div><a href="#cta" class="product-cta">Request a demo →</a></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-header"><div><p class="section-label">Pricing</p><h2 class="section-heading">Simple, transparent<br><em>pricing.</em></h2></div><p class="pricing-sub">Build with full API access, scale with Pro, or deploy on‑premise. No hidden fees.</p></div>
+  <div class="pricing-grid">
+    <div class="plan-card"><div class="plan-name">Developer</div><div class="plan-price-wrap"><span class="plan-currency">$</span><span class="plan-price">0</span></div><div class="plan-period">per month — free tier</div><ul class="plan-features"><li>1,000 API requests / month</li><li>Full audit logs</li><li>Community support</li><li>All endpoints available</li></ul><button class="plan-btn">Get started</button></div>
+    <div class="plan-card featured"><div class="plan-badge">Most popular</div><div class="plan-name">Pro</div><div class="plan-price-wrap"><span class="plan-currency">$</span><span class="plan-price">TBD</span></div><div class="plan-period">per month — production ready</div><ul class="plan-features"><li>100,000 API requests / month</li><li>Priority support (24hr SLA)</li><li>Versioned endpoints</li><li>Usage analytics dashboard</li></ul><button class="plan-btn">Start free trial</button></div>
+    <div class="plan-card"><div class="plan-name">Enterprise / Edge</div><div class="plan-price-wrap"><span class="plan-price" style="font-size:42px;">Custom</span></div><div class="plan-period">volume / on‑premise licensing</div><ul class="plan-features"><li>Unlimited requests</li><li>On‑premise / edge deployment</li><li>AppManifest domain tuning</li><li>Custom SLA + compliance docs</li></ul><button class="plan-btn">Contact sales</button></div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" id="cta">
+  <h2 class="cta-banner-heading reveal">Ready to deploy<br><em>reasoning that doesn't lie?</em></h2>
+  <div class="cta-banner-right reveal reveal-d2">
+    <p class="cta-banner-sub">Get API access in minutes or talk to the "team" (it's just me) about your use case. AETHER is ready for production, compliance, and deterministic truth.</p>
+    <div class="cta-button-group">
+      <a href="mailto:rickclmntcorp@protonmail.com" class="btn-primary">Get API Access</a>
+      <a href="mailto:rickclmntcorp@protonmail.com" class="btn-ghost">Talk to Sales [email me]</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><div class="footer-logo"><span>AƏTHER</span></div><p>AETHER — Autonomous Expression Through Hallucination-Eliminated Reasoning<br><br>Pronunciation Breakdown:<br>
+AY /eɪ/ + thər /θər/ → AY-thər /ˈeɪ.θər/</p></div><br>
+  <!-- div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Security</a></li></ul></div-->
+  <div class="footer-col"><h4>Resources</h4><ul><li><a href="aether_doc.html">Documentation</a></li><li><a>API status [CURRENTLY UNAVAILABLE]</a></li><li><a href="mailto:rickclmntcorp@protonmail.com">Contact</a></li></ul></div>
+</footer>
+<div class="footer-bottom"><p>© 2026 RICKCLMNT  — All rights reserved</p><p>v4 — zero hallucination</p></div>
+
+<script>
+  (function() {
+    // --- cursor & interactive enhancements ---
+    const cursor = document.getElementById('cursor');
+    if (cursor && !('ontouchstart' in window)) {
+      document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+      document.querySelectorAll('button, a, .product-card, .problem-card, .plan-card, .step-item, .hero-stat, .btn-primary, .btn-ghost, .product-cta, .plan-btn').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+      });
+    } else if(cursor) cursor.style.display = 'none';
+
+    // --- navbar scroll effect ---
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+    // --- reveal on scroll ---
+    const observer = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // --- mobile menu (fully functional) ---
+    const hamburger = document.querySelector('.nav-hamburger');
+    if (hamburger) {
+      const mobileMenu = document.createElement('div');
+      mobileMenu.className = 'mobile-nav';
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileMenu.innerHTML = `
+        <button class="mobile-close" aria-label="Close menu">✕</button>
+        <ul>
+        <li><a href="#how">Architecture</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#cta">Contact</a></li>
+        </ul>
+        <button class="mobile-cta" id="mobileCta">Get API Access</button>
+      `;
+      document.body.appendChild(mobileMenu);
+      const closeBtn = mobileMenu.querySelector('.mobile-close');
+      const mobileCta = mobileMenu.querySelector('#mobileCta');
+      const openMenu = () => { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; };
+      const closeMenu = () => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; };
+      hamburger.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      if (mobileCta) mobileCta.addEventListener('click', () => { window.location.href = 'mailto:rickclmntcorp@protonmail.com'; closeMenu(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu(); });
+    }
+
+    // --- nav-cta button smooth behavior ---
+    const navCta = document.querySelector('.nav-cta');
+    if (navCta) navCta.addEventListener('click', () => { document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' }); });
+  })();
+</script>
+</body>
+</html>

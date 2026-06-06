@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Page Unavailable — RICKCLMNT</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #111110;
+      --white: #FAFAF8;
+      --blue: #2a9df4;
+      --muted: #757570;
+      --border: #E8E8E4;
+      --light: #F4F4F0;
+      --display: 'Playfair Display', Georgia, serif;
+      --body: 'Source Serif 4', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--body);
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* subtle texture / grain (optional) */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+      z-index: 0;
+    }
+
+    /* navigation – minimal sticky, matches portfolio style */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,250,248,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.2s;
+    }
+    .nav.scrolled {
+      box-shadow: 0 1px 14px rgba(0,0,0,0.04);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--black);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-logo:hover {
+      opacity: 0.7;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--black);
+    }
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--black);
+      text-decoration: none;
+      padding: 7px 18px;
+      border-radius: 20px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--blue);
+    }
+
+    /* main error container */
+    .error-container {
+      flex: 1;
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 80px 48px 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* status badge */
+    .status-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(42,157,244,0.06);
+      padding: 6px 14px;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(2px);
+      border: 0.5px solid rgba(42,157,244,0.2);
+      animation: fadeSlideUp 0.6s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.4s infinite ease;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: scale(0.8);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+
+    /* main title */
+    .error-title {
+      font-family: var(--display);
+      font-size: clamp(72px, 14vw, 180px);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--black);
+      margin-bottom: 24px;
+      animation: fadeSlideUp 0.7s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .error-title em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    /* subheading */
+    .error-sub {
+      font-family: var(--display);
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 24px;
+      animation: fadeSlideUp 0.7s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    /* description */
+    .error-desc {
+      font-family: var(--body);
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+      animation: fadeSlideUp 0.7s 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    /* action buttons */
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 60px;
+      animation: fadeSlideUp 0.7s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+    }
+    .btn-primary:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(42,157,244,0.2);
+    }
+    .btn-secondary {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      background: transparent;
+      color: var(--black);
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: rgba(42,157,244,0.02);
+    }
+
+    /* subtle illustration / symbol */
+    .error-symbol {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      color: #D7D7D7;
+      margin-top: 20px;
+      animation: fadeSlideUp 0.7s 0.6s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .error-symbol span {
+      display: inline-block;
+      animation: drift 3s infinite alternate ease-in-out;
+    }
+    @keyframes drift {
+      0% { transform: translateX(-2px);}
+      100% { transform: translateX(2px);}
+    }
+
+    /* footer (matching site) */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--white);
+      padding: 22px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: auto;
+    }
+    .fl, .fr {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .nav {
+        padding: 0 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .error-container {
+        padding: 60px 24px 80px;
+      }
+      .error-actions {
+        gap: 14px;
+        flex-direction: column;
+        align-items: center;
+      }
+      footer {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+      }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* optional cursor removal (if needed, but keep default) */
+    a, button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- navigation bar (matches original style) -->
+  <div class="nav" id="nav">
+    <a href="index.html" class="nav-logo">RICKCLMNT</a>
+    <a href="mailto:rickclmntcorp@protonmail.com" class="nav-cta">Get in touch</a>
+  </div>
+
+  <!-- main error content -->
+  <main class="error-container">
+    <div class="status-badge">
+      STATUS: 404 / UNAVAILABLE
+    </div>
+    <!--h2 class="error-title">
+      Page <em>unavailable</em>
+    </h2-->
+    <h2 class="error-sub">
+      This route is currently missing or offline.
+    </h2>
+    <p class="error-desc">
+      The resource you're looking for might have been moved, renamed, or is temporarily inaccessible.
+    </p>
+    <div class="error-actions">
+      <a href="index.html" class="btn-primary">
+        ← Return to home
+      </a>
+    </div>
+    <div class="error-symbol">
+      <span>✦</span> &nbsp; RICKCLMNT &nbsp; <span>✦</span>
+    </div>
+  </main>
+
+  <!-- footer consistent with brand -->
+  <footer>
+    <div class="fl">© 2026 · RICKCLMNT</div>
+    <div class="fr">All rights reserved</div>
+  </footer>
+
+  <script>
+    // simple scroll effect for navigation shadow
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav');
+      if (nav) {
+        if (window.scrollY > 10) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+    });
+    // dynamic year in footer
+    document.getElementById('year') && (document.getElementById('year').innerText = new Date().getFullYear());
+  </script>
+</body>
+</html>

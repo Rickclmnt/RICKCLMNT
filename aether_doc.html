@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aether GI — Technical Documentation</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:  #F0EDE6;
+  --sand:   #DDD9CF;
+  --sand2:  #CBC6BA;
+  --black:  #0D0D0D;
+  --mid:    #8A8680;
+  --mono:   'Space Mono', monospace;
+  --header-h: 0px;
+}
+
+html {
+  background: var(--cream);
+  color: var(--black);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+body { min-height: 100vh; overflow-x: hidden; }
+
+/* ── TOPBAR (mobile sticky) ── */
+.topbar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--cream);
+  border-bottom: 2px solid var(--black);
+  padding: 0 18px;
+  height: 52px;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hamburger {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--black);
+  transition: transform 0.22s ease, opacity 0.22s ease;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── DRAWER OVERLAY ── */
+.drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,13,13,0.45);
+  z-index: 150;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+.drawer-overlay.visible { opacity: 1; }
+
+/* ── DRAWER ── */
+.drawer {
+  position: fixed;
+  top: 52px;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  background: var(--cream);
+  border-right: 2px solid var(--black);
+  z-index: 160;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  padding: 24px 0 40px;
+}
+.drawer.open { transform: translateX(0); }
+.drawer::-webkit-scrollbar { width: 2px; }
+.drawer::-webkit-scrollbar-thumb { background: var(--sand2); }
+.drawer-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 0 24px 12px;
+}
+.drawer a, .sidebar a {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 11px 24px;
+  border-left: 2px solid transparent;
+  transition: 0.12s ease;
+  line-height: 1.4;
+}
+.drawer a:hover, .sidebar a:hover {
+  color: var(--black);
+  border-left-color: var(--black);
+  background: var(--sand);
+}
+.drawer a.active, .sidebar a.active {
+  color: var(--black);
+  border-left-color: var(--black);
+}
+
+/* ── HEADER ── */
+.doc-header {
+  border-bottom: 2px solid var(--black);
+  padding: 48px 56px 36px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+}
+.doc-header-left h1 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.doc-header-left .tagline {
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  font-style: italic;
+}
+.doc-header-meta {
+  text-align: right;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  line-height: 2;
+}
+.doc-header-meta span {
+  display: block;
+  color: var(--black);
+}
+
+/* ── LAYOUT ── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 130px);
+}
+
+/* ── SIDEBAR (desktop) ── */
+.sidebar {
+  border-right: 1px solid var(--sand2);
+  padding: 32px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 2px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--sand2); }
+.sidebar-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 0 24px 12px;
+}
+
+/* ── CONTENT ── */
+.content {
+  padding: 48px 64px 80px;
+  max-width: 860px;
+  min-width: 0;
+}
+
+/* ── SECTIONS ── */
+.doc-section {
+  margin-bottom: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--sand2);
+}
+.doc-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.doc-section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--black);
+}
+
+.doc-section p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--black);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.doc-section p:last-child { margin-bottom: 0; }
+
+.doc-section p.lead {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* ── NEGATIVE LIST ── */
+.not-list {
+  border: 1.5px solid var(--black);
+  margin: 20px 0;
+}
+.not-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--sand2);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.not-item:last-child { border-bottom: none; }
+.not-item-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--black);
+  color: var(--cream);
+  padding: 3px 8px;
+  white-space: nowrap;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.not-item-text {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* ── PIPELINE ── */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1.5px solid var(--black);
+  margin: 20px 0;
+}
+.pipe-stage {
+  padding: 20px 18px;
+  border-right: 1.5px solid var(--black);
+}
+.pipe-stage:last-child { border-right: none; }
+.pipe-stage.dark { background: var(--black); color: var(--cream); }
+.pipe-stage-num {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-bottom: 8px;
+}
+.pipe-stage-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.pipe-stage-desc {
+  font-size: 10px;
+  line-height: 1.65;
+  opacity: 0.65;
+}
+
+/* ── CAPABILITY BLOCKS ── */
+.cap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1.5px solid var(--black);
+  margin: 20px 0;
+}
+.cap-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid var(--sand2);
+}
+.cap-item:last-child { border-bottom: none; }
+.cap-item:nth-child(even) { background: var(--sand); }
+.cap-item-head {
+  padding: 18px 20px;
+  border-right: 1px solid var(--sand2);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+}
+.cap-item-body {
+  padding: 18px 20px;
+  font-size: 11px;
+  line-height: 1.75;
+  color: var(--mid);
+}
+.cap-item-body strong { color: var(--black); font-weight: 700; }
+
+.cannot-item .cap-item-head {
+  background: var(--sand);
+  font-style: italic;
+  color: var(--mid);
+  font-weight: 400;
+}
+
+/* ── COMPARISON TABLE ── */
+.compare-wrap {
+  border: 1.5px solid var(--black);
+  margin: 20px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.compare-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+.compare-table th {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--black);
+}
+.compare-table th:first-child { border-right: 1px solid var(--sand2); }
+.compare-table th.col-aether { background: var(--black); color: var(--cream); }
+.compare-table th.col-llm { background: var(--sand); }
+.compare-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--sand);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:nth-child(even) td { background: rgba(221,217,207,0.35); }
+.compare-table .prop {
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  border-right: 1px solid var(--sand2);
+  color: var(--black);
+}
+.compare-table .aether-val { color: var(--black); font-weight: 400; }
+.compare-table .llm-val { color: var(--mid); font-style: italic; }
+
+/* ── HALLUCINATION GUARANTEE ── */
+.guarantee-block {
+  border: 2px solid var(--black);
+  background: var(--black);
+  color: var(--cream);
+  padding: 28px;
+  margin: 20px 0;
+}
+.guarantee-block h3 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.55;
+}
+.guarantee-block p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(240,237,230,0.8);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.guarantee-block p:last-child { margin-bottom: 0; }
+.guarantee-block strong { color: var(--cream); font-weight: 700; }
+
+/* ── USE CASES ── */
+.usecase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1.5px solid var(--black);
+  margin: 20px 0;
+}
+.usecase-col { padding: 0; }
+.usecase-col:first-child { border-right: 1.5px solid var(--black); }
+.usecase-col-head {
+  padding: 12px 20px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid var(--black);
+}
+.usecase-col:first-child .usecase-col-head { background: var(--black); color: var(--cream); }
+.usecase-col:last-child .usecase-col-head { background: var(--sand); color: var(--mid); }
+.usecase-item {
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--sand2);
+  font-size: 11px;
+  line-height: 1.6;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.usecase-item:last-child { border-bottom: none; }
+.usecase-mark { font-size: 11px; margin-top: 1px; flex-shrink: 0; }
+.usecase-text { color: var(--mid); }
+.usecase-text strong { color: var(--black); font-weight: 700; }
+
+/* ── DEPLOY BLOCK ── */
+.deploy-block {
+  border: 1.5px solid var(--black);
+  margin: 20px 0;
+}
+.deploy-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border-bottom: 1px solid var(--sand2);
+  font-size: 11px;
+}
+.deploy-row:last-child { border-bottom: none; }
+.deploy-key {
+  font-weight: 700;
+  padding: 12px 16px;
+  border-right: 1px solid var(--sand2);
+  background: var(--sand);
+  letter-spacing: 0.06em;
+  font-style: italic;
+  word-break: break-all;
+}
+.deploy-val {
+  padding: 12px 16px;
+  color: var(--mid);
+  line-height: 1.6;
+}
+.deploy-val code {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--sand);
+  padding: 1px 5px;
+  border: 1px solid var(--sand2);
+  color: var(--black);
+}
+
+/* ── AUTHORED GI CALLOUT ── */
+.authored-callout {
+  border-left: 4px solid var(--black);
+  padding: 16px 20px;
+  margin: 20px 0;
+  background: var(--sand);
+}
+.authored-callout p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+.authored-callout p:last-child { margin-bottom: 0; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  border-top: 2px solid var(--black);
+  padding: 20px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.doc-footer span { color: var(--black); }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+
+/* ── TABLET ── */
+@media (max-width: 900px) {
+  .doc-header { padding: 32px 28px 24px; grid-template-columns: 1fr; }
+  .doc-header-meta { text-align: left; }
+
+  /* hide sidebar, show topbar + drawer */
+  .topbar { display: flex; }
+  .sidebar { display: none; }
+
+  .layout { grid-template-columns: 1fr; }
+  .content { padding: 32px 28px 60px; max-width: 100%; }
+
+  .pipeline { grid-template-columns: 1fr 1fr; }
+  .pipe-stage { border-right: none; border-bottom: 1.5px solid var(--black); }
+  .pipe-stage:nth-child(odd) { border-right: 1.5px solid var(--black); }
+  .pipe-stage:last-child { border-bottom: none; }
+  .pipe-stage:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+
+  .cap-item { grid-template-columns: 1fr; }
+  .cap-item-head { border-right: none; border-bottom: 1px solid var(--sand2); }
+
+  .usecase-grid { grid-template-columns: 1fr; }
+  .usecase-col:first-child { border-right: none; border-bottom: 1.5px solid var(--black); }
+
+  .deploy-row { grid-template-columns: 1fr; }
+  .deploy-key { border-right: none; border-bottom: 1px solid var(--sand2); }
+
+  .doc-footer { padding: 16px 28px; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 540px) {
+  .doc-header { padding: 20px 18px 18px; gap: 16px; }
+  .doc-header-left h1 { font-size: 22px; }
+  .doc-header-left .tagline { font-size: 9px; letter-spacing: 0.1em; }
+  .doc-header-meta { font-size: 8px; }
+
+  .content { padding: 24px 18px 48px; }
+
+  .doc-section { margin-bottom: 40px; padding-bottom: 40px; }
+  .doc-section h2 { font-size: 15px; margin-bottom: 16px; padding-bottom: 12px; }
+  .doc-section p { font-size: 12px; }
+  .doc-section p.lead { font-size: 13px; }
+
+  /* pipeline: single col */
+  .pipeline { grid-template-columns: 1fr; }
+  .pipe-stage { border-right: none !important; border-bottom: 1.5px solid var(--black); }
+  .pipe-stage:last-child { border-bottom: none; }
+
+  .not-item { gap: 12px; padding: 14px 14px; }
+  .not-item-text { font-size: 11px; }
+
+  .cap-item-head { font-size: 10px; padding: 14px 14px; }
+  .cap-item-body { font-size: 11px; padding: 14px 14px; }
+
+  /* compare table: scrolls horizontally, scroll hint */
+  .compare-wrap {
+    position: relative;
+  }
+  .compare-wrap::after {
+    content: '← scroll →';
+    display: block;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-align: center;
+    padding: 6px;
+    border-top: 1px solid var(--sand2);
+    background: var(--sand);
+  }
+  .compare-table { font-size: 10px; min-width: 440px; }
+  .compare-table th, .compare-table td { padding: 9px 12px; }
+
+  .guarantee-block { padding: 20px 18px; }
+  .guarantee-block p { font-size: 12px; }
+
+  /* use cases: single col */
+  .usecase-col-head { padding: 10px 14px; }
+  .usecase-item { padding: 11px 14px; font-size: 10px; }
+
+  .deploy-row .deploy-key { font-size: 10px; padding: 10px 14px; }
+  .deploy-row .deploy-val { font-size: 10px; padding: 10px 14px; }
+
+  .authored-callout { padding: 14px 14px; }
+  .authored-callout p { font-size: 12px; }
+
+  .doc-footer { padding: 12px 18px; flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE TOPBAR -->
+<div class="topbar" id="topbar">
+  <div class="topbar-title">AETHER Docs</div>
+  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="overlay"></div>
+
+<!-- DRAWER (mobile nav) -->
+<nav class="drawer" id="drawer" aria-label="Mobile navigation">
+  <div class="drawer-label">Contents</div>
+  <a href="#what-is">What AETHER Is</a>
+  <a href="#what-is-not">What AETHER Is Not</a>
+  <a href="#architecture">Core Architecture</a>
+  <a href="#can-do">What It Can Do</a>
+  <a href="#cannot-do">What It Cannot Do</a>
+  <a href="#comparison">vs. Large Language Models</a>
+  <a href="#hallucination">Hallucination Guarantee</a>
+  <a href="#use-cases">Appropriate Use Cases</a>
+  <a href="#deployment">Deployment</a>
+  <a href="#authored-gi">Authored General Intelligence</a>
+</nav>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-header-left">
+    <h1>AETHER <br>Technical Documentation</h1>
+    <div class="tagline">Autonomous Expression Through Hallucination-Eliminated Reasoning</div>
+  </div>
+  <div class="doc-header-meta">
+    Version <span>4</span><br>
+    Author <span>RICKCLMNT</span><br>
+    Engine <span>aether_gi_v4</span>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR (desktop only) -->
+  <nav class="sidebar">
+    <div class="sidebar-label">Contents</div>
+    <a href="#what-is">What AETHER Is</a>
+    <a href="#what-is-not">What AETHER Is Not</a>
+    <a href="#architecture">Core Architecture</a>
+    <a href="#can-do">What It Can Do</a>
+    <a href="#cannot-do">What It Cannot Do</a>
+    <a href="#comparison">vs. Large Language Models</a>
+    <a href="#hallucination">Hallucination Guarantee</a>
+    <a href="#use-cases">Appropriate Use Cases</a>
+    <a href="#deployment">Deployment</a>
+    <a href="#authored-gi">Authored General Intelligence</a>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <div class="doc-section" id="what-is">
+      <h2>What AETHER Is</h2>
+      <p class="lead">AETHER is a deterministic reasoning engine.</p>
+      <p>It answers questions, solves problems, pursues goals, and assists users by processing language and applying structured logic — without a large language model anywhere in its core loop.</p>
+      <p>Every response AETHER produces is traceable. Every reasoning step follows an explicit rule. Every factual claim is retrieved from an authored knowledge corpus. There is no statistical generation, no probability-weighted word prediction, and no learned weights producing output that no one programmed directly.</p>
+      <p>This is not a limitation dressed up as a feature. It is a deliberate architectural decision with real consequences for what AETHER can guarantee and what it cannot.</p>
+    </div>
+
+    <div class="doc-section" id="what-is-not">
+      <h2>What AETHER Is Not</h2>
+      <div class="not-list">
+        <div class="not-item">
+          <div class="not-item-label">Not</div>
+          <div class="not-item-text"><strong style="color:var(--black)">A large language model.</strong> It does not use transformer architecture. It does not have billions of parameters trained on internet text. It cannot generate plausible-sounding prose about topics it has never been explicitly given knowledge about. It will not pretend to know things it does not know.</div>
+        </div>
+        <div class="not-item">
+          <div class="not-item-label">Not</div>
+          <div class="not-item-text"><strong style="color:var(--black)">A chatbot wrapper.</strong> It does not sit in front of GPT, Claude, Gemini, or any other model. There is no API call to an external AI service in its reasoning path. The intelligence is in the architecture and the authored knowledge, not in a rented model.</div>
+        </div>
+        <div class="not-item">
+          <div class="not-item-label">Not</div>
+          <div class="not-item-text"><strong style="color:var(--black)">A general-purpose language model.</strong> It is an Authored General Intelligence system: its knowledge is what has been deliberately put into it, and its reasoning operates on that knowledge using explicit deterministic rules.</div>
+        </div>
+        <div class="not-item">
+          <div class="not-item-label">Not</div>
+          <div class="not-item-text"><strong style="color:var(--black)">Self-improving through training.</strong> It learns from corrections and new injected knowledge within defined mechanisms, but it does not retrain on interactions or update weights, because it has no weights to update.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-section" id="architecture">
+      <h2>Core Architecture</h2>
+      <p>AETHER processes each turn through a sequential pipeline:</p>
+      <div class="pipeline">
+        <div class="pipe-stage dark">
+          <div class="pipe-stage-num">01</div>
+          <div class="pipe-stage-name">Understand</div>
+          <div class="pipe-stage-desc">Input parsed for intent, frame, entities, session context, and ambiguity. Ambiguous inputs are held — a clarifying question is asked before reasoning begins.</div>
+        </div>
+        <div class="pipe-stage">
+          <div class="pipe-stage-num">02</div>
+          <div class="pipe-stage-name">Retrieve</div>
+          <div class="pipe-stage-desc">Relevant knowledge fetched from the authored corpus using full-text search over <em>aether_network.</em> The lattice concept graph provides semantic enrichment. No generation.</div>
+        </div>
+        <div class="pipe-stage dark">
+          <div class="pipe-stage-num">03</div>
+          <div class="pipe-stage-name">Execute</div>
+          <div class="pipe-stage-desc">Reasoning engine fires. Diagnostic hypotheses tracked with confidence. Deductive rules applied. Causal engine distinguishes correlation from causation. Actions dispatched.</div>
+        </div>
+        <div class="pipe-stage">
+          <div class="pipe-stage-num">04</div>
+          <div class="pipe-stage-name">Verify</div>
+          <div class="pipe-stage-desc">Response checked against goal criteria and quality signals. Expansion modules: ADAPT, TRANSFER, CONSTRUCT, RECOMBINE, META_REFLECT.</div>
+        </div>
+      </div>
+      <p>Above this pipeline sit meta-control supervisors running in parallel: the Goal Monitor checks active goal expiry every turn, the Resource Allocator assigns a complexity tier and gates expensive stages, the WillEngine checks for standing intention violations before any work begins.</p>
+    </div>
+
+    <div class="doc-section" id="can-do">
+      <h2>What AETHER Can Do</h2>
+      <div class="cap-list">
+        <div class="cap-item">
+          <div class="cap-item-head">Factual retrieval with honest knowledge boundaries</div>
+          <div class="cap-item-body">Answers by retrieving from its authored corpus. When it has relevant content, it returns it with high precision. When it does not, it says so explicitly. <strong>It does not fabricate an answer to fill the silence.</strong> The system correctly says "I don't have knowledge on that" — this is the right behaviour, not a failure.</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-item-head">Multi-turn diagnostic reasoning</div>
+          <div class="cap-item-body">Maintains competing hypotheses across a conversation and updates confidence scores as evidence accumulates. Asks discriminating questions when two hypotheses are too close to separate. Falsifies hypotheses on contradicting evidence — distinct from mere outcompeting. Detects stuck threads and reframes rather than grinding. <strong>Deterministic: same inputs, same outputs.</strong></div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-item-head">Deductive reasoning with correctness guarantees</div>
+          <div class="cap-item-body">Syllogisms, logical consequence, set membership, rule application. "All employees over 40 hours get overtime. John worked 47 hours. Does he qualify?" — returns a deterministic, auditable answer. <strong>The reasoning step is explicit and inspectable.</strong> Rules injected in one turn are held in session state and applied in subsequent turns.</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-item-head">Causal reasoning: correlation vs. causation</div>
+          <div class="cap-item-body">Distinguishes temporal co-occurrence from causal mechanism. "Roosters crow before sunrise" triggers the correlational path — the engine flags the absence of mechanism and generates the counterfactual. "Smoking causes cancer because carcinogens damage DNA" triggers the causal path. <strong>This distinction is structural, not statistical.</strong></div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-item-head">Autonomous goal pursuit</div>
+          <div class="cap-item-body">Goals assigned with expiry conditions: turn limits, action limits, ISO 8601 deadlines, consecutive failure limits. Goal Monitor checks at every turn. The autonomous daemon pursues active goal steps between user turns — executing research queries and writing progress notes <strong>without requiring the user to keep the conversation active.</strong></div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-item-head">Real action execution</div>
+          <div class="cap-item-body">Action dispatcher executes shell commands, file system operations (read, write, delete, move, copy, search), HTTP requests, and API calls with real effects. Multi-step plans managed with dependency tracking and retry logic. <strong>Write operations in the daemon are gated behind explicit configuration</strong> — read-only is the default.</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-item-head">Learning from corrections and injections</div>
+          <div class="cap-item-body">Corrections are recorded in the persistent MistakeMemory store. When the same causal type is consistently miscorrected across sessions, LifelongLearningEngine registers a new problem type. <strong>New knowledge is indexed into FTS, fed to the lattice concept graph, and available immediately.</strong></div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-item-head">Session and organisational memory</div>
+          <div class="cap-item-body">Entities, topics, injected rules, stated intentions, affect trajectory, and situation context persist across turns. At session start, the engine pre-loads organisational vocabulary and problem type history from OrgModel — <strong>users in the same organisation benefit from what others have learned.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-section" id="cannot-do">
+      <h2>What AETHER Cannot Do</h2>
+      <div class="cap-list">
+        <div class="cap-item cannot-item">
+          <div class="cap-item-head">Generate knowledge it has not been given</div>
+          <div class="cap-item-body">AETHER cannot produce a coherent explanation of a topic not in its corpus. It will not confabulate. This is the sharpest difference from an LLM: an LLM will produce fluent and often plausible answers regardless of whether it actually knows the topic. <strong>That fluency masks uncertainty. AETHER's silence is honest.</strong></div>
+        </div>
+        <div class="cap-item cannot-item">
+          <div class="cap-item-head">Handle genuinely novel problem types without being shown them</div>
+          <div class="cap-item-body">The problem type registry starts with diagnostic, decision, optimisation, deductive, and causal query types. New types can be inferred from accumulated mistake patterns, but the inference mechanism is structural — pattern matching on causal type coverage — not generative. A genuinely novel class of problem will not be handled well until an appropriate framework is authored or inferred from sufficient evidence.</div>
+        </div>
+        <div class="cap-item cannot-item">
+          <div class="cap-item-head">Understand language outside its structured parsing</div>
+          <div class="cap-item-body">The intent and frame classifiers were designed for a specific range of inputs. Highly creative, figurative, culturally specific, or domain-jargon-heavy language may be misclassified. The system has no statistical generalisation over the full distribution of language the way an LLM does.</div>
+        </div>
+        <div class="cap-item cannot-item">
+          <div class="cap-item-head">Learn from raw unstructured exposure</div>
+          <div class="cap-item-body">AETHER does not learn by reading text the way a language model learns during pre-training. Injecting a raw document does populate the FTS index and feed the lattice learner, but the depth of understanding is limited by the quality and granularity of the source material. An LLM's latent representations generalise across its training distribution. AETHER's generalisation is limited to what has been explicitly authored.</div>
+        </div>
+        <div class="cap-item cannot-item">
+          <div class="cap-item-head">Produce creative or generative content</div>
+          <div class="cap-item-body">AETHER does not write poems, stories, persuasive essays, or any open-ended generated content. Its prose renderer produces structured declarative sentences from reasoning outputs. Open-ended creative work requires the kind of statistical generation it deliberately lacks.</div>
+        </div>
+        <div class="cap-item cannot-item">
+          <div class="cap-item-head">Guarantee correctness of authored knowledge</div>
+          <div class="cap-item-body">AETHER can guarantee that its reasoning is logically valid given its premises. It cannot guarantee that the premises are correct. If an article contains an error, the engine will correctly reason from that error and produce a wrong answer — but it will not have hallucinated. <strong>Wrong answers from bad data are identifiable and fixable; hallucinated answers from a language model are indistinguishable from correct ones without independent verification.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-section" id="comparison">
+      <h2>Differences from Large Language Models</h2>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th class="col-aether">AETHER</th>
+              <th class="col-llm">Large Language Model</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="prop">Core mechanism</td><td class="aether-val">Deterministic rule-based reasoning over authored knowledge</td><td class="llm-val">Statistical prediction over learned weights</td></tr>
+            <tr><td class="prop">Hallucination</td><td class="aether-val">Architecturally impossible within the reasoning layer</td><td class="llm-val">Structurally unavoidable — most probable token, not the true one</td></tr>
+            <tr><td class="prop">Knowledge source</td><td class="aether-val">Explicitly authored and injected corpus</td><td class="llm-val">Implicitly learned from training data, not inspectable</td></tr>
+            <tr><td class="prop">Reasoning trace</td><td class="aether-val">Every step is explicit and auditable</td><td class="llm-val">Internal states opaque; reasoning cannot be verified</td></tr>
+            <tr><td class="prop">Knowledge boundary</td><td class="aether-val">Hard — reports gaps honestly</td><td class="llm-val">Soft — generates regardless of whether knowledge exists</td></tr>
+            <tr><td class="prop">Response to unknowns</td><td class="aether-val">"I don't have knowledge on that"</td><td class="llm-val">A fluent confabulation indistinguishable from a correct answer</td></tr>
+            <tr><td class="prop">Correctability</td><td class="aether-val">Corrections are explicit and persistent</td><td class="llm-val">In-context corrections fade; weights are unchanged</td></tr>
+            <tr><td class="prop">Causal reasoning</td><td class="aether-val">Structural distinction between correlation and causation</td><td class="llm-val">Statistical association — distinction only if training data is explicit</td></tr>
+            <tr><td class="prop">Computation</td><td class="aether-val">Deterministic — same input → same output</td><td class="llm-val">Stochastic — output varies between runs</td></tr>
+            <tr><td class="prop">Deployment</td><td class="aether-val">Runs on consumer hardware, no external API</td><td class="llm-val">Requires significant compute or a paid API</td></tr>
+            <tr><td class="prop">Data privacy</td><td class="aether-val">All processing local — user data never leaves the deployment</td><td class="llm-val">Inputs sent to a third-party service unless self-hosted</td></tr>
+            <tr><td class="prop">Customisation</td><td class="aether-val">Domain knowledge and reasoning rules authored directly</td><td class="llm-val">Fine-tuning required and expensive; behaviour change is indirect</td></tr>
+            <tr><td class="prop">Failure mode</td><td class="aether-val">Silence or explicit uncertainty on unknown topics</td><td class="llm-val">Confident wrong answers requiring domain expertise to detect</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="doc-section" id="hallucination">
+      <h2>The Hallucination Guarantee</h2>
+      <p>Hallucination in a large language model is not a bug. It is a structural consequence of the architecture: the model generates the statistically most probable continuation of the input, and sometimes the most probable continuation is factually wrong. The model has no mechanism to distinguish between "I know this" and "this sounds right."</p>
+      <div class="guarantee-block">
+        <h3>Architectural guarantee</h3>
+        <p>In AETHER, hallucination is <strong>architecturally impossible within the reasoning layer</strong> for a specific reason: the engine does not generate. Every factual claim in a response is retrieved from an article that was explicitly authored and reviewed. Every reasoning step applies an explicit rule. There is no probability distribution over tokens being sampled.</p>
+        <p>This guarantee has an important scope. It applies to the reasoning layer. If an article in the corpus contains incorrect information, the engine will correctly reason from that incorrect information and produce a wrong answer — but it will not have hallucinated.</p>
+        <p><strong>The distinction matters:</strong> wrong answers from bad data are identifiable and fixable by correcting the corpus; hallucinated answers from a language model are indistinguishable from correct ones without independent verification.</p>
+      </div>
+    </div>
+
+    <div class="doc-section" id="use-cases">
+      <h2>Appropriate Use Cases</h2>
+      <div class="usecase-grid">
+        <div class="usecase-col">
+          <div class="usecase-col-head">Well-suited for</div>
+          <div class="usecase-item"><div class="usecase-mark">✓</div><div class="usecase-text"><strong>Correctness-consequential domains</strong> — health tech, EdTech, legal tech, financial services, compliance. These cannot tolerate confident wrong answers.</div></div>
+          <div class="usecase-item"><div class="usecase-mark">✓</div><div class="usecase-text"><strong>Auditability requirements</strong> — every reasoning step is logged and inspectable. Regulators and auditors can trace how any conclusion was reached.</div></div>
+          <div class="usecase-item"><div class="usecase-mark">✓</div><div class="usecase-text"><strong>Non-negotiable data privacy</strong> — AETHER runs entirely on-premise. User inputs never leave the deployment environment.</div></div>
+          <div class="usecase-item"><div class="usecase-mark">✓</div><div class="usecase-text"><strong>Well-defined domain knowledge</strong> — the corpus can be authored with authority by domain experts. The more structured the domain, the better AETHER performs.</div></div>
+          <div class="usecase-item"><div class="usecase-mark">✓</div><div class="usecase-text"><strong>Consistency requirements</strong> — the same question asked twice gets the same answer. No stochastic variation between runs.</div></div>
+        </div>
+        <div class="usecase-col">
+          <div class="usecase-col-head">Not suited for</div>
+          <div class="usecase-item"><div class="usecase-mark">✗</div><div class="usecase-text"><strong>Open-domain conversation without a curated corpus</strong> — it will accurately report gaps rather than filling them fluently.</div></div>
+          <div class="usecase-item"><div class="usecase-mark">✗</div><div class="usecase-text"><strong>Creative writing or content generation</strong> — it does not produce open-ended generated text.</div></div>
+          <div class="usecase-item"><div class="usecase-mark">✗</div><div class="usecase-text"><strong>Tasks requiring generalisation from sparse data</strong> — LLMs generalise across training distributions; AETHER requires explicit knowledge coverage.</div></div>
+          <div class="usecase-item"><div class="usecase-mark">✗</div><div class="usecase-text"><strong>Real-time information</strong> — unless the corpus is actively updated, AETHER's knowledge reflects the state of the corpus at injection time.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-section" id="deployment">
+      <h2>Deployment</h2>
+      <p>AETHER deploys as a Docker stack: an API container running Flask with authentication middleware, a knowledge network server, an optional background daemon for autonomous goal pursuit, and an nginx frontend. All components run locally. No external AI API is called at runtime.</p>
+      <div class="deploy-block">
+        <div class="deploy-row">
+          <div class="deploy-key">AETHER_ORG_ID</div>
+          <div class="deploy-val">Enables organisational memory sharing across users in the same deployment.</div>
+        </div>
+        <div class="deploy-row">
+          <div class="deploy-key">AETHER_DAEMON_ENABLED</div>
+          <div class="deploy-val">Starts the background worker for autonomous goal pursuit between user turns.</div>
+        </div>
+        <div class="deploy-row">
+          <div class="deploy-key">AETHER_DAEMON_WRITE</div>
+          <div class="deploy-val">Enables file write operations in the daemon. <strong>Read-only is the default.</strong></div>
+        </div>
+        <div class="deploy-row">
+          <div class="deploy-key">AETHER_API_KEY</div>
+          <div class="deploy-val">Gates all API access. Injected by nginx — the browser never sees it.</div>
+        </div>
+      </div>
+      <p>New knowledge is injected via the <code>/inject_domain</code> endpoint or the <code>inject_domain()</code> Python method, which accepts a text or JSON corpus, indexes it into the FTS store, feeds it to the lattice concept graph, and optionally registers a YAML scaffold definition for structured task elicitation in that domain.</p>
+    </div>
+
+    <div class="doc-section" id="authored-gi">
+      <h2>What "Authored General Intelligence" Means</h2>
+      <p>The Authored General Intelligence designation describes the product of the breadth deployment: a system with authored knowledge across every major domain, providing useful and reliable answers across whatever a user brings to it.</p>
+      <div class="authored-callout">
+        <p>The word <strong>"authored"</strong> is precise and intentional. Every piece of knowledge in the system was written by a person, reviewed, and deliberately included. The system's intelligence is the intelligence of its authors, expressed through a deterministic reasoning architecture.</p>
+        <p>This is a fundamentally different claim from the general intelligence claim made by or about large language models. Those systems acquire knowledge implicitly from statistical patterns in training data. AETHER acquires knowledge explicitly through deliberate authorship.</p>
+        <p>Neither approach is universally superior. Authored knowledge is more accurate, more auditable, and more correctable. Statistical learning generalises more broadly and requires no up-front authoring investment.</p>
+      </div>
+      <p>AETHER takes a clear position: in domains where correctness matters — health, law, education, finance — the auditability and correctness guarantees of authored knowledge outweigh the breadth advantage of statistical learning.</p>
+      <p>The appropriate comparison is not to a general-purpose LLM but to a domain expert working from a well-curated knowledge base, applying explicit reasoning rules, and knowing precisely the boundaries of their expertise.</p>
+    </div>
+
+  </main>
+</div>
+
+<div class="doc-footer">
+  <span>RICKCLMNT</span>
+  <div>aether_gi_v4 · Technical Documentation</div>
+  <div>Version 4</div>
+</div>
+
+<script>
+(function() {
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('drawer');
+  const overlay   = document.getElementById('overlay');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.style.display = 'block';
+    requestAnimationFrame(() => overlay.classList.add('visible'));
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('visible');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    setTimeout(() => { overlay.style.display = 'none'; }, 220);
+  }
+
+  hamburger.addEventListener('click', () => {
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+
+  overlay.addEventListener('click', closeDrawer);
+
+  // Close on nav link tap
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', closeDrawer);
+  });
+
+  // Active link highlight on scroll
+  const sections = document.querySelectorAll('.doc-section');
+  const allLinks = document.querySelectorAll('.sidebar a, .drawer a');
+
+  function setActive() {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top <= 80) current = sec.id;
+    });
+    allLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+})();
+</script>
+
+</body>
+</html>

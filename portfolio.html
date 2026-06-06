@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My work</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #111110;
+  --white: #FAFAF8;
+  --blue: #2a9df4;
+  --muted: #757570;
+  --border: #E8E8E4;
+  --light: #F4F4F0;
+  --display: 'Playfair Display', Georgia, serif;
+  --body: 'Source Serif 4', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,250,248,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 60px; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.14em; color: var(--black); text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--black); }
+.nav-cta {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--white); background: var(--black); text-decoration: none;
+  padding: 7px 18px; border-radius: 20px; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--blue); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  max-width: 1160px; margin: 0 auto;
+  padding: 80px 48px 64px;
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 360px;
+  gap: 80px; align-items: end;
+}
+.ph-kicker {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+  opacity: 0; animation: rise 0.7s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.ph-kicker::before { content: ''; width: 20px; height: 1px; background: var(--blue); }
+.ph-title {
+  font-family: var(--display);
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 900; line-height: 0.93;
+  letter-spacing: -0.035em;
+  opacity: 0; animation: rise 0.8s 0.18s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.ph-title em { font-style: italic; color: var(--blue); }
+.ph-right {
+  opacity: 0; animation: rise 0.8s 0.26s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.ph-desc {
+  font-family: var(--body); font-size: 16px;
+  color: var(--muted); line-height: 1.82; margin-bottom: 28px;
+}
+.ph-nav { display: flex; gap: 10px; flex-wrap: wrap; }
+.ph-nav a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--black); text-decoration: none;
+  border: 1px solid var(--border); padding: 8px 18px;
+  border-radius: 20px; transition: all 0.2s;
+}
+.ph-nav a:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ── PORTFOLIO ── */
+.portfolio {
+  max-width: 1160px; margin: 0 auto;
+  padding: 96px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-kicker {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 56px;
+}
+/*.sec-kicker::before { content: ''; width: 20px; height: 1px; background: var(--blue); }*/
+
+/* project rows */
+.projects { display: flex; flex-direction: column; }
+.project {
+  display: grid;
+  grid-template-columns: 72px 1fr 240px;
+  gap: 48px; padding: 52px 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.project:last-child { border-bottom: 1px solid var(--border); }
+.proj-num {
+  font-family: var(--display); font-size: 52px; font-weight: 900;
+  color: var(--border); line-height: 1; letter-spacing: -0.03em;
+  padding-top: 6px;
+}
+.proj-main {}
+.proj-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+}
+.proj-name {
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900; letter-spacing: -0.025em;
+  line-height: 1.05; margin-bottom: 16px;
+}
+.proj-name em { font-style: italic; color: var(--blue); }
+.proj-body {
+  font-size: 15px; color: #353533;
+  line-height: 1.82; font-family: var(--body);
+  max-width: 500px; margin-bottom: 24px;
+}
+.proj-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.proj-tag-pill {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid var(--border); padding: 4px 12px;
+  border-radius: 20px;
+}
+.proj-meta {
+  display: flex; flex-direction: column;
+  gap: 0; padding-top: 8px;
+}
+.pm-row {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.pm-row:first-child { border-top: 1px solid var(--border); }
+.pm-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.pm-val {
+  font-family: var(--body); font-size: 14px; color: var(--black);
+  line-height: 1.5;
+}
+.pm-val.status-active {
+  color: var(--blue);
+  font-family: var(--mono); font-size: 11px;
+}
+
+/* ── SERVICES ── */
+.services-sec {
+  background: var(--black);
+}
+.services-inner {
+  max-width: 1160px; margin: 0 auto;
+  padding: 96px 48px;
+}
+.services-top {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; margin-bottom: 64px;
+}
+.services-kicker {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+}
+.services-kicker::before { content: ''; width: 20px; height: 1px; background: var(--blue); }
+.services-h {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 900; line-height: 0.95;
+  letter-spacing: -0.03em; color: var(--white);
+}
+.services-h em { font-style: italic; color: var(--blue); }
+.services-contact {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--white); background: var(--blue);
+  text-decoration: none; padding: 11px 22px;
+  border-radius: 20px; transition: opacity 0.2s;
+  white-space: nowrap; align-self: flex-end;
+}
+.services-contact:hover { opacity: 0.85; }
+
+/* service cards */
+.service-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(255,255,255,0.06);
+}
+.service-card {
+  background: var(--black); padding: 44px 36px 40px;
+  position: relative; overflow: hidden;
+  transition: background 0.25s;
+  display: flex; flex-direction: column;
+}
+.service-card:hover { background: #181817; }
+.service-card::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--blue);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.service-card:hover::after { transform: scaleX(1); }
+.sc-watermark {
+  position: absolute; bottom: -24px; right: -4px;
+  font-family: var(--display); font-size: 9rem;
+  font-weight: 900; line-height: 1;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none; user-select: none;
+  letter-spacing: -0.02em;
+}
+.sc-type {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.2);
+  margin-bottom: 28px;
+}
+.sc-name {
+  font-family: var(--display); font-size: clamp(28px, 3vw, 40px);
+  font-weight: 900; line-height: 1.05;
+  color: var(--white); letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.sc-name em { font-style: italic; color: var(--blue); }
+.sc-body {
+  font-size: 14px; line-height: 1.8;
+  color: rgba(255,255,255,0.38);
+  font-family: var(--body); flex: 1;
+  margin-bottom: 32px;
+}
+.sc-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--blue);
+  border: 1px solid rgba(42,157,244,0.3);
+  padding: 8px 16px; border-radius: 20px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  align-self: flex-start;
+}
+.service-card:hover .sc-cta {
+  background: rgba(42,157,244,0.08); border-color: var(--blue);
+}
+.sc-arrow { transition: transform 0.2s; }
+.service-card:hover .sc-arrow { transform: translateX(3px); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  background: var(--black);
+  padding: 22px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.fl, .fr { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.25); }
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .page-header { grid-template-columns: 1fr; gap: 32px; padding: 56px 20px 48px; }
+  .portfolio { padding: 64px 20px; }
+  .project { grid-template-columns: 48px 1fr; gap: 24px; padding: 40px 0; }
+  .proj-meta { display: none; }
+  .services-inner { padding: 64px 20px; }
+  .services-top { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .service-cards { grid-template-columns: 1fr; }
+  footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">RICKCLMNT</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html" class="active">Work</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="mailto:rickclmntcorp@protonmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div>
+    <h1 class="ph-title">Work &<br><em>Services.</em></h1>
+  </div>
+  <div class="ph-right">
+    <p class="ph-desc">
+      Projects I've built from scratch.
+      Everything here is independently designed and owned.<br><br>
+      <strong>* This archive is incomplete — several prototypes and early systems were lost, abandoned, or never formally documented.</strong>
+    </p>
+    <!--nav class="ph-nav">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#services">Services</a>
+    </nav-->
+  </div>
+</header>
+
+<!-- PORTFOLIO -->
+<section class="portfolio reveal" id="portfolio">
+  <div class="sec-kicker">• Project archive</div>
+
+  <div class="projects">
+    <!-- ========== EXISTING / CORE PROJECTS (unchanged) ========== -->
+    <h1>Most recent</h1>
+    <div class="project" id="aether-core">
+      <div class="proj-num">01</div>
+      <div class="proj-main">
+        <div class="proj-tag">Core Architecture</div>
+        <h2 class="proj-name">A.E.T.H.E.R.</h2>
+        <p class="proj-body">
+          A deterministic AI architecture built without a language model in the reasoning pipeline.
+          Every inference is produced by rule-based logic. Every output has a full audit trail. Built for contexts
+          where the cost of a wrong answer is real.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag-pill">Deterministic Reasoning</span>
+          <span class="proj-tag-pill">No-LLM Pipeline</span>
+          <span class="proj-tag-pill">Audit Trail</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Proprietary Architecture</span></div>
+        <div class="pm-row"><span class="pm-label">Status</span><span class="pm-val status-active">Active Development</span></div>
+        <div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python · Rust</span></div>
+        <div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Licensing · Integration</span></div>
+      </div>
+    </div>
+
+    <div class="project" id="pal-core">
+      <div class="proj-num">02</div>
+      <div class="proj-main">
+        <div class="proj-tag">Companion Platform</div>
+        <h2 class="proj-name">P.A.L.</h2>
+        <p class="proj-body">
+          An AI companion platform built entirely on AETHER. Character identity, emotional state,
+          session continuity, and proactive behaviour are all produced by deterministic systems —
+          not prompted into existence by a language model. No LLM reasoning anywhere in the stack.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag-pill">Authored Identity</span>
+          <span class="proj-tag-pill">Persistent State</span>
+          <span class="proj-tag-pill">Drive System</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Consumer Platform</span></div>
+        <div class="pm-row"><span class="pm-label">Status</span><span class="pm-val status-active">Active Development</span></div>
+        <div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div>
+        <div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Waitlist</span></div>
+      </div>
+    </div>
+
+    <div class="project" id="rhodon-core">
+      <div class="proj-num">03</div>
+      <div class="proj-main">
+        <div class="proj-tag">Research Intelligence</div>
+        <h2 class="proj-name">Rhodon</h2>
+        <p class="proj-body">
+          A scientific research system built for autonomous problem solving on novel questions —
+          problems that have no known solutions. Abductive reasoning, causal modeling, hypothesis
+          tracking, and experiment design, all deterministic. Built to work independently
+          and surface its own reasoning at every step.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag-pill">Abductive Reasoning</span>
+          <span class="proj-tag-pill">Causal Modeling</span>
+          <span class="proj-tag-pill">Hypothesis Tracking</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Research Tool</span></div>
+        <div class="pm-row"><span class="pm-label">Status</span><span class="pm-val status-active">Active Development</span></div>
+        <div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div>
+        <div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">On Request</span></div>
+      </div>
+    </div>
+
+    <!-- ========== ALL TIMELINE PROJECTS FROM FIRST WEBPAGE ========== --><br><br>
+    <h2>In Roughly<br>Chronological Order</h2><br>
+    <!-- 1. Rheingold (2022) -->
+    <div class="project" id="rheingold">
+      <div class="proj-num">01</div>
+      <div class="proj-main">
+        <div class="proj-tag">Research · 2022</div>
+        <h2 class="proj-name">Rheingold</h2>
+        <p class="proj-body">Early trading bot experimentation exploring automated decision systems. Foundational work in rule-based market pattern recognition.</p>
+        <div class="proj-tags"><span class="proj-tag-pill">Trading Bot</span><span class="proj-tag-pill">Automated Decision</span><span class="proj-tag-pill">Python</span></div>
+      </div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Experimental Research</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Archived (2022)</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Not available</span></div></div>
+    </div>
+
+    <!-- 2. PAL (Personality Framework, Apr 2024) -->
+    <div class="project" id="pal-framework">
+      <div class="proj-num">02</div>
+      <div class="proj-main">
+        <div class="proj-tag">Concept · Apr 2024</div>
+        <h2 class="proj-name">PAL · Personality Framework</h2>
+        <p class="proj-body">Framework for assigning personality structure to artificial systems. Early exploration of authored identity before the companion platform.</p>
+        <div class="proj-tags"><span class="proj-tag-pill">Personality Architecture</span><span class="proj-tag-pill">Identity Design</span></div>
+      </div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Concept Framework</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Research completed</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Theoretical</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Archived</span></div></div>
+    </div>
+
+    <!-- 3. E3N (2024) -->
+    <div class="project" id="e3n">
+      <div class="proj-num">03</div>
+      <div class="proj-main">
+        <div class="proj-tag">Prototype · 2024</div>
+        <h2 class="proj-name">E3N</h2>
+        <p class="proj-body">Experimental AI notebook system for structured reasoning and memory tracking. Designed for long-form thought persistence.</p>
+        <div class="proj-tags"><span class="proj-tag-pill">Memory Systems</span><span class="proj-tag-pill">Reasoning Engine</span></div>
+      </div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Prototype</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Concept stage</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Internal</span></div></div>
+    </div>
+
+    <!-- 4. M.A.R.K. IV -->
+    <div class="project" id="mark-iv">
+      <div class="proj-num">04</div>
+      <div class="proj-main"><div class="proj-tag">Research · 2024</div><h2 class="proj-name">M.A.R.K. IV</h2><p class="proj-body">Self-repairing assistant concept inspired by autonomous system design. Explored error correction and resilience loops.</p><div class="proj-tags"><span class="proj-tag-pill">Self-Repair</span><span class="proj-tag-pill">Resilience</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Research</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Archived</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Not available</span></div></div>
+    </div>
+
+    <!-- 5. KAIMERA -->
+    <div class="project" id="kaimera">
+      <div class="proj-num">05</div>
+      <div class="proj-main"><div class="proj-tag">Concept · 2024</div><h2 class="proj-name">KAIMERA</h2><p class="proj-body">Simulation framework for adaptive entity behavior in game environments. Dynamic NPC logic without traditional state machines.</p><div class="proj-tags"><span class="proj-tag-pill">Game AI</span><span class="proj-tag-pill">Adaptive Behavior</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Simulation Framework</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Prototype</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Inquire</span></div></div>
+    </div>
+
+    <!-- 6. Wraith OS -->
+    <div class="project" id="wraith-os">
+      <div class="proj-num">06</div><div class="proj-main"><div class="proj-tag">Research · 2024</div><h2 class="proj-name">Wraith OS</h2><p class="proj-body">Privacy-first ephemeral operating system model for secure computation. Minimal footprint, no persistent storage after session.</p><div class="proj-tags"><span class="proj-tag-pill">Privacy</span><span class="proj-tag-pill">Ephemeral OS</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">OS Concept</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Research phase</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Rust</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Not yet</span></div></div>
+    </div>
+
+    <!-- 7. A.E.G.I.S -->
+    <div class="project" id="aegis">
+      <div class="proj-num">07</div><div class="proj-main"><div class="proj-tag">Research · 2024</div><h2 class="proj-name">A.E.G.I.S</h2><p class="proj-body">Privacy-first ephemeral operating system model for secure computation (parallel exploration of Wraith concepts).</p><div class="proj-tags"><span class="proj-tag-pill">Ephemeral</span><span class="proj-tag-pill">Secure Computation</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Research</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Archived</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Rust</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Archived</span></div></div>
+    </div>
+
+    <!-- 8. R.E.S.C.U.E -->
+    <div class="project" id="rescue">
+      <div class="proj-num">08</div><div class="proj-main"><div class="proj-tag">Research · 2024</div><h2 class="proj-name">R.E.S.C.U.E</h2><p class="proj-body">Swarm intelligence for disaster response search and rescue operations. Distributed coordination algorithms.</p><div class="proj-tags"><span class="proj-tag-pill">Swarm AI</span><span class="proj-tag-pill">Disaster Response</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Research</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Prototype</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">On request</span></div></div>
+    </div>
+
+    <!-- 9. MAADE -->
+    <div class="project" id="maade">
+      <div class="proj-num">09</div><div class="proj-main"><div class="proj-tag">Research · 2024</div><h2 class="proj-name">MAADE</h2><p class="proj-body">Rust-based compression algorithm for streaming. High-throughput, low-latency encoding for real-time data.</p><div class="proj-tags"><span class="proj-tag-pill">Compression</span><span class="proj-tag-pill">Streaming</span><span class="proj-tag-pill">Rust</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Algorithm</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Completed</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Rust</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Licensing possible</span></div></div>
+    </div>
+
+    <!-- 10. RICKCLMNT brand (2025) -->
+    <div class="project" id="rickclmnt-brand">
+      <div class="proj-num">10</div><div class="proj-main"><div class="proj-tag">Brand · 2025</div><h2 class="proj-name">RICKCLMNT</h2><p class="proj-body">Systems and consulting initiative focused on technology-driven optimization. The overarching identity for all research and engineering output.</p><div class="proj-tags"><span class="proj-tag-pill">Consulting</span><span class="proj-tag-pill">Systems</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Brand/Studio</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val status-active">Active</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">N/A</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Engage via email</span></div></div>
+    </div>
+
+    <!-- 11. Firelike -->
+    <div class="project" id="firelike">
+      <div class="proj-num">11</div><div class="proj-main"><div class="proj-tag">Prototype · 2025</div><h2 class="proj-name">Firelike</h2><p class="proj-body">Adaptive learning platform for structured education systems. Personalized pacing and knowledge mapping.</p><div class="proj-tags"><span class="proj-tag-pill">EdTech</span><span class="proj-tag-pill">Adaptive Learning</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Platform</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Early prototype</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python/JS</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Not yet</span></div></div>
+    </div>
+
+    <!-- 12. AETHER self-modeling architecture (2025–2026) -->
+    <div class="project" id="aether-cognitive">
+      <div class="proj-num">12</div><div class="proj-main"><div class="proj-tag">Research · 2025–2026</div><h2 class="proj-name">AETHER · Self-Modeling</h2><p class="proj-body">Self-modeling cognitive architecture for adaptive reasoning systems. Meta-cognition layer without LLM reliance.</p><div class="proj-tags"><span class="proj-tag-pill">Cognitive Architecture</span><span class="proj-tag-pill">Meta-Reasoning</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Research</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Prototype</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Research preview</span></div></div>
+    </div>
+
+    <!-- 13. Rhodon (2026 autonomous engine) -->
+    <div class="project" id="rhodon-engine">
+      <div class="proj-num">13</div><div class="proj-main"><div class="proj-tag">Ongoing · 2026</div><h2 class="proj-name">Rhodon · Research Engine</h2><p class="proj-body">Autonomous research engine for scientific exploration and design synthesis. Parallel to the core Rhodon platform.</p><div class="proj-tags"><span class="proj-tag-pill">Autonomous Discovery</span><span class="proj-tag-pill">Scientific AI</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Research Engine</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val status-active">Active</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python/Rust</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">On request</span></div></div>
+    </div>
+
+    <!-- 14. PAL archived (2026) -->
+    <div class="project" id="pal-archived">
+      <div class="proj-num">14</div><div class="proj-main"><div class="proj-tag">Archived · 2026</div><h2 class="proj-name">PAL · Personalized Artificial Lifeform</h2><p class="proj-body">Based on aether research. Precursor to the companion platform with stronger focus on identity persistence.</p><div class="proj-tags"><span class="proj-tag-pill">Lifeform AI</span><span class="proj-tag-pill">Identity</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Archived System</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val">Archived</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Not available</span></div></div>
+    </div>
+
+    <!-- 15. AETHER prototype (2026 demo/API) -->
+    <div class="project" id="aether-prototype">
+      <div class="proj-num">15</div><div class="proj-main"><div class="proj-tag">Prototype · 2026</div><h2 class="proj-name">AETHER · Hallucination-Eliminated</h2><p class="proj-body">Autonomous Expression Through Hallucination-Eliminated Reasoning. Demo and API available — fully deterministic reasoning exposed via REST.</p><div class="proj-tags"><span class="proj-tag-pill">Deterministic API</span><span class="proj-tag-pill">Auditable AI</span></div></div>
+      <div class="proj-meta"><div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Prototype</span></div><div class="pm-row"><span class="pm-label">Status</span><span class="pm-val status-active">Demo ready</span></div><div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python/API</span></div><div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Demo & licensing</span></div></div>
+    </div>
+
+    <div class="project" id="rubicon">
+      <div class="proj-num">16</div>
+      <div class="proj-main">
+        <div class="proj-tag">Long-Term Research</div>
+        <h2 class="proj-name">Rubicon<em>-1</em></h2>
+        <p class="proj-body">
+          A long-term research project toward genuine machine intelligence. Not a companion,
+          not a tool — a system with authored identity, independent drives, and a private
+          activity layer separate from any user interaction. Currently in the architecture
+          and research phase. No shortcuts.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag-pill">Machine Intelligence</span>
+          <span class="proj-tag-pill">Authored Identity</span>
+          <span class="proj-tag-pill">Independent Drives</span>
+          <span class="proj-tag-pill">Python · Rust</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="pm-row"><span class="pm-label">Type</span><span class="pm-val">Research Project</span></div>
+        <div class="pm-row"><span class="pm-label">Status</span><span class="pm-val status-active">Research Phase</span></div>
+        <div class="pm-row"><span class="pm-label">Stack</span><span class="pm-val">Python · Rust</span></div>
+        <div class="pm-row"><span class="pm-label">Available</span><span class="pm-val">Not yet</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION (unchanged) -->
+<section class="services-sec" id="services">
+  <div class="services-inner reveal">
+    <div class="services-top">
+      <div><div class="services-kicker">Services</div><h2 class="services-h">Ways to<br>collaborate <br>with <em>me.</em></h2></div>
+      <a href="mailto:rickclmntcorp@protonmail.com" class="services-contact">Get in touch →</a>
+    </div>
+    <div class="service-cards">
+      <div class="service-card"><div class="sc-watermark">01</div><div class="sc-type">Service · 001</div><h3 class="sc-name">Licensing</h3><p class="sc-body">Take one of my systems and run it inside your own infrastructure. Full control, no ongoing dependency on me. You own the deployment.</p><a href="mailto:rickclmntcorp@protonmail.com" class="sc-cta">Enquire <span class="sc-arrow">→</span></a></div>
+      <div class="service-card"><div class="sc-watermark">02</div><div class="sc-type">Service · 002</div><h3 class="sc-name"><em>Integration</em></h3><p class="sc-body">Deploy one of my systems inside your product — adapted to your domain, your users, your constraints. I handle the technical work end to end.</p><a href="mailto:rickclmntcorp@protonmail.com" class="sc-cta">Enquire <span class="sc-arrow">→</span></a></div>
+      <div class="service-card"><div class="sc-watermark">03</div><div class="sc-type">Service · 003</div><h3 class="sc-name">Consulting</h3><p class="sc-body">For problems that don't have an obvious solution. Architecture, system design, or something that hasn't been figured out yet. I engage with what the problem actually requires.</p><a href="mailto:rickclmntcorp@protonmail.com" class="sc-cta">Get in touch <span class="sc-arrow">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="fl">© 2026 · RICKCLMNT</div><div class="fr">All rights reserved</div></footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', scrollY > 10);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
