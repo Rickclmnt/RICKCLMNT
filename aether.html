@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="AETHER — deterministic AI reasoning platform by RICKCLMNT. No hallucinations, fully auditable, runs on consumer hardware.">
 <title>AETHER | RICKCLMNT</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-N4NGTP8WXB');
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-N4NGTP8WXB');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  /* ── RESET & AESTHETIC (from AETHER core) ────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -38,49 +38,29 @@
     overflow-x: hidden;
   }
 
-  /* grain overlay (signature texture) */
-  .grain {
-    position: fixed;
-    inset: -50%;
-    width: 200%; height: 200%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-    opacity: .028;
-    pointer-events: none;
-    z-index: 9998;
-    animation: grain 8s steps(10) infinite;
-  }
-  @keyframes grain {
-    0%,100% { transform: translate(0,0); }
-    10% { transform: translate(-2%,-3%); }
-    20% { transform: translate(3%,1%); }
-    30% { transform: translate(-1%,4%); }
-    40% { transform: translate(2%,-2%); }
-    50% { transform: translate(-3%,3%); }
-    60% { transform: translate(1%,-1%); }
-    70% { transform: translate(-2%,2%); }
-    80% { transform: translate(3%,-3%); }
-    90% { transform: translate(-1%,1%); }
-  }
-
-  /* custom cursor (deterministic dot) */
+  /* ── CURSOR — uses transform only (no left/top reflow) ── */
   .cursor {
     position: fixed;
-    top: 0; left: 0;
-    width: 10px; height: 10px;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
     background: var(--black);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    transform: translate(-50%,-50%);
+    will-change: transform;
+    transform: translate(-50%, -50%) translateZ(0);
     transition: width .15s, height .15s, background .15s;
   }
   .cursor.expand {
-    width: 36px; height: 36px;
+    width: 36px;
+    height: 36px;
     background: transparent;
     border: 1.5px solid var(--black);
   }
 
-  /* ── navigation (cream / ink) ───────────────────────────────────────────── */
+  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -141,7 +121,7 @@
   .nav-cta:hover { opacity: .8; }
   .nav-hamburger { display: none; }
 
-  /* mobile menu overlay (fixed + smooth) */
+  /* ── MOBILE NAV ── */
   .mobile-nav {
     position: fixed;
     top: 0;
@@ -159,9 +139,7 @@
     gap: 32px;
     border-left: 1px solid rgba(0,0,0,0.1);
   }
-  .mobile-nav.open {
-    right: 0;
-  }
+  .mobile-nav.open { right: 0; }
   .mobile-nav ul {
     list-style: none;
     display: flex;
@@ -204,7 +182,7 @@
     color: var(--mid);
   }
 
-  /* section shared utilities */
+  /* ── SHARED UTILITIES ── */
   .section-label {
     font-size: 9px;
     font-weight: 700;
@@ -221,7 +199,7 @@
   }
   .section-heading em { font-style: italic; color: var(--mid); }
 
-  /* marquee strip (ticker) */
+  /* ── MARQUEE — GPU-promoted ── */
   .marquee-wrap {
     background: var(--black);
     color: var(--cream);
@@ -235,6 +213,8 @@
     animation: marquee 28s linear infinite;
     white-space: nowrap;
     width: max-content;
+    will-change: transform;
+    transform: translateZ(0);
   }
   .marquee-track span {
     font-size: 9px;
@@ -246,11 +226,11 @@
   }
   .marquee-track span b { opacity: 1; color: var(--cream); }
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from { transform: translateX(0) translateZ(0); }
+    to   { transform: translateX(-50%) translateZ(0); }
   }
 
-  /* hero (aether style) */
+  /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: grid;
@@ -360,21 +340,8 @@
     text-transform: uppercase;
     color: var(--mid);
   }
-  .hero-ticker-line {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 0;
-    border-top: 1px solid rgba(0,0,0,.06);
-  }
-  .ticker-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--stone);
-  }
-  .ticker-dot.live { background: #2D6A4F; }
 
-  /* problem section (like 'about' with principles) */
+  /* ── PROBLEM ── */
   .problem {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -426,7 +393,7 @@
     color: var(--ink);
   }
 
-  /* products (capabilities grid style) */
+  /* ── PRODUCTS ── */
   .products-section {
     padding: 96px 48px;
     border-bottom: 1px solid rgba(0,0,0,.1);
@@ -458,7 +425,6 @@
     transition: background .2s;
     display: flex;
     flex-direction: column;
-    position: relative;
   }
   .product-card:hover { background: var(--sand); }
   .product-tag {
@@ -494,11 +460,7 @@
     align-items: baseline;
     border-top: 1px solid rgba(0,0,0,.06);
   }
-  .product-features li::before {
-    content: '—';
-    opacity: .4;
-    flex-shrink: 0;
-  }
+  .product-features li::before { content: '—'; opacity: .4; flex-shrink: 0; }
   .product-model {
     background: rgba(0,0,0,.03);
     border: 1px solid rgba(0,0,0,.08);
@@ -526,14 +488,14 @@
     text-transform: uppercase;
     text-decoration: none;
     color: var(--mid);
-    transition: all .15s;
+    transition: color .15s, gap .15s;
     display: inline-flex;
     align-items: center;
     gap: 8px;
   }
   .product-cta:hover { color: var(--black); gap: 12px; }
 
-  /* how it works (aether’s step+quote style) */
+  /* ── HOW IT WORKS ── */
   .how-section {
     display: grid;
     grid-template-columns: 380px 1fr;
@@ -569,9 +531,7 @@
     flex-shrink: 0;
     line-height: 1;
   }
-  .step-body {
-    padding: 32px 40px;
-  }
+  .step-body { padding: 32px 40px; }
   .step-title {
     font-size: 10px;
     font-weight: 700;
@@ -592,57 +552,8 @@
     color: var(--ink);
     margin-top: 48px;
   }
-  .arch-diagram {
-    background: var(--cream);
-    border: 1px solid rgba(0,0,0,.1);
-    padding: 32px;
-    margin-top: 32px;
-  }
-  .arch-title {
-    font-size: 8px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 20px;
-  }
-  .arch-row {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
-  .arch-block {
-    flex: 1;
-    padding: 12px 6px;
-    font-size: 9px;
-    text-align: center;
-    background: var(--cream);
-    border: 1px solid rgba(0,0,0,.08);
-    font-family: var(--mono);
-  }
-  .arch-block.highlight {
-    background: var(--sand);
-    border-color: var(--stone);
-    font-weight: 700;
-  }
-  .arch-connector {
-    text-align: center;
-    font-size: 14px;
-    color: var(--stone);
-    margin: 4px 0;
-  }
-  .arch-badge {
-    margin-top: 16px;
-    font-size: 7px;
-    letter-spacing: .24em;
-    text-transform: uppercase;
-    color: var(--mid);
-    text-align: center;
-    border-top: 1px solid rgba(0,0,0,.06);
-    padding-top: 12px;
-  }
 
-  /* pricing (black background as original aether pricing) */
+  /* ── PRICING ── */
   .pricing-section {
     background: var(--black);
     color: var(--cream);
@@ -679,10 +590,7 @@
     transition: background .2s;
   }
   .plan-card:hover { background: #1a1916; }
-  .plan-card.featured {
-    background: var(--cream);
-    color: var(--black);
-  }
+  .plan-card.featured { background: var(--cream); color: var(--black); }
   .plan-card.featured:hover { background: #f5f2eb; }
   .plan-badge {
     background: var(--cream);
@@ -695,10 +603,7 @@
     display: inline-block;
     margin-bottom: 28px;
   }
-  .plan-card.featured .plan-badge {
-    background: var(--black);
-    color: var(--cream);
-  }
+  .plan-card.featured .plan-badge { background: var(--black); color: var(--cream); }
   .plan-name {
     font-size: 9px;
     font-weight: 700;
@@ -741,10 +646,7 @@
     gap: 10px;
   }
   .plan-card.featured .plan-features li { border-color: rgba(0,0,0,.08); }
-  .plan-features li::before {
-    content: '—';
-    opacity: .35;
-  }
+  .plan-features li::before { content: '—'; opacity: .35; }
   .plan-btn {
     width: 100%;
     background: rgba(255,255,255,.08);
@@ -757,15 +659,12 @@
     text-transform: uppercase;
     padding: 14px;
     cursor: none;
+    transition: background .15s;
   }
   .plan-btn:hover { background: rgba(255,255,255,.14); }
-  .plan-card.featured .plan-btn {
-    background: var(--black);
-    color: var(--cream);
-    border-color: var(--black);
-  }
+  .plan-card.featured .plan-btn { background: var(--black); color: var(--cream); border-color: var(--black); }
 
-  /* CTA banner — fixed layout */
+  /* ── CTA BANNER ── */
   .cta-banner {
     padding: 120px 48px;
     border-bottom: 1px solid rgba(0,0,0,.1);
@@ -792,13 +691,9 @@
     line-height: 1.8;
     color: var(--ink);
   }
-  .cta-button-group {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
+  .cta-button-group { display: flex; gap: 14px; flex-wrap: wrap; }
 
-  /* footer */
+  /* ── FOOTER ── */
   footer {
     padding: 64px 48px;
     display: grid;
@@ -811,11 +706,7 @@
     letter-spacing: .22em;
     margin-bottom: 18px;
   }
-  .footer-brand .footer-logo span {
-    background: var(--black);
-    color: var(--cream);
-    padding: 3px 8px;
-  }
+  .footer-brand .footer-logo span { background: var(--black); color: var(--cream); padding: 3px 8px; }
   .footer-brand p {
     font-size: 9.5px;
     line-height: 1.75;
@@ -829,12 +720,7 @@
     text-transform: uppercase;
     margin-bottom: 18px;
   }
-  .footer-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
   .footer-col a {
     font-size: 9.5px;
     color: var(--mid);
@@ -849,26 +735,20 @@
     justify-content: space-between;
     align-items: center;
   }
-  .footer-bottom p {
-    font-size: 8.5px;
-    color: var(--stone);
-  }
+  .footer-bottom p { font-size: 8.5px; color: var(--stone); }
 
-  /* reveal animation */
+  /* ── REVEAL ── */
   .reveal {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity .65s ease, transform .65s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-d1 { transition-delay: .05s; }
   .reveal-d2 { transition-delay: .15s; }
   .reveal-d3 { transition-delay: .25s; }
 
-  /* responsive */
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 18px 24px; }
     .nav-links-main { display: none; }
@@ -881,12 +761,7 @@
       cursor: pointer;
       z-index: 201;
     }
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--black);
-    }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--black); }
     .hero, .problem, .how-section { grid-template-columns: 1fr; }
     .hero-left, .problem-left, .how-left { border-right: none; border-bottom: 1px solid rgba(0,0,0,.1); padding: 80px 24px 48px; }
     .hero-right, .problem-right, .how-right { padding: 48px 24px; }
@@ -900,6 +775,9 @@
     .hero-stat-grid { grid-template-columns: 1fr; }
     .pricing-header { flex-direction: column; align-items: flex-start; }
     .pricing-sub { text-align: left; }
+    /* disable cursor on touch devices */
+    .cursor { display: none; }
+    body { cursor: auto; }
   }
   @media (max-width: 580px) {
     .step-num { width: 70px; padding: 24px 16px; }
@@ -908,7 +786,7 @@
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
+
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <nav id="nav">
@@ -919,7 +797,6 @@
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#cta">Contact</a></li>
   </ul>
-  <!--button class="nav-cta" id="mainNavCta">Get API Access</button-->
   <button class="nav-hamburger" aria-label="Menu" id="hamburgerBtn"><span></span><span></span><span></span></button>
 </nav>
 
@@ -951,7 +828,7 @@
   </div>
 </div>
 
-<!-- PROBLEM SECTION -->
+<!-- PROBLEM -->
 <section class="problem" id="problem">
   <div class="problem-left">
     <p class="section-label reveal">The Problem with LLMs</p>
@@ -971,9 +848,11 @@
 <!-- HOW IT WORKS -->
 <section class="how-section" id="how">
   <div class="how-left">
-    <div><p class="section-label reveal">Architecture</p><h2 class="section-heading reveal reveal-d1">How AETHER<br> actually works.</h2><br><p class="section-body reveal reveal-d2" style="margin-top: 24px; font-size: 11px; line-height: 1.9;">AETHER is a deterministic reasoning engine.
-
-It answers questions, solves problems, completes tasks for users by processing language and applying structured logic — without a large language model anywhere in its core loop. <br><br>Hallucination in a large language model is not a bug. It is a structural consequence of the architecture: the model generates the statistically most probable continuation of the input, and sometimes the most probable continuation is factually wrong. The model has no mechanism to distinguish between "I know this" and "this sounds right." <br>AETHER avoids that entirely with its deterministic architecture, designed to eliminate hallucination.</p></div>
+    <div>
+      <p class="section-label reveal">Architecture</p>
+      <h2 class="section-heading reveal reveal-d1">How AETHER<br> actually works.</h2><br>
+      <p class="section-body reveal reveal-d2" style="margin-top: 24px; font-size: 11px; line-height: 1.9;">AETHER is a deterministic reasoning engine. It answers questions, solves problems, completes tasks for users by processing language and applying structured logic — without a large language model anywhere in its core loop.<br><br>Hallucination in a large language model is not a bug. It is a structural consequence of the architecture: the model generates the statistically most probable continuation of the input, and sometimes the most probable continuation is factually wrong. The model has no mechanism to distinguish between "I know this" and "this sounds right."<br><br>AETHER avoids that entirely with its deterministic architecture, designed to eliminate hallucination.</p>
+    </div>
     <blockquote class="how-quote reveal reveal-d2">"Deterministic by design."<cite>— AETHER v4</cite></blockquote>
   </div>
   <div class="how-right">
@@ -981,32 +860,81 @@ It answers questions, solves problems, completes tasks for users by processing l
     <div class="step-item reveal reveal-d1"><div class="step-num">02</div><div class="step-body"><div class="step-title">Structured reasoning</div><div class="step-desc">Routing engine applies deterministic logic, not token prediction. Outputs assembled from verified knowledge graph.</div></div></div>
     <div class="step-item reveal reveal-d2"><div class="step-num">03</div><div class="step-body"><div class="step-title">Discourse assembly</div><div class="step-desc">Sentence‑tree engine builds responses — every word traces to a verifiable reasoning step.</div></div></div>
     <div class="step-item reveal reveal-d3"><div class="step-num">04</div><div class="step-body"><div class="step-title">Audit log output</div><div class="step-desc">Full trace: intent, route taken, knowledge sources. Fully inspectable.</div></div></div>
-    <!--div class="arch-diagram reveal"><div class="arch-title">// AETHER REASONING PIPELINE</div><div class="arch-row"><div class="arch-block highlight">Input Layer</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block">Semantic Parser</div><div class="arch-block">Frame Classifier</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block highlight">Intent Router</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block">Knowledge Retrieval</div><div class="arch-block">Factual Extractor</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block">Sentence Tree</div><div class="arch-block">Discourse Engine</div></div><div class="arch-connector">↓</div><div class="arch-row"><div class="arch-block highlight">Verified Output + Audit Log</div></div><div class="arch-badge" style="margin-top:12px; font-size:8px; letter-spacing:.2em;">deterministic by design</div></div--><br><br>
-    <p class="section-body reveal reveal-d2" style="margin-top: 24px; font-size: 11px; line-height: 1.9;">Not an LLM wrapper — ground‑up deterministic reasoning: structured, traceable, verifiable at every step.</p><br>
+    <br><br>
+    <p class="section-body reveal reveal-d2" style="padding: 0 40px; font-size: 11px; line-height: 1.9;">Not an LLM wrapper — ground‑up deterministic reasoning: structured, traceable, verifiable at every step.</p><br>
   </div>
 </section>
 
 <!-- PRODUCTS -->
 <section class="products-section" id="products">
-  <div class="products-header"><div><p class="section-label reveal">Three Ways to Deploy AETHER</p><h2 class="section-heading reveal reveal-d1">Built for every<br>deployment model.</h2></div><p class="products-sub reveal reveal-d2">Developer-grade API access, white‑label B2B, or offline edge deployment. One platform — three commercial paths.</p></div>
+  <div class="products-header">
+    <div>
+      <p class="section-label reveal">Three Ways to Deploy AETHER</p>
+      <h2 class="section-heading reveal reveal-d1">Built for every<br>deployment model.</h2>
+    </div>
+    <p class="products-sub reveal reveal-d2">Developer-grade API access, white‑label B2B, or offline edge deployment. One platform — three commercial paths.</p>
+  </div>
   <div class="prod-grid">
-    <div class="product-card reveal"><div class="product-tag">01 · Developer</div><div class="product-name">AETHER API</div><p class="product-desc">Deterministic reasoning as a service. REST API, full audit logs, no hallucinations.</p><ul class="product-features"><li>REST API with JSON responses</li><li>Per-request audit trail</li><li>Usage dashboard + rate controls</li><li>Free tier available</li></ul><div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Usage‑based · Free / Pro / Enterprise tiers</div></div><a href="#pricing" class="product-cta">View pricing →</a></div>
-    <div class="product-card reveal reveal-d1"><div class="product-tag">02 · Enterprise</div><div class="product-name">B2B License</div><p class="product-desc">Embed AETHER’s reasoning engine into your product. Domain‑tuned via AppManifest.</p><ul class="product-features"><li>AppManifest domain customization</li><li>Dedicated onboarding + SLA</li><li>White‑label ready</li><li>Annual license with pilot program</li></ul><div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Annual license + onboarding</div></div><a href="#cta" class="product-cta">Talk to sales →</a></div>
-    <div class="product-card reveal reveal-d2"><div class="product-tag">03 · Edge / On‑Premise</div><div class="product-name">AETHER Edge</div><p class="product-desc">Full deployment inside your infrastructure. Air‑gapped ready, runs on consumer hardware.</p><ul class="product-features"><li>Docker + binary packages</li><li>Air‑gapped network compatible</li><li>HIPAA / compliance friendly</li><li>Per‑device licensing</li></ul><div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Annual per‑device / per‑seat</div></div><a href="#cta" class="product-cta">Request a demo →</a></div>
+    <div class="product-card reveal">
+      <div class="product-tag">01 · Developer</div>
+      <div class="product-name">AETHER API</div>
+      <p class="product-desc">Deterministic reasoning as a service. REST API, full audit logs, no hallucinations.</p>
+      <ul class="product-features"><li>REST API with JSON responses</li><li>Per-request audit trail</li><li>Usage dashboard + rate controls</li><li>Free tier available</li></ul>
+      <div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Usage‑based · Free / Pro / Enterprise tiers</div></div>
+      <a href="#pricing" class="product-cta">View pricing →</a>
+    </div>
+    <div class="product-card reveal reveal-d1">
+      <div class="product-tag">02 · Enterprise</div>
+      <div class="product-name">B2B License</div>
+      <p class="product-desc">Embed AETHER's reasoning engine into your product. Domain‑tuned via AppManifest.</p>
+      <ul class="product-features"><li>AppManifest domain customization</li><li>Dedicated onboarding + SLA</li><li>White‑label ready</li><li>Annual license with pilot program</li></ul>
+      <div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Annual license + onboarding</div></div>
+      <a href="#cta" class="product-cta">Talk to sales →</a>
+    </div>
+    <div class="product-card reveal reveal-d2">
+      <div class="product-tag">03 · Edge / On‑Premise</div>
+      <div class="product-name">AETHER Edge</div>
+      <p class="product-desc">Full deployment inside your infrastructure. Air‑gapped ready, runs on consumer hardware.</p>
+      <ul class="product-features"><li>Docker + binary packages</li><li>Air‑gapped network compatible</li><li>HIPAA / compliance friendly</li><li>Per‑device licensing</li></ul>
+      <div class="product-model"><div class="product-model-label">Billing Model</div><div class="product-model-value">Annual per‑device / per‑seat</div></div>
+      <a href="#cta" class="product-cta">Request a demo →</a>
+    </div>
   </div>
 </section>
 
 <!-- PRICING -->
 <section class="pricing-section" id="pricing">
-  <div class="pricing-header"><div><p class="section-label">Pricing</p><h2 class="section-heading">Simple, transparent<br><em>pricing.</em></h2></div><p class="pricing-sub">Build with full API access, scale with Pro, or deploy on‑premise. No hidden fees.</p></div>
+  <div class="pricing-header">
+    <div><p class="section-label">Pricing</p><h2 class="section-heading">Simple, transparent<br><em>pricing.</em></h2></div>
+    <p class="pricing-sub">Build with full API access, scale with Pro, or deploy on‑premise. No hidden fees.</p>
+  </div>
   <div class="pricing-grid">
-    <div class="plan-card"><div class="plan-name">Developer</div><div class="plan-price-wrap"><span class="plan-currency">$</span><span class="plan-price">0</span></div><div class="plan-period">per month — free tier</div><ul class="plan-features"><li>1,000 API requests / month</li><li>Full audit logs</li><li>Community support</li><li>All endpoints available</li></ul><button class="plan-btn">Get started</button></div>
-    <div class="plan-card featured"><div class="plan-badge">Most popular</div><div class="plan-name">Pro</div><div class="plan-price-wrap"><span class="plan-currency">$</span><span class="plan-price">TBD</span></div><div class="plan-period">per month — production ready</div><ul class="plan-features"><li>100,000 API requests / month</li><li>Priority support (24hr SLA)</li><li>Versioned endpoints</li><li>Usage analytics dashboard</li></ul><button class="plan-btn">Start free trial</button></div>
-    <div class="plan-card"><div class="plan-name">Enterprise / Edge</div><div class="plan-price-wrap"><span class="plan-price" style="font-size:42px;">Custom</span></div><div class="plan-period">volume / on‑premise licensing</div><ul class="plan-features"><li>Unlimited requests</li><li>On‑premise / edge deployment</li><li>AppManifest domain tuning</li><li>Custom SLA + compliance docs</li></ul><button class="plan-btn">Contact sales</button></div>
+    <div class="plan-card">
+      <div class="plan-name">Developer</div>
+      <div class="plan-price-wrap"><span class="plan-currency">$</span><span class="plan-price">0</span></div>
+      <div class="plan-period">per month — free tier</div>
+      <ul class="plan-features"><li>1,000 API requests / month</li><li>Full audit logs</li><li>Community support</li><li>All endpoints available</li></ul>
+      <button class="plan-btn">Get started</button>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">Most popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price-wrap"><span class="plan-currency">$</span><span class="plan-price">TBD</span></div>
+      <div class="plan-period">per month — production ready</div>
+      <ul class="plan-features"><li>100,000 API requests / month</li><li>Priority support (24hr SLA)</li><li>Versioned endpoints</li><li>Usage analytics dashboard</li></ul>
+      <button class="plan-btn">Start free trial</button>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Enterprise / Edge</div>
+      <div class="plan-price-wrap"><span class="plan-price" style="font-size:42px;">Custom</span></div>
+      <div class="plan-period">volume / on‑premise licensing</div>
+      <ul class="plan-features"><li>Unlimited requests</li><li>On‑premise / edge deployment</li><li>AppManifest domain tuning</li><li>Custom SLA + compliance docs</li></ul>
+      <button class="plan-btn">Contact sales</button>
+    </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
+<!-- CTA -->
 <section class="cta-banner" id="cta">
   <h2 class="cta-banner-heading reveal">Ready to deploy<br><em>reasoning that doesn't lie?</em></h2>
   <div class="cta-banner-right reveal reveal-d2">
@@ -1019,65 +947,88 @@ It answers questions, solves problems, completes tasks for users by processing l
 </section>
 
 <footer>
-  <div class="footer-brand"><div class="footer-logo"><span>AƏTHER</span></div><p>AETHER — Autonomous Expression Through Hallucination-Eliminated Reasoning<br><br>Pronunciation Breakdown:<br>
-AY /eɪ/ + thər /θər/ → AY-thər /ˈeɪ.θər/</p></div><br>
-  <!-- div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Security</a></li></ul></div-->
-  <div class="footer-col"><h4>Resources</h4><ul><li><a href="aether_doc.html">Documentation</a></li><li><a>API status [CURRENTLY UNAVAILABLE]</a></li><li><a href="mailto:rickclmntcorp@protonmail.com">Contact</a></li></ul></div>
+  <div class="footer-brand">
+    <div class="footer-logo"><span>AƏTHER</span></div>
+    <p>AETHER — Autonomous Expression Through Hallucination-Eliminated Reasoning<br><br>Pronunciation Breakdown:<br>AY /eɪ/ + thər /θər/ → AY-thər /ˈeɪ.θər/</p>
+  </div>
+  <div class="footer-col">
+    <h4>Resources</h4>
+    <ul>
+      <li><a href="aether_doc.html">Documentation</a></li>
+      <li><a>API status [CURRENTLY UNAVAILABLE]</a></li>
+      <li><a href="mailto:rickclmntcorp@protonmail.com">Contact</a></li>
+    </ul>
+  </div>
 </footer>
-<div class="footer-bottom"><p>© 2026 RICKCLMNT  — All rights reserved</p><p>v4 — zero hallucination</p></div>
+<div class="footer-bottom"><p>© 2026 RICKCLMNT — All rights reserved</p><p>v4 — zero hallucination</p></div>
 
 <script>
-  (function() {
-    // --- cursor & interactive enhancements ---
-    const cursor = document.getElementById('cursor');
-    if (cursor && !('ontouchstart' in window)) {
-      document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
-      document.querySelectorAll('button, a, .product-card, .problem-card, .plan-card, .step-item, .hero-stat, .btn-primary, .btn-ghost, .product-cta, .plan-btn').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
-      });
-    } else if(cursor) cursor.style.display = 'none';
+(function() {
+  // ── CURSOR — transform only, no layout triggers ──
+  const cursor = document.getElementById('cursor');
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    // --- navbar scroll effect ---
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  if (cursor && !isTouch) {
+    let cx = 0, cy = 0;
+    document.addEventListener('mousemove', e => {
+      cx = e.clientX;
+      cy = e.clientY;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translateZ(0)`;
+    }, { passive: true });
 
-    // --- reveal on scroll ---
-    const observer = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const hoverTargets = document.querySelectorAll(
+      'button, a, .product-card, .problem-card, .plan-card, .step-item, .hero-stat, .btn-primary, .btn-ghost, .product-cta, .plan-btn'
+    );
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+    });
+  }
 
-    // --- mobile menu (fully functional) ---
-    const hamburger = document.querySelector('.nav-hamburger');
-    if (hamburger) {
-      const mobileMenu = document.createElement('div');
-      mobileMenu.className = 'mobile-nav';
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileMenu.innerHTML = `
-        <button class="mobile-close" aria-label="Close menu">✕</button>
-        <ul>
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── REVEAL ON SCROLL ──
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── MOBILE MENU ──
+  const hamburger = document.querySelector('.nav-hamburger');
+  if (hamburger) {
+    const mobileMenu = document.createElement('div');
+    mobileMenu.className = 'mobile-nav';
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileMenu.innerHTML = `
+      <button class="mobile-close" aria-label="Close menu">✕</button>
+      <ul>
         <li><a href="#how">Architecture</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#cta">Contact</a></li>
-        </ul>
-        <button class="mobile-cta" id="mobileCta">Get API Access</button>
-      `;
-      document.body.appendChild(mobileMenu);
-      const closeBtn = mobileMenu.querySelector('.mobile-close');
-      const mobileCta = mobileMenu.querySelector('#mobileCta');
-      const openMenu = () => { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; };
-      const closeMenu = () => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; };
-      hamburger.addEventListener('click', openMenu);
-      closeBtn.addEventListener('click', closeMenu);
-      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-      if (mobileCta) mobileCta.addEventListener('click', () => { window.location.href = 'mailto:rickclmntcorp@protonmail.com'; closeMenu(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu(); });
-    }
+        <li><a href="#products">Products</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#cta">Contact</a></li>
+      </ul>
+      <button class="mobile-cta" id="mobileCta">Get API Access</button>
+    `;
+    document.body.appendChild(mobileMenu);
 
-    // --- nav-cta button smooth behavior ---
-    const navCta = document.querySelector('.nav-cta');
-    if (navCta) navCta.addEventListener('click', () => { document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' }); });
-  })();
+    const closeBtn  = mobileMenu.querySelector('.mobile-close');
+    const mobileCta = mobileMenu.querySelector('#mobileCta');
+
+    const openMenu  = () => { mobileMenu.classList.add('open'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; };
+    const closeMenu = () => { mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; };
+
+    hamburger.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    if (mobileCta) mobileCta.addEventListener('click', () => { window.location.href = 'mailto:rickclmntcorp@protonmail.com'; closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu(); });
+  }
+})();
 </script>
 </body>
 </html>
