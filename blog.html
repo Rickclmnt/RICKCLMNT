@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rickclmnt — Field notes</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-N4NGTP8WXB');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #111110;
+  --white: #FAFAF8;
+  --blue: #2a9df4;
+  --muted: #757570;
+  --border: #E8E8E4;
+  --light: #F4F4F0;
+  --display: 'Playfair Display', Georgia, serif;
+  --body: 'Source Serif 4', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,250,248,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 60px; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.06); }
+.nav-logo {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.14em; color: var(--black); text-decoration: none;
+}
+.nav-links {
+  display: flex; gap: 32px; list-style: none; align-items: center;
+}
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--black); }
+.nav-links a.active {
+  color: var(--black);
+  border-bottom: 1.5px solid var(--black);
+  padding-bottom: 4px;
+}
+.nav-cta {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--white); background: var(--black); text-decoration: none;
+  padding: 7px 18px; border-radius: 20px; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--blue); }
+
+/* ── BLOG HERO ── */
+.hero {
+  max-width: 1160px; margin: 0 auto;
+  padding: 80px 48px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.hero-name {
+  font-family: var(--display);
+  font-size: clamp(48px, 8vw, 84px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: rise 0.8s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-name em { font-style: italic; color: var(--blue); }
+.hero-bio {
+  font-family: var(--body); font-size: 18px;
+  color: #353533; line-height: 1.75;
+  max-width: 640px; margin-bottom: 28px;
+  opacity: 0; animation: rise 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-meta {
+  display: flex; gap: 20px; align-items: center;
+  opacity: 0; animation: rise 0.8s 0.3s forwards;
+}
+.hero-meta span {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.04em; color: var(--muted);
+}
+
+/* ── BLOG GRID ── */
+.blog-section {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 64px 48px 96px;
+}
+.section-header {
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.section-title {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.section-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Single-column until there are enough posts to warrant a grid */
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Featured first post — full width, slightly larger */
+.blog-card {
+  background: var(--white);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+}
+.blog-card:first-child {
+  padding-top: 0;
+}
+.blog-card::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0; right: 0; height: 2px;
+  background: var(--blue);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.blog-card:hover::after { transform: scaleX(1); }
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.card-date { text-transform: uppercase; }
+.card-readtime {
+  color: var(--blue);
+  background: var(--light);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.card-title {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--black);
+  transition: color 0.2s;
+  max-width: 720px;
+}
+.blog-card:hover .card-title { color: var(--blue); }
+.card-excerpt {
+  font-family: var(--body);
+  font-size: 15px;
+  color: #4c4c47;
+  line-height: 1.65;
+  margin-top: 4px;
+  max-width: 640px;
+}
+.card-tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.03em;
+  background: var(--light);
+  padding: 3px 8px;
+  border-radius: 20px;
+  color: var(--muted);
+  transition: background 0.2s;
+}
+.blog-card:hover .tag { background: #e9e9e4; }
+.card-arrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--blue);
+  margin-top: 6px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.blog-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* More coming note */
+.more-note {
+  margin-top: 56px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fl, .fr {
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+}
+
+/* ── ANIMATIONS & REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 56px 20px 40px; }
+  .blog-section { padding: 48px 20px 72px; }
+  .card-title { font-size: 22px; }
+  footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <a href="/" class="nav-logo">RICKCLMNT</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="marketplace.html">Marketplace</a></li>
+  </ul>
+  <a href="mailto:rickclmntcorp@protonmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 class="hero-name">Field notes</h1>
+  <p class="hero-bio">Notes on building, thinking, and making things that last.</p>
+  <div class="hero-meta">
+    <span>RICKCLMNT · EST. 2025</span>
+  </div>
+</section>
+
+<!-- BLOG POSTS -->
+<div class="blog-section">
+  <div class="section-header">
+    <div class="section-title">— latest dispatches</div>
+    <div class="section-count">2 entries</div>
+  </div>
+
+  <div class="blog-grid">
+
+    <!-- POST 1 -->
+    <a href="thinking_machines.html" class="blog-card reveal">
+      <div class="card-meta">
+        <span class="card-date">FEB, 2026</span>
+        <span class="card-readtime">8 min read</span>
+      </div>
+      <div class="card-title">We were promised thinking machines</div>
+      <div class="card-excerpt">The original AI vision was a cognitive partner — something that could reason, understand, and help us think through hard problems. What got built instead were prediction engines: extraordinarily fluent, commercially successful, and deeply limited. A case for why the harder path is still worth taking.</div>
+      <div class="card-tags">
+        <span class="tag">AI history</span>
+        <span class="tag">reasoning</span>
+        <span class="tag">8R</span>
+        <span class="tag">critique</span>
+      </div>
+      <div class="card-arrow">→ read entry</div>
+    </a>
+
+    <!-- POST 2 -->
+    <a href="my little project.html" class="blog-card reveal">
+      <div class="card-meta">
+        <span class="card-date">JUN , 2026</span>
+        <span class="card-readtime">12 min read</span>
+      </div>
+      <div class="card-title">My little A.I. project</div>
+      <div class="card-excerpt">Aether is a reasoning system built from scratch — no neural networks, no training data, no probability. Every conclusion comes with a full record of how it was reached. This is what I believe the proper approach to building intelligence actually looks like.</div>
+      <div class="card-tags">
+        <span class="tag">Aether</span>
+        <span class="tag">deterministic reasoning</span>
+        <span class="tag">authored intelligence</span>
+        <span class="tag">CPU-only</span>
+      </div>
+      <div class="card-arrow">→ read entry</div>
+    </a>
+
+  </div>
+
+  <p class="more-note">— more entries incoming</p>
+</div>
+
+<footer>
+  <div class="fl">© 2026 · RICKCLMNT</div>
+  <div class="fr">All rights reserved</div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const navEl = document.getElementById('nav');
+    if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AETHER</title><!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-N4NGTP8WXB');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #F0EDE6;
+  color: #0D0D0D;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: #CBC6BA; }
+
+/* HERO */
+.hero {
+  min-height: 100svh;
+  border-bottom: 2px solid #0D0D0D;
+  display: flex;
+  flex-direction: column;
+}
+.hero-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid #CBC6BA;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.hero-brand {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.hero-nav {
+  display: flex;
+}
+.hero-nav a {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8A8680;
+  text-decoration: none;
+  padding: 6px 16px;
+  border-left: 1px solid #CBC6BA;
+  transition: color 0.12s;
+}
+.hero-nav a:first-child { border-left: none; }
+.hero-nav a:hover { color: #0D0D0D; }
+.hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 48px 48px;
+  max-width: 1000px;
+}
+.hero-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #8A8680;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: #0D0D0D;
+  flex-shrink: 0;
+}
+.hero-headline {
+  font-size: clamp(36px, 7vw, 84px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin-bottom: 32px;
+}
+.hero-headline .invert {
+  background: #0D0D0D;
+  color: #F0EDE6;
+  padding: 0 12px;
+  display: inline;
+}
+.hero-sub {
+  font-size: clamp(13px, 2vw, 16px);
+  line-height: 1.8;
+  color: #8A8680;
+  max-width: 640px;
+}
+.hero-sub strong { color: #0D0D0D; font-weight: 700; }
+.hero-footer {
+  padding: 20px 48px;
+  border-top: 1px solid #CBC6BA;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.hero-scroll {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8A8680;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: scroll-hint 2s ease-in-out infinite;
+}
+@keyframes scroll-hint {
+  0%,100% { opacity: 0.4; transform: translateY(0); }
+  50%      { opacity: 1;   transform: translateY(4px); }
+}
+.hero-built {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #8A8680;
+}
+.hero-built strong { color: #0D0D0D; font-weight: 700; }
+
+/* SECTION LABEL */
+.section-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #8A8680;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #DDD9CF;
+}
+.section-label.inv::after { background: rgba(240,237,230,0.12); }
+
+/* THE PROBLEM */
+.grown {
+  background: #0D0D0D;
+  color: #F0EDE6;
+  padding: 80px 48px;
+  border-bottom: 2px solid #0D0D0D;
+}
+.grown-inner { max-width: 800px; margin: 0 auto; }
+.grown-quote {
+  font-size: clamp(20px, 3.5vw, 32px);
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #F0EDE6;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(240,237,230,0.1);
+}
+.grown-text {
+  font-size: clamp(15px, 2.2vw, 19px);
+  line-height: 1.75;
+  color: rgba(240,237,230,0.72);
+  margin-bottom: 24px;
+}
+.grown-text:last-child { margin-bottom: 0; }
+.grown-text strong { color: #F0EDE6; font-weight: 700; }
+
+/* WHAT IT IS / IS NOT */
+.what-is {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid #0D0D0D;
+}
+.what-col { padding: 64px 48px; }
+.what-col:first-child { border-right: 2px solid #0D0D0D; }
+.what-col:last-child { background: #DDD9CF; }
+.what-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #8A8680;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #0D0D0D;
+}
+.what-heading {
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+.what-body {
+  font-size: 13px;
+  line-height: 1.85;
+  color: #8A8680;
+}
+.what-body strong { color: #0D0D0D; }
+.what-body p { margin-bottom: 16px; }
+.what-body p:last-child { margin-bottom: 0; }
+.what-body code {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  background: #CBC6BA;
+  padding: 1px 5px;
+}
+
+/* PHILOSOPHY */
+.philosophy {
+  padding: 80px 48px;
+  border-bottom: 2px solid #0D0D0D;
+}
+.philosophy-inner { max-width: 1000px; margin: 0 auto; }
+.phil-equation {
+  display: flex;
+  margin: 40px 0;
+  border: 2px solid #0D0D0D;
+}
+.phil-eq-side { flex: 1; padding: 32px 36px; }
+.phil-eq-side:first-child { background: #0D0D0D; color: #F0EDE6; }
+.phil-eq-side:last-child { background: #F0EDE6; border-left: 2px solid #0D0D0D; }
+.phil-eq-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+.phil-eq-formula {
+  font-size: clamp(15px, 2.5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.phil-eq-desc {
+  font-size: 12px;
+  line-height: 1.75;
+  opacity: 0.65;
+}
+.phil-eq-desc strong { opacity: 1; font-weight: 700; }
+.phil-prose {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 48px;
+}
+.phil-p { font-size: 13px; line-height: 1.85; color: #8A8680; }
+.phil-p strong { color: #0D0D0D; font-weight: 700; }
+.phil-p p { margin-bottom: 16px; }
+.phil-p p:last-child { margin-bottom: 0; }
+
+/* HOW IT REASONS */
+.how-reasons {
+  padding: 80px 48px;
+  border-bottom: 2px solid #0D0D0D;
+}
+.how-reasons-inner { max-width: 1000px; margin: 0 auto; }
+.reasons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 2px solid #0D0D0D;
+  margin-top: 40px;
+}
+.reason-card {
+  padding: 32px 28px;
+  border-right: 1.5px solid #0D0D0D;
+}
+.reason-card:last-child { border-right: none; }
+.reason-card:nth-child(4),
+.reason-card:nth-child(5),
+.reason-card:nth-child(6) { border-top: 1.5px solid #0D0D0D; }
+.reason-card.dark { background: #0D0D0D; color: #F0EDE6; }
+.reason-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #8A8680;
+  margin-bottom: 16px;
+}
+.reason-card.dark .reason-num { color: rgba(240,237,230,0.3); }
+.reason-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.reason-body { font-size: 12px; line-height: 1.75; color: #8A8680; }
+.reason-card.dark .reason-body { color: rgba(240,237,230,0.55); }
+.reason-body strong { color: #0D0D0D; font-weight: 700; }
+.reason-card.dark .reason-body strong { color: #F0EDE6; }
+
+/* WHAT IT MAKES POSSIBLE */
+.possible {
+  background: #0D0D0D;
+  color: #F0EDE6;
+  padding: 80px 48px;
+  border-bottom: 2px solid #0D0D0D;
+}
+.possible-inner { max-width: 1000px; margin: 0 auto; }
+.possible-intro {
+  font-size: clamp(15px, 2.2vw, 20px);
+  line-height: 1.75;
+  color: rgba(240,237,230,0.72);
+  max-width: 760px;
+  margin-bottom: 56px;
+}
+.possible-intro strong { color: #F0EDE6; }
+.possible-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(240,237,230,0.12);
+}
+.possible-item {
+  padding: 32px 32px;
+  border-bottom: 1px solid rgba(240,237,230,0.08);
+  border-right: 1px solid rgba(240,237,230,0.08);
+}
+.possible-item:nth-child(even) { border-right: none; }
+.possible-item:nth-last-child(-n+2) { border-bottom: none; }
+.possible-num {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(240,237,230,0.25);
+  margin-bottom: 12px;
+}
+.possible-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  color: #F0EDE6;
+}
+.possible-body {
+  font-size: 12px;
+  line-height: 1.75;
+  color: rgba(240,237,230,0.55);
+}
+.possible-body strong { color: rgba(240,237,230,0.9); font-weight: 700; }
+
+/* TRACE */
+.trace-section {
+  padding: 80px 48px;
+  border-bottom: 2px solid #0D0D0D;
+  background: #F0EDE6;
+}
+.trace-inner { max-width: 1000px; margin: 0 auto; }
+.trace-heading {
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.trace-sub {
+  font-size: 13px;
+  color: #8A8680;
+  margin-bottom: 40px;
+  max-width: 560px;
+  line-height: 1.7;
+}
+.trace-inputs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.trace-input-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  border: 1.5px solid #CBC6BA;
+  background: transparent;
+  color: #8A8680;
+  cursor: pointer;
+  transition: 0.12s;
+  border-radius: 0;
+}
+.trace-input-btn:hover, .trace-input-btn.active {
+  border-color: #0D0D0D;
+  color: #0D0D0D;
+  background: #DDD9CF;
+}
+.trace-board {
+  border: 1.5px solid #0D0D0D;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.trace-left { border-right: 1.5px solid #0D0D0D; padding: 28px; }
+.trace-right { padding: 28px; background: #0D0D0D; color: #F0EDE6; }
+.trace-board-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8A8680;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #DDD9CF;
+}
+.trace-right .trace-board-label {
+  color: rgba(240,237,230,0.4);
+  border-color: rgba(240,237,230,0.1);
+}
+.trace-question {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  min-height: 48px;
+}
+.trace-steps { display: flex; flex-direction: column; gap: 8px; }
+.trace-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 8px 12px;
+  border: 1px solid #DDD9CF;
+  opacity: 0.3;
+  transition: opacity 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+.trace-step.fired { opacity: 1; background: #DDD9CF; border-color: #0D0D0D; }
+.trace-step-num {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #8A8680;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.trace-step-name { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+.trace-step-desc { font-size: 10px; color: #8A8680; line-height: 1.5; margin-top: 2px; }
+.trace-output {
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(240,237,230,0.75);
+  min-height: 120px;
+  font-style: italic;
+}
+.trace-output strong { color: #F0EDE6; font-style: normal; font-weight: 700; }
+.trace-verdict {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(240,237,230,0.1);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240,237,230,0.35);
+}
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: #F0EDE6;
+  margin-left: 2px;
+  vertical-align: middle;
+  opacity: 0;
+  animation: blink 1s step-end infinite;
+}
+.cursor.active { opacity: 1; }
+@keyframes blink { 50% { opacity: 0; } 0%,100% { opacity: 1; } }
+
+.personal-note {
+  border: 1.5px solid #0D0D0D;
+  padding: 20px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #8A8680;
+  font-style: italic;
+  background: #DDD9CF;
+  margin-top: 32px;
+}
+.personal-note strong { color: #0D0D0D; font-style: normal; }
+
+/* DOMAINS */
+.domains { border-bottom: 2px solid #0D0D0D; }
+.domains-header {
+  padding: 48px 48px 32px;
+  border-bottom: 1.5px solid #0D0D0D;
+}
+.domains-heading {
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.domains-sub {
+  font-size: 13px;
+  color: #8A8680;
+  line-height: 1.7;
+  max-width: 600px;
+}
+.domain-list { display: flex; flex-direction: column; }
+.domain-item {
+  border-bottom: 1px solid #DDD9CF;
+  cursor: pointer;
+  transition: background 0.14s;
+}
+.domain-item:last-child { border-bottom: none; }
+.domain-item:hover { background: #DDD9CF; }
+.domain-item.open { background: #DDD9CF; }
+.domain-head {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  padding: 20px 48px 20px 0;
+}
+.domain-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #8A8680;
+  padding-left: 48px;
+}
+.domain-title { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+.domain-toggle {
+  font-size: 18px;
+  color: #8A8680;
+  transition: transform 0.2s;
+  line-height: 1;
+  padding-right: 48px;
+}
+.domain-item.open .domain-toggle { transform: rotate(45deg); }
+.domain-body { display: none; padding: 0 48px 32px 112px; }
+.domain-item.open .domain-body { display: block; }
+.domain-body-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.domain-desc { font-size: 13px; line-height: 1.85; color: #8A8680; }
+.domain-desc strong { color: #0D0D0D; font-weight: 700; }
+.domain-desc p { margin-bottom: 14px; }
+.domain-desc p:last-child { margin-bottom: 0; }
+.domain-implications { border-left: 2px solid #0D0D0D; padding-left: 24px; }
+.domain-imp-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8A8680;
+  margin-bottom: 16px;
+}
+.domain-imp-item {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #8A8680;
+  padding: 10px 0;
+  border-bottom: 1px solid #CBC6BA;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.domain-imp-item:last-child { border-bottom: none; }
+.domain-imp-item::before { content: '\2192'; color: #0D0D0D; }
+.domain-imp-item strong { color: #0D0D0D; font-weight: 700; }
+
+/* PLANS */
+.plans {
+  padding: 80px 48px;
+  border-bottom: 2px solid #0D0D0D;
+  background: #F0EDE6;
+}
+.plans-inner { max-width: 1000px; margin: 0 auto; }
+.plans-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 2px solid #0D0D0D;
+  margin-top: 40px;
+}
+.plan-card { padding: 40px 36px; border-right: 1.5px solid #0D0D0D; }
+.plan-card:last-child { border-right: none; }
+.plan-card.full { grid-column: 1 / -1; border-right: none; border-top: 1.5px solid #0D0D0D; background: #0D0D0D; color: #F0EDE6; }
+.plan-tag {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8A8680;
+  margin-bottom: 20px;
+  padding: 4px 10px;
+  border: 1.5px solid #DDD9CF;
+  display: inline-block;
+}
+.plan-card.full .plan-tag {
+  border-color: rgba(240,237,230,0.2);
+  color: rgba(240,237,230,0.4);
+}
+.plan-title {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.plan-body { font-size: 13px; line-height: 1.85; color: #8A8680; }
+.plan-body strong { color: #0D0D0D; font-weight: 700; }
+.plan-card.full .plan-body { color: rgba(240,237,230,0.6); }
+.plan-card.full .plan-body strong { color: #F0EDE6; }
+.plan-body p { margin-bottom: 14px; }
+.plan-body p:last-child { margin-bottom: 0; }
+
+/* FOOTER */
+.footer {
+  border-top: 2px solid #0D0D0D;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8A8680;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand { color: #0D0D0D; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-topbar, .hero-body, .hero-footer { padding-left: 28px; padding-right: 28px; }
+  .hero-body { padding-top: 48px; padding-bottom: 36px; }
+  .grown { padding: 56px 28px; }
+  .what-is { grid-template-columns: 1fr; }
+  .what-col:first-child { border-right: none; border-bottom: 2px solid #0D0D0D; }
+  .what-col { padding: 48px 28px; }
+  .philosophy { padding: 56px 28px; }
+  .phil-equation { flex-direction: column; }
+  .phil-eq-side:last-child { border-left: none; border-top: 2px solid rgba(240,237,230,0.15); }
+  .phil-prose { grid-template-columns: 1fr; gap: 28px; }
+  .how-reasons { padding: 56px 28px; }
+  .reasons-grid { grid-template-columns: 1fr 1fr; }
+  .reason-card:nth-child(2) { border-right: none; }
+  .reason-card:nth-child(3) { border-top: 1.5px solid #0D0D0D; border-right: 1.5px solid #0D0D0D; }
+  .reason-card:nth-child(4) { border-right: none; }
+  .reason-card:nth-child(5), .reason-card:nth-child(6) { border-top: 1.5px solid #0D0D0D; }
+  .possible { padding: 56px 28px; }
+  .possible-grid { grid-template-columns: 1fr; }
+  .possible-item { border-right: none; }
+  .possible-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(240,237,230,0.08); }
+  .possible-item:last-child { border-bottom: none; }
+  .trace-section { padding: 56px 28px; }
+  .trace-board { grid-template-columns: 1fr; }
+  .trace-left { border-right: none; border-bottom: 1.5px solid #0D0D0D; }
+  .domains-header { padding: 32px 28px; }
+  .domain-head { grid-template-columns: 48px 1fr auto; padding-right: 28px; }
+  .domain-num { padding-left: 28px; }
+  .domain-toggle { padding-right: 28px; }
+  .domain-body { padding: 0 28px 28px 76px; }
+  .domain-body-grid { grid-template-columns: 1fr; }
+  .domain-implications { border-left: none; padding-left: 0; border-top: 2px solid #0D0D0D; padding-top: 20px; }
+  .plans { padding: 56px 28px; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .plan-card { border-right: none; border-bottom: 1.5px solid #0D0D0D; }
+  .plan-card:last-child { border-bottom: none; }
+  .plan-card.full { border-top: 1.5px solid rgba(240,237,230,0.15); }
+  .footer { padding: 16px 28px; }
+}
+
+@media (max-width: 540px) {
+  .hero-topbar { padding: 14px 16px; }
+  .hero-body { padding: 36px 16px 28px; }
+  .hero-footer { padding: 14px 16px; }
+  .hero-nav { display: none; }
+  .grown { padding: 40px 16px; }
+  .what-col { padding: 36px 16px; }
+  .philosophy { padding: 40px 16px; }
+  .phil-eq-side { padding: 24px 20px; }
+  .how-reasons { padding: 40px 16px; }
+  .reasons-grid { grid-template-columns: 1fr; }
+  .reason-card { border-right: none; border-top: 1.5px solid #0D0D0D; }
+  .reason-card:first-child { border-top: none; }
+  .possible { padding: 40px 16px; }
+  .trace-section { padding: 40px 16px; }
+  .trace-left, .trace-right { padding: 20px 16px; }
+  .domains-header { padding: 24px 16px; }
+  .domain-head { grid-template-columns: 40px 1fr auto; padding-right: 16px; }
+  .domain-num { padding-left: 16px; }
+  .domain-toggle { padding-right: 16px; }
+  .domain-body { padding: 0 16px 24px 56px; }
+  .plans { padding: 40px 16px; }
+  .plan-card { padding: 28px 20px; }
+  .footer { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-topbar">
+    <div class="hero-brand">RICKCLMNT</div>
+    <nav class="hero-nav">
+      <a href="#problem">The problem</a>
+      <a href="#what-is">What it is</a>
+      <a href="#philosophy">Architecture</a>
+      <a href="#how-it-reasons">How it reasons</a>
+      <a href="#trace">In action</a>
+      <a href="#domains">Applications</a>
+      <a href="#possible">What it unlocks</a>
+      <a href="#plans">The plan</a>
+    </nav>
+  </div>
+
+  <div class="hero-body">
+    <div class="hero-eyebrow">Aether v4 — Authored Intelligence</div>
+    <h1 class="hero-headline">
+      My Little<br><br><span class="invert">A.I</span> project.
+    </h1>
+    <p class="hero-sub">Aether is a reasoning system I built from scratch. No neural networks, no training data, no probability. This is my version of AI — what I believe the proper approach to building intelligence actually looks like.</p>
+  </div>
+
+  <div class="hero-footer">
+    <div class="hero-built">Built by <strong>Patrick Clement (Rick)</strong></div>
+    <div class="hero-scroll">&#8595; &nbsp; Keep reading</div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="grown" id="problem">
+  <div class="grown-inner">
+    <div class="section-label inv">The problem</div>
+    <div class="grown-quote">"Today AI systems are grown, not built."</div>
+    <p class="grown-text">Every major AI system you've heard of runs on thousands of specialized chips in data centers consuming more power than a small city. Intelligence is brute forced — grown from mountains of text, not reasoned from set rules or principles. Scale the compute up enough and the outputs become impressively coherent. But the mechanism never changes.</p>
+    <p class="grown-text">The deeper problem is that nobody, not even the people who built these systems, can tell you why they said what they said. They are black boxes. When they're wrong, and they are wrong, you can't trace the error, audit its reasoning, or reliably prevent it from happening again. Aether is a white box. Every conclusion comes with a full record of how it was reached.</p>
+  </div>
+</section>
+
+<!-- WHAT AETHER IS / IS NOT -->
+<section class="what-is" id="what-is">
+  <div class="what-col">
+    <div class="what-label">What Aether is not</div>
+    <div class="what-body">
+      <p>A language model predicts the next word. That's it. Everything from ChatGPT to Gemini to Claude is a variation of that same mechanism — trained on text, optimized to produce text that sounds right. A wrapper is a product built on top of one of those models. A fine-tune is one of those models adjusted with extra data. An agent is one of those models given tools to independently take actions to achieve a specific goal.</p>
+      <p>Aether is none of those things. There are no transformer layers, no attention heads, no training data, no temperature setting, no sampling over a vocabulary. None of the architecture that defines modern AI exists anywhere in the codebase. It is a different thing entirely.</p>
+    </div>
+  </div>
+  <div class="what-col">
+    <div class="what-label">What Aether is — Authored Intelligence</div>
+    <div class="what-body">
+      <p>AETHER — <strong>Autonomous Expression Through Hallucination-Eliminated Reasoning.</strong></p>
+      <p>Aether is inspired by expert systems. The first commercially successful wave of artificial intelligence, pioneered in the 1980s by researchers like Edward Feigenbaum. Unlike the general "problem solvers" that came before them, expert systems were built for specific domains, and they worked. They were built on two components: a Knowledge Base — a machine-readable collection of human knowledge stored as if-then statements — and an Inference Engine, an automated module that parsed those rules to logically deduce answers from data. MYCIN, developed at Stanford, diagnosed bacterial blood infections and recommended treatments using certainty factors to handle medical uncertainty. DENDRAL, also from Stanford, hypothesized the molecular structure of unknown organic compounds from mass spectrographic data. XCON, used by Digital Equipment Corporation, configured complex VAX computer orders and saved the company millions annually. PROSPECTOR, used by Shell Oil, helped geologists locate mineral deposits.</p>
+      <p>These systems worked brilliantly within their domains. They failed because they couldn't scale. Every rule had to be manually encoded by a human expert, and experts found it difficult to translate intuitive knowledge into rigid software code. This became known as the knowledge acquisition bottleneck. When markets or environments changed, the code had to be rewritten by hand. The cost of maintaining thousands of static rules eventually became unsustainable, and enthusiasm and funding for AI collapsed in the late 1980s and 1990s — what the field calls the AI Winter.</p>
+      <p>Aether is what expert systems would have become if they had solved that problem. The authored foundation remains. Every piece of knowledge in the system was written by a person, reviewed, and deliberately included. But Aether is not brittle. It learns its own procedures from experience, builds its own knowledge graph over time, and adapts without requiring a human to rewrite its rules. The system's intelligence is the intelligence of its authors, expressed through a deterministic reasoning architecture. That is what Authored Intelligence means.</p>
+      <p><strong>Aether runs on CPU, no GPU needed. 8GB of RAM is enough to run the full reasoning layer on a regular laptop — you don't need a supercomputer to run it.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURAL PREMISE -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <div class="section-label">Architectural premise</div>
+    <h2 style="font-size:clamp(20px,3vw,30px);font-weight:700;letter-spacing:-0.02em;margin-bottom:8px">The tilde versus the equals sign.</h2>
+    <p style="font-size:13px;color:#8A8680;max-width:600px;line-height:1.7">These are the two equations that define how each system produces a response.</p>
+
+    <div class="phil-equation">
+      <div class="phil-eq-side">
+        <div class="phil-eq-label">Every large language model</div>
+        <div class="phil-eq-formula">R ~ P(token | context ; &#952;)</div>
+        <div class="phil-eq-desc">Every language model produces a response the same way. It looks at everything you've said, everything it was trained on, and picks the most statistically likely next word to add to produce a correct sounding answer. Then the next. Then the next. It doesn't know if what it's saying is true. That's what the tilde means — approximately. Close enough. The model is always guessing.</div>
+      </div>
+      <div class="phil-eq-side">
+        <div class="phil-eq-label">Aether</div>
+        <div class="phil-eq-formula">R = A(I, S, K, W)</div>
+        <div class="phil-eq-desc">Aether produces a response by processing four things: what you said, what it currently believes (context), what is in its knowledge base, and what its standing goals are. Those four inputs go in, one answer comes out. The same inputs will always produce the same answer. That's what the equals sign means — exactly. There is no guessing, no sampling, no randomness. The answer is computed, not predicted.</div>
+      </div>
+    </div>
+
+    <div class="phil-prose">
+      <div class="phil-p">The process of reasoning has a structure, it's an algorithm, and that structure can be engineered.</div>
+      <div class="phil-p">Uncertainty is not a failure mode in my architecture. A system that says it doesn't know is more useful than one that confidently makes something up.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIDE THE REASONING PROCESS -->
+<section class="how-reasons" id="how-it-reasons">
+  <div class="how-reasons-inner">
+    <div class="section-label">Inside the reasoning process</div>
+    <h2 style="font-size:clamp(20px,3vw,30px);font-weight:700;letter-spacing:-0.02em;margin-bottom:8px">What it actually does</h2>
+    <p style="font-size:13px;color:#8A8680;max-width:640px;line-height:1.7">Aether reasons in steps. Here is what each step does.</p>
+
+    <div class="reasons-grid">
+      <div class="reason-card dark">
+        <div class="reason-num">01</div>
+        <div class="reason-title">Holds competing explanations simultaneously</div>
+        <div class="reason-body">Aether never jumps to an answer. It opens a set of competing hypotheses at the start of every reasoning thread and tracks them in parallel. <strong>Each one has a live confidence score that moves as evidence arrives.</strong> A conclusion only fires when one explanation is dominant enough over the rest. If none is, it keeps asking.</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">02</div>
+        <div class="reason-title">Asks the question that reduces uncertainty fastest</div>
+        <div class="reason-body">Before asking anything, Aether calculates which unknown, if answered, would most change the distribution of confidence across hypotheses. <strong>It asks that question specifically.</strong> Not the obvious follow-up. Not what comes to mind. The question with the highest information gain. This is the structure of a good diagnostician, not a chatbot.</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">03</div>
+        <div class="reason-title">Checks for causal mechanism, not just correlation</div>
+        <div class="reason-body">When a claim involves cause and effect, Aether checks whether a plausible mechanism exists before accepting it. It generates counterfactuals. <strong>It flags when temporal order is being mistaken for causation.</strong> Statistical systems inherit human confusions about correlation and cause. Aether has a dedicated layer for this.</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">04</div>
+        <div class="reason-title">Detects when it is stuck and reframes the problem</div>
+        <div class="reason-body">If a reasoning thread grinds without progress, a meta-reasoning auditor detects the impasse. It doesn't rephrase the question. <strong>It restructures the entire frame</strong> and generates new seed hypotheses using a different abstract form of the problem. The system knows when its current approach isn't working.</div>
+      </div>
+      <div class="reason-card dark">
+        <div class="reason-num">05</div>
+        <div class="reason-title">Learns permanently from every mistake and every success</div>
+        <div class="reason-body">Corrections are written to SQLite with a severity class and causal type. A rule fires on every subsequent turn. The same mistake is structurally prevented. Successful reasoning threads are extracted into reusable procedures: <strong>the next similar problem starts with better hypotheses already in place.</strong> This is real accumulation, not context window memory.</div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">06</div>
+        <div class="reason-title">Works toward goals between conversations</div>
+        <div class="reason-body">A daemon runs independently between sessions. It identifies gaps in the knowledge corpus and researches them. It pursues assigned goals step by step, with retry logic and resource budgets. <strong>You close the browser and it keeps working.</strong> It is not waiting to be prompted. It has an agenda.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REASONING TRACE -->
+<section class="trace-section" id="trace">
+  <div class="trace-inner">
+    <div class="section-label">The reasoning trace</div>
+    <h2 class="trace-heading">Watch it think</h2>
+
+    <div class="trace-inputs">
+      <button class="trace-input-btn active" onclick="setTrace(0)">My knee hurts when I run</button>
+      <button class="trace-input-btn" onclick="setTrace(1)">Should I take this job offer?</button>
+      <button class="trace-input-btn" onclick="setTrace(2)">Does rooster crowing cause sunrise?</button>
+      <button class="trace-input-btn" onclick="setTrace(3)">What is the capital of France?</button>
+    </div>
+
+    <div class="trace-board">
+      <div class="trace-left">
+        <div class="trace-board-label">Input</div>
+        <div class="trace-question" id="trace-q">My knee hurts when I run</div>
+        <div class="trace-board-label" style="margin-top:20px">Pipeline — what fires</div>
+        <div class="trace-steps" id="trace-steps"></div>
+      </div>
+      <div class="trace-right">
+        <div class="trace-board-label">What Aether says — and why</div>
+        <div class="trace-output" id="trace-output">
+          <span id="trace-text"></span><span class="cursor active" id="trace-cursor">&#9646;</span>
+        </div>
+        <div class="trace-verdict" id="trace-verdict"></div>
+      </div>
+    </div>
+
+    <div class="personal-note">
+      Aether is proprietary. The architecture, the implementation, and the design decisions accumulated over years of work are not open source and are not available for inspection. What is on this page is enough to understand what it does. How it does it is not shared. <strong>That is intentional.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- INTERESTING APPLICATIONS -->
+<section class="domains" id="domains">
+  <div class="domains-header">
+    <div class="section-label" style="margin-bottom:12px">Interesting applications</div>
+    <h2 class="domains-heading">Where Aether actually belongs.</h2>
+    <p class="domains-sub">These are the domains where a wrong answer has real consequences — and where the current generation of AI should not be trusted.</p>
+  </div>
+
+  <div class="domain-list">
+
+    <div class="domain-item" onclick="toggleDomain(this)">
+      <div class="domain-head">
+        <div class="domain-num">01</div>
+        <div class="domain-title">Medicine and clinical decision support</div>
+        <div class="domain-toggle">+</div>
+      </div>
+      <div class="domain-body">
+        <div class="domain-body-grid">
+          <div class="domain-desc">
+            <p>Medicine is the domain where AI hallucination is most dangerous. A language model that fabricates a drug interaction or invents a dosage recommendation cannot detect its own error — and the output will sound just as confident as a correct one. That is not a bug. It is how these systems work.</p>
+            <p>Aether's knowledge boundary is hard. Outside its medical corpus it says so and stops. Inside it, every claim traces to an authored source. When it reaches a conclusion, the full reasoning trace is available — every hypothesis considered, every piece of evidence that moved the scores, every elimination event. A clinician can read exactly how it got there and dispute it if needed.</p>
+            <p>Patient data never leaves the machine. No cloud, no external API, no vendor with access to sensitive records.</p>
+          </div>
+          <div class="domain-implications">
+            <div class="domain-imp-label">What this unlocks</div>
+            <div class="domain-imp-item">No fabricated drug interactions or invented dosages — only what is in the corpus</div>
+            <div class="domain-imp-item">Every diagnosis comes with a full reasoning trace a clinician can read and dispute</div>
+            <div class="domain-imp-item">Patient data stays on premise, always</div>
+            <div class="domain-imp-item">Honest uncertainty — "I don't have enough information" is a valid and expected output</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-item" onclick="toggleDomain(this)">
+      <div class="domain-head">
+        <div class="domain-num">02</div>
+        <div class="domain-title">Legal research and contract analysis</div>
+        <div class="domain-toggle">+</div>
+      </div>
+      <div class="domain-body">
+        <div class="domain-body-grid">
+          <div class="domain-desc">
+            <p>Legal work runs on precedent and source. Every claim needs to trace to something real — a case, a statute, a clause. A system that invents plausible-sounding citations is not just wrong, it is a liability. Language models do this routinely, and they do it fluently enough that the fabrication is not always obvious.</p>
+            <p>Aether does not generate citations. It retrieves them. Every factual claim traces to an authored source in the corpus. Outside the corpus it says so and stops. For contract analysis, the reasoning trace shows exactly which clauses were considered, how they were interpreted, and what conclusion was drawn — a record that is defensible and reproducible.</p>
+            <p>The entire stack runs locally. Privileged communications and confidential documents never leave the building.</p>
+          </div>
+          <div class="domain-implications">
+            <div class="domain-imp-label">What this unlocks</div>
+            <div class="domain-imp-item">No invented case law or fabricated precedents — only sourced, authored knowledge</div>
+            <div class="domain-imp-item">Every interpretation comes with a traceable reasoning chain</div>
+            <div class="domain-imp-item">Confidential documents and privileged communications stay on premise</div>
+            <div class="domain-imp-item">The same contract analysed twice produces the same result — deterministic, auditable, reproducible</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-item" onclick="toggleDomain(this)">
+      <div class="domain-head">
+        <div class="domain-num">03</div>
+        <div class="domain-title">Education and tutoring</div>
+        <div class="domain-toggle">+</div>
+      </div>
+      <div class="domain-body">
+        <div class="domain-body-grid">
+          <div class="domain-desc">
+            <p>Most AI tutors answer questions. Aether asks them. Because it reasons through a problem step by step, it knows exactly where a student's understanding breaks down — and it forms the question most likely to expose that gap rather than simply providing the answer.</p>
+            <p>When a student makes an error, Aether distinguishes between a factual gap, a causal reasoning failure, and a definitional misclassification. Each is a different kind of misunderstanding and each gets a different response. A system that just marks something wrong and moves on is not teaching.</p>
+            <p>Corrections and misunderstanding patterns are tracked permanently across sessions. The system gets better at teaching a specific student over time without storing anything in the cloud.</p>
+          </div>
+          <div class="domain-implications">
+            <div class="domain-imp-label">What this unlocks</div>
+            <div class="domain-imp-item">Questions designed to expose the actual gap, not the next obvious thing to say</div>
+            <div class="domain-imp-item">Error type classification — factual, causal, definitional — each addressed differently</div>
+            <div class="domain-imp-item">Learning patterns tracked locally, no third party sees the student's work</div>
+            <div class="domain-imp-item">Any curriculum injected at runtime, no retraining required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-item" onclick="toggleDomain(this)">
+      <div class="domain-head">
+        <div class="domain-num">04</div>
+        <div class="domain-title">Software debugging and architecture</div>
+        <div class="domain-toggle">+</div>
+      </div>
+      <div class="domain-body">
+        <div class="domain-body-grid">
+          <div class="domain-desc">
+            <p>Debugging is hypothesis-driven work. You have a symptom, you form possible causes, you run experiments to discriminate between them, you eliminate candidates. That is exactly the structure of Aether's reasoning kernel and it maps naturally to any software failure.</p>
+            <p>Aether does not guess at a fix. It forms a ranked set of failure hypotheses from the symptom, identifies what information would distinguish between them, and asks for it. Every step of the diagnostic chain is tracked. The conclusion comes with a rationale you can follow, dispute, and learn from.</p>
+            <p>For architecture and design decisions, the same structured reasoning applies. Competing approaches are weighed against each other with explicit trade-offs rather than gut feel or convention.</p>
+          </div>
+          <div class="domain-implications">
+            <div class="domain-imp-label">What this unlocks</div>
+            <div class="domain-imp-item">No hallucinated APIs or invented functions — every suggestion is bounded to what Aether knows</div>
+            <div class="domain-imp-item">Full diagnostic chain — every hypothesis considered, every elimination event, every conclusion</div>
+            <div class="domain-imp-item">Architecture decisions become structured arguments, not opinions</div>
+            <div class="domain-imp-item">Corrected once, that error class is prevented in all future sessions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT AETHER MAKES POSSIBLE -->
+<section class="possible" id="possible">
+  <div class="possible-inner">
+    <div class="section-label inv">What Aether makes possible</div>
+    <p class="possible-intro">The interesting question we should ask is not what Aether can do today, but <strong>what becomes possible when machine reasoning is deterministic, knowledge is authored, systems get permanently smarter from experience, and are optimized for edge computing</strong>.</p>
+    <div class="possible-grid">
+      <div class="possible-item">
+        <div class="possible-num">01</div>
+        <div class="possible-title">A cybernetic security analyst</div>
+        <div class="possible-body">An autonomous system that monitors a network in real time, forms attack hypotheses when anomalies appear, traces lateral movement through infrastructure the way a detective traces a suspect through a city, and writes its full reasoning chain into an incident report — before a human analyst has opened their laptop.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">02</div>
+        <div class="possible-title">A network of smart drones</div>
+        <div class="possible-body">A drone that doesn't just follow coordinates. One that forms situational hypotheses from sensor data, adapts its objectives when conditions change, and can explain every decision it made after it lands. Scale it to a swarm and each unit shares a reasoning architecture — a collective intelligence that doesn't just coordinate, but thinks.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">03</div>
+        <div class="possible-title">The satellite that thinks</div>
+        <div class="possible-body">A satellite with standing goals, a daemon pursuing them between contact windows, and the ability to diagnose its own failures and reason through alternatives. Not remote-controlled. Autonomous.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">04</div>
+        <div class="possible-title">The medical device that knows its limits</div>
+        <div class="possible-body">A surgical robot that precedes every incision with a reasoning trace. A diagnostic device that reasons from readings to conclusions, shows every step, and stops when it reaches the edge of its knowledge — rather than generating a confident wrong answer to a question it shouldn't be answering.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">05</div>
+        <div class="possible-title">Avionics that explain themselves</div>
+        <div class="possible-body">An avionics system built on Aether produces a full reasoning trace for every decision in real time — altitude changes, course corrections, system warnings. Not a black box that records what happened. A reasoning layer that documents why, as it happens.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">06</div>
+        <div class="possible-title">An autonomous submarine</div>
+        <div class="possible-body">A vessel that can pursue multi-step objectives autonomously, adapt when conditions change, and operate for extended periods without a human in the loop — because the reasoning layer has goals, not just instructions.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">07</div>
+        <div class="possible-title">Infrastructure that reasons under pressure</div>
+        <div class="possible-body">Industrial control systems that form failure hypotheses before the alarm sounds, trace fault propagation through complex dependencies, and recommend intervention — with a full causal chain attached.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">08</div>
+        <div class="possible-title">A self-improving prosthetic that anticipates</div>
+        <div class="possible-body">A limb that models its wearer's intent from muscle signals, predicts the next movement before it's initiated, and adapts in real time. Deterministic decisions at millisecond speed — no statistical sampling in the loop.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">09</div>
+        <div class="possible-title">An actual smart vehicle</div>
+        <div class="possible-body">Every autonomous vehicle on the road today makes decisions nobody can fully explain. An autonomous vehicle built on Aether can be interrogated after any manoeuvre — why it braked, why it changed lane, why it stopped. Every decision traceable to a causal chain a regulator, an insurer, or a court can read.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">10</div>
+        <div class="possible-title">The probe that keeps going</div>
+        <div class="possible-body">Space probes today go silent the moment something unexpected happens and wait — sometimes for hours — for instructions from Earth. A probe with an  Aether operating system has standing goals and a daemon that pursues them between contact windows. It diagnoses its own failures, reasons through alternatives, and sends back not just data but the thinking behind every decision it made alone in the dark.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">11</div>
+        <div class="possible-title">A digital legacy. a mind you can hand down</div>
+        <div class="possible-body">A researcher spends forty years building expertise in a narrow domain. When they retire, that expertise largely disappears. An Aether instance fed everything that researcher knows — their corpus, their corrections, their edge cases, their reasoning patterns — doesn't retire. It accumulates. The knowledge of a generation of experts, authored, structured, and reasoned over. Permanent.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">12</div>
+        <div class="possible-title">Smart exoskeleton</div>
+        <div class="possible-body">Today's powered exoskeletons respond to movement. An exoskeleton built on Aether builds a permanent model of its wearer across every session — how they move, where they fatigue, what they're about to do before they do it. It doesn't just assist. It anticipates. And it gets better every single day it's worn.</div>
+      </div>
+      <div class="possible-item">
+        <div class="possible-num">13</div>
+        <div class="possible-title">A civilisation-scale knowledge store</div>
+        <div class="possible-body">Libraries contain the sum of human knowledge. They cannot utilize that knowledge in thinking. Language models think but cannot be trusted with that knowledge. Aether is a deterministic engine that knows exactly where its knowledge ends. When it encounters something outside that boundary it doesn't guess, it logs the gap and fills it by reasoning on a carefully curated knowledge base. Aether can be corrected, expanded, and <strong>trusted</strong> in a way that no large language model can be.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY PLAN FOR AETHER -->
+<section class="plans" id="plans">
+  <div class="plans-inner">
+    <div class="section-label">My plan for Aether</div>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-tag">Track 1</div>
+        <h3 class="plan-title">Specialist systems</h3>
+        <div class="plan-body">
+          <p>Most organisations don't need general AI. They need something that knows their domain cold, reasons through their specific problems, and can be held accountable when it gets something wrong. That's what specialist Aether deployments are.</p>
+          <p>A legal reasoning system built on an authored corpus of case law and statute. A clinical diagnostic system that shows its working before a treatment decision is made. A financial compliance engine that traces every flag to a specific rule. A cybersecurity analyst that forms attack hypotheses in real time and never needs to sleep.</p>
+          <p>The architecture is the same across all of them. The corpus is what changes. And because knowledge is injected at runtime, a new regulation, a new precedent, a new threat class — it's in the system immediately. No retraining. No rebuild. No waiting.</p>
+        </div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-tag">Track 2 — Personal</div>
+        <h3 class="plan-title">A general intelligence fork, built for one person</h3>
+        <div class="plan-body">
+          <p>The most ambitious direction is not commercial. It's personal.</p>
+          <p>The plan is to build a fork of Aether designed specifically to be taught everything i know, and everything it can learn on its own. A system tuned to one person's knowledge, reasoning style, goals, and accumulated experience.</p>
+          <p>This means feeding it years of knowledge across every domain of interest. Structuring that knowledge so the reasoning engine can actually use it, not just retrieve it. It means giving it standing goals, a persistent model of its builder (<strong>me</strong>), and the autonomy to pursue research between sessions without supervision.</p>
+          <p>The goal is not to build a system that answers questions well. The goal is to build something closer to a second mind — one that reasons the way i reason, knows what i knows, and keeps working when I'm not at the keyboard.</p>
+        </div>
+      </div>
+      <div class="plan-card full">
+        <div class="plan-tag">Track 3 — Long game</div>
+        <h3 class="plan-title">Infrastructure</h3>
+        <div class="plan-body">
+          <p>The third direction is not a product. It's a foundation.</p>
+          <p>Aether's reasoning architecture exposed as APIs, SDKs, and deployment blueprints. The primitives of deterministic reasoning — hypothesis tracking, causal inference, permanent learning, autonomous goal pursuit — available to any builder who needs them, experimented with by people smarter than me.</p>
+          <p>The applications in the previous section don't all get built here. They get built by the people closest to those problems, on top of infrastructure that handles the reasoning. That's the plan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">RICKCLMNT</div>
+  <div>Aether v4 — Authored Intelligence</div>
+  <div>&#169; 2026 Patrick Clement</div><br>
+  <a href="mailto:rickclmntcorp@protonmail.com" style="color:#8A8680;text-decoration:none;letter-spacing:0.16em;">contact &#8594;</a>
+</footer>
+
+<script>
+function toggleDomain(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.domain-item').forEach(d => d.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+const TRACES = [
+  {
+    q: "My knee hurts when I run",
+    steps: [
+      { name: "Intent Classify", desc: "Diagnostic intent detected. Path: reason." },
+      { name: "Semantic Parse", desc: "Entity: knee. Condition: pain. Temporal: during running." },
+      { name: "Knowledge Retrieve", desc: "FTS5 search: knee pain, running, mechanical, inflammatory. 3 articles matched." },
+      { name: "Hypothesis Init", desc: "H = {runner's knee, IT band, meniscus, patellar tendon}. Evidence slots open." },
+      { name: "Question Former", desc: "Max info-gain slot: location. Asks: where exactly does it hurt?" }
+    ],
+    output: "I've identified four possible explanations — runner's knee, IT band syndrome, a meniscus issue, or patellar tendon strain. They have different locations and causes. <strong>Where exactly does the pain occur — front of the knee, the outside edge, or behind the kneecap?</strong>",
+    verdict: "No answer fabricated. Competing hypotheses tracked. Discriminating question asked."
+  },
+  {
+    q: "Should I take this job offer?",
+    steps: [
+      { name: "Intent Classify", desc: "Decision intent detected. Path: reason." },
+      { name: "Semantic Parse", desc: "Domain: career. Type: binary choice under uncertainty." },
+      { name: "Knowledge Retrieve", desc: "FTS5: career decisions, opportunity cost, negotiation. 2 articles matched." },
+      { name: "WillEngine Check", desc: "No standing intention violations. Turn intent: INFORM + QUESTION." },
+      { name: "Question Former", desc: "Max info-gain: alternatives. Asks: what does staying look like?" }
+    ],
+    output: "A good decision requires knowing the alternative. You've described the offer — but I don't yet know what you're comparing it to. <strong>What does staying in your current role look like over the next 12 months?</strong>",
+    verdict: "Decision framework applied. Opportunity cost framing. No invented advice."
+  },
+  {
+    q: "Does rooster crowing cause sunrise?",
+    steps: [
+      { name: "Intent Classify", desc: "Causal query detected. Short-circuit: CausalReasoningEngine." },
+      { name: "Causal Parse", desc: "Claim: rooster crowing → sunrise. Temporal precedence: yes." },
+      { name: "Mechanism Check", desc: "No causal mechanism found. Roosters cannot influence Earth's rotation." },
+      { name: "Counterfactual", desc: "Removing roosters: sunrise continues. Correlation confirmed, causation refuted." },
+      { name: "Response Compose", desc: "Correlational path. Counterfactual generated. Response assembled." }
+    ],
+    output: "No. This is a classic correlation without causation. Roosters crow before sunrise because light triggers their biological clock — <strong>the sunrise causes the crowing, not the reverse.</strong> Remove every rooster from Earth and the sun still rises. The mechanism runs in the opposite direction.",
+    verdict: "Causal mechanism check fired. Correlation/causation distinguished. Counterfactual generated."
+  },
+  {
+    q: "What is the capital of France?",
+    steps: [
+      { name: "Intent Classify", desc: "Factual query. Short-circuit: KnowledgeResponder." },
+      { name: "Knowledge Retrieve", desc: "FTS5: France, capital, Paris. Direct match found." },
+      { name: "Short-Circuit", desc: "Factual answer retrieved. Pipeline exits immediately." },
+      { name: "Response Compose", desc: "Single-fact response. No reasoning thread needed." },
+      { name: "Return", desc: "Answer delivered. 4 stages skipped. Zero unnecessary compute." }
+    ],
+    output: "<strong>Paris.</strong>",
+    verdict: "Short-circuit fired. Factual retrieval only. Full reasoning pipeline not needed — and not used."
+  }
+];
+
+let currentTrace = 0;
+let typeTimeout = null;
+
+function setTrace(i) {
+  document.querySelectorAll('.trace-input-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+  currentTrace = i;
+  runTrace(i);
+}
+
+function runTrace(i) {
+  const t = TRACES[i];
+  document.getElementById('trace-q').textContent = t.q;
+  document.getElementById('trace-output').innerHTML = '<span id="trace-text"></span><span class="cursor active" id="trace-cursor">&#9646;</span>';
+  document.getElementById('trace-verdict').textContent = '';
+
+  const container = document.getElementById('trace-steps');
+  container.innerHTML = '';
+  t.steps.forEach((s, idx) => {
+    const div = document.createElement('div');
+    div.className = 'trace-step';
+    div.id = 'ts-' + idx;
+    div.innerHTML = '<div class="trace-step-num">0' + (idx+1) + '</div><div class="trace-step-body"><div class="trace-step-name">' + s.name + '</div><div class="trace-step-desc">' + s.desc + '</div></div>';
+    container.appendChild(div);
+  });
+
+  if (typeTimeout) clearTimeout(typeTimeout);
+
+  t.steps.forEach((_, idx) => {
+    setTimeout(function() {
+      var el = document.getElementById('ts-' + idx);
+      if (el) el.classList.add('fired');
+    }, idx * 420 + 200);
+  });
+
+  var delay = t.steps.length * 420 + 400;
+  setTimeout(function() { typeOutput(t.output, t.verdict); }, delay);
+}
+
+function typeOutput(html, verdict) {
+  var el = document.getElementById('trace-text');
+  var cursor = document.getElementById('trace-cursor');
+  if (!el) return;
+  var plain = html.replace(/<[^>]+>/g, '');
+  var i = 0;
+  el.textContent = '';
+  if (cursor) cursor.classList.add('active');
+  function tick() {
+    if (i < plain.length) {
+      el.textContent += plain[i++];
+      typeTimeout = setTimeout(tick, 18 + Math.random() * 10);
+    } else {
+      el.innerHTML = html;
+      if (cursor) cursor.classList.remove('active');
+      var v = document.getElementById('trace-verdict');
+      if (v) v.textContent = verdict;
+    }
+  }
+  tick();
+}
+
+runTrace(0);
+</script>
+</body>
+</html>
