@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIS — Legal Intelligence System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:      #111010;
+  --ink-2:    #2a2826;
+  --paper:    #f5f2ed;
+  --paper-2:  #ede9e2;
+  --muted:    #8a8580;
+  --accent:   #1B3A5C;
+  --accent-2: #25568C;
+  --gilt:     #B8963C;
+  --rule:     #d8d3cb;
+  --serif:    'Cormorant Garamond', Georgia, serif;
+  --mono:     'DM Mono', 'Courier New', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.6;
+}
+
+/* ── Nav ─────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px;
+  background: var(--paper);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 22px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--accent); }
+
+/* ── Hero ─────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 0 48px 48px;
+  padding-top: 120px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1100px;
+  padding-top: 40px;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.1s forwards;
+}
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(58px, 8.5vw, 120px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.2s forwards;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  max-width: 580px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.35s forwards;
+}
+.hero-sub strong { font-weight: 500; color: var(--ink); }
+.hero-cta {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.5s forwards;
+}
+.btn-primary {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 13px 28px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+.btn-ghost {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--ink); }
+.btn-ghost::after { content: '→'; font-family: serif; transition: transform 0.2s; }
+.btn-ghost:hover::after { transform: translateX(4px); }
+.hero-footer {
+  display: flex;
+  gap: 64px;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border-top: 1px solid var(--rule);
+  padding-top: 24px;
+  margin-top: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s forwards;
+  flex-wrap: wrap;
+}
+.hero-stat { display: flex; flex-direction: column; gap: 4px; }
+.hero-stat .num {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+}
+.hero-stat .lbl {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Section base ─────────────────────────────────────── */
+section {
+  padding: 120px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-label {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 48px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.4;
+}
+
+/* ── Problem ──────────────────────────────────────────── */
+#problem { border-top: 1px solid var(--rule); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.problem-headline {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.problem-headline em { font-style: italic; color: var(--accent); }
+.problem-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.problem-body p { font-size: 13.5px; line-height: 1.8; color: var(--ink-2); }
+.problem-body p strong { color: var(--ink); font-weight: 500; }
+.problem-cards {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 40px;
+}
+.problem-card {
+  background: var(--paper);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.problem-card-num {
+  font-family: var(--serif);
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+.problem-card-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.problem-card-body { font-size: 12px; line-height: 1.7; color: var(--muted); }
+
+/* ── Capabilities ─────────────────────────────────────── */
+#capabilities { border-top: 1px solid var(--rule); }
+.cap-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+.cap-headline {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.cap-headline em { font-style: italic; color: var(--accent); }
+.cap-intro-right {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+  padding-top: 8px;
+}
+
+/* capability list — numbered accordion style */
+.cap-list {
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.cap-item {
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+.cap-head {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: baseline;
+  padding: 24px 0;
+  cursor: pointer;
+  gap: 24px;
+  transition: background 0.15s;
+  user-select: none;
+}
+.cap-head:hover { background: var(--paper-2); margin: 0 -48px; padding: 24px 48px; }
+.cap-num {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--muted);
+}
+.cap-name {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.cap-tag {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+  padding: 4px 10px;
+  border: 1px solid rgba(27,58,92,.2);
+}
+.cap-tag.soon {
+  color: var(--gilt);
+  border-color: rgba(184,150,60,.25);
+}
+.cap-body {
+  display: none;
+  padding: 0 0 32px 80px;
+  max-width: 680px;
+}
+.cap-body.open { display: block; }
+.cap-body p {
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-bottom: 16px;
+}
+.cap-body p:last-child { margin-bottom: 0; }
+.cap-body strong { color: var(--ink); font-weight: 500; }
+.cap-body .cap-example {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 16px;
+  background: var(--paper-2);
+  border-left: 2px solid var(--accent);
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+.cap-bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0 16px;
+}
+.cap-bullet-list li {
+  font-size: 12.5px;
+  color: var(--muted);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.65;
+}
+.cap-bullet-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--rule);
+}
+
+/* ── How it works ─────────────────────────────────────── */
+#how { border-top: 1px solid var(--rule); }
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.how-headline {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+}
+.how-headline em { font-style: italic; color: var(--accent); }
+.how-body {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 40px;
+}
+.how-body strong { color: var(--ink); font-weight: 500; }
+.principle-list {
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.principle {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 16px;
+  align-items: baseline;
+}
+.principle-mark {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--gilt);
+}
+.principle-text {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.principle-text strong { color: var(--ink); font-weight: 500; }
+
+/* Distinction panel */
+.distinction-panel {
+  border: 1px solid var(--rule);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 40px 36px;
+}
+.distinction-panel-label {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245,242,237,.35);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(245,242,237,.08);
+}
+.distinction-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(245,242,237,.06);
+  border: 1px solid rgba(245,242,237,.06);
+  margin-bottom: 1px;
+}
+.distinction-cell {
+  padding: 16px 18px;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.distinction-cell.them {
+  background: rgba(245,242,237,.03);
+  color: rgba(245,242,237,.4);
+  position: relative;
+}
+.distinction-cell.them::before {
+  content: 'Others';
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245,242,237,.2);
+  margin-bottom: 6px;
+}
+.distinction-cell.us {
+  background: rgba(27,58,92,.3);
+  color: rgba(245,242,237,.85);
+  position: relative;
+}
+.distinction-cell.us::before {
+  content: 'ALIS';
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(184,150,60,.7);
+  margin-bottom: 6px;
+}
+
+/* ── Contact ──────────────────────────────────────────── */
+#contact {
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  padding: 140px 48px;
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+.contact-bg-text {
+  position: absolute;
+  font-family: var(--serif);
+  font-size: clamp(100px, 18vw, 240px);
+  font-weight: 300;
+  color: var(--rule);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0.5;
+  user-select: none;
+}
+.contact-content { position: relative; z-index: 2; }
+.contact-headline {
+  font-family: var(--serif);
+  font-size: clamp(44px, 6vw, 88px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.contact-headline em { font-style: italic; color: var(--accent); }
+.contact-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 48px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.contact-email {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-email:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── Guardrail callout ────────────────────────────────── */
+.guardrail-strip {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 40px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  border-top: 1px solid var(--rule);
+}
+.guardrail-cell {
+  padding: 28px 32px;
+  border-right: 1px solid rgba(245,242,237,.07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.guardrail-cell:last-child { border-right: none; }
+.guardrail-tier {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 3px 8px;
+  font-weight: 500;
+}
+.guardrail-tier.safe  { background: rgba(45,90,39,.2); color: #7ec87a; }
+.guardrail-tier.caution { background: rgba(184,150,60,.15); color: #d4b85a; }
+.guardrail-tier.route { background: rgba(180,40,40,.15); color: #e07070; }
+.guardrail-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(245,242,237,.9);
+  line-height: 1.2;
+}
+.guardrail-desc {
+  font-size: 12px;
+  color: rgba(245,242,237,.45);
+  line-height: 1.65;
+}
+.guardrail-eg {
+  font-size: 11px;
+  color: rgba(245,242,237,.25);
+  font-style: italic;
+  line-height: 1.55;
+  margin-top: 4px;
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; }
+.footer-note { font-size: 10px; color: var(--muted); letter-spacing: 0.04em; font-style: italic; }
+
+/* ── Animations ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 860px) {
+  nav { padding: 16px 24px; }
+  nav .nav-links { display: none; }
+  .nav-cta { padding: 8px 16px; font-size: 9px; }
+  #hero, section { padding-left: 24px; padding-right: 24px; }
+  #hero { padding-top: 100px; }
+  .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+  .problem-cards { grid-template-columns: 1fr; }
+  .cap-intro { grid-template-columns: 1fr; gap: 24px; }
+  .cap-head { grid-template-columns: 40px 1fr; }
+  .cap-tag { display: none; }
+  .cap-body { padding-left: 64px; }
+  .how-grid { grid-template-columns: 1fr; gap: 48px; }
+  .distinction-row { grid-template-columns: 1fr; }
+  .guardrail-strip { grid-template-columns: 1fr; padding: 24px; }
+  .guardrail-cell { border-right: none; border-bottom: 1px solid rgba(245,242,237,.07); }
+  .guardrail-cell:last-child { border-bottom: none; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .cap-head:hover { margin: 0; padding: 24px 0; }
+}
+/* =====================================================
+   ALIS — INTELLIGENCE SYSTEM VISUAL LANGUAGE
+   ===================================================== */
+
+:root {
+  --bg: #050914;
+  --surface: rgba(255,255,255,.04);
+  --surface-2: rgba(255,255,255,.07);
+
+  --text:#eef5ff;
+  --text-soft:#9aa9bd;
+  --line:rgba(130,170,220,.18);
+
+  --blue:#4da3ff;
+  --blue-soft:#7bc0ff;
+
+  --mono:'JetBrains Mono', monospace;
+  --sans:'Inter', sans-serif;
+}
+
+
+/* Base */
+
+body {
+ background:
+ radial-gradient(circle at 15% 15%,rgba(77,163,255,.18),transparent 35%),
+ radial-gradient(circle at 85% 80%,rgba(77,163,255,.12),transparent 40%),
+ var(--bg);
+
+ color:var(--text);
+ font-family:var(--sans);
+}
+
+
+/* remove old paper texture */
+
+body::before {
+ opacity:.05;
+}
+
+
+body::after {
+
+ content:"";
+
+ position:fixed;
+ inset:0;
+
+ background-image:
+ linear-gradient(
+ rgba(255,255,255,.035) 1px,
+ transparent 1px
+ ),
+ linear-gradient(
+ 90deg,
+ rgba(255,255,255,.035) 1px,
+ transparent 1px
+ );
+
+ background-size:70px 70px;
+
+ pointer-events:none;
+ z-index:-1;
+}
+
+
+
+/* NAV */
+
+nav {
+
+ background:
+ rgba(5,9,20,.65);
+
+ backdrop-filter:
+ blur(25px);
+
+ border-bottom:
+ 1px solid var(--line);
+
+}
+
+
+.nav-logo {
+
+ font-family:var(--mono);
+
+ letter-spacing:.08em;
+
+ color:white;
+
+}
+
+
+.nav-logo span {
+
+ color:var(--blue);
+
+}
+
+
+.nav-links a {
+
+ font-family:var(--mono);
+
+ color:var(--text-soft);
+
+}
+
+
+.nav-links a:hover {
+
+ color:var(--blue);
+
+}
+
+
+.nav-cta,
+.btn-primary {
+
+ background:
+ linear-gradient(
+ 135deg,
+ var(--blue),
+ #1769d0
+ );
+
+ border-radius:999px;
+
+ box-shadow:
+ 0 10px 40px rgba(77,163,255,.25);
+
+}
+
+
+
+/* HERO */
+
+
+.hero-headline {
+
+ font-family:var(--sans);
+
+ font-weight:600;
+
+ letter-spacing:-.05em;
+
+ line-height:.95;
+
+}
+
+
+.hero-headline em {
+
+ color:var(--blue);
+
+ font-style:normal;
+
+}
+
+
+.hero-eyebrow {
+
+ font-family:var(--mono);
+
+ color:var(--blue);
+
+}
+
+
+.hero-sub {
+
+ color:var(--text-soft);
+
+}
+
+
+
+.hero-footer {
+
+ border-color:var(--line);
+
+}
+
+
+
+.hero-stat .num {
+
+ color:white;
+
+ font-family:var(--mono);
+
+}
+
+
+
+/* sections */
+
+
+section {
+
+ max-width:1280px;
+
+}
+
+
+
+.section-label {
+
+ font-family:var(--mono);
+
+ color:var(--blue);
+
+}
+
+
+
+/* cards */
+
+
+.problem-card,
+.distinction-panel {
+
+ background:
+
+ linear-gradient(
+ 145deg,
+ rgba(255,255,255,.07),
+ rgba(255,255,255,.02)
+ );
+
+ backdrop-filter:blur(20px);
+
+ border:
+
+ 1px solid var(--line);
+
+ border-radius:18px;
+
+}
+
+
+
+.problem-card {
+
+ transition:
+ transform .25s,
+ border .25s;
+
+}
+
+
+.problem-card:hover {
+
+ transform:translateY(-8px);
+
+ border-color:rgba(77,163,255,.45);
+
+}
+
+
+
+/* capabilities */
+
+
+.cap-item {
+
+ border-color:var(--line);
+
+}
+
+
+.cap-name {
+
+ font-family:var(--sans);
+
+ font-weight:500;
+
+}
+
+
+.cap-head:hover {
+
+ background:
+ rgba(77,163,255,.06);
+
+}
+
+
+.cap-tag {
+
+ border-radius:999px;
+
+ color:var(--blue);
+
+ border-color:
+ rgba(77,163,255,.35);
+
+}
+
+
+
+/* dark panel */
+
+
+.distinction-panel {
+
+ background:
+
+ linear-gradient(
+ 145deg,
+ #101827,
+ #050914
+ );
+
+}
+
+
+
+.distinction-cell.us {
+
+ background:
+
+ rgba(77,163,255,.15);
+
+}
+
+
+
+/* guardrails */
+
+
+.guardrail-strip {
+
+ background:
+
+ linear-gradient(
+ 135deg,
+ #03050b,
+ #0c1424
+ );
+
+}
+
+
+
+.guardrail-cell {
+
+ border-color:var(--line);
+
+}
+
+
+/* contact */
+
+
+.contact-headline {
+
+ font-family:var(--sans);
+
+ font-weight:600;
+
+}
+
+
+.contact-headline em {
+
+ color:var(--blue);
+
+}
+
+
+
+.contact-email {
+
+ color:var(--blue);
+
+}
+
+
+
+/* footer */
+
+
+footer {
+
+ background:#03050b;
+
+ border-color:var(--line);
+
+}
+
+
+/* mobile */
+
+@media(max-width:860px){
+
+ .hero-headline {
+
+ font-size:56px;
+
+ }
+
+}
+/* =====================================================
+   ALIS — INTELLIGENCE ARCHIVE RESTYLE
+   ===================================================== */
+
+:root {
+
+  --paper: #05070d;
+  --paper-2:#0a101b;
+
+  --ink:#e9eef8;
+  --ink-2:#aab6c8;
+
+  --muted:#68758a;
+
+  --accent:#4f9cff;
+  --accent-2:#9bc9ff;
+
+  --gilt:#c9a45b;
+
+  --rule:rgba(160,190,230,.16);
+
+}
+
+
+/* -----------------------------------------------------
+   Background
+----------------------------------------------------- */
+
+body {
+
+ background:
+
+ radial-gradient(
+  circle at 50% 0%,
+  rgba(79,156,255,.14),
+  transparent 38%
+ ),
+
+ linear-gradient(
+ 180deg,
+ #05070d,
+ #080d17
+ );
+
+}
+
+
+/* subtle technical grid */
+
+body::after {
+
+ content:"";
+
+ position:fixed;
+
+ inset:0;
+
+ background-image:
+
+ linear-gradient(
+ rgba(255,255,255,.025) 1px,
+ transparent 1px
+ ),
+
+ linear-gradient(
+ 90deg,
+ rgba(255,255,255,.025) 1px,
+ transparent 1px
+ );
+
+ background-size:80px 80px;
+
+ opacity:.35;
+
+ pointer-events:none;
+
+ z-index:-1;
+
+}
+
+
+body::before {
+
+ opacity:.08;
+
+}
+
+
+
+/* -----------------------------------------------------
+   Navigation
+----------------------------------------------------- */
+
+nav {
+
+ background:
+
+ rgba(5,7,13,.78);
+
+ backdrop-filter:blur(20px);
+
+ border-bottom:
+
+ 1px solid var(--rule);
+
+}
+
+
+.nav-logo {
+
+ font-family:var(--serif);
+
+ font-size:22px;
+
+ letter-spacing:.06em;
+
+ color:#fff;
+
+}
+
+
+.nav-logo span {
+
+ color:var(--accent);
+
+}
+
+
+.nav-links a {
+
+ color:var(--muted);
+
+}
+
+
+.nav-links a:hover {
+
+ color:var(--accent);
+
+}
+
+
+.nav-cta {
+
+ background:transparent;
+
+ border:
+
+ 1px solid rgba(79,156,255,.45);
+
+ border-radius:2px;
+
+ color:var(--accent);
+
+}
+
+
+.nav-cta:hover {
+
+ background:rgba(79,156,255,.12);
+
+}
+
+
+
+/* -----------------------------------------------------
+   Hero
+----------------------------------------------------- */
+
+#hero {
+
+ position:relative;
+
+}
+
+
+.hero-eyebrow {
+
+ color:var(--accent);
+
+ font-family:var(--mono);
+
+}
+
+
+.hero-headline {
+
+ font-family:var(--serif);
+
+ font-weight:300;
+
+ letter-spacing:-.035em;
+
+}
+
+
+.hero-headline em {
+
+ color:var(--accent);
+
+}
+
+
+.hero-sub {
+
+ color:var(--ink-2);
+
+ max-width:620px;
+
+}
+
+
+.btn-primary {
+
+ background:var(--accent);
+
+ border-radius:2px;
+
+}
+
+
+.btn-primary:hover {
+
+ background:var(--accent-2);
+
+}
+
+
+.btn-ghost {
+
+ color:var(--muted);
+
+}
+
+
+
+/* -----------------------------------------------------
+   Stats
+----------------------------------------------------- */
+
+
+.hero-footer {
+
+ border-color:var(--rule);
+
+}
+
+
+.hero-stat .num {
+
+ color:white;
+
+}
+
+
+
+/* -----------------------------------------------------
+   Sections
+----------------------------------------------------- */
+
+
+section {
+
+ position:relative;
+
+}
+
+
+.section-label {
+
+ color:var(--accent);
+
+ font-family:var(--mono);
+
+}
+
+
+
+.problem-card {
+
+ background:
+
+ linear-gradient(
+ 135deg,
+ rgba(255,255,255,.055),
+ rgba(255,255,255,.015)
+ );
+
+ border:
+
+ 1px solid var(--rule);
+
+ border-radius:0;
+
+}
+
+
+.problem-card:hover {
+
+ border-color:
+
+ rgba(79,156,255,.5);
+
+ transform:translateY(-5px);
+
+}
+
+
+
+.problem-card-title {
+
+ color:white;
+
+}
+
+
+
+.problem-card-body {
+
+ color:var(--muted);
+
+}
+
+
+
+/* -----------------------------------------------------
+   Capability system
+----------------------------------------------------- */
+
+
+.cap-list {
+
+ border-color:var(--rule);
+
+}
+
+
+.cap-item {
+
+ border-color:var(--rule);
+
+}
+
+
+.cap-head:hover {
+
+ background:
+
+ rgba(79,156,255,.06);
+
+}
+
+
+
+.cap-name {
+
+ color:#fff;
+
+}
+
+
+
+.cap-tag {
+
+ border-radius:2px;
+
+ color:var(--accent);
+
+ border-color:
+
+ rgba(79,156,255,.35);
+
+}
+
+
+
+.cap-body {
+
+ color:var(--ink-2);
+
+}
+
+
+.cap-example {
+
+ background:
+
+ rgba(79,156,255,.08)!important;
+
+ border-left:
+
+ 2px solid var(--accent)!important;
+
+}
+
+
+
+/* -----------------------------------------------------
+   Comparison panel
+----------------------------------------------------- */
+
+
+.distinction-panel {
+
+ background:
+
+ linear-gradient(
+ 150deg,
+ #101827,
+ #05070d
+ );
+
+ border-radius:0;
+
+ box-shadow:
+
+ 0 30px 80px rgba(0,0,0,.45);
+
+}
+
+
+
+.distinction-cell.us {
+
+ background:
+
+ rgba(79,156,255,.14);
+
+}
+
+
+
+/* -----------------------------------------------------
+   Guardrails
+----------------------------------------------------- */
+
+
+.guardrail-strip {
+
+ background:
+
+ #03050a;
+
+}
+
+
+.guardrail-cell {
+
+ border-color:var(--rule);
+
+}
+
+
+.guardrail-tier.safe {
+
+ color:var(--accent);
+
+ background:
+
+ rgba(79,156,255,.12);
+
+}
+
+
+
+/* -----------------------------------------------------
+   Contact
+----------------------------------------------------- */
+
+
+.contact-bg-text {
+
+ color:
+
+ rgba(79,156,255,.05);
+
+}
+
+
+
+.contact-headline {
+
+ font-family:var(--serif);
+
+}
+
+
+.contact-headline em {
+
+ color:var(--accent);
+
+}
+
+
+.contact-email {
+
+ color:var(--accent);
+
+ border-color:var(--accent);
+
+}
+
+
+
+/* -----------------------------------------------------
+   Footer
+----------------------------------------------------- */
+
+
+footer {
+
+ background:#03050a;
+
+ border-color:var(--rule);
+
+}
+
+
+
+/* -----------------------------------------------------
+   Mobile
+----------------------------------------------------- */
+
+
+@media(max-width:860px){
+
+ .hero-headline {
+
+ font-size:60px;
+
+ }
+
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="" class="nav-logo">ALIS<span></span></a>
+  <ul class="nav-links">
+    <li><a href="#problem">The problem</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Request a pilot</a>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Advanced Legal Intelligence System</div>
+    <h1 class="hero-headline">
+  The future of law<br>
+  is not automated.<br>
+  <em>It is intelligent.</em>
+</h1>
+    <p class="hero-sub">
+      ALIS is an intelligence layer for legal teams that want to work at a higher level. It reads case files, reasons through legal questions, and surfaces the right knowledge — so lawyers spend their hours on judgment, not on finding the answer to find the answer.
+Every output traces to a real source. Every gap is acknowledged honestly.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Request a pilot</a>
+      <a href="#capabilities" class="btn-ghost">What it does</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Problem ─────────────────────────────────────────── -->
+<section id="problem">
+  <div class="section-label reveal">The problem</div>
+  <div class="problem-grid">
+    <h2 class="problem-headline reveal reveal-delay-1">
+      Law firms are<br>burying talent in<br><em>work that scales.</em>
+    </h2>
+    <div class="problem-body reveal reveal-delay-2">
+      <p>
+        A senior lawyer reading discovery documents is not doing senior work. A partner building a first draft from a blank page is not doing partner work. <strong>The leverage problem in law is not headcount, it is how the existing headcount spends its hours.</strong>
+      </p>
+      <p>
+        The firms that win the next decade will not be the ones that replace lawyers with AI. They will be the ones that use AI to let their lawyers do only the work that requires a lawyer — and automate everything that does not.
+      </p>
+      <p>
+        Most AI tools sold to law firms are glorified search engines in legal clothing. They cannot reason. They invent citations. They answer a question about doctrine with the same confident tone as a question from someone facing a criminal charge. <br><strong>That is not a tool. It is a liability.</strong>
+      </p>
+    </div>
+    <div class="problem-cards">
+      <div class="problem-card reveal">
+        <div class="problem-card-num">i.</div>
+        <div class="problem-card-title">No fabricated authority</div>
+        <div class="problem-card-body">ALIS never invents a case or statute. Every claim traces to a real source. Where it does not know, it says so plainly.</div>
+      </div>
+      <div class="problem-card reveal reveal-delay-1">
+        <div class="problem-card-num">ii.</div>
+        <div class="problem-card-title">Deterministic output</div>
+        <div class="problem-card-body">The same question asked twice returns the same answer. No probabilistic drift. No model updates that quietly change the output overnight.</div>
+      </div>
+      <div class="problem-card reveal reveal-delay-2">
+        <div class="problem-card-num">iii.</div>
+        <div class="problem-card-title">Knows when to stop</div>
+        <div class="problem-card-body">Live proceedings, criminal charges, imminent deadlines. ALIS stops, and refers. Every time, without exception.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Capabilities ────────────────────────────────────── -->
+<section id="capabilities">
+  <div class="section-label reveal">Capabilities</div>
+  <div class="cap-intro">
+    <h2 class="cap-headline reveal reveal-delay-1">
+      Ten tasks consuming your best lawyers' hours. <em>ALIS does handles them.</em>
+    </h2>
+    <div class="cap-intro-right reveal reveal-delay-2">
+      These are the ten highest-value tasks in a legal operation, the ones that consume the most hours and produce the least leverage. Each is either live or in active development. The roadmap is public. The test suite is open. Any buyer can run it before they sign anything.
+    </div>
+  </div>
+
+  <ul class="cap-list reveal">
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">01.</span>
+        <span class="cap-name">Case file understanding and summarisation</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>A lawyer can spend three days reading what ALIS reads in ten minutes. Drop in a matter folder — discovery documents, depositions, contracts, emails, prior judgments, witness statements — and ALIS produces a structured brief: timeline of key events, identified facts, contradictions between sources, missing evidence, and a case map of who knew what and when.</p>
+        <ul class="cap-bullet-list">
+          <li>Ingests thousands of pages across multiple document types</li>
+          <li>Builds a chronological event timeline automatically</li>
+          <li>Surfaces contradictions between depositions and documents</li>
+          <li>Flags evidentiary gaps — what should be there but isn't</li>
+          <li>Produces a single-page case brief on request</li>
+        </ul>
+        <span class="cap-example">"Tell me everything important about the Marchetti matter in ten minutes."</span>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">02.</span>
+        <span class="cap-name">Legal research that reasons</span>
+        <span class="cap-tag">Live</span>
+      </div>
+      <div class="cap-body">
+        <p>ALIS understands a legal question — not just the keywords in it. It searches its corpus of authored articles and case holdings, distinguishes between similar and controlling precedent, explains why a case matters and what it actually decided, and assesses how strong a legal argument is likely to be.</p>
+        <p>Thirty leading cases are indexed verbatim with their ratio decidendi. <strong>No paraphrasing. No invention.</strong> Caparo, Hadley, Bolam, Donoghue, Lister, SAAMCO, and twenty-four others are held exactly as decided.</p>
+        <ul class="cap-bullet-list">
+          <li>Finds relevant statutes and cases by legal question, not keyword</li>
+          <li>Distinguishes controlling from merely persuasive authority</li>
+          <li>Returns the actual ratio, not a summary of a summary</li>
+          <li>Assesses likely argument strength against existing precedent</li>
+        </ul>
+        <span class="cap-example">"Find cases where courts rejected penalty clause arguments and explain the reasoning."</span>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">03.</span>
+        <span class="cap-name">First-draft legal documents</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>Not final output — strong first drafts. The kind a partner would hand to a trainee and say "build from this." ALIS produces grounded first drafts of contracts, motions, briefs, demand letters, pleadings, opinions, and client communications, drawn from the firm's own precedent library.</p>
+        <p>The lawyer's role shifts: <strong>review → refine → strategise</strong>, instead of starting from a blank page. Partners gain leverage. Associates gain time. The work improves because more of it is strategic and less of it is mechanical.</p>
+        <ul class="cap-bullet-list">
+          <li>Drafts from firm-specific precedent — not generic templates</li>
+          <li>Grounded in the actual statutory and case authority</li>
+          <li>Every draft includes source citations for review</li>
+          <li>Works from instructions given in plain language</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">04.</span>
+        <span class="cap-name">Contract intelligence</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>One of the clearest commercial opportunities in legal AI. ALIS can review a portfolio of contracts — hundreds of them — identifying risky clauses, comparing each against the firm's standard positions, extracting deadlines and renewal dates, flagging unlimited liability exposure, and surfacing unusual obligations that a busy associate might miss on document 87 of 200.</p>
+        <ul class="cap-bullet-list">
+          <li>Processes large contract portfolios in minutes, not weeks</li>
+          <li>Compares every clause against the firm's standard positions</li>
+          <li>Extracts all deadlines, notice periods, and renewal triggers</li>
+          <li>Flags uncapped liability, exclusivity, IP assignment, and change-of-control clauses</li>
+          <li>Suggests negotiation positions based on clause risk level</li>
+        </ul>
+        <span class="cap-example">"Find every agreement in this portfolio where we have unlimited liability exposure."</span>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">05.</span>
+        <span class="cap-name">Litigation outcome prediction</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>Not a crystal ball. A structured strategic tool. ALIS analyses the facts of a matter against comparable precedent, estimates the likelihood of success on key issues, models likely damages ranges, assesses settlement value, and flags litigation risks the partner may not have surfaced yet.</p>
+        <p>The output is not a verdict — it is a calibrated second opinion that forces strategic conversation earlier in the matter lifecycle, when the choices still matter.</p>
+        <ul class="cap-bullet-list">
+          <li>Models likely outcomes on each disputed legal issue</li>
+          <li>Estimates damages ranges based on comparable awards</li>
+          <li>Assesses settlement value against litigation cost and risk</li>
+          <li>Flags procedural or evidentiary risks proactively</li>
+        </ul>
+        <span class="cap-example">"Based on similar cases, should we settle the Williams matter or proceed to trial?"</span>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">06.</span>
+        <span class="cap-name">Billing and admin automation</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>Partners lose billable hours to time recording, invoice preparation, and deadline tracking. ALIS generates time entries from work product, categorises activities, prepares invoice drafts, tracks matter deadlines, and updates case management systems — automatically.</p>
+        <p>This is the capability that pays for itself fastest. <strong>Every hour recovered from admin is a billable hour recovered.</strong> For a ten-partner firm billing at £300 per hour, recovering two admin hours per partner per week is worth over £300,000 per year.</p>
+        <ul class="cap-bullet-list">
+          <li>Generates narrative time entries from emails, documents, and meeting notes</li>
+          <li>Categorises work types automatically for billing purposes</li>
+          <li>Tracks all matter deadlines across the firm</li>
+          <li>Flags matters approaching limitation or procedural deadlines</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">07.</span>
+        <span class="cap-name">Client intelligence</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>The full history of the firm's relationship with a client — every matter, every communication, every fee, every risk, every opportunity — surfaced in seconds. Before a meeting. Before a pitch. Before the partner picks up the phone.</p>
+        <ul class="cap-bullet-list">
+          <li>Aggregates all past matters and outcomes for a given client</li>
+          <li>Surfaces fee history, write-offs, and billing patterns</li>
+          <li>Identifies risks and open issues across the relationship</li>
+          <li>Flags cross-sell opportunities based on active instructions elsewhere</li>
+        </ul>
+        <span class="cap-example">"Give me a complete picture of our relationship with Marchetti Industries before the meeting."</span>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">08.</span>
+        <span class="cap-name">Deposition and transcript analysis</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>A transcript is not useful until someone has read it carefully enough to find the contradictions. ALIS reads every transcript in the matter, identifies inconsistencies between witnesses, flags credibility issues, surfaces important admissions, and generates the follow-up questions a litigator would want to ask.</p>
+        <ul class="cap-bullet-list">
+          <li>Finds inconsistencies between multiple witness accounts</li>
+          <li>Cross-references deposition testimony against documentary evidence</li>
+          <li>Highlights admissions that are directly useful to the opposing position</li>
+          <li>Generates targeted follow-up questions for the next deposition</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">09.</span>
+        <span class="cap-name">Internal firm knowledge search</span>
+        <span class="cap-tag">Live</span>
+      </div>
+      <div class="cap-body">
+        <p>Law firms have decades of expertise trapped in old files, internal memos, and the memories of partners who may no longer be at the firm. ALIS indexes the firm's own work product — precedents, opinions, research memos, past judgments — and makes it searchable by legal question.</p>
+        <p><strong>The answer to "have we handled something like this before?" should take ten seconds, not three days of asking around the office.</strong></p>
+        <ul class="cap-bullet-list">
+          <li>Ingests the firm's own precedent library and indexes it</li>
+          <li>Searches by legal question, not filename or date</li>
+          <li>Returns the specific memo, opinion, or precedent — with the relevant passage identified</li>
+          <li>Grows more useful with every matter the firm completes</li>
+        </ul>
+        <span class="cap-example">"Have we ever advised on a penalty clause in a construction contract? What was our conclusion?"</span>
+      </div>
+    </li>
+
+    <li class="cap-item">
+      <div class="cap-head" onclick="toggleCap(this)">
+        <span class="cap-num">10.</span>
+        <span class="cap-name">Legal strategist — the full copilot</span>
+        <span class="cap-tag soon">In development</span>
+      </div>
+      <div class="cap-body">
+        <p>The capability that makes all the others add up to something. A lawyer describes the matter. ALIS builds the strategy: the legal issues, the arguments for each side, the evidence needed, the procedural risks, a timeline, a research plan, and draft motions to get started.</p>
+        <p>Not a replacement for a senior lawyer. A junior associate that never sleeps, never loses a document, never forgets a precedent, and bills no hours of its own. <strong>The output capacity of a much larger firm, without the headcount.</strong></p>
+        <ul class="cap-bullet-list">
+          <li>Analyses the matter against relevant precedent and doctrine</li>
+          <li>Identifies the strongest and weakest points in the client's position</li>
+          <li>Builds the counterargument to stress-test the strategy</li>
+          <li>Produces a draft litigation plan with research priorities</li>
+          <li>Generates first-draft motions and letters to get work moving</li>
+        </ul>
+        <span class="cap-example">"I'm defending a construction company in a breach of contract claim. Build my strategy."</span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ── Guardrail ────────────────────────────────────────── -->
+<div class="guardrail-strip">
+  <div class="guardrail-cell">
+    <span class="guardrail-tier safe">Educational</span>
+    <div class="guardrail-name">General legal information</div>
+    <div class="guardrail-desc">Doctrine, case law, statutes, procedure. ALIS answers fully with a brief information-not-advice reminder.</div>
+    <div class="guardrail-eg">"What is the Bolam test?" · "How does Caparo apply?"</div>
+  </div>
+  <div class="guardrail-cell">
+    <span class="guardrail-tier caution">Advice-adjacent</span>
+    <div class="guardrail-name">Situation-specific questions</div>
+    <div class="guardrail-desc">Questions applying law to a specific circumstance. Full non-advice block appended. Prominent. Every time.</div>
+    <div class="guardrail-eg">"Am I liable if...?" · "Is my clause enforceable?"</div>
+  </div>
+  <div class="guardrail-cell">
+    <span class="guardrail-tier route">Refer out</span>
+    <div class="guardrail-name">Immediate professional need</div>
+    <div class="guardrail-desc">Live proceedings, criminal charges, imminent deadlines. ALIS stops and refers — with Law Society details and duty solicitor information.</div>
+    <div class="guardrail-eg">"I have been charged with..." · "My hearing is tomorrow..."</div>
+  </div>
+</div>
+
+<!-- ── How it works ────────────────────────────────────── -->
+<section id="how">
+  <div class="section-label reveal">How it works</div>
+  <div class="how-grid">
+    <div>
+      <h2 class="how-headline reveal reveal-delay-1">
+        Not a chatbot.<br>A <em>reasoning</em><br>system.
+      </h2>
+      <p class="how-body reveal reveal-delay-2">
+        Every response ALIS produces traces a verifiable path from query to answer. No language model generating plausible text. A reasoning engine — retrieving sourced knowledge, applying it to the question, showing its work.
+<strong>The architecture is deterministic by design. That means auditable output, consistent behaviour, and no silent drift between versions.</strong>
+      </p>
+      <ul class="principle-list reveal reveal-delay-2">
+        <li class="principle">
+          <span class="principle-mark">i.</span>
+          <span class="principle-text"><strong>Every answer has a source.</strong> Fifty authored legal articles, thirty verbatim case holdings. If the answer is not in the knowledge base, ALIS says so.</span>
+        </li>
+        <li class="principle">
+          <span class="principle-mark">ii.</span>
+          <span class="principle-text"><strong>The same question returns the same answer. </strong>No model drift, no version updates that change outputs, no randomness in the response. What worked last month works the same way today.The same question gets the same answer.</span>
+        </li>
+        <li class="principle">
+          <span class="principle-mark">iii.</span>
+          <span class="principle-text"><strong>Jurisdiction-aware by default.</strong> English and Welsh law primary. Scottish law, UK-wide instruments, EU, and international frameworks detected automatically and flagged.</span>
+        </li>
+        <li class="principle">
+          <span class="principle-mark">iv.</span>
+          <span class="principle-text"><strong>Runs on your infrastructure.</strong> Nothing leaves your network. Client data, privileged communications, and matter files stay on premise.</span>
+        </li>
+        <li class="principle">
+          <span class="principle-mark">v.</span>
+          <span class="principle-text"><strong>Accumulates institutional knowledge.</strong> Corrections and new knowledge from sessions are retained permanently. The longer it runs inside your firm, the more it knows about how your firm thinks.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="reveal reveal-delay-3">
+      <div class="distinction-panel">
+        <div class="distinction-panel-label">ALIS vs general AI tools</div>
+        <div class="distinction-row">
+          <div class="distinction-cell them">Invents plausible-sounding case citations</div>
+          <div class="distinction-cell us">Returns only sourced, authored knowledge — or says so</div>
+        </div>
+        <div class="distinction-row">
+          <div class="distinction-cell them">Changes answer based on phrasing</div>
+          <div class="distinction-cell us">Deterministic — same input, same output, always</div>
+        </div>
+        <div class="distinction-row">
+          <div class="distinction-cell them">Sends queries to external servers</div>
+          <div class="distinction-cell us">Runs fully on premise — data never leaves your network</div>
+        </div>
+        <div class="distinction-row">
+          <div class="distinction-cell them">Same confident tone for everything, including "I have been charged with..."</div>
+          <div class="distinction-cell us">Three-tier guardrail — automatically defers to professionals for live situations</div>
+        </div>
+        <div class="distinction-row">
+          <div class="distinction-cell them">Learns nothing from corrections</div>
+          <div class="distinction-cell us">Permanent session learning — institutional knowledge accumulates over time</div>
+        </div>
+        <div class="distinction-row">
+          <div class="distinction-cell them">Requires retraining or fine-tuning to add new knowledge</div>
+          <div class="distinction-cell us">New knowledge injected at runtime — no rebuild, no waiting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ─────────────────────────────────────────── -->
+<section id="contact" style="max-width:100%;padding-left:0;padding-right:0;">
+  <div class="contact-bg-text">Let's work.</div>
+  <div class="contact-content">
+    <div class="section-label reveal" style="justify-content:center;">Get in touch</div>
+    <h2 class="contact-headline reveal reveal-delay-1">
+      Ready to see it<br><em>in your firm?</em>
+    </h2>
+    <p class="contact-sub reveal reveal-delay-2">
+      I run pilots with a small number of firms at a time.<br> Reach out and we will find out if this is the right fit.
+    </p>
+    <a href="mailto: rickclmntcorp@protonmail.com" class="contact-email reveal reveal-delay-3">rickclmntcorp@protonmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 RICKCLMNT &nbsp;·&nbsp; ALIS — Advanced Legal Intelligence System</span>
+  <span class="footer-note">Responses from ALIS are legal information only — not legal advice</span>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+
+// Capability accordion
+function toggleCap(head) {
+  const body = head.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.cap-body').forEach(b => b.classList.remove('open'));
+  // Open clicked (if it was closed)
+  if (!isOpen) body.classList.add('open');
+}
+
+// Open first cap by default
+document.querySelector('.cap-body').classList.add('open');
+</script>
+</body>
+</html>

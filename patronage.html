@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RICKCLMNT — Independent Technology Architect</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*,*::before,*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --ink:#111010;
+  --ink-2:#2a2826;
+  --paper:#f5f2ed;
+  --paper-2:#ede9e2;
+  --muted:#8a8580;
+  --accent:#1B3A5C;
+  --rule:#d8d3cb;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --mono:'DM Mono','Courier New',monospace;
+}
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--mono);
+  font-size:13px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+  pointer-events:none;
+  z-index:1000;
+}
+
+/* NAV */
+nav{
+  position:sticky; top:0; z-index:100;
+  background:rgba(245,242,237,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--rule);
+  height:60px; padding:0 48px;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:box-shadow 0.3s;
+}
+nav.scrolled{ box-shadow:0 1px 16px rgba(0,0,0,0.06); }
+.nav-logo{
+  font-family:var(--mono); font-size:12px; font-weight:500;
+  letter-spacing:0.14em; color:var(--ink); text-decoration:none;
+}
+.nav-links{
+  display:flex; gap:32px; list-style:none; align-items:center;
+}
+.nav-links a{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.06em;
+  color:var(--muted); text-decoration:none; transition:color 0.2s;
+}
+.nav-links a:hover{ color:var(--ink); }
+.nav-cta{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.06em;
+  color:var(--paper); background:var(--ink); text-decoration:none;
+  padding:7px 18px; transition:background 0.2s;
+}
+.nav-cta:hover{ background:var(--accent); }
+
+/* HERO */
+#hero{
+  min-height:100vh;
+  padding:120px 48px 48px;
+  display:grid;
+  grid-template-rows:1fr auto;
+}
+
+.hero-content{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  max-width:1000px;
+}
+
+.hero-eyebrow{
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:30px;
+}
+
+.hero-headline{
+  font-family:var(--serif);
+  font-size:clamp(58px,9vw,130px);
+  font-weight:300;
+  line-height:.95;
+  margin-bottom:40px;
+}
+
+.hero-headline em{
+  font-style:italic;
+  color:var(--accent);
+}
+
+.hero-sub{
+  max-width:620px;
+  font-size:14px;
+  line-height:1.8;
+  color:var(--ink-2);
+  margin-bottom:45px;
+}
+
+.hero-sub strong{
+  color:var(--ink);
+  font-weight:500;
+}
+
+.hero-cta{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.btn-primary{
+  background:var(--ink);
+  color:var(--paper);
+  padding:13px 28px;
+  text-decoration:none;
+  font-size:10px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  transition:background 0.2s;
+}
+.btn-primary:hover{ background:var(--accent); }
+
+.btn-ghost{
+  font-size:10px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+.btn-ghost:hover{ color:var(--ink); }
+
+/* PROOF STRIP */
+.proof-strip{
+  border-top:1px solid var(--rule);
+  padding-top:35px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+}
+
+.proof-item{}
+.proof-num{
+  font-family:var(--serif);
+  font-size:42px;
+  font-weight:300;
+  color:var(--ink);
+  line-height:1;
+}
+.proof-label{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* BASE */
+section{
+  padding:120px 48px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-label{
+  font-size:9px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:55px;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(25px);
+  transition:.7s;
+}
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* VISION */
+#vision{ border-top:1px solid var(--rule); }
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+}
+
+.about-headline{
+  font-family:var(--serif);
+  font-size:clamp(38px,5vw,60px);
+  font-weight:300;
+  line-height:1.05;
+}
+
+.about-headline em{
+  color:var(--accent);
+  font-style:italic;
+}
+
+.about-body p{
+  font-size:14px;
+  line-height:1.9;
+  margin-bottom:25px;
+  color:var(--ink-2);
+}
+
+.about-pillars{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--rule);
+}
+
+.pillar{
+  padding:35px;
+  border-right:1px solid var(--rule);
+}
+.pillar:last-child{ border-right:none; }
+
+.pillar-num{
+  font-family:var(--serif);
+  font-size:45px;
+  color:var(--rule);
+}
+
+.pillar-title{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin:15px 0 10px;
+}
+
+.pillar-body{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* RESEARCH */
+#research{ border-top:1px solid var(--rule); }
+
+.work-header{ margin-bottom:50px; }
+
+.work-headline{
+  font-family:var(--serif);
+  font-size:clamp(38px,5vw,60px);
+  font-weight:300;
+  line-height:1;
+}
+
+.work-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+}
+
+.work-card{
+  background:var(--paper);
+  padding:45px 40px;
+  min-height:380px;
+  display:flex;
+  flex-direction:column;
+}
+
+.work-card-index{
+  font-family:var(--serif);
+  font-size:100px;
+  font-weight:300;
+  color:var(--rule);
+  line-height:.8;
+  margin-bottom:30px;
+}
+
+.work-card-tag{
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:12px;
+}
+
+.work-card-title{
+  font-family:var(--serif);
+  font-size:38px;
+  font-weight:400;
+  line-height:1.1;
+  margin-bottom:20px;
+}
+
+.work-card-body{
+  color:var(--muted);
+  line-height:1.8;
+  flex:1;
+  font-size:13px;
+}
+
+.tag{
+  display:inline-block;
+  margin-top:20px;
+  padding:5px 12px;
+  border:1px solid var(--rule);
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.tag-accent{ color:var(--accent); border-color:var(--accent); }
+
+/* TERMS */
+#sponsorship{ border-top:1px solid var(--rule); }
+
+.sponsor-grid{
+  display:grid;
+  grid-template-columns:5fr 4fr;
+  gap:80px;
+}
+
+.sponsor-headline{
+  font-family:var(--serif);
+  font-size:clamp(38px,5vw,60px);
+  font-weight:300;
+  line-height:1;
+  margin-bottom:30px;
+}
+
+.sponsor-headline em{
+  font-style:italic;
+  color:var(--accent);
+}
+
+.sponsor-text{
+  font-size:14px;
+  line-height:1.9;
+  color:var(--ink-2);
+  max-width:500px;
+  margin-bottom:40px;
+}
+
+/* Three-column terms grid */
+.terms-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:3px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+  margin-bottom:40px;
+}
+
+.terms-col{
+  background:var(--paper);
+  padding:30px 28px;
+}
+
+.terms-col-header{
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  padding-bottom:16px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:20px;
+}
+
+.terms-item{
+  padding:14px 0;
+  border-bottom:1px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.terms-item:last-child{ border-bottom:none; }
+
+.terms-item-name{
+  font-size:12px;
+  color:var(--ink);
+}
+
+.terms-item-note{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+/* Panel */
+.sponsor-panel{
+  border:1px solid var(--rule);
+  padding:35px;
+  align-self:start;
+}
+
+.panel-title{
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  border-bottom:1px solid var(--rule);
+  padding-bottom:20px;
+  margin-bottom:20px;
+}
+
+.panel-block{
+  padding:22px 0;
+  border-bottom:1px solid var(--rule);
+}
+.panel-block:last-of-type{ border-bottom:none; }
+
+.panel-name{
+  font-size:10px;
+  text-transform:uppercase;
+  color:var(--muted);
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+
+.panel-value{
+  font-family:var(--serif);
+  font-size:34px;
+  font-weight:300;
+  line-height:1.1;
+}
+
+.panel-note{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+  line-height:1.6;
+}
+
+.notice{
+  margin-top:25px;
+  padding:15px;
+  border-left:2px solid var(--accent);
+  font-size:12px;
+  color:var(--ink-2);
+  line-height:1.7;
+}
+
+/* CONTACT */
+#contact{
+  max-width:none;
+  text-align:center;
+  border-top:1px solid var(--rule);
+  padding:140px 48px;
+  position:relative;
+}
+
+.contact-bg{
+  position:absolute;
+  font-family:var(--serif);
+  font-size:clamp(120px,20vw,260px);
+  color:var(--rule);
+  opacity:.5;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.contact-content{
+  position:relative;
+  z-index:2;
+}
+
+.contact-title{
+  font-family:var(--serif);
+  font-size:clamp(50px,7vw,90px);
+  font-weight:300;
+  line-height:1;
+}
+
+.contact-title em{
+  color:var(--accent);
+  font-style:italic;
+}
+
+.contact-sub{
+  color:var(--muted);
+  margin:30px 0 50px;
+  line-height:1.8;
+}
+
+/* PATRONAGE */
+#patronage{
+  border-top:1px solid var(--rule);
+}
+
+.patronage-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+}
+
+.patronage-headline{
+  font-family:var(--serif);
+  font-size:clamp(38px,5vw,60px);
+  font-weight:300;
+  line-height:1.05;
+}
+
+.patronage-headline em{
+  color:var(--accent);
+  font-style:italic;
+}
+
+.patronage-body p{
+  font-size:14px;
+  line-height:1.9;
+  color:var(--ink-2);
+  margin-bottom:25px;
+}
+
+.patronage-card{
+  grid-column:1/-1;
+  border:1px solid var(--rule);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+
+.patronage-item{
+  padding:35px;
+  border-right:1px solid var(--rule);
+}
+
+.patronage-item:last-child{
+  border-right:none;
+}
+
+.patronage-number{
+  font-family:var(--serif);
+  font-size:48px;
+  color:var(--rule);
+}
+
+.patronage-title{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin:15px 0;
+}
+
+.patronage-text{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+@media(max-width:900px){
+  .patronage-grid,
+  .patronage-card{
+    grid-template-columns:1fr;
+  }
+
+  .patronage-item{
+    border-right:none;
+    border-bottom:1px solid var(--rule);
+  }
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--rule);
+  padding:25px 48px;
+  display:flex;
+  justify-content:space-between;
+  font-size:10px;
+  color:var(--muted);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{ padding:0 20px; }
+  .nav-links{ display:none; }
+
+  #hero, section{ padding-left:24px; padding-right:24px; }
+
+  .about-grid,
+  .sponsor-grid,
+  .work-cards,
+  .about-pillars,
+  .terms-grid{ grid-template-columns:1fr; }
+
+  .proof-strip{ grid-template-columns:1fr 1fr; }
+}
+
+@media(max-width:520px){
+  .proof-strip{ grid-template-columns:1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">RICKCLMNT</a>
+  <ul class="nav-links">
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#patronage">Patron Model</a></li>
+    <li><a href="#research">Work</a></li>
+    <li><a href="#sponsorship">Sponsorship</a></li>
+  </ul>
+  <a href="mailto:rickclmntcorp@protonmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+
+    <div class="hero-eyebrow">Independent Technology Architect</div>
+
+    <h1 class="hero-headline">
+      Building the<br>
+      <em>future</em><br>
+      of technology.
+    </h1>
+
+    <p class="hero-sub">
+      I design and build advanced technology systems with a single focus:
+<strong>creating reliable, transformative, and genuinely novel tools.</strong>
+I am seeking aligned private sponsorship to continue building and exploring innovative ideas independently.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#sponsorship" class="btn-primary">Become a patron</a>
+      <a href="#research" class="btn-ghost">See my work →</a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- VISION -->
+<section id="vision">
+
+  <div class="section-label reveal">The Vision</div>
+
+  <div class="about-grid">
+
+    <h2 class="about-headline reveal">
+      Independent work<br>
+      with <em>unrestricted</em><br>
+      possibility.
+    </h2>
+
+    <div class="about-body reveal">
+      <p>
+        The most important technological breakthroughs often begin before there is a company,
+        a market, or a clear business model. 
+      </p>
+      <p>
+  Some ideas require a different environment:
+  time, independence, and room to explore.
+  They begin with someone having the freedom to
+explore difficult questions without being accountable to short-term thinking.
+</p>
+
+<p>
+  The patron model allows foundational ideas to develop without being reshaped
+  too early by external pressures. The focus remains on building things that are genuinely important — not just useful.
+</p>
+
+      <p>
+        My work explores the future of technology:
+<strong>intelligent systems, advanced architectures, and tools that expand human capability.</strong>
+The goal is not simply to improve existing approaches, but to explore what becomes possible when technology is designed from first principles. This is a fundamentally different direction from the current industry consensus.
+      </p>
+      <p>
+        Patrons support the journey while maintaining proximity to the ideas, the work, and the possibilities that emerge.
+      </p>
+    </div>
+
+    <div class="about-pillars">
+      <div class="pillar reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Independent Research</div>
+        <div class="pillar-body">
+          Freedom to explore foundational problems outside traditional structures,
+          without quarterly pressure reshaping the work.
+        </div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Private Access</div>
+        <div class="pillar-body">
+          Sponsors receive direct insight and exclusive access into finished products, prototypes, technical progress, research documentation,
+          and ideas.
+        </div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Early Position</div>
+        <div class="pillar-body">
+          Supporting important work before its full potential becomes apparent
+          to the market is the definition of good timing.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PATRONAGE -->
+<section id="patronage">
+  
+  <div class="section-label reveal">The Patron Model</div>
+  
+  <div class="patronage-grid">
+    
+    <h2 class="patronage-headline reveal">
+      A forgotten model<br>
+      for <em>future</em><br>
+      innovation.
+    </h2>
+    
+    
+    <div class="patronage-body reveal">
+      
+      <p>
+        Throughout history, many of humanity's most important breakthroughs
+        were enabled by patrons — individuals who recognized potential before
+        the wider world understood its value. From the Medici supporting Renaissance artists like Michelangelo to innovators like Ada Lovelace exploring ideas far ahead of their time, progress has often depended on giving visionaries the freedom to pursue difficult questions.
+      </p>
+      
+      <p>
+        Artists, inventors, philosophers, and scientists often required the same
+        thing: freedom. The ability to explore difficult questions without being
+        restricted by immediate commercial demands.
+      </p>
+      
+      <p>
+        Modern technology has largely replaced this model with venture capital,
+        corporate structures, and market-driven development. Those systems are
+        powerful, but they are not always designed for foundational exploration.
+      </p>
+      
+      <p>
+        This is a modern form of patronage applied to technological innovation:
+        supporting independent creation while allowing ideas the time and space
+        required to become something meaningful.
+      </p>
+      
+    </div>
+    
+    
+    <div class="patronage-card reveal">
+      
+      <div class="patronage-item">
+        
+        <div class="patronage-number">01</div>
+        
+        <div class="patronage-title">
+          Why this exists
+        </div>
+        
+        <div class="patronage-text">
+          Some ideas need years of exploration before their value becomes obvious.
+          Independence protects the work from being shaped too early by external
+          pressures.
+        </div>
+        
+      </div>
+      
+      
+      <div class="patronage-item">
+        
+        <div class="patronage-number">02</div>
+        
+        <div class="patronage-title">
+          The relationship
+        </div>
+        
+        <div class="patronage-text">
+          A patron is not simply funding a project. They are creating the conditions
+          for exploration and gaining proximity to the process itself.
+        </div>
+        
+      </div>
+      
+      
+      <div class="patronage-item">
+        
+        <div class="patronage-number">03</div>
+        
+        <div class="patronage-title">
+          The opportunity
+        </div>
+        
+        <div class="patronage-text">
+          A chance to support ambitious technology before it becomes mainstream. Participating in the journey from idea, to prototype, to reality.
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+  
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+
+  <div class="section-label reveal">Active Research & Development</div>
+
+  <div class="work-header">
+    <h2 class="work-headline reveal">
+      What support<br>
+      makes possible.
+    </h2>
+  </div>
+
+  <div class="work-cards">
+
+    <div class="work-card reveal">
+      <div class="work-card-index">01</div>
+      <div class="work-card-tag">Reasoning Architecture</div>
+      <h3 class="work-card-title">AETHER</h3>
+      <p class="work-card-body">
+        <strong>Autonomous Expression Through Hallucination-Eliminated Reasoning.</strong> A deterministic reasoning architecture designed to produce reliable, auditable outputs. Built on causal graphs,
+        constraint propagation, and a lifelong solution library that doesn't rely on neural networks. Currently in active
+        development with vertical deployment forks for high-stakes domains.
+      </p>
+      <span class="tag tag-accent">Deterministic AI architecture</span>
+    </div>
+
+    <div class="work-card reveal">
+      <div class="work-card-index">02</div>
+      <div class="work-card-tag">Legal Intelligence</div>
+      <h3 class="work-card-title">ALIS</h3>
+      <p class="work-card-body">
+        Aether Legal Intelligence System — a vertical deployment targeting law firms.
+        Designed for practitioners who need answers they can stake their reputation on.
+        Handles legal research, contract analysis, and structured reasoning at a level
+        current AI tools cannot reliably provide. End-to-end integration tests passing.
+        Commercial release imminent.
+      </p>
+      <span class="tag">Legal AI powered by aether</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPONSORSHIP -->
+<section id="sponsorship">
+
+  <div class="section-label reveal">Private Sponsorship</div>
+
+  <div class="sponsor-grid">
+
+    <div>
+      <h2 class="sponsor-headline reveal">
+        Support the work.<br>
+        Preserve the <em>freedom.</em>
+      </h2>
+
+      <p class="sponsor-text reveal">
+        This is not a request for traditional investment. It is an invitation to support independent technological creation.
+  
+  The goal is not to create a dependent relationship, but an aligned one:
+  where a patron provides the freedom to build and explore, while remaining
+  close to the ideas, prototypes, and discoveries that emerge.
+</p>
+
+      <div class="terms-grid reveal">
+
+        <div class="terms-col">
+          <div class="terms-col-header">Sponsor provides</div>
+          <div class="terms-item">
+            <span class="terms-item-name">Monthly research stipend</span>
+            <span class="terms-item-note">Sustains focused, uninterrupted development</span>
+          </div>
+          <div class="terms-item">
+            <span class="terms-item-name">Equipment &amp; compute budget</span>
+            <span class="terms-item-note">Hardware, proprietary datasets, API infrastructure</span>
+          </div>
+          <div class="terms-item">
+            <span class="terms-item-name">Duration</span>
+            <span class="terms-item-note">Agreed term with milestone checkpoints</span>
+          </div>
+        </div>
+
+        <div class="terms-col">
+          <div class="terms-col-header">I provide</div>
+          <div class="terms-item">
+            <span class="terms-item-name">Quarterly progress reports</span>
+            <span class="terms-item-note">Honest technical and strategic updates</span>
+          </div>
+          <div class="terms-item">
+            <span class="terms-item-name">Private demonstrations</span>
+            <span class="terms-item-note">Live access to systems as they develop</span>
+          </div>
+          <div class="terms-item">
+            <span class="terms-item-name">Full documentation</span>
+            <span class="terms-item-note">Architecture, decisions, and research findings</span>
+          </div>
+        </div>
+
+        <div class="terms-col">
+          <div class="terms-col-header">I retain</div>
+          <div class="terms-item">
+            <span class="terms-item-name">Full IP ownership</span>
+            <span class="terms-item-note">All intellectual property remains mine</span>
+          </div>
+          <div class="terms-item">
+            <span class="terms-item-name">Creative &amp; technical control</span>
+            <span class="terms-item-note">Research direction is not negotiable</span>
+          </div>
+          <div class="terms-item">
+            <span class="terms-item-name">Freedom to explore</span>
+            <span class="terms-item-note">Scope can evolve as the work demands</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="sponsor-panel reveal">
+
+      <div class="panel-title">What the sponsor receives</div>
+
+      <div class="panel-block">
+        <div class="panel-name">Primary return</div>
+        <div class="panel-value">Proximity</div>
+        <div class="panel-note">
+          Direct visibility into frontier work before it becomes a product,
+          a company, or a news story.
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-name">Access</div>
+        <div class="panel-value">Briefings</div>
+        <div class="panel-note">
+          Private technical demonstrations, early prototypes,
+          and insight into research directions as they develop.
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-name">Future</div>
+        <div class="panel-value">Option</div>
+        <div class="panel-note">
+          Opportunity to explore future collaborations, partnerships, or ventures when genuine alignment exists.
+        </div>
+      </div>
+
+      <div class="notice">
+        IP retention protects the long-term value of what you are funding.
+        A relationship built on alignment, not control.
+        Currently open to conversations with individuals who believe
+        ambitious ideas require independence to reach their potential.
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+  <div class="contact-bg">Future</div>
+
+  <div class="contact-content">
+
+    <div class="section-label">Start a conversation</div>
+
+    <h2 class="contact-title reveal">
+      Help build<br>
+      <em>what comes next.</em>
+    </h2>
+
+    <p class="contact-sub reveal">
+      If you believe meaningful innovation requires curiosity, freedom, and the ability to explore ambitious ideas — let's talk.
+    </p>
+
+    <a href="mailto:rickclmntcorp@protonmail.com" class="btn-primary">
+      rickclmntcorp@protonmail.com
+    </a>
+
+  </div>
+
+</section>
+
+<footer>
+  <span>© 2026 RICKCLMNT. All rights reserved.</span><br>
+  <span><strong>Independent Technology Research & Development</strong></span>
+</footer>
+
+<script>
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 40);
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: .12 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", e => {
+    const target = document.querySelector(link.getAttribute("href"));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

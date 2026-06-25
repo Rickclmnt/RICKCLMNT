@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RICKCLMNT — Independent Technology</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-N4NGTP8WXB');
+</script>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+
+<style>
+
+:root{
+
+--black:#111110;
+--white:#FAFAF8;
+--blue:#2a9df4;
+--muted:#757570;
+--border:#E8E8E4;
+--light:#F4F4F0;
+
+--display:'Playfair Display',Georgia,serif;
+--body:'Source Serif 4',Georgia,serif;
+--mono:'DM Mono',monospace;
+
+}
+
+
+*,
+*::before,
+*::after{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
+
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+
+body{
+
+background:var(--white);
+color:var(--black);
+font-family:var(--body);
+font-size:18px;
+line-height:1.7;
+overflow-x:hidden;
+
+}
+
+
+/* NAV */
+
+
+nav{
+
+height:64px;
+padding:0 48px;
+
+position:sticky;
+top:0;
+z-index:100;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+background:rgba(250,250,248,.92);
+backdrop-filter:blur(12px);
+
+border-bottom:1px solid var(--border);
+
+}
+
+
+.nav-logo{
+
+font-family:var(--mono);
+font-size:12px;
+letter-spacing:.18em;
+text-decoration:none;
+color:var(--black);
+
+}
+
+
+.nav-links{
+
+display:flex;
+gap:32px;
+list-style:none;
+
+}
+
+
+.nav-links a{
+
+font-family:var(--mono);
+font-size:11px;
+letter-spacing:.08em;
+text-decoration:none;
+color:var(--muted);
+
+transition:.2s;
+
+}
+
+
+.nav-links a:hover{
+
+color:var(--black);
+
+}
+
+
+.nav-cta{
+
+font-family:var(--mono);
+font-size:11px;
+
+background:var(--black);
+color:white;
+
+text-decoration:none;
+
+padding:8px 18px;
+border-radius:30px;
+
+}
+
+
+
+/* HERO */
+
+
+.hero{
+
+max-width:1160px;
+margin:auto;
+
+padding:120px 48px 110px;
+
+border-bottom:1px solid var(--border);
+
+}
+
+.hero-meta{
+
+display:flex;
+gap:30px;
+
+font-family:var(--mono);
+font-size:10px;
+
+letter-spacing:.16em;
+text-transform:uppercase;
+
+color:var(--muted);
+
+margin-bottom:50px;
+
+}
+
+
+.hero h1{
+
+font-family:var(--display);
+
+font-size:clamp(70px,12vw,150px);
+
+font-weight:900;
+
+line-height:.86;
+
+letter-spacing:-.06em;
+
+}
+
+
+.hero h1 em{
+
+font-style:italic;
+color:var(--blue);
+
+}
+
+
+.hero-text{
+
+margin-top:45px;
+
+max-width:650px;
+
+font-size:22px;
+
+line-height:1.7;
+
+color:#353533;
+
+}
+
+
+.hero-actions{
+
+display:flex;
+gap:24px;
+
+margin-top:45px;
+
+}
+
+
+.hero-actions a{
+
+font-family:var(--mono);
+font-size:11px;
+
+text-decoration:none;
+
+}
+
+
+.primary{
+
+background:var(--black);
+color:white;
+
+padding:14px 28px;
+
+border-radius:30px;
+
+}
+
+
+.secondary{
+
+color:var(--black);
+
+padding-top:14px;
+
+}
+
+
+
+/* FEATURED */
+
+
+.featured{
+
+max-width:1160px;
+margin:auto;
+
+padding:110px 48px;
+
+}
+
+
+.featured-label{
+
+font-family:var(--mono);
+
+font-size:10px;
+
+letter-spacing:.2em;
+
+color:var(--blue);
+
+text-transform:uppercase;
+
+}
+
+
+.featured h2{
+
+margin-top:25px;
+
+font-family:var(--display);
+
+font-size:clamp(45px,7vw,90px);
+
+line-height:.9;
+
+letter-spacing:-.04em;
+
+}
+
+
+.work-grid{
+
+margin-top:80px;
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+}
+
+
+.work-card{
+
+border:1px solid var(--border);
+
+padding:45px;
+
+min-height:270px;
+
+transition:.3s;
+
+}
+
+
+.work-card:hover{
+
+background:var(--light);
+transform:translateY(-5px);
+
+}
+
+
+.work-card h3{
+
+font-family:var(--display);
+
+font-size:45px;
+
+}
+
+
+.work-card p{
+
+margin-top:20px;
+
+color:var(--muted);
+
+}
+
+
+
+/* PATRONAGE */
+
+
+.patron{
+
+background:var(--black);
+
+color:white;
+
+padding:120px 48px;
+
+}
+
+
+.patron-inner{
+
+max-width:1160px;
+
+margin:auto;
+
+}
+
+
+.patron span{
+
+font-family:var(--mono);
+
+font-size:10px;
+
+letter-spacing:.2em;
+
+color:var(--blue);
+
+}
+
+
+.patron h2{
+
+font-family:var(--display);
+
+font-size:clamp(45px,7vw,100px);
+
+line-height:.9;
+
+margin-top:30px;
+
+max-width:900px;
+
+}
+
+
+.patron p{
+
+max-width:650px;
+
+margin-top:35px;
+
+font-size:20px;
+
+color:#aaa;
+
+}
+
+
+.patron a{
+
+display:inline-block;
+
+margin-top:40px;
+
+font-family:var(--mono);
+
+font-size:11px;
+
+color:white;
+
+border:1px solid white;
+
+padding:14px 30px;
+
+text-decoration:none;
+
+}
+
+/* NAVIGATION CARDS */
+
+.elsewhere{
+
+max-width:1160px;
+margin:auto;
+
+padding:90px 48px;
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:1px;
+
+background:var(--border);
+
+}
+
+
+.elsewhere-item{
+
+background:var(--white);
+
+padding:35px 28px;
+
+text-decoration:none;
+
+color:inherit;
+
+min-height:230px;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+
+.ei-label{
+
+font-family:var(--mono);
+
+font-size:9px;
+
+letter-spacing:.16em;
+
+text-transform:uppercase;
+
+color:var(--muted);
+
+}
+
+
+.ei-title{
+
+font-family:var(--display);
+
+font-size:28px;
+
+margin-top:20px;
+
+}
+
+
+.ei-desc{
+
+font-size:14px;
+
+color:var(--muted);
+
+margin-top:15px;
+
+flex:1;
+
+}
+
+
+.ei-arrow{
+
+font-family:var(--mono);
+
+font-size:12px;
+
+color:var(--blue);
+
+margin-top:20px;
+
+}
+
+
+
+/* UPDATES */
+
+
+.new-stuff-wrap{
+
+max-width:1160px;
+
+margin:auto;
+
+padding:0 48px 90px;
+margin-top: 90px;
+
+}
+
+
+.ns-label{
+
+font-family:var(--mono);
+
+font-size:10px;
+
+letter-spacing:.18em;
+
+text-transform:uppercase;
+
+color:var(--muted);
+
+margin-bottom:25px;
+
+}
+
+.slide-prompt {
+
+display:flex;
+align-items:center;
+justify-content:flex-end;
+gap:10px;
+
+margin-top:18px;
+
+font-family:var(--mono);
+font-size:10px;
+letter-spacing:.16em;
+text-transform:uppercase;
+
+color:var(--muted);
+
+animation:pulseSlide 2s infinite;
+
+}
+
+
+.slide-prompt span {
+
+font-size:16px;
+color:var(--blue);
+
+}
+
+
+@keyframes pulseSlide {
+
+0%,100% {
+opacity:.45;
+transform:translateX(0);
+}
+
+50% {
+opacity:1;
+transform:translateX(8px);
+}
+
+}
+
+.new-stuff-slider{
+
+display:flex;
+
+overflow-x:auto;
+
+border:1px solid var(--border);
+
+scrollbar-width:none;
+
+}
+
+
+.new-stuff-slider::-webkit-scrollbar{
+
+display:none;
+
+}
+
+
+.ns-card{
+
+flex:0 0 340px;
+
+padding:30px;
+
+border-right:1px solid var(--border);
+
+text-decoration:none;
+
+color:inherit;
+
+}
+
+
+.ns-top-row{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:20px;
+
+}
+
+
+.ns-tag,
+.ns-date{
+
+font-family:var(--mono);
+
+font-size:9px;
+
+}
+
+
+.ns-tag{
+
+color:var(--blue);
+
+}
+
+
+.ns-title{
+
+font-family:var(--display);
+
+font-size:24px;
+
+line-height:1.1;
+
+}
+
+
+.ns-body{
+
+margin-top:12px;
+
+font-size:14px;
+
+color:var(--muted);
+
+}
+
+
+
+/* FOOTER */
+
+
+footer{
+
+border-top:1px solid var(--border);
+
+padding:25px 48px;
+
+display:flex;
+
+justify-content:space-between;
+
+}
+
+
+footer div{
+
+font-family:var(--mono);
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+
+
+/* RESPONSIVE */
+
+
+@media(max-width:900px){
+
+
+nav{
+
+padding:0 20px;
+
+}
+
+
+.nav-links{
+
+display:none;
+
+}
+
+
+.hero{
+
+padding:80px 20px;
+
+}
+
+
+.hero-meta{
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+
+.work-grid,
+.elsewhere{
+
+grid-template-columns:1fr;
+
+}
+
+
+.featured{
+
+padding:80px 20px;
+
+}
+
+
+.patron{
+
+padding:80px 20px;
+
+}
+
+
+.new-stuff-wrap{
+
+padding:0 20px 70px;
+
+}
+
+
+footer{
+
+flex-direction:column;
+
+gap:10px;
+
+text-align:center;
+
+}
+
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<nav>
+
+<a class="nav-logo" href="/">
+RICKCLMNT
+</a>
+
+
+<ul class="nav-links">
+
+<li><a href="about.html">About</a></li>
+
+<li><a href="portfolio.html">Work</a></li>
+
+<li><a href="blog.html">Writing</a></li>
+
+<li><a href="patronage.html">Patronage</a></li>
+
+</ul>
+
+
+<a class="nav-cta" href="mailto:rickclmntcorp@protonmail.com">
+Contact
+</a>
+
+
+</nav>
+
+
+
+<section class="hero">
+
+
+<div class="hero-meta">
+
+<span>Independent Technology</span> •
+
+<span>Systems Architecture</span> •
+
+<span>Future Research</span>
+
+</div>
+
+
+
+<h1>
+
+Patrick<br>
+
+<em>Clement</em>
+
+</h1>
+
+
+
+<p class="hero-text">
+
+I explore difficult problems beyond the boundaries of current technology. Give me a question interesting enough, and I'll build the systems required to answer it — bringing ideas that once felt like fiction into reality.
+
+</p>
+
+
+
+<div class="hero-actions">
+
+
+<a class="primary" href="portfolio.html">
+Explore work
+</a>
+
+
+<a class="secondary" href="about.html">
+The vision
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section class="featured">
+
+
+<div class="featured-label">
+
+Research Archive
+
+</div>
+
+
+
+<h2>
+
+Systems built<br>
+
+from first principles.
+
+</h2>
+
+
+
+
+<div class="work-grid">
+
+
+
+<div class="work-card">
+
+<h3>AETHER</h3>
+
+<p>
+<strong>Autonomous Expression Through Hallucination-Eliminated Reasoning</strong><br> An experimental cognitive architecture exploring
+memory, reasoning, and machine intelligence.
+</p>
+<a class="nav-cta" href="/my little project.html">
+  View
+</a>
+</div>
+
+
+
+<div class="work-card">
+
+<h3>ALIS</h3>
+
+<p>
+<strong>Advanced Legal Intelligence System</strong><br> A vertical deployment of my AETHER architecture targeting law firms.
+</p>
+<a class="nav-cta" href="ALIS.html">
+  View
+</a>
+</div>
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section class="patron">
+
+
+<div class="patron-inner">
+
+
+<span>
+PATRONAGE
+</span>
+
+
+<h2>
+
+Supporting ideas
+before the world
+understands them.
+
+</h2>
+
+
+<p>
+
+Some of humanity's most important breakthroughs
+began because someone provided the freedom to explore.
+This is that principle applied to technological innovation.
+
+</p>
+
+
+<a href="patronage.html">
+Learn more
+</a>
+
+
+</div>
+
+
+</section>
+<section class="elsewhere">
+
+
+<a href="about.html" class="elsewhere-item">
+
+<span class="ei-label">
+01 · About
+</span>
+
+<span class="ei-title">
+The Vision
+</span>
+
+<span class="ei-desc">
+Background, philosophy, and the direction behind the work.
+</span>
+
+<span class="ei-arrow">
+→
+</span>
+
+</a>
+
+
+
+<a href="portfolio.html" class="elsewhere-item">
+
+<span class="ei-label">
+02 · Work
+</span>
+
+<span class="ei-title">
+Projects
+</span>
+
+<span class="ei-desc">
+Systems, experiments, and technologies built from scratch.
+</span>
+
+<span class="ei-arrow">
+→
+</span>
+
+</a>
+
+
+
+<a href="blog.html" class="elsewhere-item">
+
+<span class="ei-label">
+03 · Writing
+</span>
+
+<span class="ei-title">
+Ideas
+</span>
+
+<span class="ei-desc">
+Notes on technology, intelligence, philosophy, and creation.
+</span>
+
+<span class="ei-arrow">
+→
+</span>
+
+</a>
+
+
+
+<a href="patronage.html" class="elsewhere-item">
+
+<span class="ei-label">
+04 · Patronage
+</span>
+
+<span class="ei-title">
+Support
+</span>
+
+<span class="ei-desc">
+Enable independent exploration of ambitious technology.
+</span>
+
+<span class="ei-arrow">
+→
+</span>
+
+</a>
+
+
+</section>
+
+
+
+
+<div class="new-stuff-wrap">
+
+
+<div class="ns-label">
+
+— latest developments
+
+</div>
+
+
+
+<div class="new-stuff-slider">
+
+
+
+<a href="blog.html" class="ns-card">
+
+
+<div class="ns-top-row">
+
+<span class="ns-tag">
+Writing
+</span>
+
+
+<span class="ns-date">
+2026
+</span>
+
+</div>
+
+
+
+<div class="ns-title">
+
+Thoughts on intelligence
+
+</div>
+
+
+
+<div class="ns-body">
+
+Explorations around cognition,
+systems, and the future of software.
+
+</div>
+
+
+</a>
+
+
+
+
+
+<a href="portfolio.html" class="ns-card">
+
+
+<div class="ns-top-row">
+
+<span class="ns-tag">
+Research
+</span>
+
+
+<span class="ns-date">
+2026
+</span>
+
+</div>
+
+
+
+<div class="ns-title">
+
+New systems
+
+</div>
+
+
+
+<div class="ns-body">
+
+Experimental architectures and
+technology projects in development.
+
+</div>
+
+
+</a>
+
+
+
+
+
+<a href="patronage.html" class="ns-card">
+
+
+<div class="ns-top-row">
+
+<span class="ns-tag">
+Vision
+</span>
+
+
+<span class="ns-date">
+2026
+</span>
+
+</div>
+
+
+
+<div class="ns-title">
+
+Independent creation
+
+</div>
+
+
+
+<div class="ns-body">
+
+Building without sacrificing
+long-term exploration.
+
+</div>
+
+
+</a>
+
+
+
+</div>
+
+
+<div class="slide-prompt">
+  
+  <span>|</span>
+  Swipe
+  
+</div>
+
+
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+<footer>
+
+
+<div>
+
+© 2026 · RICKCLMNT
+
+</div>
+
+
+<div>
+
+All rights reserved
+
+</div>
+
+
+</footer>
+
+
+
+
+<script>
+
+
+const nav = document.querySelector("nav");
+
+
+window.addEventListener("scroll",()=>{
+
+
+if(window.scrollY > 10){
+
+nav.style.boxShadow =
+"0 1px 16px rgba(0,0,0,.08)";
+
+}else{
+
+nav.style.boxShadow="none";
+
+}
+
+
+});
+
+
+
+const cards =
+document.querySelectorAll(".work-card,.elsewhere-item,.ns-card");
+
+
+
+const observer =
+new IntersectionObserver(entries=>{
+
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity="1";
+entry.target.style.transform="translateY(0)";
+
+}
+
+
+});
+
+
+},
+{
+threshold:.1
+});
+
+
+
+cards.forEach(card=>{
+
+
+card.style.opacity="0";
+
+card.style.transform="translateY(20px)";
+
+card.style.transition=
+"opacity .7s ease, transform .7s ease";
+
+
+observer.observe(card);
+
+
+});
+
+
+
+</script>
+
+
+</body>
+
+</html>
