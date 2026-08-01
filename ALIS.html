@@ -287,6 +287,75 @@ section {
 }
 .problem-card-body { font-size: 12px; line-height: 1.7; color: var(--muted); }
 
+/* ── Demo ─────────────────────────────────────────────── */
+#demo { border-top: 1px solid var(--rule); }
+.demo-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+.demo-headline {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.demo-headline em { font-style: italic; color: var(--accent); }
+.demo-intro-right {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+  padding-top: 8px;
+}
+.demo-frame {
+  position: relative;
+  border: 1px solid var(--rule);
+  background: #05070d;
+  box-shadow: 0 30px 80px rgba(0,0,0,.28);
+  overflow: hidden;
+}
+.demo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 15%, rgba(79,156,255,.16), transparent 45%);
+  pointer-events: none;
+  z-index: 1;
+}
+.demo-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.demo-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.demo-caption-text {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 640px;
+}
+.demo-caption-text strong { color: var(--ink); font-weight: 500; }
+.demo-meta {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
 /* ── Capabilities ─────────────────────────────────────── */
 #capabilities { border-top: 1px solid var(--rule); }
 .cap-intro {
@@ -790,6 +859,7 @@ footer {
   #hero { padding-top: 100px; }
   .problem-grid { grid-template-columns: 1fr; gap: 40px; }
   .problem-cards { grid-template-columns: 1fr; }
+  .demo-intro { grid-template-columns: 1fr; gap: 24px; }
   .cap-intro { grid-template-columns: 1fr; gap: 24px; }
   .cap-head { grid-template-columns: 40px 1fr; }
   .cap-tag { display: none; }
@@ -1759,6 +1829,17 @@ footer {
 .pricing-tier-price { color: #fff; }
 .pricing-compare-row { border-color: var(--rule); }
 .pricing-compare-row:first-of-type { border-color: var(--rule); }
+
+/* -----------------------------------------------------
+   Demo section (matches archive restyle tokens)
+----------------------------------------------------- */
+
+.demo-frame {
+  border: 1px solid var(--rule);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+.demo-caption { border-color: var(--rule); }
+.demo-meta { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1767,6 +1848,7 @@ footer {
   <a href="" class="nav-logo">ALIS<span></span></a>
   <ul class="nav-links">
     <li><a href="#problem">The problem</a></li>
+    <li><a href="#demo">Demo</a></li>
     <li><a href="#capabilities">Capabilities</a></li>
     <li><a href="#how">How it works</a></li>
     <li><a href="#pricing">Pricing</a></li>
@@ -1789,7 +1871,7 @@ footer {
 Every output it produces traces to a real source. Every gap in its knowledge is stated honestly. Self-hosted on your own infrastructure so client data and privileged work product never leave your network.
     </p>
     <div class="hero-cta">
-      <a href="#contact" class="btn-primary">Request a pilot</a>
+      <a href="#demo" class="btn-primary">Watch the demo</a>
       <a href="#capabilities" class="btn-ghost">What it does</a>
     </div>
     <div class="hero-footer">
@@ -1840,6 +1922,31 @@ Every output it produces traces to a real source. Every gap in its knowledge is 
         <div class="problem-card-body">Live proceedings, criminal charges, imminent deadlines. ALIS stops, and refers. Every time, without exception.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── Demo ─────────────────────────────────────────────── -->
+<section id="demo">
+  <div class="section-label reveal">Demo</div>
+  <div class="demo-intro">
+    <h2 class="demo-headline reveal reveal-delay-1">
+      See it reason, <em>not just answer.</em>
+    </h2>
+    <div class="demo-intro-right reveal reveal-delay-2">
+      A short walkthrough of ALIS working a real matter from case file ingestion to a sourced, inspectable answer.
+    </div>
+  </div>
+  <div class="demo-frame reveal reveal-delay-2">
+    <video controls preload="metadata" playsinline poster="">
+      <source src="alis-demo.mp4" type="video/mp4">
+      Your browser does not support embedded video. <a href="assets/alis-demo.mp4">Download the demo</a> instead.
+    </video>
+  </div>
+  <div class="demo-caption reveal reveal-delay-3">
+    <div class="demo-caption-text">
+      <strong>Full platform walkthrough.</strong> Every answer shown traces to a real source in the knowledge base. Nothing generated, nothing invented.
+    </div>
+    <div class="demo-meta">ALIS v2 · Live capture</div>
   </div>
 </section>
 
