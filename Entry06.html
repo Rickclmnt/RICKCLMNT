@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Why Deterministic Legal AI Beats Probabilistic Legal AI Under the EU AI Act.">
+<title>Why Deterministic Legal AI Beats Probabilistic Legal AI Under the EU AI Act</title>
+
+<style>
+:root {
+  --black:#000;
+  --white:#fff;
+  --grey-50:#f7f7f7;
+  --grey-200:#ddd;
+  --grey-400:#aaa;
+  --grey-600:#666;
+  --blue:#315f9f;
+}
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  margin:0;
+  background:var(--white);
+  color:var(--black);
+  font-family:"Courier New", Courier, monospace;
+  font-size:15px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+a { color:inherit; text-decoration:none; }
+a:hover { color:var(--blue); }
+
+.site-header {
+  height:82px;
+  border-bottom:1px solid var(--grey-200);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5vw;
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(255,255,255,.97);
+}
+
+.brand {
+  display:flex;
+  align-items:baseline;
+  gap:13px;
+}
+
+.brand-name {
+  font-size:23px;
+  letter-spacing:-1px;
+  font-weight:700;
+}
+
+.brand-status {
+  color:var(--grey-400);
+  font-size:12px;
+}
+
+.nav {
+  display:flex;
+  gap:27px;
+  font-size:12px;
+  color:var(--grey-600);
+}
+
+.nav .active { color:var(--blue); }
+
+.page {
+  width:min(1000px,88vw);
+  margin:0 auto;
+}
+
+.article-header {
+  padding:105px 0 80px;
+  border-bottom:1px solid var(--black);
+}
+
+.meta {
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  color:var(--grey-400);
+  font-size:11px;
+  margin-bottom:34px;
+}
+
+.kicker {
+  color:var(--blue);
+  margin:0 0 17px;
+  font-size:12px;
+}
+
+h1 {
+  font-family:Georgia, "Times New Roman", serif;
+  font-weight:400;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  letter-spacing:-3px;
+  max-width:900px;
+  margin:0;
+}
+
+.subtitle {
+  max-width:720px;
+  color:var(--grey-600);
+  font-size:15px;
+  margin:30px 0 0;
+}
+
+.article-layout {
+  display:grid;
+  grid-template-columns:150px minmax(0,680px);
+  gap:65px;
+  padding:70px 0 110px;
+}
+
+.contents {
+  position:sticky;
+  top:120px;
+  align-self:start;
+  font-size:11px;
+  color:var(--grey-400);
+}
+
+.contents-title {
+  color:var(--black);
+  margin-bottom:15px;
+}
+
+.contents a {
+  display:block;
+  padding:5px 0;
+}
+
+article {
+  min-width:0;
+}
+
+article section {
+  margin-bottom:65px;
+  scroll-margin-top:110px;
+}
+
+article h2 {
+  font-family:Georgia, "Times New Roman", serif;
+  font-weight:400;
+  font-size:clamp(29px,4vw,43px);
+  line-height:1.12;
+  letter-spacing:-1.5px;
+  margin:0 0 24px;
+}
+
+article h3 {
+  font-size:14px;
+  margin:30px 0 10px;
+  color:var(--blue);
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+
+article p {
+  margin:0 0 20px;
+}
+
+.lead {
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:20px;
+  line-height:1.55;
+}
+
+blockquote {
+  border-left:2px solid var(--blue);
+  margin:32px 0;
+  padding:4px 0 4px 22px;
+  color:var(--grey-600);
+}
+
+.callout {
+  border:1px solid var(--black);
+  padding:24px;
+  margin:30px 0;
+}
+
+.callout-label {
+  color:var(--blue);
+  font-size:11px;
+  display:block;
+  margin-bottom:10px;
+}
+
+.article-divider {
+  border:0;
+  border-top:1px solid var(--grey-200);
+  margin:55px 0;
+}
+
+.question {
+  border-top:1px solid var(--black);
+  border-bottom:1px solid var(--black);
+  padding:28px 0;
+  margin:35px 0;
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:24px;
+  line-height:1.4;
+}
+
+.article-footer {
+  border-top:1px solid var(--black);
+  padding:35px 0 70px;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  color:var(--grey-400);
+  font-size:11px;
+}
+
+@media (max-width:760px) {
+  .site-header {
+    height:70px;
+    padding:0 6vw;
+  }
+
+  .brand-status { display:none; }
+
+  .nav { gap:14px; font-size:10px; }
+
+  .page { width:88vw; }
+
+  .article-header { padding:70px 0 55px; }
+
+  h1 {
+    font-size:clamp(39px,12vw,62px);
+    letter-spacing:-2px;
+  }
+
+  .meta {
+    display:block;
+    line-height:2;
+  }
+
+  .article-layout {
+    display:block;
+    padding-top:45px;
+  }
+
+  .contents {
+    position:static;
+    border-bottom:1px solid var(--grey-200);
+    padding-bottom:20px;
+    margin-bottom:55px;
+  }
+
+  .contents a {
+    display:inline-block;
+    margin-right:15px;
+  }
+
+  article section { margin-bottom:55px; }
+
+  .lead { font-size:18px; }
+
+  .question { font-size:21px; }
+
+  .article-footer {
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+<header class="article-header">
+  <div class="meta">
+    <strong><span>ENTRY 06 / LEGAL TECHNOLOGY</span>
+    <span>15.08.26</span></strong>
+  </div>
+
+  <h1>Why Deterministic Legal AI Beats Probabilistic Legal AI Under the EU AI Act</h1>
+
+  <p class="subtitle">
+    A closer look at traceability, verification, human oversight, and why
+    architecture may matter more than compliance paperwork.
+  </p>
+</header>
+
+<div class="article-layout">
+
+  <aside class="contents" id="contents">
+    <div class="contents-title">contents:</div>
+    <a href="#probabilistic">01 / The problem</a>
+    <a href="#act">02 / The Act</a>
+    <a href="#requirements">03 / Requirements</a>
+    <a href="#alis">04 / ALIS</a>
+    <a href="#limits">05 / Limits</a>
+    <a href="#question">06 / The question</a>
+  </aside>
+
+  <article>
+
+    <section id="probabilistic">
+      <h2>The bill for probabilistic legal AI is already overdue</h2>
+
+      <p class="lead">
+        Most "legal AI" sold today is a thin wrapper over a general-purpose
+        language model. Ask it a question and it generates a plausible-sounding
+        answer, token by token.
+      </p>
+
+      <p>
+        It is very good at sounding like a lawyer and delivering advice with
+        confidence, even when that advice is wrong. But it is not, by design,
+        built to be independently checked in the same way as a lawyer's
+        written advice.
+      </p>
+
+      <p>
+        That gap is precisely what makes traceability, transparency, and human
+        oversight such important parts of the EU AI Act's high-risk framework.
+      </p>
+
+      <p>
+        There is another approach that remains relatively uncommon in legal AI:
+        deterministic systems, where outputs are produced by fixed, inspectable
+        rules operating against a citation-backed corpus rather than generated
+        from a language model.
+      </p>
+
+      <p>
+        The same inputs produce the same outputs, and the steps between them
+        remain visible and inspectable.
+      </p>
+
+      <blockquote>
+        ALIS is built around this approach. The architecture underneath the
+        system determines how much compliance, verification, and accountability
+        can be achieved in the first place.
+      </blockquote>
+
+      <p>
+        Start with what is happening in courtrooms right now, because it is the
+        clearest evidence of the problem underneath the technology. A public
+        tracker maintained by HEC Paris researcher Damien Charlotin has recorded
+        well over a thousand court decisions worldwide in which parties relied
+        on AI-generated case law, quotations, or statutes that did not exist or
+        were materially wrong.
+      </p>
+
+      <p>
+        The consequences have escalated accordingly. What began with the $5,000
+        sanction in <em>Mata v. Avianca</em> in 2023 has expanded into six-figure
+        aggregate penalties, bar suspensions, and disciplinary referrals.
+      </p>
+
+      <p>
+        Purpose-built, paid legal research products have also generated
+        fabricated quotations that made their way into briefs. Wrapping a
+        general-purpose generative model in legal branding does not change what
+        it fundamentally is: a system that produces the statistically likely
+        next token, not a system that knows the difference between a real
+        citation and a convincing one.
+      </p>
+    </section>
+
+    <hr class="article-divider">
+
+    <section id="act">
+      <h2>What actually changed under the Act, and when</h2>
+
+      <p>
+        The EU AI Act's Annex III classifies certain AI systems used in the
+        administration of justice as high-risk. The scope is narrower than the
+        broader "legal AI" market: it specifically covers systems used by
+        judicial authorities, or on their behalf, to research and apply facts
+        and law to cases, with a comparable provision for alternative dispute
+        resolution.
+      </p>
+
+      <p>
+        A law firm using AI on its own client matters does not automatically
+        fall within that specific high-risk category as currently written.
+      </p>
+
+      <p>
+        But the distinction matters less than it first appears. The functions
+        the Act identifies — researching facts and law, interpreting them, and
+        applying law to specific circumstances — are also central to firm-side
+        legal AI.
+      </p>
+
+      <p>
+        The regulatory boundary may distinguish courts from law firms, but the
+        underlying risk does not disappear at that boundary.
+      </p>
+
+      <div class="callout">
+        <span class="callout-label">THE BROADER SHIFT</span>
+        Legal AI is moving toward a model where traceability, verification,
+        and accountability are becoming requirements of the system itself,
+        not merely compliance paperwork layered on afterward.
+      </div>
+
+      <p>
+        The Digital Omnibus on AI (Regulation (EU) 2026/1744) entered into force
+        on 27 July 2026, moving the main compliance date for standalone Annex
+        III high-risk systems from 2 August 2026 to 2 December 2027.
+      </p>
+
+      <p>
+        That delay should not be mistaken for a reduction in risk. It reflects
+        a more practical problem: the harmonised technical standards needed to
+        assess conformity are not yet ready. Regulators still need the
+        infrastructure and methods to audit these systems against the Act's
+        requirements.
+      </p>
+    </section>
+
+    <hr class="article-divider">
+
+    <section id="requirements">
+      <h2>What the requirements actually ask for</h2>
+
+      <p>
+        Strip the Act's high-risk requirements down to their essentials, and
+        four demands stand out:
+      </p>
+
+      <div class="callout">
+        <span class="callout-label">FOUR DEMANDS</span>
+        traceability · transparency · meaningful human oversight ·
+        reliable accuracy and robustness
+      </div>
+
+      <p>
+        Article 14 on human oversight is particularly relevant to legal AI.
+        It requires deployers to understand a system's capabilities and
+        limitations, correctly interpret its outputs, and guard against
+        automation bias — the tendency to place undue trust in
+        confident-looking machine-generated results.
+      </p>
+
+      <p>
+        The hallucination cases described above are automation bias in practice:
+        lawyers trusted outputs they had no reliable way to independently
+        verify.
+      </p>
+
+      <p>
+        You cannot meaningfully oversee what you cannot inspect.
+      </p>
+
+      <p>
+        That makes architecture more than a technical detail. A generative
+        model's fluency is not an audit trail. Asking an LLM to explain why it
+        produced an answer generates another plausible explanation; it does
+        not necessarily reveal the actual process that produced the original
+        output.
+      </p>
+
+      <p>
+        There is no fixed rule set an auditor can inspect and say,
+        "this is why the system reached this conclusion."
+      </p>
+
+      <p>
+        A deterministic system approaches the requirement differently. Its
+        reasoning process is the system's actual execution: defined rules
+        operating on identifiable, citation-backed data.
+      </p>
+
+      <blockquote>
+        What the system did and what it can show you it did are therefore the
+        same thing.
+      </blockquote>
+
+      <p>
+        Traceability is not something added around the system; it is a property
+        of the system itself.
+      </p>
+    </section>
+
+    <hr class="article-divider">
+
+    <section id="alis">
+      <h2>What that looks like in practice</h2>
+
+      <p>
+        This is the architecture ALIS is built around, not merely a positioning
+        statement: no LLM in the reasoning pipeline.
+      </p>
+
+      <p>
+        Every fact is traceable to a specific source document and page, rather
+        than inferred from a model's learned approximation of the law. Every
+        output includes a visible reasoning trace showing the actual steps used
+        to reach it, not a generated explanation produced afterward.
+      </p>
+
+      <p>
+        A deterministic three-tier guardrail — safe, caution, or review —
+        evaluates every query and response before it reaches the user.
+      </p>
+
+      <p>
+        When a matter requires solicitor judgment rather than automated
+        analysis, ALIS stops and routes it for review instead of producing a
+        confident-looking answer.
+      </p>
+
+      <div class="callout">
+        <span class="callout-label">THE DIFFERENCE</span>
+        A disclaimer says: "we might be wrong."<br><br>
+        A guardrail says: "we know when the evidence is insufficient to answer."
+      </div>
+
+      <p>
+        A disclaimer telling users that an AI output "may be inaccurate" does
+        not determine when the system should be trusted. It simply shifts the
+        burden of detection to the user.
+      </p>
+
+      <p>
+        A guardrail that evaluates outputs against predefined criteria and
+        withholds an answer when the matter exceeds the system's defined limits
+        makes a fundamentally different claim.
+      </p>
+    </section>
+
+    <hr class="article-divider">
+
+    <section id="limits">
+      <h2>What determinism doesn't buy you</h2>
+
+      <p>
+        None of this amounts to a compliance certificate, and any vendor
+        suggesting otherwise should be treated skeptically.
+      </p>
+
+      <p>
+        Conformity assessment under the Act is a separate regulatory process,
+        and the December 2027 deadline for Annex III systems has not arrived,
+        regardless of architecture.
+      </p>
+
+      <p>
+        Determinism also has genuine trade-offs. A rule-based system can only
+        handle what it has been engineered to understand, and expanding that
+        scope requires deliberate engineering rather than simply increasing a
+        model's training data.
+      </p>
+
+      <p>
+        It cannot improvise fluently outside its domain. It will tell you when
+        something falls outside its scope — which is precisely the point, but
+        still a meaningful limitation compared with generative AI.
+      </p>
+
+      <p>
+        What determinism provides is therefore narrower, but more useful, than
+        a compliance certificate: a stronger architectural foundation for the
+        properties the regulatory direction increasingly demands —
+        traceability, reproducibility, and meaningful human oversight.
+      </p>
+
+      <p>
+        Those properties do not have to be added after the fact by a compliance
+        team. They are consequences of how the system is built.
+      </p>
+    </section>
+
+    <hr class="article-divider">
+
+    <section id="question">
+      <h2>The question worth asking now</h2>
+
+      <p>
+        Moving the Annex III deadline to December 2027 is not a reason to stop
+        paying attention.
+      </p>
+
+      <p>
+        If anything, it highlights how difficult it is to verify the compliance
+        of opaque AI systems at scale. The regulatory framework is still
+        catching up with the challenge of auditing systems whose outputs are
+        difficult to reproduce or trace.
+      </p>
+
+      <p>
+        Firms evaluating legal AI do not need to wait for that process to
+        finish. The more useful question to ask a vendor today is simpler:
+      </p>
+
+      <div class="question">
+        Can you show me exactly why your system produced this answer — not a
+        generated explanation of why, but the actual rules, evidence, and
+        reasoning steps that produced it?
+      </div>
+
+      <p>
+        If the answer is no, the problem goes beyond future compliance.
+      </p>
+
+      <p>
+        It is a limitation inherent in the system's architecture, and one that
+        should concern anyone relying on it for consequential legal decisions.
+      </p>
+    </section>
+
+  </article>
+</div>
+
+<footer class="article-footer" id="about">
+  <span>RICKCLMNT · ALIS / AETHER LEGAL INTELLIGENCE SYSTEM</span>
+  <span><a href="notebook-blog.html">← back to notebook</a></span>
+</footer>
+
+</main>
+</body>
+</html>
