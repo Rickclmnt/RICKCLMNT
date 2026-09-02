@@ -80,6 +80,15 @@ nav.scrolled{ box-shadow:0 1px 16px rgba(0,0,0,0.06); }
 }
 .nav-cta:hover{ background:var(--accent); }
 
+.nav-icon{
+  display:inline-flex;
+  align-items:center;
+  color:var(--muted);
+  transition:color 0.2s;
+}
+.nav-icon:hover{ color:var(--ink); }
+.nav-icon svg{ width:16px; height:16px; display:block; }
+
 /* HERO */
 #hero{
   min-height:100vh;
@@ -340,6 +349,21 @@ section{
 
 .tag-accent{ color:var(--accent); border-color:var(--accent); }
 
+.work-card-link{
+  display:inline-block;
+  margin-top:20px;
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px solid var(--accent);
+  padding-bottom:2px;
+  width:fit-content;
+  transition:opacity 0.2s;
+}
+.work-card-link:hover{ opacity:.65; }
+
 /* TERMS */
 #sponsorship{ border-top:1px solid var(--rule); }
 
@@ -514,6 +538,28 @@ section{
   line-height:1.8;
 }
 
+.contact-links{
+  display:flex;
+  gap:24px;
+  align-items:center;
+  justify-content:center;
+  margin-top:28px;
+}
+
+.contact-links a{
+  color:var(--muted);
+  transition:color 0.2s;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+.contact-links a:hover{ color:var(--ink); }
+.contact-links svg{ width:15px; height:15px; }
+
 /* PATRONAGE */
 #patronage{
   border-top:1px solid var(--rule);
@@ -633,6 +679,11 @@ footer{
     <li><a href="#patronage">Patron Model</a></li>
     <li><a href="#research">Work</a></li>
     <li><a href="#sponsorship">Sponsorship</a></li>
+    <li>
+      <a href="LINKEDIN_URL_HERE" class="nav-icon" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+      </a>
+    </li>
   </ul>
   <a href="mailto:rickclmntcorp@protonmail.com" class="nav-cta">Get in touch</a>
 </nav>
@@ -697,7 +748,7 @@ explore difficult questions without being accountable to short-term thinking.
       <p>
         My work explores the future of technology:
 <strong>intelligent systems, advanced architectures, and tools that expand human capability.</strong>
-The goal is not simply to improve existing approaches, but to explore what becomes possible when technology is designed from first principles. This is a fundamentally different direction from the current industry consensus.
+The goal is not simply to improve existing approaches, but to explore what becomes possible when technology is designed from first principles. This is a fundamentally different direction from the current industry consensus: no black-box neural networks, no probabilistic guessing — every output traceable back to the reasoning that produced it.
       </p>
       <p>
         Patrons support the journey while maintaining proximity to the ideas, the work, and the possibilities that emerge.
@@ -717,7 +768,7 @@ The goal is not simply to improve existing approaches, but to explore what becom
         <div class="pillar-num">02</div>
         <div class="pillar-title">Private Access</div>
         <div class="pillar-body">
-          Sponsors receive direct insight and exclusive access into finished products, prototypes, technical progress, research documentation,
+          Sponsors receive direct insight and exclusive access into finished work, prototypes, technical progress, research documentation,
           and ideas.
         </div>
       </div>
@@ -853,7 +904,7 @@ The goal is not simply to improve existing approaches, but to explore what becom
       <p class="work-card-body">
         <strong>Autonomous Expression Through Hallucination-Eliminated Reasoning.</strong> A deterministic reasoning architecture designed to produce reliable, auditable outputs. Built on causal graphs,
         constraint propagation, and a lifelong solution library that doesn't rely on neural networks. Currently in active
-        development with vertical deployment forks for high-stakes domains.
+        development, with ALIS as its first vertical deployment.
       </p>
       <span class="tag tag-accent">Deterministic AI architecture</span>
     </div>
@@ -865,10 +916,11 @@ The goal is not simply to improve existing approaches, but to explore what becom
       <p class="work-card-body">
         Aether Legal Intelligence System — a vertical deployment targeting law firms.
         Designed for practitioners who need answers they can stake their reputation on.
-        Handles legal research, contract analysis, and structured reasoning at a level
-        current AI tools cannot reliably provide. End-to-end integration tests passing.
-        Commercial release imminent.
+        Handles legal research, contract analysis, and structured reasoning through a fully
+        deterministic pipeline — auditable by design, with no hallucination risk. End-to-end
+        integration tests passing. Commercial rollout underway.
       </p>
+      <a href="https://alis-legal.vercel.app/" class="work-card-link" target="_blank" rel="noopener">Visit the ALIS site →</a>
       <span class="tag">Legal AI powered by aether</span>
     </div>
 
@@ -974,9 +1026,10 @@ The goal is not simply to improve existing approaches, but to explore what becom
 
       <div class="panel-block">
         <div class="panel-name">Future</div>
-        <div class="panel-value">Option</div>
+        <div class="panel-value">First Pick</div>
         <div class="panel-note">
-          Opportunity to explore future collaborations, partnerships, or ventures when genuine alignment exists.
+          Right of first refusal on new technology and licensing opportunities
+          as they become available.
         </div>
       </div>
 
@@ -1013,6 +1066,13 @@ The goal is not simply to improve existing approaches, but to explore what becom
     <a href="mailto:rickclmntcorp@protonmail.com" class="btn-primary">
       rickclmntcorp@protonmail.com
     </a>
+
+    <div class="contact-links reveal">
+      <a href="https://www.linkedin.com/in/rick-clmnt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+        LinkedIn
+      </a>
+    </div>
 
   </div>
 
