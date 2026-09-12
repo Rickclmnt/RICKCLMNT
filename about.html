@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — RICKCLMNT</title>
+<meta name="description" content="About RICKCLMNT and its founder, Patrick Clement — why the laboratory exists, its philosophy of independence, and its current state.">
+<meta name="theme-color" content="#080808">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+:root {
+    --black: ;
+    --white: ;
+    --blue: ;
+    --muted: #757570;
+    --border: #E8E8E4;
+    --light: ;
+}
+cert-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: white;
+  margin-top: 8px;
+}
+.cert-card {
+  background: white; padding: 28px;
+  transition: background 0.2s;
+}
+.cert-card:hover { background: #F4F4F0; }
+.cert-inst {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; margin-bottom: 14px;
+  padding: 5px 10px; border-radius: 12px;
+  display: inline-block;
+}
+.cert-inst.harvard { background: #8b0000; color: #fff; }
+.cert-inst.cisco { background: #FAFAF8; color: #2a9df4; border: 1px solid #2a9df4; }
+.cert-inst.fcc { background: #111110; color: #FAFAF8; }
+.cert-inst.mit { background: #F4F4F0; color: #111110; border: 1px solid #E8E8E4; }
+.cert-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.cert-list li {
+  font-size: 14px; color: #353533;
+   position: relative;
+}
+</style>
+
+<header>
+    <div class="container nav">
+        <a href="index.html" class="logo">RICKCLMNT<span>.</span></a>
+        <button class="menu" id="menuButton" aria-label="Open navigation">☰</button>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="archive.html">Archive</a>
+            <a href="patronage.html">Patronage</a>
+            <a href="licensing.html">Licensing</a>
+            <a href="about.html" class="current">About</a>
+            <a href="contact.html" class="nav-cta">Become a Patron</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<section class="section page-header">
+    <div class="container">
+        <div class="breadcrumb"><a href="index.html">Home</a> / About</div>
+        <h1>Patrick Clement</h1>
+        <p class="lead">Why RICKCLMNT exists, what it believes about independent research, and where the laboratory stands today.</p>
+        <div class="subnav">
+            <a href="#why">Why RICKCLMNT Exists</a>
+            <a href="#philosophy">Philosophy</a>
+            <a href="#current-state">Current State</a>
+            <a href="#background">Background</a>
+        </div>
+    </div>
+</section>
+
+<!-- WHY IT EXISTS -->
+<section class="section tight" id="why">
+    <div class="container about-layout">
+        <div>
+            <div class="eyebrow">Why RICKCLMNT Exists</div>
+            <h2 class="about-name" style="font-size:clamp(32px,4vw,52px);">Build what is worth building.</h2>
+        </div>
+        <div class="about-text">
+            <p class="lead">I'm a software engineer and independent researcher interested in building things that don't already have obvious answers.</p>
+            <p>RICKCLMNT is where I put that curiosity to work.</p>
+            <p>I don't want to spend my life only implementing other people's ideas. I want to investigate my own. RICKCLMNT exists to make that possible.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section" id="philosophy">
+    <div class="container two-col">
+        <div class="section-title">
+            <div class="eyebrow">Philosophy / Independence</div>
+            <h2>No manufactured institution.</h2>
+        </div>
+        <div class="section-content">
+            <p class="large-statement">RICKCLMNT is currently small. Very small.</p>
+            <p><strong style="color:white;">So far, it's just me.</strong></p>
+            <p>I don't want the website to pretend otherwise. There is no artificial team page filled with imaginary departments. No inflated headcount. No manufactured corporate structure. The laboratory is a researcher-led operation.</p>
+            <p>As the work grows, collaborators, specialists, manufacturers, institutions, and commercial partners may become part of individual projects.</p>
+            <div class="quote"><p>But the underlying principle remains: the work should speak for itself.</p></div>
+
+            <p style="margin-top:35px;">My interests move across disciplines because many of the problems I find interesting sit between them. Artificial intelligence leads into cognition. Cognition leads into neuroscience and philosophy. Energy leads into materials. Materials lead into manufacturing. Robotics leads into mechanics, software, control systems, and human capability.</p>
+
+            <p style="margin-top:25px;">I don't know which projects will become important. Nobody does at the beginning. That's the nature of research. The job is to investigate honestly, build carefully, test aggressively, and follow the evidence.</p>
+            <p>Some ideas will die. Some will become useful. A few may become technologies that matter.</p>
+            <p style="font-family:var(--display);font-size:38px;color:white;margin-top:35px;">I want to find out which ones.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CURRENT STATE -->
+<section class="section" id="current-state">
+    <div class="container">
+        <div class="eyebrow">Current State of the Laboratory</div>
+        <h2>Where things stand.</h2>
+        <div class="archive-intro">
+            <p class="lead">RICKCLMNT is a solo, researcher-led operation working across four active projects — Aether, ALIS, ATLAS, and Energy Brick — plus several ideas still too early for the public archive.</p>
+            <p>There is no team, no office, no funding round. The laboratory runs on independent research time and, where patrons choose to support it, patronage.</p>
+        </div>
+        <p style="margin-top:35px;"><a class="btn" href="archive.html">See the full project catalogue →</a></p>
+    </div>
+</section>
+
+<!-- BACKGROUND -->
+<section class="section" id="background">
+    <div class="container about-layout">
+        <div>
+            <div class="eyebrow">Background</div>
+            <h2 class="about-name">Patrick Clement</h2>
+        </div>
+        <div class="about-text">
+            <p>I'm a software engineer, systems architect, and independent researcher based in Nigeria. I design, build, and explore ideas at the intersection of artificial intelligence, cognition, and human potential.
+            <br><br>I'm an engineer by discipline, but a researcher by temperament. Programming is the medium I use to explore deeper questions: how intelligence works, how systems emerge, and how we can build technology that is not only powerful, but understandable.<br><br>My path into computer science has been unconventional. I didn't follow a traditional academic route; instead, I built my education through curiosity, independent study, experimentation, and years of self-directed practical work. My background spans computer science, AI, cybersecurity, cognitive systems, and engineering, with courses drawn from wherever I found the strongest material. It's an unusual mix, but that breadth has become one of my strengths.</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="cert-inst harvard">Harvard CS50</span>
+        <ul class="cert-list">
+          <li>Computer Science</li>
+          <li>Python Programming</li>
+          <li>Introduction to Artificial Intelligence with Python</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <span class="cert-inst fcc">freeCodeCamp</span>
+        <ul class="cert-list">
+          <li>Artificial Intelligence — Full Course</li>
+          <li>Godot Game Development</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <span class="cert-inst mit">MIT OpenCourseWare</span>
+        <ul class="cert-list">
+          <li>Cognitive Robotics</li>
+          <li>Systems Engineering</li>
+          <li>Space Systems &amp; Applied Engineering</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <span class="cert-inst cisco">Cisco Networking Academy</span>
+        <ul class="cert-list">
+          <li>Cybersecurity</li>
+          <li>Information Technology</li>
+        </ul>
+      </div>
+    </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner">
+        <div>
+            <div class="logo">RICKCLMNT<span>.</span></div>
+            <div class="footer-copy" style="margin-top:8px;">Independent Technology Laboratory</div>
+        </div>
+        <div class="footer-copy">Researching. Building. Testing.</div>
+        <div class="footer-links">
+            <a href="archive.html">Archive</a>
+            <a href="patronage.html">Patronage</a>
+            <a href="licensing.html">Licensing</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+    <div class="container" style="margin-top:30px;">
+        <div class="footer-copy">© RICKCLMNT</div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

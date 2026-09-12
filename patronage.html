@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patronage — RICKCLMNT</title>
+<meta name="description" content="Support independent research at RICKCLMNT. Patron tiers, what patrons receive, founding patronage, and project sponsorship.">
+<meta name="theme-color" content="#080808">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="container nav">
+        <a href="index.html" class="logo">RICKCLMNT<span>.</span></a>
+        <button class="menu" id="menuButton" aria-label="Open navigation">☰</button>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="archive.html">Archive</a>
+            <a href="patronage.html" class="current">Patronage</a>
+            <a href="licensing.html">Licensing</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="nav-cta">Become a Patron</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<section class="section page-header">
+    <div class="container">
+        <div class="breadcrumb"><a href="index.html">Home</a> / Patronage</div>
+        <h1>Help make the research possible.</h1>
+        <p class="lead">Why patronage exists, what it funds, and what patrons actually receive in return.</p>
+        <div class="subnav">
+            <a href="#why">Why Patronage</a>
+            <a href="#tiers">Patron Tiers</a>
+            <a href="#proximity">What Patrons Receive</a>
+            <a href="#founding">Founding Patrons</a>
+            <a href="#sponsorship">Project Sponsorship</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </div>
+</section>
+
+<!-- WHY PATRONAGE -->
+<section class="section tight" id="why">
+    <div class="container two-col">
+        <div class="section-title">
+            <div class="eyebrow">Why Patronage Exists</div>
+            <h2>Support the researcher, not a pitch deck.</h2>
+        </div>
+        <div class="section-content">
+            <p class="lead">RICKCLMNT is independent. That independence matters to me.</p>
+            <p>It means I can investigate ideas because I believe they are worth investigating rather than because a board, employer, investor, or customer has already decided that they are commercially safe.</p>
+            <p>But independence requires resources. Computers cost money. Components cost money. Materials cost money. Experiments cost money. Most importantly, research requires time.</p>
+            <div class="patron-principle">Patronage provides the resources and runway that allow me to spend more of that time researching, experimenting, and building.</div>
+            <p style="margin-top:35px;">Patronage is intentionally different from conventional investment. You are not buying shares in RICKCLMNT, you are not buying ownership of every project, and you are not being promised a financial return. You are supporting the work because you want to see it happen.</p>
+            <div class="quote"><p>People who wanted to see the work exist.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- TIERS -->
+<section class="section" id="tiers">
+    <div class="container">
+        <div class="eyebrow">Patron Tiers</div>
+        <h2>Choose a level of support.</h2>
+
+        <div class="currency-bar">
+            <span class="mono">Currency</span>
+            <button class="currency-btn active" data-currency="NGN">NGN</button>
+            <button class="currency-btn" data-currency="USD">USD</button>
+            <button class="currency-btn" data-currency="GBP">GBP</button>
+            <button class="currency-btn" data-currency="EUR">EUR</button>
+        </div>
+
+        <div class="tiers">
+            <article class="tier">
+                <div class="tier-name">Patron</div>
+                <div class="price" data-ngn="₦5,000" data-usd="$15" data-gbp="£12" data-eur="€14">₦5,000</div>
+                <div class="price-note">/ month</div>
+                <p class="tier-description">For people who simply want to help keep the laboratory moving.</p>
+                <ul>
+                    <li>Patron status</li>
+                    <li>General research updates</li>
+                    <li>Selected laboratory notes</li>
+                    <li>Recognition as a supporter</li>
+                </ul>
+                <button class="btn" onclick="patronMessage('Patron')">Become a Patron</button>
+            </article>
+
+            <article class="tier featured">
+                <div class="tier-name">Founding Patron</div>
+                <div class="price" data-ngn="₦20,000" data-usd="$50" data-gbp="£40" data-eur="€45">₦20,000</div>
+                <div class="price-note">/ month</div>
+                <p class="tier-description">For early supporters who want to be closer to the work.</p>
+                <ul>
+                    <li>Everything in Patron</li>
+                    <li>Detailed research briefings</li>
+                    <li>Early project announcements</li>
+                    <li>Selected prototype demonstrations</li>
+                    <li>Founding Patron recognition</li>
+                    <li>Earlier notice of developments</li>
+                </ul>
+                <button class="btn" onclick="patronMessage('Founding Patron')">Become a Patron</button>
+            </article>
+
+            <article class="tier">
+                <div class="tier-name">Principal Patron</div>
+                <div class="price" data-ngn="₦75,000" data-usd="$150" data-gbp="£120" data-eur="£140">₦75,000</div>
+                <div class="price-note">/ month</div>
+                <p class="tier-description">For patrons who want meaningful access to the research process.</p>
+                <ul>
+                    <li>Everything above</li>
+                    <li>Private research briefings</li>
+                    <li>Direct questions to the researcher</li>
+                    <li>Early selected demonstrations</li>
+                    <li>Research discussion</li>
+                    <li>Early technology notice</li>
+                </ul>
+                <button class="btn" onclick="patronMessage('Principal Patron')">Become a Patron</button>
+            </article>
+
+            <article class="tier featured">
+                <div class="tier-name">R&D Patron</div>
+                <div class="price" data-ngn="₦250,000+" data-usd="$500+" data-gbp="£400+" data-eur="€450+">₦250,000+</div>
+                <div class="price-note">/ month</div>
+                <p class="tier-description">For individuals or organizations willing to materially fund research.</p>
+                <ul>
+                    <li>Dedicated research sponsorship</li>
+                    <li>Project-specific reporting</li>
+                    <li>Private demonstrations</li>
+                    <li>Direct technical discussion</li>
+                    <li>Research priority discussions</li>
+                    <li>Early commercial discussions</li>
+                </ul>
+                <button class="btn primary" onclick="patronMessage('R&D Patron')">Discuss R&D Patronage</button>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT PATRONS RECEIVE / PROXIMITY -->
+<section class="section proximity" id="proximity">
+    <div class="container">
+        <div class="proximity-text">
+            <div class="eyebrow">What Patrons Actually Get</div>
+            <h2>Proximity.</h2>
+            <p class="lead">The most valuable thing patronage provides isn't a badge. It is proximity to work that is still being created.</p>
+            <p style="margin-top:25px;">You get to see ideas move from:</p>
+
+            <div class="proximity-flow">
+                <span class="flow-item">Question</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-item">Experiment</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-item">Prototype</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-item">Technology</span>
+            </div>
+
+            <p style="margin-top:40px;">before the outcome is obvious.</p>
+            <p style="margin-top:25px;">A patron might see a project when it is still a sketch. Then an architecture. Then a strange prototype on a workbench. Then something that actually works.</p>
+            <p style="font-family:var(--display);font-size:34px;color:white;margin-top:40px;">That's the relationship I want to build.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOUNDING PATRONS -->
+<section class="section founding" id="founding">
+    <div class="container">
+        <div class="eyebrow">Founding Patrons</div>
+        <div class="founding-copy">
+            <h2>Be here before the result.</h2>
+            <div style="max-width:750px;margin-top:40px;">
+                <p class="lead">The first people to support an idea rarely know whether it will succeed. That's what makes early support meaningful.</p>
+                <p style="margin-top:25px;">Founding Patrons are the people who choose to support RICKCLMNT while the laboratory is still being built. Founding Patron status recognizes that contribution.</p>
+                <p style="margin-top:25px;">It isn't an investment contract. It isn't a promise of financial return. It is a record that you were here when the work was still uncertain.</p>
+            </div>
+            <div class="buttons">
+                <a class="btn primary" href="contact.html">Become a Founding Patron</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECT SPONSORSHIP -->
+<section class="section" id="sponsorship">
+    <div class="container">
+        <div class="eyebrow">Project Sponsorship</div>
+        <h2>Have a project you want to see investigated?</h2>
+
+        <div class="info-grid">
+            <article class="info-card">
+                <h3>What sponsorship can support</h3>
+                <p>Equipment, materials, computing hardware, prototype construction, software development, testing, research time, specialist services, and experimental runs.</p>
+            </article>
+            <article class="info-card">
+                <h3>What sponsorship means</h3>
+                <p>Project sponsorship can help make a particular experiment or prototype possible. It does not mean that the sponsor automatically owns the resulting technology.</p>
+            </article>
+            <article class="info-card">
+                <h3>What remains separate</h3>
+                <p>Ownership, licensing, exclusivity, and acquisition are negotiated separately where appropriate. See <a href="licensing.html" style="color:var(--blue);">Licensing →</a></p>
+            </article>
+            <article class="info-card">
+                <h3>The purpose</h3>
+                <p>The purpose of sponsorship is simple:</p>
+                <p style="font-family:var(--display);font-size:34px;color:white;margin-top:15px;">make the experiment possible.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- PATRONAGE FAQ -->
+<section class="section" id="faq">
+    <div class="container">
+        <div class="eyebrow">Patronage FAQ</div>
+        <h2>Questions.</h2>
+
+        <div class="faq">
+            <div class="faq-item">
+                <button class="faq-question">What does my patronage pay for?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>It helps fund the practical costs of independent research: equipment, materials, computing, software, prototyping, testing, and the time required to do the work.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Do patrons own the projects?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>No. Patronage does not automatically transfer intellectual property ownership.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Do patrons get first rights to inventions?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Patronage may provide earlier notice and an opportunity to discuss licensing or acquisition before broader availability, where appropriate. It does not guarantee a license, acquisition, exclusivity, or ownership.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Can I sponsor a specific project?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Yes. R&D Patronage can be structured around particular experiments, prototypes, equipment, or development phases.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Does patronage guarantee that a project will succeed?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>No. Research is uncertain. Some projects will fail. I would rather tell you that honestly than pretend every project is destined to become a product.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Where does the money go?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Into the work. The immediate priority is increasing the amount of time, equipment, computing, materials, and experimental capacity available for research and development.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Why not just get investors?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Because I value independence. Investment can be appropriate for some technologies and businesses. It isn't necessarily appropriate for early research whose direction is still being discovered. Patronage lets the research happen without requiring every idea to justify itself as a conventional startup before it has even been investigated.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner">
+        <div>
+            <div class="logo">RICKCLMNT<span>.</span></div>
+            <div class="footer-copy" style="margin-top:8px;">Independent Technology Laboratory</div>
+        </div>
+        <div class="footer-copy">Researching. Building. Testing.</div>
+        <div class="footer-links">
+            <a href="archive.html">Archive</a>
+            <a href="patronage.html">Patronage</a>
+            <a href="licensing.html">Licensing</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+    <div class="container" style="margin-top:30px;">
+        <div class="footer-copy">© RICKCLMNT</div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

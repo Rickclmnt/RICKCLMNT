@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Notes — RICKCLMNT</title>
+<meta name="description" content="The laboratory notebook: hypotheses, experiments, results, failures, and revisions from RICKCLMNT's active research.">
+<meta name="theme-color" content="#080808">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="container nav">
+        <a href="index.html" class="logo">RICKCLMNT<span>.</span></a>
+        <button class="menu" id="menuButton" aria-label="Open navigation">☰</button>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="research.html" class="current">Research</a>
+            <a href="archive.html">Archive</a>
+            <a href="patronage.html">Patronage</a>
+            <a href="licensing.html">Licensing</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="nav-cta">Become a Patron</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<section class="section page-header">
+    <div class="container">
+        <div class="breadcrumb"><a href="index.html">Home</a> / <a href="research.html">Research</a> / Research Notes</div>
+        <h1>Research Notes</h1>
+        <p class="lead">The laboratory's public notebook. Individual entries document hypotheses, experiments, results, failures, and revisions as they happen — not only after a project succeeds.</p>
+        <div class="subnav">
+            <a href="#framework">The Framework</a>
+            <a href="#investigations">Current Investigations</a>
+            <a href="#experiments">Experiments</a>
+            <a href="#abandoned">Failed / Abandoned Approaches</a>
+        </div>
+    </div>
+</section>
+
+<!-- FRAMEWORK -->
+<section class="section tight" id="framework">
+    <div class="container">
+        <div class="eyebrow">The Framework</div>
+        <h2>What every note tries to answer.</h2>
+        <div class="notes-grid">
+            <div class="note"><span class="note-number">01</span><p>What I am trying to solve</p></div>
+            <div class="note"><span class="note-number">02</span><p>What I currently believe</p></div>
+            <div class="note"><span class="note-number">03</span><p>What I don't know</p></div>
+            <div class="note"><span class="note-number">04</span><p>What I am testing</p></div>
+            <div class="note"><span class="note-number">05</span><p>What worked and what failed</p></div>
+            <div class="note"><span class="note-number">06</span><p>What I am trying next</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- CURRENT INVESTIGATIONS -->
+<section class="section" id="investigations">
+    <div class="container">
+        <div class="eyebrow">Current Investigations</div>
+        <h2>Active entries</h2>
+
+        <div class="entry-list">
+            <article class="entry">
+                <div class="entry-meta">
+                    <span class="entry-tag">Aether</span>
+                    Cognitive Systems
+                </div>
+                <div>
+                    <h3>Bounding uncertainty without a probability model</h3>
+                    <p>Testing whether a deterministic reasoning system can express "I don't know" in a structured way, without falling back on a statistical confidence score borrowed from the systems Aether is trying not to be.</p>
+                    <span class="entry-status">In Progress</span>
+                </div>
+            </article>
+
+            <article class="entry">
+                <div class="entry-meta">
+                    <span class="entry-tag">Energy Brick</span>
+                    Materials / Energy
+                </div>
+                <div>
+                    <h3>Load-bearing capacity under embedded cell density</h3>
+                    <p>Measuring how much energy-storage density can be packed into a structural composite before mechanical performance starts to degrade, and where the acceptable trade-off sits.</p>
+                    <span class="entry-status">In Progress</span>
+                </div>
+            </article>
+
+            <article class="entry">
+                <div class="entry-meta">
+                    <span class="entry-tag">ALIS</span>
+                    Legal Intelligence
+                </div>
+                <div>
+                    <h3>Auditability as a design constraint, not a feature</h3>
+                    <p>Investigating what changes in a legal-reasoning system's architecture when every output has to be traceable back to an explicit rule, rather than added as an explanation after the fact.</p>
+                    <span class="entry-status">In Progress</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIMENTS -->
+<section class="section" id="experiments">
+    <div class="container">
+        <div class="eyebrow">Experiments</div>
+        <h2>What's being tested</h2>
+
+        <div class="entry-list">
+            <article class="entry">
+                <div class="entry-meta">
+                    <span class="entry-tag">Aether</span>
+                    Experiment
+                </div>
+                <div>
+                    <h3>Structured-knowledge reasoning against ambiguous prompts</h3>
+                    <p>Running Aether against inputs deliberately designed to be ambiguous or underspecified, to see whether it degrades gracefully or fails silently.</p>
+                    <span class="entry-status">Results Pending</span>
+                </div>
+            </article>
+
+            <article class="entry">
+                <div class="entry-meta">
+                    <span class="entry-tag">Energy Brick</span>
+                    Experiment
+                </div>
+                <div>
+                    <h3>Charge-cycle fatigue in a structural composite</h3>
+                    <p>Repeated charge and discharge cycling on a load-bearing test panel, checking for microfracturing at the cell boundaries over time.</p>
+                    <span class="entry-status">Results Pending</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ABANDONED -->
+<section class="section" id="abandoned">
+    <div class="container">
+        <div class="eyebrow">Failed / Abandoned Approaches</div>
+        <h2>What didn't work.</h2>
+        <div class="archive-intro">
+            <p class="lead">Failure is part of the archive. A failed experiment is still useful if it eliminates a bad path.</p>
+        </div>
+
+        <div class="entry-list">
+            <article class="entry">
+                <div class="entry-meta">
+                    <span class="entry-tag">Aether</span>
+                    Abandoned
+                </div>
+                <div>
+                    <h3>Hybrid confidence-scored knowledge graph</h3>
+                    <p>An early architecture attempted to attach probabilistic confidence scores to nodes in an otherwise explicit knowledge graph. Abandoned once it became clear this reintroduced the same opacity the deterministic approach was meant to avoid.</p>
+                    <span class="entry-status">Closed</span>
+                </div>
+            </article>
+
+            <article class="entry">
+                <div class="entry-meta">
+                    <span class="entry-tag">Energy Brick</span>
+                    Abandoned
+                </div>
+                <div>
+                    <h3>Resin-integrated cell layout, first generation</h3>
+                    <p>An early cell layout embedded directly in the resin matrix showed unacceptable capacity loss under structural load. The approach was set aside in favor of an isolated-cell architecture within the composite.</p>
+                    <span class="entry-status">Closed</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner">
+        <div>
+            <div class="logo">RICKCLMNT<span>.</span></div>
+            <div class="footer-copy" style="margin-top:8px;">Independent Technology Laboratory</div>
+        </div>
+        <div class="footer-copy">Researching. Building. Testing.</div>
+        <div class="footer-links">
+            <a href="archive.html">Archive</a>
+            <a href="patronage.html">Patronage</a>
+            <a href="licensing.html">Licensing</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+    <div class="container" style="margin-top:30px;">
+        <div class="footer-copy">© RICKCLMNT</div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
