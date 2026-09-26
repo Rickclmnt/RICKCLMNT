@@ -646,6 +646,7 @@ document.querySelectorAll('.nav-item').forEach(btn => {
         document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+        window.scrollTo(0, 0);
     });
 });
 
