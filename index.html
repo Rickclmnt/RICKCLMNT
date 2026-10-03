@@ -343,6 +343,39 @@ body {
     margin-bottom: 18px;
 }
 
+.patron {
+    border: 1px solid #000;
+    padding: 14px;
+    margin-top: 12px;
+}
+.patron-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+.patron-num { font-size: 10px; opacity: 0.45; margin-right: 8px; }
+.patron-name { font-size: 12px; font-weight: 500; }
+.patron-price { font-size: 12px; white-space: nowrap; }
+.patron-for { font-size: 11px; line-height: 1.55; opacity: 0.65; margin: 8px 0 10px; }
+.patron-list { font-size: 10px; line-height: 1.8; opacity: 0.6; }
+.patron-list div::before { content: "+ "; opacity: 0.6; }
+.patron.top { background: #000; color: whitesmoke; }
+.patron.top .patron-for,
+.patron.top .patron-list { opacity: 0.75; }
+.steps { counter-reset: step; }
+.steps .doc-row::before {
+    counter-increment: step;
+    content: "0" counter(step);
+    font-size: 10px;
+    opacity: 0.4;
+    margin-right: 8px;
+}
+
+a.patron { display: block; color: inherit; text-decoration: none; }
+a.patron:hover { background: #000; color: whitesmoke; }
+a.patron:hover .patron-for { opacity: 0.75; }
+
 .contact-line {
     font-size: 11px;
     line-height: 1.9;
@@ -532,44 +565,53 @@ body {
             </div>
 
             <!-- PATRONAGE -->
-            <div class="panel" id="panel-support">
-                <div class="entry">
-                    <div class="eyebrow">Patronage</div>
-                    <div class="entry-title">Help make the research possible.</div>
-                    <div class="entry-body">
-                        <p>Independence requires resources — computers, components, materials, experiments, and most of all, time. Patronage provides the runway to spend more of that time researching, experimenting, and building.</p>
-                    </div>
+<div class="panel" id="panel-support">
+    <div class="panel-intro">fund the research</div>
 
-                    <div class="currency-toggle" role="group" aria-label="Display currency">
-                        <button class="currency-btn active" data-currency="NGN" type="button">NGN</button>
-                        <button class="currency-btn" data-currency="USD" type="button">USD</button>
-                        <button class="currency-btn" data-currency="GBP" type="button">GBP</button>
-                        <button class="currency-btn" data-currency="EUR" type="button">EUR</button>
-                    </div>
-                    <div class="currency-note">converted at fixed reference rates, not live FX</div>
+    <div class="entry">
+        <div class="eyebrow">Patronage</div>
+        <div class="entry-body">
+            <p>Research costs hardware, materials, and above all time. Patronage is straightforward financial support for that: you give, the laboratory keeps working.</p>
+        </div>
+    </div>
 
-                    <div class="tier">
-                        <div class="tier-head"><span class="tier-name">Patron</span><span class="tier-price" data-ngn="5000">₦5,000/mo</span></div>
-                        <div class="tier-desc">For people who simply want to help keep the laboratory moving.</div>
-                        <div class="tier-perks">Patron status · general research updates · selected lab notes · supporter recognition</div>
-                    </div>
-                    <div class="tier">
-                        <div class="tier-head"><span class="tier-name">Charter Patron</span><span class="tier-price" data-ngn="20000">₦20,000/mo</span></div>
-                        <div class="tier-desc">For early supporters who want to be closer to the work.</div>
-                        <div class="tier-perks">Everything in Patron · detailed research briefings · early project announcements · founding recognition</div>
-                    </div>
-                    <div class="tier">
-                        <div class="tier-head"><span class="tier-name">Principal Patron</span><span class="tier-price" data-ngn="75000">₦75,000/mo</span></div>
-                        <div class="tier-desc">For patrons who want meaningful access to the research process.</div>
-                        <div class="tier-perks">Everything above · private briefings · direct questions to the researcher · early technology notice</div>
-                    </div>
-                    <div class="tier">
-                        <div class="tier-head"><span class="tier-name">R&amp;D Patron</span><span class="tier-price" data-ngn="250000" data-plus="true">₦250,000+/mo</span></div>
-                        <div class="tier-desc">For individuals or organizations willing to materially fund research.</div>
-                        <div class="tier-perks">Dedicated sponsorship · project-specific reporting · private demonstrations · early commercial discussions</div>
-                    </div>
-                </div>
-            </div>
+    <div class="entry">
+        <div class="eyebrow">Choose a Tier</div>
+
+        <div class="currency-toggle" role="group" aria-label="Display currency">
+            <button class="currency-btn active" data-currency="NGN" type="button">NGN</button>
+            <button class="currency-btn" data-currency="USD" type="button">USD</button>
+            <button class="currency-btn" data-currency="GBP" type="button">GBP</button>
+            <button class="currency-btn" data-currency="EUR" type="button">EUR</button>
+        </div>
+        <div class="currency-note">billed monthly · each price is set in its own currency</div>
+
+        <a class="patron" href="PAYMENT_LINK_SUPPORTER">
+    <div class="patron-top"><span class="patron-name">Supporter</span><span class="patron-price" data-tier="0" data-plus="true"></span></div>
+    <div class="patron-for">Start at the minimum and give more if you like. For anyone who likes the work and wants it to keep going.</div>
+</a>
+        <a class="patron top" href="PAYMENT_LINK_RD">
+            <div class="patron-top"><span class="patron-name">R&amp;D Patron</span><span class="patron-price" data-tier="1" data-plus="true"></span></div>
+            <div class="patron-for">For individuals or organizations funding a line of research. Larger amounts are welcome; email me to arrange.</div>
+        </a>
+    </div>
+
+    <div class="entry">
+        <div class="eyebrow">How It Works</div>
+        <div class="steps">
+            <div class="doc-row"><span class="doc-name">Pick a tier</span><div class="doc-desc">Tap one above.</div></div>
+            <div class="doc-row"><span class="doc-name">Pay securely</span><div class="doc-desc">You're taken to the payment page. Cancel any time.</div></div>
+            <div class="doc-row"><span class="doc-name">That's it</span><div class="doc-desc">Your support goes straight into the work.</div></div>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="eyebrow">The Fine Print</div>
+        <div class="entry-body">
+            <p>Patronage grants no ownership, equity, or rights in any technology. Commercial rights are a separate conversation (see Licensing).</p>
+        </div>
+    </div>
+</div>
 
             <!-- LICENSING -->
             <div class="panel" id="panel-licensing">
@@ -605,6 +647,46 @@ body {
                     <span class="entry-tag">soon</span>
                 </div>
             </div>
+            
+            <!-- CONSULTING -->
+<div class="panel" id="panel-consulting">
+    <!--div class="panel-intro">pay me to design and build it</div-->
+
+    <div class="entry">
+        <div class="eyebrow">Consulting</div>
+        <div class="entry-title">Businesses hire me to solve hard problems.</div>
+        <div class="entry-body">
+            <p>Alongside the research, I take on a limited number of paid engagements. You bring the problem; I design the solution and build it, end to end.</p>
+            <p>Fees from consulting keep the laboratory independent. They don't affect the ownership of RICKCLMNT's own research.</p>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="eyebrow">What I Do</div>
+        <div class="entry-title">Design and implementation</div>
+        <div class="doc-row"><span class="doc-num">01</span><span class="doc-name">System Architecture</span><div class="doc-desc">Designing software systems built for reliability, auditability, and the realities of your business.</div></div>
+        <div class="doc-row"><span class="doc-num">02</span><span class="doc-name">Deterministic AI &amp; Reasoning Systems</span><div class="doc-desc">Rule-based and knowledge-driven systems whose decisions can be traced, explained, and trusted, with no black box.</div></div>
+        <div class="doc-row"><span class="doc-num">03</span><span class="doc-name">Custom Software Development</span><div class="doc-desc">Internal tools, platforms, and automation, built and delivered working.</div></div>
+        <div class="doc-row"><span class="doc-num">04</span><span class="doc-name">Technical Feasibility &amp; Prototyping</span><div class="doc-desc">Testing whether an idea can work before you commit a full budget to it.</div></div>
+    </div>
+
+    <div class="entry">
+        <div class="eyebrow">How It Works</div>
+        <div class="doc-row"><span class="doc-num">01</span><span class="doc-name">Conversation</span><div class="doc-desc">We define the problem and decide whether I'm the right person for it.</div></div>
+        <div class="doc-row"><span class="doc-num">02</span><span class="doc-name">Scope &amp; Proposal</span><div class="doc-desc">A written scope, timeline, and fixed price or agreed rate.</div></div>
+        <div class="doc-row"><span class="doc-num">03</span><span class="doc-name">Build</span><div class="doc-desc">Design and implementation with regular check-ins.</div></div>
+        <div class="doc-row"><span class="doc-num">04</span><span class="doc-name">Handover</span><div class="doc-desc">Working software, documentation, and the IP your agreement specifies.</div></div>
+    </div>
+
+    <div class="entry">
+        <div class="eyebrow">Engage</div>
+        <div class="entry-title">Have a problem worth solving?</div>
+        <div class="entry-body">
+            <p>Send a short description of the problem, your timeline, and a rough budget.</p>
+        </div>
+        <a href="mailto:rickclmntcorp@protonmail.com?subject=Consulting%20enquiry" class="entry-link">start a conversation</a>
+    </div>
+</div>
 
             <!-- CONTACT -->
             <div class="panel" id="panel-contact">
@@ -623,6 +705,7 @@ body {
                 <button class="nav-item" data-panel="about">+ About</button>
                 <button class="nav-item" data-panel="docs">+ Docs</button>
                 <button class="nav-item" data-panel="licensing">+ Licensing</button>
+                <button class="nav-item" data-panel="consulting">+ Consulting</button>
                 <button class="nav-item" data-panel="support">+ Patron</button>
                 <button class="nav-item" data-panel="contact">+ Contact</button>
             </div>
@@ -646,7 +729,7 @@ document.querySelectorAll('.nav-item').forEach(btn => {
         document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
 
@@ -657,32 +740,20 @@ document.querySelector('.contact-send')?.addEventListener('click', function() {
     setTimeout(() => { this.textContent = 'send'; }, 1200);
 });
 
-/* CURRENCY TOGGLE — static reference rates, not live FX */
-const FX_RATES_PER_NGN = {
-    NGN: 1,
-    USD: 1 / 1600,
-    GBP: 1 / 2050,
-    EUR: 1 / 1750
+/* PATRONAGE PRICING — monthly, set per currency */
+const PRICES = {
+    NGN: [5000, 100000],
+    USD: [15, 250],
+    GBP: [12, 200],
+    EUR: [14, 230]
 };
-
-const CURRENCY_SYMBOLS = {
-    NGN: '₦',
-    USD: '$',
-    GBP: '£',
-    EUR: '€'
-};
+const SYMBOLS = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' };
 
 function renderTierPrices(currency) {
-    document.querySelectorAll('.tier-price').forEach(el => {
-        const ngnAmount = parseFloat(el.dataset.ngn);
-        const isOpenEnded = el.dataset.plus === 'true';
-        const converted = ngnAmount * FX_RATES_PER_NGN[currency];
-
-        const formatted = currency === 'NGN'
-            ? Math.round(converted).toLocaleString('en-US')
-            : converted.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-        el.textContent = `${CURRENCY_SYMBOLS[currency]}${formatted}${isOpenEnded ? '+' : ''}/mo`;
+    document.querySelectorAll('.patron-price').forEach(el => {
+        const amount = PRICES[currency][+el.dataset.tier];
+        const from = el.dataset.plus === 'true' ? 'from ' : '';
+        el.textContent = `${from}${SYMBOLS[currency]}${amount.toLocaleString('en-US')}/mo`;
     });
 }
 
