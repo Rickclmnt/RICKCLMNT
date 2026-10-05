@@ -15,11 +15,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#e9e9e9;--ink:#000;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1a1a;--ink:#e9e9e9}}
-:root[data-theme="dark"]{--bg:#1a1a1a;--ink:#e9e9e9}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);min-height:100vh;font-family:'Rajdhani','Arial Narrow',Arial,sans-serif;font-weight:700;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#e9e9e9;
+  --ink:#000;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+html{
+  scroll-padding-top:env(safe-area-inset-top,0px);
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  font-family:'Rajdhani','Arial Narrow',Arial,sans-serif;
+  font-weight:700;
+  -webkit-tap-highlight-color:transparent;
+}
 
 /* Heading + toolbar */
 .heading{margin-left:2px; margin:15px}
