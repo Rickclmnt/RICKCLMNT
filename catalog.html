@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Explore technologies and inventions developed by Patrick Clement.">
+<title>Catalog</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --background: #ffffff;
+    --foreground: #17191d;
+    --muted: #737b86;
+    --accent: #2a8de0;
+    --border: #e5e8ec;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.8;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+main {
+    width: min(100% - 48px, 760px);
+    margin: auto;
+    padding: 65px 0 80px;
+}
+
+/* HEADER */
+
+.topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+}
+
+.brand {
+    font-weight: 500;
+}
+
+.status {
+    color: var(--muted);
+}
+
+/* INTRO */
+
+.intro {
+    padding: 85px 0 65px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(42px, 8vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -3.5px;
+    font-weight: 600;
+}
+
+.intro p.description {
+    max-width: 560px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+    margin-top: 25px;
+}
+
+/* CATALOG INFO */
+
+.catalog-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 17px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .5px;
+}
+
+/* ITEMS */
+
+.catalog {
+    margin-top: 15px;
+}
+
+.catalog-item {
+    padding: 35px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.item-number {
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+}
+
+.item-type {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-align: right;
+}
+
+.item-name {
+    font-size: clamp(28px, 5vw, 38px);
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+}
+
+.item-fullname {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.item-description {
+    max-width: 600px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+    margin-top: 20px;
+}
+
+.item-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.tag {
+    padding: 5px 9px;
+    border: 1px solid var(--border);
+    color: #69727e;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+}
+
+.item-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 28px;
+}
+
+.item-status {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .8px;
+}
+
+.item-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 11px;
+    transition: .2s;
+}
+
+.item-link span {
+    color: var(--accent);
+}
+
+.item-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* INQUIRIES */
+
+.inquiries {
+    padding: 65px 0;
+}
+
+.inquiries h2 {
+    font-size: clamp(25px, 5vw, 34px);
+    font-weight: 500;
+    letter-spacing: -1.3px;
+}
+
+.inquiries p {
+    max-width: 550px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+    margin-top: 18px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 25px;
+    padding: 11px 16px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 12px;
+    transition: .2s;
+}
+
+.button span {
+    color: var(--accent);
+}
+
+.button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* FOOTER */
+
+footer {
+    width: min(100% - 48px, 760px);
+    margin: auto;
+    padding: 22px 0 30px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #858d97;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .5px;
+}
+
+footer a:hover {
+    color: var(--accent);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 560px) {
+    main {
+        padding-top: 45px;
+    }
+
+    .intro {
+        padding: 70px 0 55px;
+    }
+
+    h1 {
+        letter-spacing: -2.5px;
+    }
+
+    .item-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+    <!-- HEADER -->
+
+    <header class="topline">
+        <a href="index.html" class="brand">RICKCLMNT</a>
+        <span class="status">CATALOG</span>
+    </header>
+
+
+    <!-- CATALOG ITEMS -->
+
+    <section class="catalog">
+
+        <!-- PTM -->
+
+        <article class="catalog-item">
+
+            <div class="item-top">
+                <span class="item-number">001</span>
+                <span class="item-type">ARTIFICIAL INTELLIGENCE</span>
+            </div>
+
+            <h2 class="item-name">PTM</h2>
+
+            <p class="item-fullname">
+                Patrick's Thinking Machine
+            </p>
+
+            <p class="item-description">
+                A deterministic reasoning system designed around
+                explicit knowledge, structured reasoning, and
+                controlled expression.
+
+                PTM explores an alternative approach to artificial
+                intelligence in which conclusions are derived through
+                defined rules and traceable reasoning processes.
+            </p>
+
+            <div class="item-details">
+                <span class="tag">DETERMINISTIC REASONING</span>
+                <span class="tag">KNOWLEDGE SYSTEMS</span>
+                <span class="tag">SOFTWARE</span>
+            </div>
+
+            <div class="item-bottom">
+                <span class="item-status">INDEPENDENT R&D</span>
+
+                <a href="ptm.html" class="item-link">
+                    Explore PTM <span>↗</span>
+                </a>
+            </div>
+
+        </article>
+
+
+        <!-- 20N -->
+
+        <article class="catalog-item">
+
+            <div class="item-top">
+                <span class="item-number">002</span>
+                <span class="item-type">NEURAL ARCHITECTURE</span>
+            </div>
+
+            <h2 class="item-name">20N</h2>
+
+            <p class="item-fullname">
+                Programmable Neuron Architecture
+            </p>
+
+            <p class="item-description">
+                A programmable neural architecture in which
+                individual neurons can be assigned explicit
+                functional instructions while retaining the
+                capacity to adapt through training.
+
+                20N explores a different way to construct neural
+                systems, with applications extending across
+                robotics, computation, and intelligent systems.
+            </p>
+
+            <div class="item-details">
+                <span class="tag">PROGRAMMABLE NEURONS</span>
+                <span class="tag">ADAPTIVE SYSTEMS</span>
+                <span class="tag">ROBOTICS</span>
+            </div>
+
+            <div class="item-bottom">
+                <span class="item-status">INDEPENDENT R&D</span>
+
+                <a href="20n.html" class="item-link">
+                    Explore 20N <span>↗</span>
+                </a>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- COMMERCIAL INQUIRIES -->
+
+    <section class="inquiries">
+
+        <p class="eyebrow">COMMERCIAL INQUIRIES</p>
+
+        <h2>Interested in something?</h2>
+
+        <p>
+            For inquiries concerning acquisition, licensing,
+            commercial use, partnerships, or further information
+            about any of my technologies, get in touch.
+        </p>
+
+        <a href="mailto:contact@rickclmnt.com?subject=Technology%20Inquiry" class="button">
+            Get in touch <span>↗</span>
+        </a>
+
+    </section>
+
+
+    <!-- NAVIGATION -->
+
+    <div style="display:flex; flex-wrap:wrap; gap:12px; padding-top:22px;">
+
+        <a href="index.html" class="item-link">
+            Home <span>↗</span>
+        </a>
+
+        <a href="about.html" class="item-link">
+            About Me <span>↗</span>
+        </a>
+
+        <a href="reports.html" class="item-link">
+            Reports <span>↗</span>
+        </a>
+
+        <a href="contact.html" class="item-link">
+            Contact <span>↗</span>
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+    <span>© 2026 RICKCLMNT</span>
+</footer>
+
+</body>
+</html>

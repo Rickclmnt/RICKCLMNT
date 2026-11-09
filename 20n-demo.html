@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Explore 20N, a programmable neuron architecture, through quadcopter control and robotic arm demonstrations by Patrick Clement.">
+<title>20N Demonstrations — RICKCLMNT</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --background: #ffffff;
+    --foreground: #17191d;
+    --muted: #737b86;
+    --accent: #2a8de0;
+    --border: #e5e8ec;
+    --soft: #f7f9fb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.8;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+main {
+    width: min(100% - 48px, 900px);
+    margin: auto;
+    padding: 35px 0 90px;
+}
+
+/* HEADER */
+
+.topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+}
+
+.brand {
+    font-weight: 500;
+}
+
+.header-links {
+    display: flex;
+    gap: 24px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.header-links a:hover {
+    color: var(--accent);
+}
+
+/* INTRODUCTION */
+
+.intro {
+    padding: 85px 0 60px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-size: clamp(55px, 11vw, 90px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -5px;
+}
+
+.subtitle {
+    font-size: clamp(17px, 3vw, 22px);
+    color: var(--muted);
+    margin-top: 15px;
+}
+
+.intro-description {
+    max-width: 650px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 2.1;
+    margin-top: 30px;
+}
+
+.metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 25px;
+    margin-top: 30px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .6px;
+}
+
+/* HERO VISUAL */
+
+.hero-visual {
+    margin-top: 15px;
+    border: 1px solid var(--border);
+    background: var(--soft);
+    overflow: hidden;
+}
+
+.hero-visual img {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+}
+
+.image-caption {
+    padding: 12px 15px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .5px;
+}
+
+/* ARTICLE */
+
+.article {
+    padding-top: 75px;
+}
+
+.article-section {
+    padding: 0 0 55px;
+    margin-bottom: 55px;
+    border-bottom: 1px solid var(--border);
+}
+
+.section-number {
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: clamp(26px, 5vw, 36px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -1.5px;
+    margin-bottom: 22px;
+}
+
+h3 {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -.5px;
+}
+
+.article p {
+    max-width: 720px;
+    color: #626b77;
+    font-size: 13px;
+    line-height: 2.1;
+    margin-top: 15px;
+}
+
+.article strong {
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+/* ARCHITECTURE DIAGRAM */
+
+.architecture {
+    margin-top: 30px;
+    padding: 30px 20px;
+    border: 1px solid var(--border);
+    background: var(--soft);
+}
+
+.architecture-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.architecture-node {
+    min-width: 120px;
+    padding: 17px 14px;
+    border: 1px solid #d8e0e8;
+    background: #fff;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.architecture-node.core {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #f0f7ff;
+}
+
+.architecture-arrow {
+    color: var(--accent);
+    font-size: 19px;
+}
+
+.diagram-caption {
+    text-align: center;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    margin-top: 25px;
+}
+
+/* FEATURE LIST */
+
+.feature-list {
+    margin-top: 25px;
+    border-top: 1px solid var(--border);
+}
+
+.feature {
+    display: flex;
+    gap: 20px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.feature-index {
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding-top: 3px;
+}
+
+.feature-content h3 {
+    font-size: 13px;
+}
+
+.feature-content p {
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+/* DEMONSTRATION PROJECTS */
+
+.demos-heading {
+    padding-bottom: 25px;
+}
+
+.demo {
+    padding: 40px 0 55px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid var(--border);
+}
+
+.demo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.demo-index {
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+}
+
+.demo-category {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-align: right;
+}
+
+.demo h2 {
+    margin-bottom: 10px;
+}
+
+.demo-description {
+    max-width: 680px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+}
+
+/* MEDIA */
+
+.media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.media-frame {
+    border: 1px solid var(--border);
+    background: var(--soft);
+    overflow: hidden;
+}
+
+.media-frame img,
+.media-frame video {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: #f1f3f5;
+}
+
+.media-label {
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .4px;
+}
+
+.demo-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.detail h3 {
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.detail p {
+    font-size: 12px;
+    margin-top: 0;
+}
+
+/* TAGS */
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.tag {
+    padding: 5px 9px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+}
+
+/* CONCLUSION */
+
+.conclusion {
+    padding: 45px 0 65px;
+}
+
+.conclusion h2 {
+    max-width: 600px;
+}
+
+.conclusion p {
+    max-width: 650px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2.1;
+    margin-top: 15px;
+}
+
+/* LINKS */
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 15px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 11px;
+    transition: .2s;
+}
+
+.button span {
+    color: var(--accent);
+}
+
+.button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* FOOTER */
+
+footer {
+    width: min(100% - 48px, 900px);
+    margin: auto;
+    padding: 22px 0 30px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #858d97;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .5px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 600px) {
+    main {
+        padding-top: 25px;
+    }
+
+    .intro {
+        padding: 65px 0 45px;
+    }
+
+    h1 {
+        letter-spacing: -3px;
+    }
+
+    .header-links {
+        gap: 12px;
+    }
+
+    .media-grid,
+    .demo-details {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-flow {
+        flex-direction: column;
+    }
+
+    .architecture-arrow {
+        transform: rotate(90deg);
+    }
+
+    .architecture-node {
+        width: min(100%, 220px);
+    }
+
+    footer {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+    <!-- HEADER -->
+
+    <header class="topline">
+        <a href="index.html" class="brand">RICKCLMNT</a>
+    </header>
+
+
+    <!-- INTRODUCTION -->
+
+    <section class="intro">
+
+        <h1>20N</h1>
+
+        <p class="subtitle">
+            Programmable Neuron Architecture.
+        </p>
+
+        <p class="intro-description">
+            20N is a programmable neural architecture in which
+            individual neurons can be assigned explicit functional
+            instructions while retaining the capacity to adapt
+            through training.
+
+            It explores a different way to construct neural systems:
+            combining programmed behaviour, adaptive learning,
+            and traceable functional organization.
+        </p>
+
+    </section>
+
+
+    <!-- ARTICLE -->
+
+    <article class="article">
+
+        <!-- OVERVIEW -->
+
+        <section class="article-section">
+
+            <p class="section-number">01 / OVERVIEW</p>
+
+            <h2>Rethinking neural architecture.</h2>
+
+            <p>
+                Conventional neural networks generally rely on
+                learned parameters to determine how information
+                is processed. Their behaviour emerges through
+                training rather than being explicitly assigned
+                to each individual computational unit.
+            </p>
+
+            <p>
+                <strong>20N explores a different arrangement.</strong>
+                Individual neurons can be given defined functional
+                instructions, establishing what they are intended
+                to do within a larger network.
+            </p>
+
+            <p>
+                These instructions provide an explicit structural
+                foundation. Training can then improve how the
+                network performs its assigned functions, allowing
+                adaptation without making the original design
+                entirely implicit.
+            </p>
+
+            <p>
+                The objective is to combine the flexibility of
+                adaptive systems with the clarity and control
+                of programmable architecture.
+            </p>
+
+        </section>
+
+
+        <!-- ARCHITECTURE -->
+
+        <section class="article-section">
+
+            <p class="section-number">02 / ARCHITECTURE</p>
+
+            <h2>Programmable by design.</h2>
+
+            <p>
+                A 20N network can be organized around functional
+                responsibilities. Neurons may receive instructions
+                governing how they process information, what
+                conditions they respond to, and what outputs
+                they produce.
+            </p>
+
+            <p>
+                Multiple neurons can work together to form
+                more complex operations. Their individual
+                functions contribute to the behaviour of
+                the overall network.
+            </p>
+
+            <div class="architecture">
+
+                <div class="architecture-flow">
+
+                    <div class="architecture-node">
+                        INPUT<br>
+                        <span>Sensor / Data</span>
+                    </div>
+
+                    <span class="architecture-arrow">→</span>
+
+                    <div class="architecture-node core">
+                        20N CORE<br>
+                        <span>Programmable Neurons</span>
+                    </div>
+
+                    <span class="architecture-arrow">→</span>
+
+                    <div class="architecture-node">
+                        OUTPUT<br>
+                        <span>Action / Response</span>
+                    </div>
+
+                </div>
+
+                <p class="diagram-caption">
+                    FIG. 02 — SIMPLIFIED FUNCTIONAL FLOW
+                </p>
+
+            </div>
+
+            <div class="feature-list">
+
+                <div class="feature">
+                    <span class="feature-index">01</span>
+                    <div class="feature-content">
+                        <h3>Explicit functionality</h3>
+                        <p>
+                            Neurons can be assigned specific
+                            responsibilities and functional rules.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-index">02</span>
+                    <div class="feature-content">
+                        <h3>Adaptive training</h3>
+                        <p>
+                            Training can improve performance
+                            within the architecture's design.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-index">03</span>
+                    <div class="feature-content">
+                        <h3>Modular organization</h3>
+                        <p>
+                            Functional units can be organized
+                            into larger networks.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-index">04</span>
+                    <div class="feature-content">
+                        <h3>Traceable behaviour</h3>
+                        <p>
+                            Explicit instructions provide a basis
+                            for examining how individual units
+                            contribute to network behaviour.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DEMONSTRATIONS -->
+
+        <section class="demos-heading">
+
+            <p class="section-number">03 / DEMONSTRATIONS</p>
+
+            <h2>20N in action.</h2>
+
+            <p>
+                These two projects explore how a programmable
+                neural architecture can be applied to physical
+                systems. Each demonstration focuses on a
+                different control problem.
+            </p>
+
+        </section>
+
+
+        <!-- QUADCOPTER -->
+
+        <section class="demo">
+
+            <div class="demo-header">
+                <span class="demo-index">DEMO 01</span>
+                <span class="demo-category">AERIAL ROBOTICS</span>
+            </div>
+
+            <h2>Quadcopter Control</h2>
+
+            <p class="demo-description">
+                Applying 20N to the control of a quadcopter.
+                This project explores how programmable neurons
+                can process flight-related inputs and contribute
+                to the control decisions required for stable,
+                responsive movement.
+            </p>
+
+            <p class="demo-description">
+                The network is organized around functional
+                responsibilities such as interpreting sensor
+                information, evaluating flight conditions,
+                and producing control outputs.
+            </p><br>
+            <a href="drone_sim_20n_offline (1).html" class="button">View Demo <span>↗</span>
+            </a>
+
+            <div class="demo-details">
+
+                <div class="detail">
+                    <h3>Control objective</h3>
+                    <p>
+                        Explore how a programmable network
+                        can interpret flight inputs and
+                        produce coordinated control responses.
+                    </p>
+                </div>
+
+                <div class="detail">
+                    <h3>Areas of investigation</h3>
+                    <p>
+                        Sensor processing, stabilization,
+                        motor control, and adaptive response.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="tags">
+                <span class="tag">FLIGHT CONTROL</span>
+                <span class="tag">SENSOR PROCESSING</span>
+                <span class="tag">STABILIZATION</span>
+                <span class="tag">AUTONOMOUS SYSTEMS</span>
+            </div>
+
+        </section>
+
+
+        <!-- ROBOTIC ARM -->
+
+        <section class="demo">
+
+            <div class="demo-header">
+                <span class="demo-index">DEMO 02</span>
+                <span class="demo-category">ROBOTIC MANIPULATION</span>
+            </div>
+
+            <h2>Robotic Arms</h2>
+
+            <p class="demo-description">
+                Exploring the use of 20N in robotic arm control.
+                This project investigates how individual neurons
+                can be programmed to contribute to the movement
+                and coordination of a multi-joint robotic system.
+            </p>
+
+            <p class="demo-description">
+                The network can be structured around different
+                responsibilities, including interpreting target
+                information, coordinating movement, and
+                controlling the end effector.
+            </p>
+
+            <div class="demo-details">
+
+                <div class="detail">
+                    <h3>Control objective</h3>
+                    <p>
+                        Explore programmable control of
+                        coordinated joint movement and
+                        robotic manipulation.
+                    </p>
+                </div>
+
+                <div class="detail">
+                    <h3>Areas of investigation</h3>
+                    <p>
+                        Joint coordination, movement control,
+                        object interaction, and adaptation.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="tags">
+                <span class="tag">JOINT CONTROL</span>
+                <span class="tag">MOTION PLANNING</span>
+                <span class="tag">MANIPULATION</span>
+                <span class="tag">ADAPTIVE SYSTEMS</span>
+            </div>
+
+        </section>
+
+
+        <!-- APPLICATIONS -->
+
+        <section class="article-section">
+
+            <p class="section-number">04 / APPLICATIONS</p>
+
+            <h2>Beyond the demonstrations.</h2>
+
+            <p>
+                Quadcopter control and robotic manipulation
+                provide two different environments for exploring
+                the architecture. However, 20N is not limited
+                to robotics.
+            </p>
+
+            <p>
+                Its programmable approach can be investigated
+                across other computational systems in which
+                individual functional units need to perform
+                defined tasks while contributing to a larger
+                adaptive system.
+            </p>
+
+            <p>
+                Potential areas of exploration include
+                intelligent software, autonomous systems,
+                simulation, decision systems, and other
+                applications of neural computation.
+            </p><br>
+
+            <div class="actions">
+
+                <a href="report.html" class="button">
+                    Back <span>↗</span>
+                </a>
+
+            </div>
+
+        </section>
+
+    </article>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+    <span>© 2026 RICKCLMNT</span>
+</footer>
+
+</body>
+</html>

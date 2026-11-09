@@ -1,0 +1,1269 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ecedea">
+<meta name="description" content="Explore how PTM processes language, reasons over structured knowledge, evaluates conclusions, and produces deterministic responses.">
+<title>PTM — Interactive Demonstration</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NGTP8WXB"></script>  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-N4NGTP8WXB');
+  </script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=JetBrains+Mono:wght@500&family=Public+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --wall: #ffffff;
+    --panel: #fafaf9;
+    --ink: #17181a;
+    --mute: #666a6c;
+    --line: #dfe2df;
+    --acc: #2e6b66;
+
+    --fact: #18d48f;
+    --inf: #38b6e8;
+    --hyp: #f7b04a;
+    --unk: #b4b6bd;
+    --err: #f4585a;
+
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Public Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--wall);
+    color: var(--ink);
+    font: 400 15px/1.7 var(--sans);
+    padding-top: env(safe-area-inset-top, 0);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--acc);
+    outline-offset: 3px;
+}
+
+@media(prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px calc(65px + env(safe-area-inset-bottom, 0px));
+}
+
+/* HEADER */
+
+.topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font: 500 10px var(--mono);
+    letter-spacing: .08em;
+}
+
+.brand {
+    font-size: 12px;
+}
+
+.top-status {
+    color: var(--mute);
+}
+
+/* INTRODUCTION */
+
+.intro {
+    padding: 85px 0 65px;
+}
+
+.eyebrow {
+    color: var(--acc);
+    font: 500 10px var(--mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font: 300 clamp(58px, 11vw, 92px)/.95 var(--serif);
+    letter-spacing: -3px;
+}
+
+.subtitle {
+    font: 400 clamp(19px, 4vw, 25px)/1.4 var(--serif);
+    color: var(--mute);
+    margin-top: 15px;
+}
+
+.intro-description {
+    max-width: 650px;
+    color: var(--mute);
+    font-size: 13px;
+    line-height: 2.1;
+    margin-top: 30px;
+}
+
+.metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 28px;
+    color: var(--mute);
+    font: 500 9px var(--mono);
+    letter-spacing: .04em;
+}
+
+/* ARTICLE */
+
+.article-section {
+    padding: 45px 0;
+    border-top: 1px solid var(--line);
+}
+
+.section-number {
+    color: var(--acc);
+    font: 500 10px var(--mono);
+    letter-spacing: .08em;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font: 400 clamp(28px, 5vw, 39px)/1.2 var(--serif);
+    letter-spacing: -.5px;
+    margin-bottom: 18px;
+}
+
+.article-section p.body-copy {
+    max-width: 690px;
+    color: var(--mute);
+    font-size: 13px;
+    line-height: 2.1;
+    margin-top: 14px;
+}
+
+.article-section strong {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+/* PIPELINE */
+
+.pipeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 28px;
+}
+
+.pipeline-item {
+    padding: 15px 12px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+}
+
+.pipeline-item span {
+    display: block;
+    color: var(--acc);
+    font: 500 9px var(--mono);
+    margin-bottom: 7px;
+}
+
+.pipeline-item b {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* EPISTEMIC LABELS */
+
+.status-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    font-size: 11px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+}
+
+.status-item b {
+    display: block;
+    font-weight: 500;
+}
+
+.status-item small {
+    display: block;
+    color: var(--mute);
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+/* DEMO INTRO */
+
+.demo-intro {
+    padding: 55px 0 25px;
+}
+
+.demo-intro p {
+    color: var(--mute);
+    font-size: 13px;
+    line-height: 2.1;
+    margin-top: 13px;
+}
+
+.instructions {
+    margin-top: 25px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+}
+
+.instructions-title {
+    font: 500 10px var(--mono);
+    color: var(--acc);
+    letter-spacing: .08em;
+    margin-bottom: 10px;
+}
+
+.instructions ol {
+    padding-left: 18px;
+    color: var(--mute);
+    font-size: 11px;
+    line-height: 2;
+}
+
+/* DEMO PANEL */
+
+#demo {
+    padding-top: 15px;
+}
+
+#demo .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: clamp(16px, 3vw, 30px);
+}
+
+.demo-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.demo-heading span {
+    font: 500 10px var(--mono);
+    color: var(--mute);
+    letter-spacing: .05em;
+}
+
+.demo-heading .live {
+    color: var(--acc);
+}
+
+/* SCENARIO BUTTONS */
+
+#demo .demos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+#demo button {
+    font: 500 12px var(--sans);
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 9px 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#demo button:hover,
+#demo button[aria-pressed="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--wall);
+}
+
+#demo button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+/* CONTROLS */
+
+#demo .ctl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 15px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+#demo .ctl button {
+    font-size: 11px;
+}
+
+#demo .ctl .primary {
+    border-color: var(--acc);
+    color: var(--acc);
+}
+
+#demo .ctl .primary:hover:not(:disabled) {
+    background: var(--acc);
+    color: white;
+}
+
+/* INPUT AND OUTPUT */
+
+#demo .lab {
+    font: 500 10px var(--mono);
+    color: var(--mute);
+    letter-spacing: .06em;
+    margin: 22px 0 8px;
+    text-transform: uppercase;
+}
+
+#demo .box {
+    font: 500 12px/1.8 var(--mono);
+    background: var(--wall);
+    border: 1px solid var(--line);
+    padding: 14px;
+    min-height: 48px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+#demo .box.ans {
+    border-color: var(--fact);
+}
+
+#demo .box.ans.Unknown {
+    border-color: var(--unk);
+}
+
+#demo .box.ans.Hypothesis {
+    border-color: var(--hyp);
+}
+
+#demo .box.ans.Error {
+    border-color: var(--err);
+}
+
+/* TYPING CURSOR */
+
+#demo .cur:after {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 13px;
+    background: var(--ink);
+    margin-left: 3px;
+    vertical-align: -2px;
+    animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* COMPARISON */
+
+#demo .llm {
+    font-size: 12px;
+    color: var(--mute);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin: 18px 0 0;
+    line-height: 1.8;
+}
+
+#demo .llm b {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+/* REASONING LOG */
+
+#demo ol {
+    list-style: none;
+    padding: 0;
+}
+
+#demo li.st {
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--mute);
+}
+
+#demo li.st:first-child {
+    border-top: 0;
+}
+
+#demo li.st b {
+    display: block;
+    font: 500 10px var(--mono);
+    color: var(--mute);
+    margin-bottom: 5px;
+}
+
+#demo li.st.now {
+    color: var(--ink);
+}
+
+#demo li.st.now b {
+    color: var(--acc);
+}
+
+/* EPISTEMIC CHIPS */
+
+#demo .chip {
+    display: inline-block;
+    font: 500 9px var(--mono);
+    padding: 2px 7px;
+    margin-left: 8px;
+    color: #14141a;
+}
+
+#demo .chip.Fact { background: var(--fact); }
+#demo .chip.Inference { background: var(--inf); }
+#demo .chip.Hypothesis { background: var(--hyp); }
+#demo .chip.Unknown { background: var(--unk); }
+#demo .chip.Error { background: var(--err); }
+
+/* INITIAL EMPTY STATE */
+
+.empty-state {
+    padding: 35px 10px;
+    text-align: center;
+}
+
+.empty-state .symbol {
+    color: var(--acc);
+    font: 400 35px var(--serif);
+    margin-bottom: 12px;
+}
+
+.empty-state h3 {
+    font: 400 23px var(--serif);
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: var(--mute);
+    font-size: 11px;
+    line-height: 1.9;
+    max-width: 380px;
+    margin: auto;
+}
+
+/* FOOTER */
+
+footer {
+    max-width: 760px;
+    margin: auto;
+    padding: 22px 24px 30px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: var(--mute);
+    font: 500 9px var(--mono);
+    letter-spacing: .04em;
+}
+
+@media(max-width: 560px) {
+    main {
+        padding: 25px 20px 55px;
+    }
+
+    .intro {
+        padding: 65px 0 50px;
+    }
+
+    .pipeline {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .status-list {
+        grid-template-columns: 1fr;
+    }
+
+    .demo-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+    <!-- HEADER -->
+
+    <header class="topline">
+        <a href="index.html" class="brand">RICKCLMNT</a>
+    </header>
+
+
+    <!-- INTRODUCTION -->
+
+    <section class="intro">
+
+        <p class="eyebrow">PATRICK'S THINKING MACHINE</p>
+
+        <h1>PTM.</h1>
+
+        <p class="subtitle">
+            A different approach to artificial intelligence.
+        </p>
+
+        <p class="intro-description">
+            PTM is a deterministic reasoning system built around
+            structured knowledge, explicit rules, epistemic
+            evaluation, and controlled language expression.
+
+            Rather than generating an answer based solely on
+            linguistic probability, PTM is designed to process
+            information through defined stages and produce
+            responses grounded in what its knowledge system
+            can establish.
+        </p>
+
+    </section>
+
+
+    <!-- HOW PTM WORKS -->
+
+    <section class="article-section">
+
+        <p class="section-number">01 / THE APPROACH</p>
+
+        <h2>How PTM thinks.</h2>
+
+        <p class="body-copy">
+            PTM separates the process of understanding a question
+            from the process of reasoning about it and expressing
+            an answer. Each stage has a defined responsibility.
+        </p>
+
+        <p class="body-copy">
+            Input is interpreted and converted into a structured
+            representation. The reasoning system then examines
+            relevant knowledge, applies rules, evaluates possible
+            conclusions, and determines what can legitimately
+            be communicated.
+        </p>
+
+        <p class="body-copy">
+            This separation is important. A conclusion is not
+            automatically treated as a fact simply because
+            the system can produce a sentence about it.
+        </p>
+
+        <div class="pipeline">
+
+            <div class="pipeline-item">
+                <span>01</span>
+                <b>Input</b>
+            </div>
+
+            <div class="pipeline-item">
+                <span>02</span>
+                <b>Understanding</b>
+            </div>
+
+            <div class="pipeline-item">
+                <span>03</span>
+                <b>Representation</b>
+            </div>
+
+            <div class="pipeline-item">
+                <span>04</span>
+                <b>Knowledge</b>
+            </div>
+
+            <div class="pipeline-item">
+                <span>05</span>
+                <b>Reasoning</b>
+            </div>
+
+            <div class="pipeline-item">
+                <span>06</span>
+                <b>Evaluation</b>
+            </div>
+
+            <div class="pipeline-item">
+                <span>07</span>
+                <b>Conclusion</b>
+            </div>
+
+            <div class="pipeline-item">
+                <span>08</span>
+                <b>Expression</b>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EPISTEMIC STATUS -->
+
+    <section class="article-section">
+
+        <p class="section-number">02 / EPISTEMIC EVALUATION</p>
+
+        <h2>Not every conclusion is a fact.</h2>
+
+        <p class="body-copy">
+            PTM distinguishes between different epistemic
+            states. This allows it to communicate the status
+            of a conclusion rather than presenting every
+            response with the same level of certainty.
+        </p>
+
+        <div class="status-list">
+
+            <div class="status-item">
+                <span class="status-dot" style="background:var(--fact)"></span>
+                <div>
+                    <b>Fact</b>
+                    <small>Established within the knowledge system.</small>
+                </div>
+            </div>
+
+            <div class="status-item">
+                <span class="status-dot" style="background:var(--inf)"></span>
+                <div>
+                    <b>Inference</b>
+                    <small>Derived through reasoning from available information.</small>
+                </div>
+            </div>
+
+            <div class="status-item">
+                <span class="status-dot" style="background:var(--hyp)"></span>
+                <div>
+                    <b>Hypothesis</b>
+                    <small>A possible explanation that remains unconfirmed.</small>
+                </div>
+            </div>
+
+            <div class="status-item">
+                <span class="status-dot" style="background:var(--unk)"></span>
+                <div>
+                    <b>Unknown</b>
+                    <small>Insufficient information to establish an answer.</small>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="body-copy">
+            The distinction is intended to prevent unsupported
+            conclusions from silently becoming established
+            knowledge. Unknown information remains unknown
+            until something provides a basis for resolving it.
+        </p>
+
+    </section>
+
+
+    <!-- DEMO EXPLANATION -->
+
+    <section class="demo-intro">
+
+        <p class="section-number">03 / INTERACTIVE DEMONSTRATION</p>
+
+        <h2>See the reasoning process.</h2>
+
+        <p>
+            The interactive demonstration below presents several
+            example scenarios that illustrate how PTM processes
+            different kinds of input.
+        </p>
+
+        <p>
+            Each scenario exposes the stages involved in reaching
+            a response. Depending on the example, this may include
+            language interpretation, knowledge lookup, rule
+            evaluation, causal reasoning, epistemic classification,
+            and deterministic expression.
+        </p>
+
+        <p>
+            The comparison text provides context about how a
+            conventional language model might approach the same
+            situation. It is illustrative rather than a benchmark
+            or a measured comparison.
+        </p>
+
+        <div class="instructions">
+
+            <div class="instructions-title">
+                HOW TO USE THE DEMONSTRATION
+            </div>
+
+            <ol>
+                <li>Select one of the five scenarios below.</li>
+                <li>Read the input and its explanation.</li>
+                <li>Use Next step to advance through the reasoning process.</li>
+                <li>Use Pause or Resume to control playback.</li>
+                <li>Use Replay to run the selected scenario again.</li>
+            </ol>
+
+        </div>
+
+    </section>
+
+
+    <!-- INTERACTIVE DEMO -->
+
+    <section id="demo">
+
+        <div class="panel" aria-live="polite">
+
+            <div class="demo-heading">
+                <span>PTM / REASONING SIMULATOR</span>
+                <span class="live" id="demo-status">AWAITING SELECTION</span>
+            </div>
+
+            <div class="demos" id="demos"></div>
+
+            <div class="ctl">
+                <button id="pp" disabled>Pause</button>
+                <button id="nx" class="primary" disabled>Next step</button>
+                <button id="rp" disabled>Replay</button>
+            </div>
+
+            <div id="empty" class="empty-state">
+                <div class="symbol">PTM</div>
+                <h3>Select a scenario.</h3>
+                <p>
+                    Choose one of the examples above to begin.
+                    The demonstration will not run until you
+                    make a selection.
+                </p>
+            </div>
+
+            <div id="workspace" hidden>
+
+                <div class="lab" id="plab">Input</div>
+                <div class="box" id="prompt"></div>
+
+                <div class="llm" id="llm"></div>
+
+                <div class="lab">What PTM does</div>
+                <ol id="log"></ol>
+
+                <div class="lab" id="alab" hidden>Reply</div>
+                <div class="box ans" id="ans" hidden></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+    <span>© RICKCLMNT 2026</span>
+</footer>
+
+
+<script>
+(function() {
+"use strict";
+
+var reduce = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var T = {
+    A: "English text",
+    B: "Teach & assert calls",
+    D: "Prepare",
+    E: "Lexicon & morphology",
+    F: "Tokenize & classify",
+    G: "Parse & interpret",
+    H: "Question → query",
+    J: "Knowledge base",
+    K: "Rules & chaining",
+    L: "Causes & hypotheses",
+    Nn: "Induction & constraints",
+    O: "Epistemic status",
+    P: "Communication plan",
+    Q: "Expression pipeline",
+    R: "English reply"
+};
+
+/*
+  Step format:
+  [stage, explanation, epistemic status]
+*/
+
+var D = [
+
+{
+name: "Unknown, not guessed",
+label: "English question",
+prompt: "Is Orion a dragon?",
+
+llm: "<b>A language model</b> may produce a fluent yes or no answer even when it has no reliable information about Orion.",
+
+ans: "I don't know whether Orion is a dragon. Nothing about Orion is recorded.",
+tag: "Unknown",
+
+s: [
+["A", "Text arrives: “Is Orion a dragon?”"],
+["D", "Prepare tries idiom, metaphor and indirect-question rewrites. Nothing taught matches, so the text passes through unchanged."],
+["F", "Classified once, as a question. Questions can only read: nothing from here on can be stored."],
+["H", "Interpreted as: is the entity Orion in the category dragon? Words come from the lexicon."],
+["J", "Read-only lookup. No entity named Orion is recorded and the concept hierarchy derives nothing. Open world: absence is Unknown, never No.", "Unknown"],
+["O", "Confidence 0 maps to the fixed status Unknown.", "Unknown"],
+["P", "The caller chose the act Answer, a General audience, Neutral style. The plan has one lead item and no wording yet."],
+["Q", "The expression gate allows an honest Unknown. Wording is built from the lexicon, with no template."],
+["R", "Deterministic reply. Same input in the same state gives the same bytes.", "Unknown"]
+]
+},
+
+{
+name: "Rule, then a Fact",
+label: "Setup call, then an English question",
+prompt: "apply_taught_rule(\"overheats\", pump)\nIs the pump overheating?",
+
+llm: "<b>A language model</b> may reason plausibly about pumps, but it does not automatically have the particular rule you taught or the stored conclusion from that rule.",
+
+ans: "Yes. The pump is overheating.",
+tag: "Fact",
+
+s: [
+["B", "A structured call skips the language layers. Earlier facts: pump running = true, valve closed = true."],
+["K", "The rule reads both states from the knowledge base. Both conditions hold."],
+["J", "The conclusion is stored as an inferred belief (the write-back). Boolean-only rule: confidence 1.0, so status Fact while the source stays Inference.", "Inference"],
+["A", "Now the English question arrives."],
+["F", "Prepare changes nothing. The classifier marks it as a question: read-only from here."],
+["H", "Interpreted as a state query: is the pump overheating?"],
+["J", "Lookup finds the stored inferred belief, with its source and confidence."],
+["O", "1.0 maps to Fact. Source and status are separate dimensions.", "Fact"],
+["Q", "The gate lets a Fact be said plainly. No caveat needed."],
+["R", "Reply.", "Fact"]
+]
+},
+
+{
+name: "A hypothesis, said as one",
+label: "Structured call",
+prompt: "hypotheses(effect: \"line stopped\")\nact: Hypothesize",
+
+llm: "<b>A language model</b> may state its best guess in the same confident tone it uses for established information.",
+
+ans: "This is a hypothesis, not a recorded fact. The pump may have failed, or power may have been cut.",
+tag: "Hypothesis",
+
+s: [
+["B", "The caller asks for candidate causes. No text parsing, so nothing can be misread."],
+["L", "Walks the taught causal links backwards from “line stopped”: pump failure and power cut both lead to it."],
+["O", "Candidates are scored. Hypotheses are capped at Hypothesis (0.50 up to below 0.85) and never stored.", "Hypothesis"],
+["P", "Speech act Hypothesize: the planner puts the caveat first, then the candidates."],
+["Q", "communicate() realizes hedged messages with their caveats. express() would have withheld this below Fact."],
+["R", "Reply, hedged by construction.", "Hypothesis"]
+]
+},
+
+{
+name: "Constraint check",
+label: "Structured call",
+prompt: "check_constraints()\nact: Warn",
+
+llm: "<b>A language model</b> may overlook a contradiction between two statements in a conversation unless it explicitly checks for it.",
+
+ans: "Warning: the valve is recorded as both open and closed, and these are declared mutually exclusive.",
+tag: "Fact",
+
+s: [
+["B", "The caller asks for every declared violation."],
+["Nn", "Reads states and declared constraints: valve open and valve closed are mutually exclusive, and both are recorded. Read-only: nothing is fixed silently."],
+["O", "The violation is reported with both source facts as evidence.", "Fact"],
+["P", "Speech act Warn: the planner leads with the violation, with evidence."],
+["Q", "The gate passes: it is a recorded Fact that both are stored."],
+["R", "Reply.", "Fact"]
+]
+},
+
+{
+name: "Refuses, never guesses",
+label: "English statement",
+prompt: "The flarg zonked the pump.",
+
+llm: "<b>A language model</b> may infer meanings for unfamiliar words from context and continue answering, even when its interpretation is unsupported.",
+
+ans: "Error: I don't know the word “flarg”. Nothing was stored.",
+tag: "Error",
+
+s: [
+["A", "Text arrives: “The flarg zonked the pump.”"],
+["F", "Prepare changes nothing. Classified as a statement, so it is allowed to write, if it understands."],
+["G", "Parse and interpret needs the word forms. “flarg” and “zonked” are not in the lexicon, and an unknown word is refused.", "Error"],
+["J", "The knowledge base is exactly as it was. A statement that fails leaves it untouched.", "Fact"],
+["R", "The caller gets a typed error, not a partial answer.", "Error"]
+]
+}
+];
+
+
+/* ELEMENTS */
+
+var $ = function(id) {
+    return document.getElementById(id);
+};
+
+var dm = $("demos");
+var pr = $("prompt");
+var logE = $("log");
+var ans = $("ans");
+var alab = $("alab");
+var llm = $("llm");
+var pp = $("pp");
+var nx = $("nx");
+var rp = $("rp");
+
+var cur = null;
+var idx = 0;
+var playing = false;
+var run = 0;
+var timer = null;
+var waiting = false;
+var DUR = 2400;
+
+var reduceSpeed = reduce ? 400 : 38;
+
+
+/* CREATE SCENARIO BUTTONS */
+
+D.forEach(function(d, i) {
+    var b = document.createElement("button");
+
+    b.textContent = d.name;
+    b.setAttribute("aria-pressed", "false");
+
+    b.addEventListener("click", function() {
+        start(i);
+    });
+
+    dm.appendChild(b);
+    d.b = b;
+});
+
+
+/* TYPING EFFECT */
+
+function typeInto(element, text, cps, done, my) {
+    var i = 0;
+
+    element.classList.add("cur");
+
+    function frame() {
+        if (my !== run) return;
+
+        element.textContent = text.slice(0, i);
+
+        if (i++ < text.length) {
+            timer = setTimeout(frame, 1000 / cps);
+        } else {
+            element.classList.remove("cur");
+
+            if (done) done();
+        }
+    }
+
+    frame();
+}
+
+
+/* UPDATE CONTROLS */
+
+function setControls(enabled) {
+    pp.disabled = !enabled;
+    nx.disabled = !enabled;
+    rp.disabled = !enabled;
+}
+
+
+/* UPDATE STATUS */
+
+function setStatus(value) {
+    $("demo-status").textContent = value;
+}
+
+
+/* START SELECTED SCENARIO */
+
+function start(i) {
+
+    run++;
+    var my = run;
+
+    clearTimeout(timer);
+
+    cur = D[i];
+    idx = 0;
+    waiting = false;
+    playing = true;
+
+    $("empty").hidden = true;
+    $("workspace").hidden = false;
+
+    setControls(true);
+    setStatus("RUNNING");
+
+    pp.textContent = "Pause";
+
+    D.forEach(function(d) {
+        d.b.setAttribute(
+            "aria-pressed",
+            d === cur ? "true" : "false"
+        );
+    });
+
+    logE.innerHTML = "";
+
+    ans.hidden = true;
+    alab.hidden = true;
+
+    ans.className = "box ans";
+    ans.textContent = "";
+
+    $("plab").textContent = cur.label;
+
+    llm.innerHTML = cur.llm;
+
+    pr.textContent = "";
+
+    typeInto(
+        pr,
+        cur.prompt,
+        reduceSpeed,
+        function() {
+            if (my === run) {
+                step();
+            }
+        },
+        my
+    );
+}
+
+
+/* ADVANCE ONE REASONING STEP */
+
+function step() {
+
+    var my = run;
+
+    clearTimeout(timer);
+    waiting = false;
+
+    if (!cur || idx >= cur.s.length) return;
+
+    var s = cur.s[idx++];
+
+    Array.prototype.forEach.call(
+        logE.children,
+        function(li) {
+            li.classList.remove("now");
+        }
+    );
+
+    var li = document.createElement("li");
+
+    li.className = "st now";
+
+    var heading = document.createElement("b");
+    heading.textContent = T[s[0]] || s[0];
+
+    if (s[2]) {
+        var chip = document.createElement("span");
+
+        chip.className = "chip " + s[2];
+        chip.textContent = s[2];
+
+        heading.appendChild(chip);
+    }
+
+    var explanation = document.createElement("span");
+    explanation.textContent = s[1];
+
+    li.appendChild(heading);
+    li.appendChild(explanation);
+
+    logE.appendChild(li);
+
+    li.scrollIntoView({
+        block: "nearest",
+        behavior: reduce ? "auto" : "smooth"
+    });
+
+    if (idx >= cur.s.length) {
+
+        playing = false;
+
+        pp.textContent = "Replay";
+        setStatus("COMPLETE");
+
+        alab.hidden = false;
+        ans.hidden = false;
+
+        ans.className = "box ans " + cur.tag;
+
+        timer = setTimeout(function() {
+            typeInto(
+                ans,
+                cur.ans,
+                reduce ? 400 : 40,
+                null,
+                my
+            );
+        }, reduce ? 0 : 500);
+
+        return;
+    }
+
+    if (playing) {
+        timer = setTimeout(function() {
+            if (my === run) step();
+        }, DUR);
+    } else {
+        waiting = true;
+    }
+}
+
+
+/* PAUSE / RESUME / REPLAY */
+
+pp.addEventListener("click", function() {
+
+    if (!cur) return;
+
+    if (idx >= cur.s.length) {
+        start(D.indexOf(cur));
+        return;
+    }
+
+    playing = !playing;
+
+    pp.textContent = playing ? "Pause" : "Resume";
+
+    if (playing) {
+        setStatus("RUNNING");
+
+        if (waiting) {
+            step();
+        }
+    } else {
+        clearTimeout(timer);
+        waiting = true;
+        setStatus("PAUSED");
+    }
+});
+
+
+/* NEXT STEP */
+
+nx.addEventListener("click", function() {
+
+    if (!cur || idx >= cur.s.length) return;
+
+    clearTimeout(timer);
+
+    playing = false;
+    pp.textContent = "Resume";
+
+    setStatus("PAUSED");
+
+    step();
+
+    if (idx < cur.s.length) {
+        waiting = true;
+    }
+});
+
+
+/* REPLAY */
+
+rp.addEventListener("click", function() {
+
+    if (!cur) return;
+
+    start(D.indexOf(cur));
+});
+
+
+/*
+  IMPORTANT:
+  There is deliberately no start(0) call here.
+  The page loads in an idle state.
+  The visitor must select a scenario to begin.
+*/
+
+setControls(false);
+
+})();
+</script>
+
+</body>
+</html>
